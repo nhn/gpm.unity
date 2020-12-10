@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serviceList>
+    <service>
+        <name>Common</name>
+        <version>1.0.1</version>
+    </service>
+    <service>
+        <name>Adapter</name>
+        <version>1.1.0</version>
+    </service>
+    <service>
+        <name>DLST</name>
+        <version>1.0.1</version>
+    </service>
+    <service>
+        <name>UI</name>
+        <version>1.1.0</version>
+    </service>
+    <service>
+      <name>LogViewer</name>
+      <version>1.0.0</version>
+    </service>
+    <service>
+        <name>WebView</name>
+    </service>
+</serviceList>
