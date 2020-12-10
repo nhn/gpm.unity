@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<multilanguage>
+  <default>
+    <language>en</language>
+  </default>
+  <list>
+    <string>
+      <key>$DESCRIPTION</key>
+      <language>
+        <ko>TOAST Kit 공통 모듈</ko>
+        <en>TOAST Kit Common Module</en>
+      </language>
+    </string>
+    <string>
+      <key>$VIEW_DOCUMENTATION</key>
+      <language>
+        <ko>문서 보기</ko>
+        <en>View documentation</en>
+      </language>
+    </string>
+    <string>
+      <key>$VIEW_RELEASE_NOTES</key>
+      <language>
+        <ko>릴리스 정보</ko>
+        <en>Release notes</en>
+      </language>
+    </string>
+    <string>
+      <key>$VIEW_LICENSES</key>
+      <language>
+        <ko>라이선스</ko>
+        <en>Licenses</en>
+      </language>
+    </string>
+  </list>
+</multilanguage>
