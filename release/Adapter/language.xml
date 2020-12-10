@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<multilanguage>
+  <default>
+    <language>en</language>
+  </default>
+  <list>
+    <string>
+      <key>$DESCRIPTION</key>
+      <language>
+        <ko>TOAST Kit Adapter는 하나의 공통화된 인터페이스를 제공해 여러 IdP의 기능을 쉽게 적용할 수 있습니다.</ko>
+        <en>TOAST Kit Adapter provides a common interface so as to easily apply different IdP fuctions.</en>
+      </language>
+    </string>
+    <string>
+      <key>$VIEW_DOCUMENTATION</key>
+      <language>
+        <ko>문서 보기</ko>
+        <en>View documentation</en>
+      </language>
+    </string>
+    <string>
+      <key>$VIEW_RELEASE_NOTES</key>
+      <language>
+        <ko>릴리스 정보</ko>
+        <en>Release notes</en>
+      </language>
+    </string>
+  </list>
+</multilanguage>
