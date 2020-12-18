@@ -25,7 +25,7 @@ Check the service list from Manager, while you install, remove, or update servic
 
 * Menu > Tools > GPM > Manager
 
-![Manager](./images/toastkit_manager_001.png)
+![Manager](./images/gpm_manager_001.png)
 
 ### 1. Service List
 

@@ -24,7 +24,7 @@ Manager에서 서비스 목록을 확인할 수 있고, 원하는 서비스를 �
 
 * Menu > Tools > GPM > Manager
 
-![Manager](./images/toastkit_manager_001.png)
+![Manager](./images/gpm_manager_001.png)
 
 ### 1. 서비스 목록
 
