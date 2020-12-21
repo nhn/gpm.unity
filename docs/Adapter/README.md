@@ -58,7 +58,7 @@ error CS0103: The name 'FB' does not exist in the current context
 
 사용하는 IdP에 따라서 Adapter 설정이 필요합니다.
 
-![GPMAdapterSettingTool](./images/TOASTKitAdapterSettingTool_001.png)
+![GPMAdapterSettingTool](./images/GPMAdapterSettingTool_001.png)
 
 ### 사용방법
 
