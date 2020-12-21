@@ -3,30 +3,35 @@
   <title>DLST</title>
   <status>publish</status>
   <description>$DESCRIPTION</description>
-  <version>1.0.1</version>
+  <version>2.0.0</version>
   <dependencies>
     <unity>
       <version>2018.4.0+</version>
     </unity>
     <Common>
-      <version>1.0.0</version>
+      <version>2.0.0</version>
       <install>auto</install>
     </Common>
   </dependencies>
   <packageList>
-      <package>
-          <path>toastkit_dlst_v1.0.1.unitypackage</path>
-          <installPath>TOAST/Kit/DLST</installPath>
+		<package>
+			<version>2.0.0</version>
+			<installList>
+				<install>
+					<name>gpm_dlst_v2.0.0.unitypackage</name>
+					<path>GPM/DLST</path>
+				</install>
+			</installList>
       </package>
   </packageList>
   <linkList>
     <link>
         <name>$VIEW_DOCUMENTATION</name>
-        <url>https://github.com/nhn/toastkit.unity/tree/master/docs/DLST</url>
+        <url>README.md</url>
     </link>
     <link>
         <name>$VIEW_RELEASE_NOTES</name>
-        <url>https://github.com/nhn/toastkit.unity/blob/master/docs/DLST/ReleaseNotes.md</url>
+        <url>ReleaseNotes.md</url>
     </link>
   </linkList>
   <imageList>
