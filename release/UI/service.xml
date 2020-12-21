@@ -18,10 +18,10 @@
             <version>2.0.0</version>
             <installList>
                 <install>
-					<name>gpm_ui_v2.0.0.unitypackage</name>
-					<path>GPM/UI</path>
-				</install>
-			</installList>
+                    <name>gpm_ui_v2.0.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
         </package>
     </packageList>
     <linkList>
