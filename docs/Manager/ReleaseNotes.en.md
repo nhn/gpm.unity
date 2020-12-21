@@ -9,8 +9,8 @@
 * 2020.12.21
 
 ### Added
-* Added service list to be manually updated
-* Added to see service dependencies
+* Add service refresh ui
+* Add service dependency list
 
 ### Updated
 
