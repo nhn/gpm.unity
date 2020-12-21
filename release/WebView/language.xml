@@ -1,15 +1,15 @@
 <?xml version="1.0" ?>
 <multilanguage>
-  <default>
-    <language>en</language>
-  </default>
-  <list>
-    <string>
-      <key>$DESCRIPTION</key>
-      <language>
-        <ko>WebView는 게임에서 손쉽게 사용할 수 있는 web view 서비스입니다. </ko>
-        <en>WebView is an easy-to-use web view service for games.</en>
-      </language>
-    </string>
-  </list>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>$DESCRIPTION</key>
+            <language>
+                <ko>WebView는 게임에서 손쉽게 사용할 수 있는 web view 서비스입니다. </ko>
+                <en>WebView is an easy-to-use web view service for games.</en>
+            </language>
+        </string>
+    </list>
 </multilanguage>
