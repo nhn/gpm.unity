@@ -133,7 +133,7 @@ Regular expression : [a-zA-Z]?(\d+)(.\d+)?(.\d+)?(.\d+))
 
 ### Execute DLST 
 
-Menu > Tools > TOAST > Kit > Duplicate Library Search Tool(DLST)
+Menu > Tools > GPM > Duplicate Library Search Tool(DLST)
 
 ### UI
 
