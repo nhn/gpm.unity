@@ -156,7 +156,7 @@ public void CallAsync()
 
 ### Communicator 설치
 
-* GPM Manager에서 Communicator를 설치합니다
+* Manager에서 Communicator를 설치합니다
 
 ### Native Class 만들기
 

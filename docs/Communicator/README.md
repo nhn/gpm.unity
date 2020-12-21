@@ -156,7 +156,7 @@ public void CallAsync()
 
 ### Communicator 설치
 
-* GPM Manager에서 Communicator를 설치합니다
+* Manager에서 Communicator를 설치합니다
 
 ### Native Class 만들기
 
@@ -329,7 +329,7 @@ public void CallAsync()
         }
     }
     ```
-    
+
 ### Async/Sync 추가하기
 
 * Sample.cs
