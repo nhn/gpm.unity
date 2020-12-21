@@ -20,7 +20,7 @@
         <name>LogViewer</name>
         <version>2.0.0</version>
     </service>
-	<service>
+    <service>
         <name>Communicator</name>
         <version>1.0.0</version>
     </service>
