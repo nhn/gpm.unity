@@ -89,8 +89,8 @@
 
 ### 사용 준비하기
 
-* ToastKitLogViewer GameObject 설정    
-    * TOAST/Kit/LogViewer/Prefabs/ToastKitLogViewer.prefab 파일을 Scene에 추가합니다.
+* GpmLogViewer GameObject 설정    
+    * GPM/LogViewer/Prefabs/GpmLogViewer.prefab 파일을 Scene에 추가합니다.
     *  Inspector 설정</br>
     ![inspector](./images/inspector.png)
         * Gesture Enable 설정
@@ -143,7 +143,7 @@
 1. Category
     * 카테고리 입력 방법
         ```cs
-        Debug.Log(ToastKitLogViewer.Instance.MakeLogWithCategory("TestLog", "UserCategory"));
+        Debug.Log(GpmLogViewer.Instance.MakeLogWithCategory("TestLog", "UserCategory"));
         ```
 
 2.  Log 타입

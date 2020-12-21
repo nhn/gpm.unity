@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="2">
+<info version="3">
   <title>LogViewer</title>
   <status>publish</status>
   <description>$DESCRIPTION</description>
-  <version>1.0.0</version>
+  <version>2.0.0</version>
   <dependencies>
     <unity>
       <version>2018.4.0+</version>
     </unity>
+    <Common>
+      <version>2.0.0</version>
+      <install>auto</install>
+    </Common>
     <UI>
-      <version>1.1.0</version>
+      <version>2.0.0</version>
       <install>auto</install>
     </UI>
   </dependencies>
   <packageList>
-    <package>
-      <path>toastkit_logviewer_v1.0.0.unitypackage</path>
-      <installPath>TOAST/Kit/LogViewer</installPath>
-    </package>
+		<package>
+			<version>2.0.0</version>
+			<installList>
+				<install>
+					<name>gpm_logviewer_v2.0.0.unitypackage</name>
+					<path>GPM/LogViewer</path>
+				</install>
+			</installList>
+		</package>
   </packageList>
   <linkList>
     <link>
-      <name>$VIEW_DOCUMENTATION</name>
-      <url>https://github.com/nhn/toastkit.unity/tree/master/docs/LogViewer</url>
+        <name>$VIEW_DOCUMENTATION</name>
+        <url>README.md</url>
     </link>
     <link>
-      <name>$VIEW_RELEASE_NOTES</name>
-      <url>https://github.com/nhn/toastkit.unity/blob/master/docs/LogViewer/ReleaseNotes.md</url>
+        <name>$VIEW_RELEASE_NOTES</name>
+        <url>ReleaseNotes.md</url>
     </link>
   </linkList>
   <imageList>

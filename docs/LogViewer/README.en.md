@@ -89,8 +89,8 @@
 
 ### Preparation
 
-* Configuring ToastKitLogViewer GameObject
-    * Add the TOAST/Kit/LogViewer/Prefabs/ToastKitLogViewer.prefab file to the scene.
+* Configuring GpmLogViewer GameObject
+    * Add the GPM/LogViewer/Prefabs/GpmLogViewer.prefab file to the scene.
     *  Configuring Inspector </br>
     ![inspector](./images/inspector.png)
         * Set Gesture Enable
@@ -143,7 +143,7 @@
 1. Category
     * Inputting Categories
         ```cs
-        Debug.Log(ToastKitLogViewer.Instance.MakeLogWithCategory("TestLog", "UserCategory"));
+        Debug.Log(GpmLogViewer.Instance.MakeLogWithCategory("TestLog", "UserCategory"));
         ```
 
 2.  Log Type
