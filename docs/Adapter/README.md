@@ -12,7 +12,7 @@
 ## 개요
 
 Facebook, Google 등의 IdP는 Unity로 개발 중인 애플리케이션에서 쉽고 빠르게 IdP의 기능을 사용할 수 있도록 Unity SDK를 제공하고 있습니다. 하지만 IdP마다 API가 서로 다르므로, 여러 IdP의 기능을 각각 구현 시 많은 학습과 시간이 필요합니다.
-TOAST Kit Adapter는 하나의 공통화된 인터페이스를 제공해 여러 IdP의 기능을 쉽게 적용할 수 있습니다.
+Adapter는 하나의 공통화된 인터페이스를 제공해 여러 IdP의 기능을 쉽게 적용할 수 있습니다.
 
 ## 스펙
 
@@ -53,23 +53,23 @@ TOAST Kit Adapter는 하나의 공통화된 인터페이스를 제공해 여러 
 Adapter에서 지원하는 IdP SDK가 없으면 아래와 같은 오류가 발생합니다.
 
 ```cs
-Assets/TOAST/Kit/Adapter/IdP/Facebook/Scripts/FacebookAdapter.cs(43,17): error CS0103: The name 'FB' does not exist in the current context
+error CS0103: The name 'FB' does not exist in the current context
 ```
 
 사용하는 IdP에 따라서 Adapter 설정이 필요합니다.
 
-![TOASTKitAdapterSettingTool](./images/TOASTKitAdapterSettingTool_001.png)
+![GPMAdapterSettingTool](./images/GPMAdapterSettingTool_001.png)
 
 ### 사용방법
 
-1. Menu > Tools > TOAST > Kit > Adapter > Settings
+1. Menu > Tools > GPM > Adapter > Settings
 2. 사용 여부에 따라 체크버튼을 선택하거나 선택을 해제합니다.
 3. Set 버튼을 클릭하여 설정을 완료합니다.
 
 > [`주의`]
 >
-> TOAST Kit Adapter의 폴더 구조를 변경하지 마십시오.
-> TOAST Kit Adapter의 코드 및 파일을 삭제하지 마십시오.
+> Adapter의 폴더 구조를 변경하지 마십시오.
+> Adapter의 코드 및 파일을 수동으로 삭제하지 마십시오.
 
 
 ## 🔨 API
@@ -90,7 +90,7 @@ static bool IsSuccess(AdapterError error)
 ```cs
 private void SampleIsSucces(AdapterError error)
 {
-    if (ToastKitAdapter.IsSuccess(error) == true)
+    if (GpmAdapter.IsSuccess(error) == true)
     {
         Debug.Log("success");
     }
@@ -104,7 +104,7 @@ private void SampleIsSucces(AdapterError error)
 ### Login
 
 IdP의 이름과 추가 정보를 사용하여 IdP 로그인을 시도합니다.
-TOAST Kit Adapter에서 지원하는 IdP의 이름은 ToastKitAdapterType.Idp 클래스를 통해 제공합니다.
+Adapter에서 지원하는 IdP의 이름은 GpmAdapterType.Idp 클래스를 통해 제공합니다.
 
 > [참고]
 >
@@ -125,14 +125,14 @@ private void SampleLogin(string idpName)
     
     switch (idpName)
     {
-        case ToastKitAdapterType.Idp.FACEBOOK:
+        case GpmAdapterType.Idp.FACEBOOK:
         {
             var facebookPermissionList = new List<string> { "public_profile", "email" };
             additionalInfo = new Dictionary<string, object>();
             additionalInfo.Add("facebook_permissions", facebookPermissionList);
             break;
         }
-        case ToastKitAdapterType.Idp.GPGS:
+        case GpmAdapterType.Idp.GPGS:
         default:
         {
             additionalInfo = null;
@@ -140,9 +140,9 @@ private void SampleLogin(string idpName)
         }
     }
     
-    ToastKitAdapter.Idp.Login(ToastKitAdapterType.Idp.FACEBOOK, additionalInfo, (error) => 
+    GpmAdapter.Idp.Login(GpmAdapterType.Idp.FACEBOOK, additionalInfo, (error) => 
     {
-        if (ToastKitAdapter.IsSuccess(error) == true)
+        if (GpmAdapter.IsSuccess(error) == true)
         {
             Debug.Log("success");
         }
@@ -169,9 +169,9 @@ static void Logout(string idpName, Action<AdapterError> callback)
 ```cs
 private void SampleLogout()
 {
-    ToastKitAdapter.Idp.Logout(ToastKitAdapterType.Idp.FACEBOOK, (error) => 
+    GpmAdapter.Idp.Logout(GpmAdapterType.Idp.FACEBOOK, (error) => 
     {
-        if (ToastKitAdapter.IsSuccess(error) == true)
+        if (GpmAdapter.IsSuccess(error) == true)
         {
             Debug.Log("success");
         }
@@ -199,9 +199,9 @@ static void LogoutAll(Action<AdapterError> callback)
 ```cs
 private void SampleLogoutAll()
 {
-    ToastKitAdapter.Idp.LogoutAll((error) =>
+    GpmAdapter.Idp.LogoutAll((error) =>
     {
-        if (ToastKitAdapter.IsSuccess(error) == true)
+        if (GpmAdapter.IsSuccess(error) == true)
         {
             Debug.Log("success");
         }
@@ -230,7 +230,7 @@ static void GetAuthInfo(string idpName, Action<string> callback)
 ```cs
 private void SampleGetAuthInfo()
 {
-    ToastKitAdapter.Idp.GetAuthInfo(ToastKitAdapterType.Idp.FACEBOOK, (facebookAuthInfo) => 
+    GpmAdapter.Idp.GetAuthInfo(GpmAdapterType.Idp.FACEBOOK, (facebookAuthInfo) => 
     {
         Debug.Log(string.Format("authInfo:{0}", facebookAuthInfo));
     });
@@ -258,7 +258,7 @@ static void GetProfile(string idpName, Action<Dictionary<string, object>> callba
 ```cs
 private void SampleGetProfile()
 {
-    ToastKitAdapter.Idp.GetProfile(ToastKitAdapterType.Idp.FACEBOOK, (facebookProfile) =>
+    GpmAdapter.Idp.GetProfile(GpmAdapterType.Idp.FACEBOOK, (facebookProfile) =>
     {
         if (facebookProfile == null)
         {
@@ -290,7 +290,7 @@ static List<string> GetLoggedInIdpList()
 ```cs
 private void SampleGetLoggedInIdpList()
 {
-    var loggedInIdpList = ToastKitAdapter.Idp.GetLoggedInIdpList();
+    var loggedInIdpList = GpmAdapter.Idp.GetLoggedInIdpList();
     foreach (var loggedInIdp in loggedInIdpList)
     {
         Debug.Log(string.Format("loggedInIdp:{0}", loggedInIdp));
@@ -313,7 +313,7 @@ static string GetUserId(string idpName)
 ```cs
 private void SampleGetUserId()
 {
-    var facebookUserId = ToastKitAdapter.Idp.GetUserId(ToastKitAdapterType.Idp.FACEBOOK);
+    var facebookUserId = GpmAdapter.Idp.GetUserId(GpmAdapterType.Idp.FACEBOOK);
     Debug.Log(string.Format("facebookUserId:{0}", facebookUserId));
 }
 ```
