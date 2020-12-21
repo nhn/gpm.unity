@@ -7,8 +7,8 @@
     <string>
       <key>$DESCRIPTION</key>
       <language>
-        <ko>TOAST Kit DLST는 Unity 중복되는 라이브러리들을 검색해서 지울 수 있는 툴입니다.</ko>
-        <en>TOAST Kit DLST(Duplicate Library Search Tool) searches and removes duplicate libraries.</en>
+        <ko>DLST는 Unity 중복되는 라이브러리들을 검색해서 지울 수 있는 툴입니다.</ko>
+        <en>DLST(Duplicate Library Search Tool) searches and removes duplicate libraries.</en>
       </language>
     </string>
     <string>
