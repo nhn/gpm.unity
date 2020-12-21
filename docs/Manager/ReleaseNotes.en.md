@@ -9,13 +9,13 @@
 * 2020.12.21
 
 ### Added
+
 * Add service refresh ui
 * Add service dependency list
 
 ### Updated
 
 * Brand name changed to Game Package Manager from TOAST Kit.
-* Improved to manage by package version
 
 ---
 

@@ -9,12 +9,13 @@
 * 2020.12.21
 
 ### Added
+
 * 서비스 갱신 ui 추가
 * 서비스 의존성 목록 추가
 
 ### Updated
+
 * TOAST Kit에서 Game Package Manager로 브랜드 이름 변경
-* 패키지 버전별로 관리되도록 개선
 
 ---
 
