@@ -133,7 +133,7 @@ DLST에서는 라이브러리 파일 이름을 다음과 같이 구분합니다.
 
 ### DLST 실행
 
-Menu > Tools > TOAST > Kit > Duplicate Library Search Tool(DLST)
+Menu > Tools > GPM > Duplicate Library Search Tool(DLST)
 
 ### UI
 
