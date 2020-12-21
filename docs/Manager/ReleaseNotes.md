@@ -2,6 +2,23 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.0
+
+### Date
+
+* 2020.12.21
+
+### Added
+
+* 서비스 갱신 ui 추가
+* 서비스 의존성 목록 추가
+
+### Updated
+
+* TOAST Kit에서 Game Package Manager로 브랜드 이름 변경
+
+---
+
 ## 1.0.2
 
 ### Date
