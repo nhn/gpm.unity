@@ -7,8 +7,8 @@
     <string>
       <key>$DESCRIPTION</key>
       <language>
-        <ko>GPM Communicator는 하나의 공통화된 인터페이스를 제공해 Native와 Data를 쉽게 주고 받을 수 있습니다.</ko>
-        <en>GPM Communicator provides one common interface so you can easily exchange data with Native.</en>
+        <ko>Communicator는 하나의 공통화된 인터페이스를 제공해 Native와 Data를 쉽게 주고 받을 수 있습니다.</ko>
+        <en>Communicator provides one common interface so you can easily exchange data with Native.</en>
       </language>
     </string>
     <string>

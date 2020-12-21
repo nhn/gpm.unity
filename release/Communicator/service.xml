@@ -8,25 +8,26 @@
     <unity>
       <version>2018.4.0+</version>
     </unity>
-    <Common>
-      <version>1.0.0</version>
-      <install>auto</install>
-    </Common>
   </dependencies>
   <packageList>
-      <package>
-          <path>gpm_communicator_v1.0.0.unitypackage</path>
-          <installPath>TOAST/Kit/Adapter</installPath>
-      </package>
-  </packageList>
+    <package>
+      <version>1.0.0</version>
+      <installList>
+        <install>
+          <name>gpm_communicator_v1.0.0.unitypackage</name>
+          <path>GPM/Communicator</path>
+        </install>
+      </installList>
+    </package>
+  </packageList>  
   <linkList>
     <link>
         <name>$VIEW_DOCUMENTATION</name>
-        <url>https://github.com/nhn/gpm.unity/tree/master/docs/Communicator</url>
+        <url>README.md</url>
     </link>
     <link>
         <name>$VIEW_RELEASE_NOTES</name>
-        <url>https://github.com/nhn/gpm.unity/blob/master/docs/Communicator/ReleaseNotes.md</url>
+        <url>ReleaseNotes.md</url>
     </link>
   </linkList>
 </info>
