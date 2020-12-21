@@ -2,6 +2,20 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.0
+
+### Date
+
+* 2020.12.21
+
+### Updated
+
+* Brand name changed to Game Package Manager from TOAST Kit.
+* Improved to update service list
+* Improved to see service dependencies
+
+---
+
 ## 1.0.2
 
 ### Date
