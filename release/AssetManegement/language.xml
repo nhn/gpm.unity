@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<multilanguage>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>$DESCRIPTION</key>
+            <language>
+                <ko>AssetManagerment는 유니티 에셋들을 손쉽게 관리할수 있는 툴입니다. </ko>
+                <en>AssetManagerment is a tool to easily manage your Unity assets.</en>
+            </language>
+        </string>
+    </list>
+</multilanguage>
