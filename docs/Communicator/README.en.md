@@ -1,4 +1,4 @@
-# Adapter
+# Communicator
 
 🌏 [한국어](README.md)
 
