@@ -27,4 +27,7 @@
     <service>
         <name>WebView</name>
     </service>
+    <service>
+        <name>AssetManegement</name>
+    </service>
 </serviceList>
