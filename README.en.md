@@ -51,11 +51,11 @@ Provide components to use Unity UI more efficiently.
 
 LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers.
 
-* [Go to LogViewer](docs/LogViewer/README.en.md)
+* [Go to LogViewer service](docs/LogViewer/README.en.md)
 
 ### Communicator
 
-* Preparing for Service
+* [Go to Communicator service](docs/Communicator/README.en.md)
 
 ### WebView
 
