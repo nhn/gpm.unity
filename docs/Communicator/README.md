@@ -173,10 +173,10 @@ public void CallAsync()
         import com.gpm.communicator.GpmCommunicator;
         import com.gpm.communicator.vo.GpmCommunicatorMessage;
 
-        public class Sample {
+        public class GpmCommunicatorSample {
             private final String DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
 
-            public Sample() {
+            public GpmCommunicatorSample() {
                 // Receiver 생성
                 GpmCommunicatorReceiver listener = new GpmCommunicatorReceiver() {
                     @Override
@@ -206,46 +206,43 @@ public void CallAsync()
     * Sample.h
         ```objc
         #import <Foundation/Foundation.h>
-        #import "GpmCommunicatorReceiver.h"
-        
-        @class Message;
 
-        @interface Sample: NSObject
+        @interface GPMCommunicatorSample: NSObject
 
         @end
         ```
     * Sample.mm
         ```objc
-        #import "Sample.h"
-        #import "GpmCommunicator.h"
-        #import "GpmCommunicatorReceiver.h"
-        #import "Message.h"
+        #import "GPMCommunicatorSample.h"
+        #import "GPMCommunicator.h"
+        #import "GPMCommunicatorReceiver.h"
+        #import "GPMCommunicatorMessage.h"
 
         #define GPM_COMMUNICATOR_SAMPLE_DOMAIN @"GPM_COMMUNICATOR_SAMPLE"
 
-        @implementation Sample
+        @implementation GPMCommunicatorSample
 
-        - (instancetype)init {
+        - (id)init {
             if((self = [super init]) == nil) {
                 return nil;
             }
             
             // Receiver 생성
-            GpmCommunicatorReceiver* receiver = [[GpmCommunicatorReceiver alloc] init];
+            GPMCommunicatorReceiver* receiver = [[GPMCommunicatorReceiver alloc] init];
 
             receiver.onRequestMessageSync = ^NSString *(Message *message) {
                 //Sync Message 처리
-                [[GpmCommunicator sharedGpmCommunicator] sendResponseWithMessage:message];
+                [[GPMCommunicator sharedGPMCommunicator] sendResponseWithMessage:message];
                 return @"Retuen Sync Data";
             };
 
             receiver.onRequestMessageAsync = ^(Message *message) {
                 // Async Message 처리
-                [[GpmCommunicator sharedGpmCommunicator] sendResponseWithMessage:message];
+                [[GPMCommunicator sharedGPMCommunicator] sendResponseWithMessage:message];
             };
 
             // Receiver 등록
-            [[GpmCommunicator sharedGpmCommunicator] addReceiverWithDomain:GPM_COMMUNICATOR_SAMPLE_DOMAIN receiver:receiver];
+            [[GPMCommunicator sharedGPMCommunicator] addReceiverWithDomain:GPM_COMMUNICATOR_SAMPLE_DOMAIN receiver:receiver];
             return self;
         }
         @end
@@ -255,16 +252,19 @@ public void CallAsync()
 
 * Sample.cs를 만듭니다
     ```cs
-    using System.Text;
-    using Gpm.Communicator;
-    using UnityEngine;
-    using UnityEngine.UI;
-
-    public class Sample
+    namespace Gpm.Communicator.Sample
     {
-        private const string DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
-        private const string ANDROID_CLASS_NAME = "com.gpm.communicator.sample.Sample";
-        private const string IOS_CLASS_NAME = "Sample";
+        using System.Text;
+        using Gpm.Communicator;
+        using UnityEngine;
+        using UnityEngine.UI;
+
+        public class GpmCommunicatorSample
+        {
+            private const string DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
+            private const string ANDROID_CLASS_NAME = "com.gpm.communicator.sample.GpmCommunicatorSample";
+            private const string IOS_CLASS_NAME = "GPMCommunicatorSample";
+        }
     }
     ```
 
@@ -272,27 +272,30 @@ public void CallAsync()
 
 * Sample.cs에 Initialize Method를 추가 합니다.
     ```cs
-    using System.Text;
-    using Gpm.Communicator;
-    using UnityEngine;
-    using UnityEngine.UI;
-
-    public class Sample
+    namespace Gpm.Communicator.Sample
     {
-        ...
-        
-        public void Initialize()
-        {
-            GpmCommunicatorVO.Configuration configuration = new GpmCommunicatorVO.Configuration()
-            {
-    #if UNITY_ANDROID
-            className = ANDROID_CLASS_NAME;
-    #elif UNITY_IOS
-            className = IOS_CLASS_NAME;
-    #endif
-            };
+        using System.Text;
+        using Gpm.Communicator;
+        using UnityEngine;
+        using UnityEngine.UI;
 
-            GpmCommunicator.InitializeClass(configuration);
+        public class GpmCommunicatorSample
+        {
+            ...
+            
+            public void Initialize()
+            {
+                GpmCommunicatorVO.Configuration configuration = new GpmCommunicatorVO.Configuration()
+                {
+        #if UNITY_ANDROID
+                className = ANDROID_CLASS_NAME;
+        #elif UNITY_IOS
+                className = IOS_CLASS_NAME;
+        #endif
+                };
+
+                GpmCommunicator.InitializeClass(configuration);
+            }
         }
     }
     ```
@@ -301,31 +304,34 @@ public void CallAsync()
 
 * Sample.cs에 AddReceiver Method를 추가 합니다.
     ```cs
-    using System.Text;
-    using Gpm.Communicator;
-    using UnityEngine;
-    using UnityEngine.UI;
-
-    public class Sample
+    namespace Gpm.Communicator.Sample
     {
-        ...
-        
-        public void AddReceiver()
-        {            
-            GpmCommunicator.AddReceiver(DOMAIN, OnReceiver);
-        }
-        
-        private void OnReceiver(GpmCommunicatorVO.Message message)
+        using System.Text;
+        using Gpm.Communicator;
+        using UnityEngine;
+        using UnityEngine.UI;
+
+        public class GpmCommunicatorSample
         {
-            StringBuilder sb = new StringBuilder(resultText.text);
+            ...
+            
+            public void AddReceiver()
+            {            
+                GpmCommunicator.AddReceiver(DOMAIN, OnReceiver);
+            }
+            
+            private void OnReceiver(GpmCommunicatorVO.Message message)
+            {
+                StringBuilder sb = new StringBuilder(resultText.text);
 
-            sb.AppendLine();
-            sb.AppendLine("OnReceiver");
-            sb.AppendLine("Domain : " + message.domain);
-            sb.AppendLine("Data : " + message.data);
-            sb.AppendLine("Extra : " + message.extra);
+                sb.AppendLine();
+                sb.AppendLine("OnReceiver");
+                sb.AppendLine("Domain : " + message.domain);
+                sb.AppendLine("Data : " + message.data);
+                sb.AppendLine("Extra : " + message.extra);
 
-            Debug.Log(sb.ToString());
+                Debug.Log(sb.ToString());
+            }
         }
     }
     ```
@@ -334,43 +340,46 @@ public void CallAsync()
 
 * Sample.cs
     ```cs
-    using System.Text;
-    using Gpm.Communicator;
-    using UnityEngine;
-    using UnityEngine.UI;
+    namespace Gpm.Communicator.Sample
+    {
+        using System.Text;
+        using Gpm.Communicator;
+        using UnityEngine;
+        using UnityEngine.UI;
 
-    public class Sample
-    {        
-        public void CallAsync()
-        {
-            GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
+        public class GpmCommunicatorSample
+        {        
+            public void CallAsync()
             {
-                domain = DOMAIN,
-                data = "USER_ASYNC_DATA",
-                extra = "USER_ASYNC_EXTRA"
-            };
+                GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
+                {
+                    domain = DOMAIN,
+                    data = "USER_ASYNC_DATA",
+                    extra = "USER_ASYNC_EXTRA"
+                };
 
-            GpmCommunicator.CallAsync(message);
-        }
+                GpmCommunicator.CallAsync(message);
+            }
 
-        public void CallSync()
-        {
-            GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
+            public void CallSync()
             {
-                domain = DOMAIN,
-                data = "USER_SYNC_DATA",
-                extra = "USER_SYNC_EXTRA"
-            };
+                GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
+                {
+                    domain = DOMAIN,
+                    data = "USER_SYNC_DATA",
+                    extra = "USER_SYNC_EXTRA"
+                };
 
-            GpmCommunicatorVO.Message responseMessage = GpmCommunicator.CallSync(message);
+                GpmCommunicatorVO.Message responseMessage = GpmCommunicator.CallSync(message);
 
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("CallSync Response");
-            sb.AppendLine("Domain : " + responseMessage.domain);
-            sb.AppendLine("Data : " + responseMessage.data);
-            sb.AppendLine("Extra : " + responseMessage.extra);
-            
-            Debug.Log(sb.ToString());
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("CallSync Response");
+                sb.AppendLine("Domain : " + responseMessage.domain);
+                sb.AppendLine("Data : " + responseMessage.data);
+                sb.AppendLine("Extra : " + responseMessage.extra);
+                
+                Debug.Log(sb.ToString());
+            }
         }
     }
     ```
