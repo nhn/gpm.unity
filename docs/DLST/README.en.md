@@ -148,7 +148,6 @@ Menu > Tools > GPM > Duplicate Library Search Tool(DLST)
     * 'Refresh' : Update search results.
     * 'Delete' : Choose a library from search result and remove it. 
 4. Change language for the tool: Korean and English are supported.
-5. Open the DLST document.
 
 #### Configuration window for **character strings to ignore for a library name**.
 
