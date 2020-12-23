@@ -11,5 +11,19 @@
                 <en>AssetManagerment is a tool to easily manage your Unity assets.</en>
             </language>
         </string>
+		<string>
+            <key>$VIEW_DOCUMENTATION</key>
+            <language>
+                <ko>문서 보기(준비중)</ko>
+                <en>View documentation(준비중)</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_RELEASE_NOTES</key>
+            <language>
+                <ko>릴리스 정보</ko>
+                <en>Release notes</en>
+            </language>
+        </string>
     </list>
 </multilanguage>
