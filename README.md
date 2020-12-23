@@ -56,6 +56,8 @@ Unity Log와 디바이스 시스템 정보를 화면에서 확인할 수 있고,
 
 ### Communicator
 
+Communicator는 하나의 공통화된 인터페이스를 제공해 Native와 Data를 쉽게 주고 받을 수 있는 프레임웍입니다.
+
 * [Communicator 서비스로 이동](docs/Communicator/README.md)
 
 ### WebView
