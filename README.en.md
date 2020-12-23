@@ -55,6 +55,8 @@ LogViewer enables users to view Unity logs with device system information on the
 
 ### Communicator
 
+Communicator is a framework that can easily exchange data with native by providing one common interface.
+
 * [Go to Communicator service](docs/Communicator/README.en.md)
 
 ### WebView
