@@ -48,7 +48,7 @@
 ### 에셋 맵
 
 * 에셋의 관계와 상태를 한눈에 관리할 수 있게 해줍니다.
-![1_gpm_assetmanegment_assetmap_kr.png](./images/1_gpm_assetmanegment_assetmap_kr.png)
+![1_gpm_assetmanagement_assetmap_kr.png](./images/1_gpm_assetmanagement_assetmap_kr.png)
 
 1. 루트 에셋 설정
     * 에셋의 관계와 상태를 보여줄 대상입니다.
@@ -67,7 +67,7 @@
 ### 에셋 이슈 찾기
 
 * 이슈가 있는 전체 에셋을 알 수 있습니다. 이슈는 missing과 같은 상태입니다.
-![2_gpm_assetmanegment_issuecheck_kr.png](./images/2_gpm_assetmanegment_issuecheck_kr.png)
+![2_gpm_assetmanagement_issuecheck_kr.png](./images/2_gpm_assetmanagement_issuecheck_kr.png)
 
 1. 이슈 리스트 전체 검색
     * 원하는 시점에 이슈가 있는 에셋 리스트를 갱신을 할 수 있습니다.
@@ -80,7 +80,7 @@
 
 ### 에셋 레퍼런스 찾기
 * 에셋이 사용되는 지점을 찾고 쉽게 수정할 수 있게 해줍니다.
-![3_gpm_assetmanegment_referencefind_kr.png](./images/3_gpm_assetmanegment_referencefind_kr.png)
+![3_gpm_assetmanagement_referencefind_kr.png](./images/3_gpm_assetmanagement_referencefind_kr.png)
 
 1. 검색 대상 및 옵션 설정 
     * 찾을 대상에 대한 설정과 검색 옵션을 제공합니다.
@@ -106,7 +106,7 @@
 에셋 관리 창에서 AssetManagement가 활성화되어있지 않다면 활성화 버튼이 노출됩니다.
 ![0_enable.gif](./images/0_enable.gif)
 
-* Tools/GPM/AssetManegement/Enable 메뉴로 활성화/비활성화가 가능합니다.
+* Tools/GPM/AssetManagement/Enable 메뉴로 활성화/비활성화가 가능합니다.
 
 
 ### 에셋 구조 보기
