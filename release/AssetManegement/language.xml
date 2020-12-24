@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <multilanguage>
     <default>
-        <language>en</language>
+        <language>ko</language>
     </default>
     <list>
         <string>
@@ -14,8 +14,8 @@
 		<string>
             <key>$VIEW_DOCUMENTATION</key>
             <language>
-                <ko>문서 보기(준비중)</ko>
-                <en>View documentation(준비중)</en>
+                <ko>문서 보기</ko>
+                <en>View documentation(Preparing)</en>
             </language>
         </string>
         <string>
