@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="1">
+<info version="2">
   <title>Communicator</title>
   <status>publish</status>
   <description>$DESCRIPTION</description>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <dependencies>
     <unity>
       <version>2018.4.0+</version>
@@ -11,10 +11,10 @@
   </dependencies>
   <packageList>
     <package>
-      <version>1.0.0</version>
+      <version>1.0.1</version>
       <installList>
         <install>
-          <name>gpm_communicator_v1.0.0.unitypackage</name>
+          <name>gpm_communicator_v1.0.1.unitypackage</name>
           <path>GPM/Communicator</path>
         </install>
       </installList>
