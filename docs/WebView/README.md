@@ -48,7 +48,7 @@
 
 ###  Android
 
-GPM WebView는 [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html)을 사용하여 Android에서 필요한 종속성을 설정합니다.
+WebView는 [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html)을 사용하여 Android에서 필요한 종속성을 설정합니다.
 Unity 2019.3 이전 버전에 프로젝트에서는 **Internal** 빌드 설정이 아닌 **Gradle**로 전환해야 합니다.
 
 * Gradle 설정
