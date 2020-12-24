@@ -29,7 +29,7 @@
 		<version>1.0.0</version>
     </service>
     <service>
-        <name>AssetManegement</name>
+        <name>AssetManagement</name>
 		<version>1.0.0</version>
     </service>
 </serviceList>
