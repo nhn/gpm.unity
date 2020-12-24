@@ -37,15 +37,15 @@
     <imageList>
         <image>
             <title>$IMAGE_ASSETMAP</title>
-            <path>/image/AssetManegement_AssetMap.png</path>
+            <path>/image/AssetManagement_AssetMap.png</path>
         </image>
         <image>
             <title>$IMAGE_ISSUECHECK</title>
-            <path>/image/AssetManegement_IssueCheck.png</path>
+            <path>/image/AssetManagement_IssueCheck.png</path>
         </image>
         <image>
             <title>$IMAGE_FINDREFERENCE</title>
-            <path>/image/AssetManegement_FindReference.png</path>
+            <path>/image/AssetManagement_FindReference.png</path>
         </image>
     </imageList>
 </info>
