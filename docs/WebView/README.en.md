@@ -85,6 +85,8 @@ WebView를 표시합니다.
 * configuration : GpmWebViewRequest.Configuration으로 WebView의 옵션을 변경 할 수 있습니다.
 * closeCallback : WebView가 종료될 때 사용자에게 콜백으로 알려 줍니다.
 * schemeList : 사용자가 받고 싶은 커스텀 Scheme 목록을 지정합니다.
+    * "https://"를 입력하면 "https://"로 시작하는 모든 url을 schemeEvent로 받을 수 있습니다.
+    * schemeEvent로 받은 scheme은 redirect 되지 않습니다.
 * schemeEvent : schemeList로 지정한 커스텀 Scheme을 포함하는 url을 콜백으로 알려 줍니다.
 
 #### Configuration
@@ -119,7 +121,7 @@ static void ShowUrl(
 public void ShowUrl()
 {
     GpmWebView.ShowUrl(
-        url.text,
+        "https://www.nhn.com",
         new GpmWebViewRequest.Configuration() {
             title = "WebView Title",
             orientation = ScreenOrientation.AutoRotation,
