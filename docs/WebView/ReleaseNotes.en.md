@@ -4,6 +4,10 @@
 
 ## 1.0.0
 
+### Date
+
+* 2020.12.24
+
 ### Features
 
 * Platform 
