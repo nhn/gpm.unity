@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="1">
+<info version="2">
   <title>Communicator</title>
   <status>publish</status>
   <description>$DESCRIPTION</description>
@@ -18,6 +18,8 @@
           <path>GPM/Communicator</path>
         </install>
       </installList>
+    </package>
+    <package>
 	  <version>1.0.1</version>
       <installList>
         <install>
