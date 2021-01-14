@@ -19,7 +19,7 @@ Scroll Rect (Scroll View) creates items to fit in content and allows them to b
 
 ## 🔨 API
 
-Regarding how to use API, see Assets/TOAST/Kit/UI/InfiniteScroll/Sample/Scripts/InfiniteScrollSample.cs.
+Regarding how to use API, see Assets/GPM/UI/InfiniteScroll/Sample/Scripts/InfiniteScrollSample.cs.
 
 ### InsertData
 
@@ -110,7 +110,7 @@ public void ResizeScrollView()
 
 ## 🐾 Sample
 
-Assets/TOAST/Kit/UI/InfiniteScroll/Sample
+Assets/GPM/UI/InfiniteScroll/Sample
 
 ![infinitescroll_sample](images/infinitescroll_sample.gif)
 

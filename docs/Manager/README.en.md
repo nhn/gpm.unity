@@ -10,7 +10,7 @@
 
 ## Overview
 
-Check the service list of TOAST Kit from TOAST Kit Manager, while you install, remove, or update services as you need.
+Check the service list from Manager, while you install, remove, or update services as you need.
 
 
 ## Specification
@@ -23,13 +23,13 @@ Check the service list of TOAST Kit from TOAST Kit Manager, while you install, r
 
 ### Execute
 
-* Menu > Tools > TOAST > Kit > Manager
+* Menu > Tools > GPM > Manager
 
-![Manager](./images/toastkit_manager_001.png)
+![Manager](./images/gpm_manager_001.png)
 
 ### 1. Service List
 
-* Check the list of services provided by TOAST Kit.
+* Check the list of services provided.
 
 ### 2. Service Information
 

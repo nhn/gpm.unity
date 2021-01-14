@@ -51,16 +51,22 @@ Provide components to use Unity UI more efficiently.
 
 LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers.
 
-* [Go to LogViewer](docs/LogViewer/README.en.md)
+* [Go to LogViewer service](docs/LogViewer/README.en.md)
 
 ### Communicator
 
-* Preparing for Service
+Communicator is a framework that can easily exchange data with native by providing one common interface.
+
+* [Go to Communicator service](docs/Communicator/README.en.md)
 
 ### WebView
 
-* Preparing for Service
+Provides a web view that can be used in various ways in the game.
+
+* [Go to WebView service](docs/WebView/README.en.md)
 
 ### AssetManagement
 
-* Preparing for Service
+AssetManagement is a tool that allows you to easily manage your Unity assets.
+
+* [Go to AssetManagement service](docs/AssetManagement/README.en.md)
