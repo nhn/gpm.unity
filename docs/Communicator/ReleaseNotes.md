@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Fixed 'INativeMessageSender could not be found' error when building Unity Standalone
+* Unity Standalone 빌드 시 'INativeMessageSender could not be found' 에러를 수정
 
 ## 1.0.0
 
