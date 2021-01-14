@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.0.1
+
+### Date
+
+* 2021.01.14
+
+### Fixed
+
+* Unity Standalone 빌드 시 'INativeMessageSender could not be found' 에러를 수정
+
 ## 1.0.0
 
 ### Date
