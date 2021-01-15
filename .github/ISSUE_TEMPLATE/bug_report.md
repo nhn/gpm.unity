@@ -8,7 +8,15 @@ assignees: ''
 ---
 
 ## Service
-Write the service name that you are currently using.[e.g. AssetManagement]
+
+* [ ] Adapter
+* [ ] AssetManagement
+* [ ] Communicator
+* [ ] DLST
+* [ ] LogViewer
+* [ ] Manager
+* [ ] UI
+* [ ] WebView
 
 ## Version
 Write the version that you are currently using.
