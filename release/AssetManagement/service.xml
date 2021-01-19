@@ -3,7 +3,7 @@
     <title>AssetManagement</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <dependencies>
         <unity>
             <version>2018.4.0+</version>
@@ -14,6 +14,15 @@
         </Common>
     </dependencies>
     <packageList>
+		<package>
+            <version>1.0.1</version>
+            <installList>
+                <install>
+                    <name>gpm_assetmanagement_v1.0.1.unitypackage</name>
+                    <path>GPM/AssetManagement</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>1.0.0</version>
             <installList>
