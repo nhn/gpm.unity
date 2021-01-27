@@ -15,7 +15,7 @@
             <key>$VIEW_DOCUMENTATION</key>
             <language>
                 <ko>문서 보기</ko>
-                <en>View documentation(Preparing)</en>
+                <en>View documentation</en>
             </language>
         </string>
         <string>
@@ -23,6 +23,27 @@
             <language>
                 <ko>릴리스 정보</ko>
                 <en>Release notes</en>
+            </language>
+        </string>
+		<string>
+            <key>$IMAGE_ASSETMAP</key>
+            <language>
+                <ko>에셋맵</ko>
+                <en>AssetMap</en>
+            </language>
+        </string>
+		<string>
+            <key>$IMAGE_ISSUECHECK</key>
+            <language>
+                <ko>이슈체크</ko>
+                <en>IssueCheck</en>
+            </language>
+        </string>
+		<string>
+            <key>$IMAGE_FINDREFERENCE</key>
+            <language>
+                <ko>레퍼런스 찾기</ko>
+                <en>Reference Find</en>
             </language>
         </string>
     </list>
