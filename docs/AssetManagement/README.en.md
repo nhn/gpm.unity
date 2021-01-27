@@ -25,18 +25,14 @@
 ### What does it do?
 1. Can easily understand the relations between assets.
     * Even new assets can be easily analyzed.
-<br>
 2. Can easily learn where each asset is used.
     * Assets can be easily and safely modified and replaced.
-<br>
 3. Can reduce errors by identifying problems in assets.
     * Can easily track down where something is missing and resolve the issue.
     * Warns users with a log when a task has a problem.
-<br>
 4. Can manage and optimize projects.
     * Can easily and safely remove useless assets to reduce the size of a project.
     * Can minimize the complexity of assets to reduce the size of the build.
-<br>
 
 ## Specification
 
