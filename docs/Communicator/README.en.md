@@ -29,7 +29,7 @@ Communicator allows you to easily send and receive data through a single common 
 
 ## Specifications
 
-### Unity support version
+### Supported Unity Version
 
 * 2018.4.0 or higher
 
