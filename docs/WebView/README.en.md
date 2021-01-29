@@ -52,25 +52,28 @@ Provides a WebView used in various ways in the game.
 GPM WebView uses [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html) to set the dependencies needed in Android.
 In a project that uses a version before Unity 2019.3, you need to switch to **Gradle** instead of **Internal** settings.
 
-* Gradle settings
-    1.  Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Gradle Template** to create an `Assets/Plugins/Android/mainTemplate.gradle` file.
-        * ![unity_gradle.png](images/unity_gradle.png)
-        * If you are already using a mainTemplate.gradle file, you may skip this step.
-    2.  Uncomment any comment in mainTemplate.gradle.
-        ```gradle
-        // ENERATED BY UNITY. REMOVE THIS COMMENT TO PREVENT OVERWRITING WHEN EXPORTING AGAIN
-        ```
-    3.  Add dependencies in mainTemplate.gradle.
-        ```gradle
-        dependencies {
-            implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
-        }
-        ```
-        * If they are already added in another package, you may skip this step.
+#### Gradle settings
+
+1.  Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Gradle Template** to create an `Assets/Plugins/Android/mainTemplate.gradle` file.
+    * ![unity_gradle.png](images/unity_gradle.png)
+    * If you are already using a mainTemplate.gradle file, you may skip this step.
+2.  Uncomment any comment in mainTemplate.gradle.
+    ```gradle
+    // ENERATED BY UNITY. REMOVE THIS COMMENT TO PREVENT OVERWRITING WHEN EXPORTING AGAIN
+    ```
+3.  Add dependencies in mainTemplate.gradle.
+    ```gradle
+    dependencies {
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+    }
+    ```
+    * If they are already added in another package, you may skip this step.
 
 ### iOS
-* Setting Other Linker Flags
-    * In **Build Settings > Linking > Other Linker Flags** of Xcode Target, you need to add -ObjC.
+
+#### Setting Other Linker Flags
+    
+In **Build Settings > Linking > Other Linker Flags** of Xcode Target, you need to add -ObjC.
 
 ## 🔨 API
 
@@ -79,10 +82,12 @@ In a project that uses a version before Unity 2019.3, you need to switch to **Gr
 Displays the WebView.
 
 **Required parameter**
+
 * url: the url transmitted to the parameter must be a valid value.
 * openCallback: When WebView is open, the success result is notified via a callback.
 
 **Optional parameter**
+
 * configuration: With GpmWebViewRequest.Configuration, WebView options can be changed.
 * closeCallback: The closing of WebView is notified to users via a callback.
 * schemeList: Specifies the list of custom schemes that users want to receive.
@@ -107,8 +112,9 @@ Displays the WebView.
 
 
 **API**
+
 ```cs
-static void ShowUrl(
+public static void ShowUrl(
     string url,
     GpmWebViewRequest.Configuration configuration,
     GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
@@ -159,8 +165,9 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 You can close the WebView using the following API.
 
 **API**
+
 ```cs
-static void Close()
+public static void Close()
 ```
 
 **Example**

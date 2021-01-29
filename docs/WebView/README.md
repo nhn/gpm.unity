@@ -11,6 +11,7 @@
 
 
 ## 개요
+
 게임에서 다양하게 사용할 수 있는 웹뷰를 제공합니다.
 
 ## 스펙
@@ -33,6 +34,7 @@
 * iOS 
 
 ### 지원하는 기능
+
 | Category | Spec |
 | --- | --- |
 | Navigation | title |
@@ -51,25 +53,28 @@
 GPM WebView는 [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html)을 사용하여 Android에서 필요한 종속성을 설정합니다.
 Unity 2019.3 이전 버전의 프로젝트에서는 **Internal** 빌드 설정이 아닌 **Gradle**로 전환해야 합니다.
 
-* Gradle 설정
-    1.  **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Template**을 활성화하면 `Assets/Plugins/Android/mainTemplate.gradle` 파일이 생성됩니다.
-        * ![unity_gradle.png](images/unity_gradle.png)
-        * 사용 중인 mainTemplate.gradle 파일이 있을 때는 생략할 수 있습니다.
-    2.  mainTemplate.gradle의 주석을 제거합니다.
-        ```gradle
-        // ENERATED BY UNITY. REMOVE THIS COMMENT TO PREVENT OVERWRITING WHEN EXPORTING AGAIN
-        ```
-    3.  mainTemplate.gradle에서 dependencies를 추가합니다.
-        ```gradle
-        dependencies {
-            implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
-        }
-        ```
-        * 다른 패키지에서 이미 추가한 경우 해당 과정을 제외할 수 있습니다.
+#### Gradle 설정
+
+1.  **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Template**을 활성화하면 `Assets/Plugins/Android/mainTemplate.gradle` 파일이 생성됩니다.
+    * ![unity_gradle.png](images/unity_gradle.png)
+    * 사용 중인 mainTemplate.gradle 파일이 있을 때는 생략할 수 있습니다.
+2.  mainTemplate.gradle의 주석을 제거합니다.
+    ```gradle
+    // ENERATED BY UNITY. REMOVE THIS COMMENT TO PREVENT OVERWRITING WHEN EXPORTING AGAIN
+    ```
+3.  mainTemplate.gradle에서 dependencies를 추가합니다.
+    ```gradle
+    dependencies {
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+    }
+    ```
+    * 다른 패키지에서 이미 추가한 경우 해당 과정을 제외할 수 있습니다.
 
 ### iOS
-* Other Linker Flags 설정
-    * Xcode Target에서 **Build Settings > Linking > Other Linker Flags**에 -ObjC를 추가해야 합니다.
+
+#### Other Linker Flags 설정
+
+Xcode Target에서 **Build Settings > Linking > Other Linker Flags**에 -ObjC를 추가해야 합니다.
 
 ## 🔨 API
 
@@ -78,10 +83,12 @@ Unity 2019.3 이전 버전의 프로젝트에서는 **Internal** 빌드 설정�
 WebView를 표시합니다.
 
 **Required 파라미터**
+
 * url : 파라미터로 전송되는 url은 유효한 값이어야 합니다.
 * openCallback : WebView가 오픈될 때 성공 여부를 콜백으로 알려줍니다.
 
 **Optional 파라미터**
+
 * configuration : GpmWebViewRequest.Configuration으로 WebView의 옵션을 변경할 수 있습니다.
 * closeCallback : WebView가 종료될 때 사용자에게 콜백으로 알려줍니다.
 * schemeList : 사용자가 받고 싶은 커스텀 스킴(scheme) 목록을 지정합니다.
@@ -105,8 +112,9 @@ WebView를 표시합니다.
 |                          | GamebaseWebViewContentMode.DESKTOP            | 데스크탑 브라우저          |
 
 **API**
+
 ```cs
-static void ShowUrl(
+public static void ShowUrl(
     string url,
     GpmWebViewRequest.Configuration configuration,
     GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
@@ -157,8 +165,9 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 다음 API를 이용해 WebView를 닫을 수 있습니다.
 
 **API**
+
 ```cs
-static void Close()
+public static void Close()
 ```
 
 **Example**
