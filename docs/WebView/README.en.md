@@ -11,7 +11,8 @@
 
 
 ## Overview
-게임에서 다양하게 사용할 수 있는 웹뷰를 제공합니다.
+
+Provides a WebView used in various ways in the game.
 
 ## Specifications
 
