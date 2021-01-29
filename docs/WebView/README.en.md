@@ -2,37 +2,38 @@
 
 🌏 [한국어](README.md)
 
-## 🚩 목차
+## 🚩 Table of Contents
 
-* [개요](#개요)
-* [스펙](#스펙)
-* [플랫폼별 설정](#-플랫폼별-설정)
-* [API](#-api)
+* [Overview](#Overview)
+* [Specifications](#Specifications)
+* [Platform specific settings](#-Platform-specific-settings)
+* [API](#-API)
 
 
-## 개요
-게임에서 다양하게 사용할 수 있는 웹뷰를 제공합니다.
+## Overview
 
-## 스펙
+Provides a WebView used in various ways in the game.
 
-### Unity 지원 버전
+## Specifications
 
-* 2018.4.0 이상
+### Supported Unity Version
 
-### Android 지원 버전
+* 2018.4.0 or higher
 
-* 4.4 이상
+### Supported Android version
 
-### iOS 지원버전
+* 4.4 or higher
 
-* 11 이상
+### Supported iOS version
 
-### 지원 플랫폼
+* 11 or higher
+
+### Supported platforms
 
 * Anroid
 * iOS 
 
-### 지원하는 기능
+### Supported features
 | Category | Spec |
 | --- | --- |
 | Navigation | title |
@@ -44,69 +45,76 @@
 |  | scheme Callback |
 |  | schemeList |
 
-## 🔨 플랫폼별 설정
+## 🔨 Platform specific settings
 
 ###  Android
 
-WebView는 [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html)을 사용하여 Android에서 필요한 종속성을 설정합니다.
-Unity 2019.3 이전 버전에 프로젝트에서는 **Internal** 빌드 설정이 아닌 **Gradle**로 전환해야 합니다.
+Uses [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html) to set the dependencies needed in Android.
+In a project that uses a version before Unity 2019.3, you need to switch to **Gradle** instead of **Internal** settings.
 
-* Gradle 설정
-    1.  File -> Build Settings -> Player Settings -> Android -> Publishing Settings 에서 `Custom Gradle Template`을 활성화 하면 `Assets/Plugins/Android/mainTemplate.gradle` 파일이 생성이 됩니다.
-        * ![unity_gradle.png](images/unity_gradle.png)
-        * 기존에 사용중이던 mainTemplate.gradle 파일이 있는 경우는 생략할 수 있습니다.
-    2.  mainTemplate.gradle의 주석을 제거합니다.
-        ```gradle
-        // ENERATED BY UNITY. REMOVE THIS COMMENT TO PREVENT OVERWRITING WHEN EXPORTING AGAIN
-        ```
-    3.  mainTemplate.gradle에서 dependencies를 추가합니다.
-        ```gradle
-        dependencies {
-            implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
-        }
-        ```
-        * 다른 패키지에서 이미 추가하고 있는 경우 해당 과정을 제외할 수 있습니다.
+#### Gradle settings
+
+1.  Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Gradle Template** to create an `Assets/Plugins/Android/mainTemplate.gradle` file.
+    * ![unity_gradle.png](images/unity_gradle.png)
+    * If you are already using a mainTemplate.gradle file, you may skip this step.
+2.  Uncomment any comment in mainTemplate.gradle.
+    ```gradle
+    // ENERATED BY UNITY. REMOVE THIS COMMENT TO PREVENT OVERWRITING WHEN EXPORTING AGAIN
+    ```
+3.  Add dependencies in mainTemplate.gradle.
+    ```gradle
+    dependencies {
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+    }
+    ```
+    * If they are already added in another package, you may skip this step.
 
 ### iOS
-* Other Linker Flags 설정
-    * Xcode Target에서 Build Settings > Linking > Other Linker Flags에 -ObjC를 추가해야 합니다.
+
+#### Setting Other Linker Flags
+    
+In **Build Settings > Linking > Other Linker Flags** of Xcode Target, you need to add -ObjC.
 
 ## 🔨 API
 
 ### ShowUrl
 
-WebView를 표시합니다.
+Displays the WebView.
 
-**Required 파라미터**
-* url : 파라미터로 전송되는 url은 유효한 값이어야 합니다.
-* openCallback : WebView가 오픈될 때 성공여부를 콜백으로 알려 줍니다.
+**Required parameter**
 
-**Optional 파라미터**
-* configuration : GpmWebViewRequest.Configuration으로 WebView의 옵션을 변경 할 수 있습니다.
-* closeCallback : WebView가 종료될 때 사용자에게 콜백으로 알려 줍니다.
-* schemeList : 사용자가 받고 싶은 커스텀 Scheme 목록을 지정합니다.
-    * "https://"를 입력하면 "https://"로 시작하는 모든 url을 schemeEvent로 받을 수 있습니다.
-    * schemeEvent로 받은 scheme은 redirect 되지 않습니다.
-* schemeEvent : schemeList로 지정한 커스텀 Scheme을 포함하는 url을 콜백으로 알려 줍니다.
+* url: the url transmitted to the parameter must be a valid value.
+* openCallback: When WebView is open, the success result is notified via a callback.
+
+**Optional parameter**
+
+* configuration: With GpmWebViewRequest.Configuration, WebView options can be changed.
+* closeCallback: The closing of WebView is notified to users via a callback.
+* schemeList: Specifies the list of custom schemes that users want to receive.
+    * Entering 'https://' allows you receive all URLs that begin with 'https://' as schemeEvent.
+    * A scheme received as schemeEvent is not redirected.
+* schemeEvent: Any URL that includes a custom scheme specified using schemeList is notified via a callback.
 
 #### Configuration
 
 | Parameter | Values | Description |
 | ------------------------ | ---------------------------------------- | --------------------------- |
-| title                    | string                                   | WebView의 제목                 |
-| orientation       | ScreenOrientation.Unknown    | 미지정(Device 설정) |
-|                          | ScreenOrientation.Portrait       | 세로 모드                       |
-|                          | ScreenOrientation.PortraitUpsideDown      | 뒤집힌 세로모드                      |
-|                          | ScreenOrientation.LandscapeLeft</br>ScreenOrientation.Landscape | 가로 모드              |
-|                          | ScreenOrientation.LandscapeRight | 가로 모드를 180도 회전              |
-|                          | ScreenOrientation.AutoRotation | 자동              |
-| contentMode</br>(iOS only)              | GamebaseWebViewContentMode.RECOMMENDED        | 현재 플랫폼 추천 브라우저    |
-|                          | GamebaseWebViewContentMode.MOBILE             | 모바일 브라우저            |
-|                          | GamebaseWebViewContentMode.DESKTOP            | 데스크탑 브라우저          |
+| title                    | string                                   | WebView title                 |
+| orientation       | ScreenOrientation.Unknown    | not specified (device settings) |
+|                          | ScreenOrientation.Portrait       | portrait mode                       |
+|                          | ScreenOrientation.PortraitUpsideDown      | flipped portrait mode                       |
+|                          | ScreenOrientation.LandscapeLeft</br>ScreenOrientation.Landscape | landscape mode              |
+|                          | ScreenOrientation.LandscapeRight | rotate landscape mode 180 degrees              |
+|                          | ScreenOrientation.AutoRotation | auto              |
+| contentMode</br>(iOS only)              | GamebaseWebViewContentMode.RECOMMENDED        | recommended browsers for the current platform    |
+|                          | GamebaseWebViewContentMode.MOBILE             | mobile browser            |
+|                          | GamebaseWebViewContentMode.DESKTOP            | desktop browser          |
+
 
 **API**
+
 ```cs
-static void ShowUrl(
+public static void ShowUrl(
     string url,
     GpmWebViewRequest.Configuration configuration,
     GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
@@ -154,11 +162,12 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 
 ### Close
 
-다음 API를 이용하여 보여지고 있는 WebView를 닫을 수 있습니다.
+You can close the WebView using the following API.
 
 **API**
+
 ```cs
-static void Close()
+public static void Close()
 ```
 
 **Example**
