@@ -2,6 +2,23 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.2.0
+
+### Date
+
+* 2021.2.23
+
+### Features
+
+* 불필요한 에셋 찾기 제거하는 기능 추가
+    * 미사용에셋을 제거하여 프로젝트 사이즈 최적화
+    * Built-in, Assetbundle, path 필터링 가능
+
+### Updated
+
+* 진행도 ui 표기될때 성능 향상
+* 모델링 의존성 체크 제외로 캐시 성능 향상
+ 
 ## 1.0.2
 
 ### Date
