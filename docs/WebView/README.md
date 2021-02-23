@@ -311,7 +311,7 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 
 ### ShowHtmlString
 
-지정된 HTML 문자열을 웹뷰에서 불러옵니다.
+지정된 HTML 문자열을 웹뷰에 불러옵니다.
 
 **API**
 
