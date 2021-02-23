@@ -30,6 +30,6 @@
     </service>
     <service>
         <name>AssetManagement</name>
-		<version>1.0.1</version>
+		<version>1.2.0</version>
     </service>
 </serviceList>
