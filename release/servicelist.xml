@@ -26,10 +26,10 @@
     </service>
     <service>
         <name>WebView</name>
-		<version>1.0.0</version>
+        <version>1.1.0</version>
     </service>
     <service>
         <name>AssetManagement</name>
-		<version>1.2.0</version>
+        <version>1.2.0</version>
     </service>
 </serviceList>
