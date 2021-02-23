@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="1">
+<info version="2">
     <title>WebView</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <dependencies>
         <unity>
             <version>2018.4.0+</version>
@@ -13,11 +13,20 @@
             <install>auto</install>
         </Common>
         <Communicator>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <install>auto</install>
         </Communicator>
     </dependencies>
     <packageList>
+        <package>
+            <version>1.1.0</version>
+            <installList>
+                <install>
+                    <name>gpm_webview_v1.1.0.unitypackage</name>
+                    <path>GPM/WebView</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>1.0.0</version>
             <installList>
