@@ -2,6 +2,23 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.2.0
+
+### Date
+
+* 2021.2.23
+
+### Features
+
+* Added the features to find and remove unnecessary assets
+    * Optimize project size by removing unnecessary assets
+    * Built-in, Assetbundle, Path filtering available
+
+### Updated
+
+* Performance improvement when progress ui is displayed
+* Improved cache performance by excluding modeling dependency check
+
 ## 1.0.2
 
 ### Date
