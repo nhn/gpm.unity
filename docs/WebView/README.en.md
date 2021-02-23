@@ -115,12 +115,12 @@ Displays the WebView.
 
 | Parameter | Values | Description |
 | ------------------------- | ----------------------------------------- | -------------------------------- |
-| style                     | GpmWebViewStyle.POPUP                     | 팝업 모드 |
-|                           | GpmWebViewStyle.FULLSCREEN                | 전체 화면 모드 |
+| style                     | GpmWebViewStyle.POPUP                     | Popup moode |
+|                           | GpmWebViewStyle.FULLSCREEN                | Fullscreen mode |
 | title                     | string                                    | WebView title |
-| orientation               | UnityEngine.ScreenOrientation             | GPM WebView v1.1.0에서 제거되었습니다. |
-| isBackButtonVisible       | bool                                      | 뒤로 가기 버튼 활성 또는 비활성  |
-| isForwardButtonVisible    | bool                                      | 앞으로 가기 버튼 활성 또는 비활성 |
+| orientation               | UnityEngine.ScreenOrientation             | Removed in GPM WebView v1.1.0. |
+| isBackButtonVisible       | bool                                      | Activate/Deactivate Go Back Button |
+| isForwardButtonVisible    | bool                                      | Activate/Deactivate Go Forward Button |
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | recommended browsers for the current platform |
 |                           | GamebaseWebViewContentMode.MOBILE         | mobile browser |
 |                           | GamebaseWebViewContentMode.DESKTOP        | desktop browser |
@@ -313,7 +313,7 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 
 ### ShowHtmlString
 
-지정된 HTML 문자열을 웹뷰에서 불러옵니다.
+지정된 HTML 문자열을 웹뷰에 불러옵니다.
 
 **API**
 
@@ -397,7 +397,7 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 
 ### ExecuteJavaScript
 
-지정된 JavaScript 문자열을 실행합니다.
+Execute the specified JavaScript string.
 
 **API**
 
