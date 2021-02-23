@@ -58,7 +58,7 @@ Unity 2019.3 이전 버전의 프로젝트에서는 **Internal** 빌드 설정�
 
 #### hardwareAccelerated 설정
 
-원활한 WebView 사용을 위해 GPM WebView는 PostProcessBuild 스크립트에서 **hardwareAccelerated**를 활성화하고 있습니다.
+원활한 WebView 사용을 위해 PostProcessBuild 스크립트에서 **hardwareAccelerated**를 활성화하고 있습니다.
 
 #### Gradle 설정
 

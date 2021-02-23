@@ -58,7 +58,7 @@ In a project that uses a version before Unity 2019.3, you need to switch to **Gr
 
 #### hardwareAccelerated 설정
 
-원활한 WebView 사용을 위해 GPM WebView는 PostProcessBuild 스크립트에서 **hardwareAccelerated**를 활성화하고 있습니다.
+원활한 WebView 사용을 위해 PostProcessBuild 스크립트에서 **hardwareAccelerated**를 활성화하고 있습니다.
 
 #### Gradle settings
 
