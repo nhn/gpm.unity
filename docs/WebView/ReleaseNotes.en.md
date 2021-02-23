@@ -18,7 +18,7 @@
     * ShowHtmlString
     * ExecuteJavaScript
 
-### Fixed
+### Removed
 
 * Configuration
     * Orientation
