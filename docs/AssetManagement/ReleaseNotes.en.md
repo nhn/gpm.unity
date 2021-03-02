@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.2.1
+
+### Date
+
+* 2021.3.02
+
+### Fixed
+* When removing all unnecessary assets and restoring them, modified so that only the checked assets are applicable.
+
 ## 1.2.0
 
 ### Date
