@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="2">
+<info version="3">
     <title>Common</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <dependencies>
         <unity>
             <version>2018.4.0+</version>
         </unity>
     </dependencies>
     <packageList>
+        <package>
+            <version>2.0.1</version>
+            <installList>
+                <install>
+                    <name>gpm_common_v2.0.1.unitypackage</name>
+                    <path>GPM/Common</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>2.0.0</version>
             <installList>
