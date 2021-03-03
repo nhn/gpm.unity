@@ -70,3 +70,7 @@ Provides a web view that can be used in various ways in the game.
 AssetManagement is a tool that allows you to easily manage your Unity assets.
 
 * [Go to AssetManagement service](docs/AssetManagement/README.en.md)
+
+## 📜 License
+
+This software is licensed under the [MPL](https://github.com/nhn/gpm.unity/blob/master/LICENSE) © [NHN](https://github.com/nhn).

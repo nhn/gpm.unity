@@ -71,3 +71,7 @@ Communicator는 하나의 공통화된 인터페이스를 제공해 Native와 Da
 유니티 에셋들을 손쉽게 관리할 수 있는 툴입니다.
 
 * [AssetManagement 서비스로 이동](docs/AssetManagement/README.md)
+
+## 📜 License
+
+This software is licensed under the [MPL](https://github.com/nhn/gpm.unity/blob/master/LICENSE) © [NHN](https://github.com/nhn).
