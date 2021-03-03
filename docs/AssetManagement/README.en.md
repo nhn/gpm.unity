@@ -10,12 +10,16 @@
     * [AssetMap](#AssetMap)
     * [Finding asset issues](#Finding-asset-issues)
     * [Finding asset reference](#Finding-asset-reference)
+    * [Unnecessary Asset Management](#Unnecessary-Asset-Management)
+
 * [How to Use](#How-to-Use)
     * [Activate](#Activate)
     * [Seeing asset structure](#Seeing-asset-structure)
     * [Using asset structure](#Using-asset-structure)
     * [Finding and fixing an asset with an issue](#Finding-and-fixing-an-asset-with-an-issue)
-    * [Finding-and-replacing-connected-assets](#Finding-and-replacing-connected-assets)
+    * [Finding and replacing connected assets](#Finding-and-replacing-connected-assets)
+    * [Removing unnecessary assets](#Removing-unnecessary-assets)
+    ### 
 * [Practice with the sample](#Practice-with-the-sample)
     
 
@@ -91,6 +95,35 @@
     * can switch the scenes and assets of a project when activated.
 6. Language setting
     * Can change the language.
+
+    
+### Unnecessary Asset Management
+* Can Find and remove unnecessary assets.
+* Can exclude them through filtering settings When finding unnecessary assets.
+![4_gpm_assetmanagement_unusedasset_en.png](./images/4_gpm_assetmanagement_unusedasset_en.png)
+![4_gpm_assetmanagement_unusedasset_2_en.png](./images/4_gpm_assetmanagement_unusedasset_2_en.png)
+
+1. Function selection tap
+    * Remove unnecessary assets
+        * Search and remove unnecessary assets.
+    * Filter options
+        * Can set what to filter when searching for unnecessary assets.
+2. List of unnecessary assets
+    * Can search for unnecessary assets and set whether to include or remove them in the filtering.
+3. Overall size
+    * Shows the size of all assets checked in the list of unnecessary assets.
+4. Delete and recover
+    * Deletes or restores all checked assets from the list of unnecessary assets.
+5. Language setting
+    * Can change the language.
+6. Filter Options
+    * Can set what to filter when searching for unnecessary assets.
+    * Filter Built-in
+        * Excludes resources included when building, such as subfolders of Resources, project settings, or default included scenes.
+    * Filter Assetbundles
+        * Excludes resources designated as Assetbundle.
+    * Filter Path List
+        * Exclude if the path contains the strings in the list below.
 
 ## How to Use
 
@@ -170,6 +203,36 @@ The content of the list is as follows:
 * Double-click the sub node to see from where it is referenced.
 * A referenced asset can be replaced with a different asset. To replace an asset, drag it to Function and click the **Replace** button."
 
+### Removing unnecessary assets
+Can remove unnecessary assets from project.
+
+![4_unusedAsset_check_en.gif](./images/4_unusedAsset_check_en.gif)
+* The bottom is the total file size of the checked asset.
+* Can check all assets through the check all button.
+* After selecting multiple assets, can decide whether to check them at once.
+
+![4_unusedAsset_button_en.gif](./images/4_unusedAsset_button_en.gif)
+* Can exclude paths from the search, remove assets, or restore them through the filter button.
+* Checked assets can be removed and restored through Remove All and Restore All at the bottom.
+* Assets Removed assets are stored in the Trash sub-folder, so can recover them even if accidentally delete them.
+
+![4_unusedAsset_menu_en.gif](./images/4_unusedAsset_menu_en.gif)
+* After selecting an asset, can open the management menu through the right mouse button.
+* Asset check, asset check off
+    * Check or uncheck selected assets.
+* Filter, filter off
+    * Filter the path of selected assets to exclude or include from search.
+* Asset removal, asset recovery
+    * Remove or restore selected assets.
+
+![4_unusedAsset_filter_en.gif](./images/4_unusedAsset_filter_en.gif)
+* Can have a list that comes out through filtering settings.
+    * Built-in filter
+        * Excludes resources included when building, such as resource subfolders, project settings, or included scenes.
+    * Filter asset bundle
+        * Excludes resources designated as Assetbundle.
+    * Filter route list
+        * Paths are excluded from the list below.
 
 ## Practice with the sample
 ### Replacing an existing asset and safely deleting it
