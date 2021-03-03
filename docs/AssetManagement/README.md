@@ -101,7 +101,7 @@
 ![4_gpm_assetmanagement_unusedasset_kr.png](./images/4_gpm_assetmanagement_unusedasset_kr.png)
 ![4_gpm_assetmanagement_unusedasset_2_kr.png](./images/4_gpm_assetmanagement_unusedasset_2_kr.png)
 
-1. 기능 선택 텝
+1. 기능 선택 탭
     * 불필요한 에셋 제거
         * 불필요한 에셋을 검색하고 제거할 수 있습니다.
     * 필터 옵션
