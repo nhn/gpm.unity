@@ -40,10 +40,5 @@
             <url>ReleaseNotes.md</url>
             <path>$PATH_RELEASE_NOTES</path>
         </link>
-        <link>
-            <name>$VIEW_LICENSES</name>
-            <url>LICENSE.md</url>
-            <path>LICENSE.md</path>
-        </link>
     </linkList>
 </info>
