@@ -64,10 +64,12 @@
         <link>
             <name>$VIEW_DOCUMENTATION</name>
             <url>README.md</url>
+            <path>$PATH_DOCUMENTATION</path>
         </link>
         <link>
             <name>$VIEW_RELEASE_NOTES</name>
             <url>ReleaseNotes.md</url>
+            <path>$PATH_RELEASE_NOTES</path>
         </link>
     </linkList>
     <imageList>
