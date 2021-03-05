@@ -2,6 +2,24 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.1
+
+### Date
+
+* 2020.03.05
+
+### Added
+
+* Add Assembly Definition
+* Add license file
+
+### Updated
+
+* Improved accessibility of English guides
+* Update to Common 2.0.1 version
+
+---
+
 ## 2.0.0
 
 ### Date
