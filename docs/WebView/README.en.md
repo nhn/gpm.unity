@@ -58,7 +58,7 @@ In a project that uses a version before Unity 2019.3, you need to switch to **Gr
 
 #### hardwareAccelerated 설정
 
-원활한 WebView 사용을 위해 PostProcessBuild 스크립트에서 **hardwareAccelerated**를 활성화하고 있습니다.
+For smooth WebView experience, PostProcessBuild script enables **hardwareAccelerated**.
 
 #### Gradle settings
 
@@ -86,8 +86,7 @@ In **Build Settings > Linking > Other Linker Flags** of Xcode Target(Unity-iPhon
 
 #### GPMWebView.bundle
 
-Unity 특정 버전에서 iOS 빌드 시, NavigationBar의 버튼이 보이지 않는 현상이 발생할 수 있습니다.
-해당 현상이 발생하면, Xcode Target(Unity-iPhone)의 **Xcode Project > Build Phases > Copy Bundle Resource** 설정에서 `+ 버튼`을 눌러 `GPMWebView.bundle 파일 검색하여 추가`하십시오.
+When performing an iOS build in certain Unity versions, the buttons on **Navigation Bar** might not display properly. When this issue occurs, go to **Xcode Project > Build Phases > Copy Bundle Resource** Setting of the Xcode Target (Unity-iPhone) and press the + button to find and add `GPMWebView.bundle` file.
 
 ![GPMWebViewBundle.png](images/GPMWebViewBundle.png)
 
@@ -208,11 +207,11 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 
 ### ShowHtmlFile
 
-`Assets > StreamingAssets` 폴더에 있는 HTML 파일을 웹뷰에 불러옵니다.
+Loads the HTML file from the **Assets > StreamingAssets** folder into the WebView.
 
 ![StreamingAssets.png](images/StreamingAssets.png)
 
-ShowHtmlFile API의 filePath 값은 아래 코드를 참고하여 입력하십시오.
+See the code below to enter the filePath value of ShowHtmlFile API.
 
 ```cs
 #if UNITY_IOS
@@ -313,7 +312,7 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 
 ### ShowHtmlString
 
-지정된 HTML 문자열을 웹뷰에 불러옵니다.
+Loads the HTML string into the WebView.
 
 **API**
 
