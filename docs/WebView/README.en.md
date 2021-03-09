@@ -56,7 +56,7 @@ Provides a WebView used in various ways in the game.
 Uses [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html) to set the dependencies needed in Android.
 In a project that uses a version before Unity 2019.3, you need to switch to **Gradle** instead of **Internal** settings.
 
-#### hardwareAccelerated 설정
+#### hardwareAccelerated settings
 
 For smooth WebView experience, PostProcessBuild script enables **hardwareAccelerated**.
 
