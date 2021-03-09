@@ -85,8 +85,8 @@ Xcode Target(Unity-iPhone)에서 **Build Settings > Linking > Other Linker Flags
 
 #### GPMWebView.bundle
 
-Unity 특정 버전에서 iOS 빌드 시, NavigationBar의 버튼이 보이지 않는 현상이 발생할 수 있습니다.
-해당 현상이 발생하면, Xcode Target(Unity-iPhone)의 **Xcode Project > Build Phases > Copy Bundle Resource** 설정에서 `+ 버튼`을 눌러 `GPMWebView.bundle 파일 검색하여 추가`하십시오.
+Unity 특정 버전에서 iOS 빌드 시, **내비게이션 바**의 버튼이 보이지 않는 현상이 발생할 수 있습니다.
+해당 현상이 발생하면, Xcode Target(Unity-iPhone)의 **Xcode Project > Build Phases > Copy Bundle Resource** 설정에서 + 버튼을 눌러 `GPMWebView.bundle` 파일 검색하여 추가하십시오.
 
 ![GPMWebViewBundle.png](images/GPMWebViewBundle.png)
 
@@ -206,7 +206,7 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 
 ### ShowHtmlFile
 
-`Assets > StreamingAssets` 폴더에 있는 HTML 파일을 웹뷰에 불러옵니다.
+**Assets > StreamingAssets** 폴더에 있는 HTML 파일을 웹뷰에 불러옵니다.
 
 ![StreamingAssets.png](images/StreamingAssets.png)
 
