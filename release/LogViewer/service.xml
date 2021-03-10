@@ -14,7 +14,7 @@
         </UI>
     </dependencies>
     <packageList>
-		<package>
+        <package>
             <version>2.0.1</version>
             <installList>
                 <install>
