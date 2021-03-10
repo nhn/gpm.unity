@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.1
+
+### Date
+
+* 2020.03.10
+
+### Added
+
+* Add Assembly Definition
+
 ## 2.0.0
 
 ### Date
