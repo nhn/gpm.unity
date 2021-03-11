@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.2
+
+### Date
+
+* 2020.03.11
+
+### Fixed
+
+* Asseambly Definition 적용 후 빌드시 컴파일 오류 수정
+
 ## 2.0.1
 
 ### Date

@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.2
+
+### Date
+
+* 2020.03.11
+
+### Fixed
+
+* Fix comfile error when building after applying Asseambly Definition
+
 ## 2.0.1
 
 ### Date
