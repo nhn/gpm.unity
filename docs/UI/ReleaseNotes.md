@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.2
+
+### Date
+
+* 2020.03.11
+
+### Fixed
+
+* Asseambly Definition 이후 editor가 아닌 환경에서 컴파일에서 수정
+
 ## 2.0.1
 
 ### Date
