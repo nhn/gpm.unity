@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Fix Comfile error in non-editor environment After Asseambly Definition
+* Fix comfile error when building after applying Asseambly Definition
 
 ## 2.0.1
 
