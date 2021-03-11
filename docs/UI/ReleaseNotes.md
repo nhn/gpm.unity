@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Asseambly Definition 이후 editor가 아닌 환경에서 컴파일에서 수정
+* Asseambly Definition 적용 후 빌드시 컴파일 오류 수정
 
 ## 2.0.1
 
