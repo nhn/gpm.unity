@@ -116,6 +116,9 @@ Displays the WebView.
 | ------------------------- | ----------------------------------------- | -------------------------------- |
 | style                     | GpmWebViewStyle.POPUP                     | Popup moode |
 |                           | GpmWebViewStyle.FULLSCREEN                | Fullscreen mode |
+| isClearCookie             | bool                                      | Clear cookies |
+| isClearCache              | bool                                      | Clear cache |
+| isNavigationBarVisible    | bool                                      | Activate/Deactivate Navigation Bar |
 | title                     | string                                    | WebView title |
 | orientation               | UnityEngine.ScreenOrientation             | Removed in GPM WebView v1.1.0. |
 | isBackButtonVisible       | bool                                      | Activate/Deactivate Go Back Button |
@@ -147,6 +150,9 @@ public void ShowUrl()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = true,
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
@@ -252,6 +258,9 @@ public void ShowHtmlFile()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = true,
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
@@ -336,6 +345,9 @@ public void ShowHtmlString()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = true,
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,

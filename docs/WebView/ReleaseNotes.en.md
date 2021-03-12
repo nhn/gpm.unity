@@ -2,6 +2,21 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.2.0
+
+### Date
+
+* 2020.03.12
+
+### Added
+
+* Configuration
+    * isNavigationBarVisible
+    * isClearCookie
+    * isClearCache
+
+---
+
 ## 1.1.0
 
 ### Date
@@ -22,6 +37,8 @@
 
 * Configuration
     * Orientation
+
+---
 
 ## 1.0.0
 
