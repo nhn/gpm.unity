@@ -116,6 +116,9 @@ WebView를 표시합니다.
 | ------------------------- | ----------------------------------------- | -------------------------------- |
 | style                     | GpmWebViewStyle.POPUP                     | 팝업 모드 |
 |                           | GpmWebViewStyle.FULLSCREEN                | 전체 화면 모드 |
+| isClearCookie             | bool                                      | 쿠키 제거 |
+| isClearCache              | bool                                      | 캐시 제거 |
+| isNavigationBarVisible    | bool                                      | 네비게이션 바 활성 또는 비활성 |
 | title                     | string                                    | WebView의 제목 |
 | orientation               | UnityEngine.ScreenOrientation             | GPM WebView v1.1.0에서 제거되었습니다. |
 | isBackButtonVisible       | bool                                      | 뒤로 가기 버튼 활성 또는 비활성  |
@@ -146,6 +149,9 @@ public void ShowUrl()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = true,
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
@@ -251,6 +257,9 @@ public void ShowHtmlFile()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = true,
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
@@ -335,6 +344,9 @@ public void ShowHtmlString()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = true,
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
