@@ -39,7 +39,8 @@
 | --- | --- |
 | Style | Popup |
 |   | Fullscreen |
-| Navigation | Title |
+| Navigation | Visibility |
+|   | Title |
 |   | Back |
 |   | Forword |
 |   | Close |
@@ -48,6 +49,9 @@
 |   | Close Callback |
 |   | Scheme Callback |
 |   | Scheme List |
+| Other | Execute JavaScript |
+|   | Clear Cookies |
+|   | Clear Cache |
 
 ## 🔨 플랫폼별 설정
 

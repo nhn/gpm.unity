@@ -39,7 +39,8 @@ Provides a WebView used in various ways in the game.
 | --- | --- |
 | Style | Popup |
 |   | Fullscreen |
-| Navigation | Title |
+| Navigation | Visibility |
+|   | Title |
 |   | Back |
 |   | Forword |
 |   | Close |
@@ -48,6 +49,9 @@ Provides a WebView used in various ways in the game.
 |   | Close Callback |
 |   | Scheme Callback |
 |   | Scheme List |
+| Other | Execute JavaScript |
+|   | Clear Cookies |
+|   | Clear Cache |
 
 ## 🔨 Platform specific settings
 
