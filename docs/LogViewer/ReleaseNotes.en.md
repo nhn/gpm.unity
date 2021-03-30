@@ -6,6 +6,17 @@
 
 ### Date
 
+* 2020.03.31
+
+### Updated
+* Improved to change the size of the console log column according to the visible setting
+* Improved to change flexibly according to the length of system information
+* Popup size improved to change according to the message content
+
+## 2.0.1
+
+### Date
+
 * 2020.03.10
 
 ### Added
