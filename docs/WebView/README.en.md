@@ -30,7 +30,7 @@ Provides a WebView used in various ways in the game.
 
 ### Supported platforms
 
-* Anroid
+* Android
 * iOS 
 
 ### Supported features

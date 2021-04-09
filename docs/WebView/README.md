@@ -30,7 +30,7 @@
 
 ### 지원 플랫폼
 
-* Anroid
+* Android
 * iOS 
 
 ### 지원하는 기능
