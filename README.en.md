@@ -13,9 +13,10 @@
 
 Game Package Manager is a brand of NHN providing free services required for game development.<br/>
 More services are to be added.<br/>
-If you have ideas regarding service upgrades or inquiries, don't hesitate but send us mails as below.
+If you have ideas regarding service upgrades or inquiries, please do not hesitate to contact us at any time below.
 
-dl_gpm_help@nhn.com
+Email : dl_gpm_help@nhn.com<br>
+GitHub Issue : https://github.com/nhn/gpm.unity/issues
 
 
 ## Service
