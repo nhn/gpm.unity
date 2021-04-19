@@ -2,6 +2,20 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.3
+
+### Date
+
+* 2020.04.16
+
+### Added
+* DragableRect 기능 추가
+* ContentSizeSetter 기능 추가
+
+### Updated
+* InfiniteScroll 초기화 로직 개선
+* 폴더 구조 변경
+
 ## 2.0.2
 
 ### Date

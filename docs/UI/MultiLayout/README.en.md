@@ -42,7 +42,7 @@ public void SetOrientation(ScreenOrientation orientataion)
 
 ## 🐾 Sample
 
-Assets/GPM/UI/MultiLayout/Sample
+Assets/GPM/UI/Sample/MultiLayout
 
 ### Editor
 
