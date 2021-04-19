@@ -19,7 +19,7 @@
 
 ## 🔨 API
 
-API 사용 방법은 Assets/GPM/UI/InfiniteScroll/Sample/Scripts/InfiniteScrollSample.cs를 참고하시기 바랍니다.
+API 사용 방법은 Assets/GPM/UI/Sample/InfiniteScroll/Scripts/InfiniteScrollSample.cs를 참고하시기 바랍니다.
 
 ### InsertData
 
@@ -110,7 +110,7 @@ public void ResizeScrollView()
 
 ## 🐾 Sample
 
-Assets/GPM/UI/InfiniteScroll/Sample
+Assets/GPM/UI/Sample/InfiniteScroll
 
 ![infinitescroll_sample](images/infinitescroll_sample.gif)
 

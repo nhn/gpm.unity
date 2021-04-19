@@ -2,6 +2,20 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.3
+
+### Date
+
+* 2020.04.16
+
+### Added
+* Add DrawableRect feature
+* Add ContentSizeFitter  feature
+
+### Updated
+* Improvement InfiniteScroll initialization logic 
+* Change folder structure 
+
 ## 2.0.2
 
 ### Date
