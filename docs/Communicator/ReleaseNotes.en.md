@@ -2,6 +2,18 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.0.2
+
+### Date
+
+* 2021.04.23
+
+### Added
+
+* Assembly definition
+
+---
+
 ## 1.0.1
 
 ### Date
@@ -11,6 +23,8 @@
 ### Fixed
 
 * Fixed 'INativeMessageSender could not be found' error when building Unity Standalone
+
+---
 
 ## 1.0.0
 
