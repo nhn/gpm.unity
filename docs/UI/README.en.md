@@ -27,3 +27,12 @@ Provide components to use [Unity UI](https://docs.unity3d.com/Manual/com.unity.u
 ### Infinite Scroll
 
 * [Go to Infinite Scroll](InfiniteScroll/README.en.md)
+
+### DragableRect
+
+* [Go to DragableRect](DragableRect/README.en.md)
+
+### ContentSizeSetter
+
+* [Go to ContentSizeSetter](ContentSizeSetter/README.en.md)
+
