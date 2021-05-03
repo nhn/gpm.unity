@@ -9,11 +9,11 @@
 * 2020.05.03
 
 ### Updated
-* ExecuteInEditMode 프리팹모드 팝업 이슈로 ExcuteAlways로 변경
+* ExecuteInEditMode 프리팹 모드 팝업 이슈로 ExcuteAlways로 변경
 
 ### Fixed
-* DragableRect 온오프 반복 시 이벤트 누적되는 문제 수정
-* LayoutUpdate 부모 없을때 예외처리 빠진것 추가
+* DragableRect 온/오프 반복 시 이벤트 누적되는 문제 수정
+* LayoutUpdate 부모 없을 때 예외처리 빠진 것 추가
 
 ## 2.0.3
 
