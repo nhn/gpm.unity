@@ -2,6 +2,19 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.4
+
+### Date
+
+* 2020.05.03
+
+### Updated
+* ExecuteInEditMode changed to ExcuteAlways as a popup issue in prefab mode
+
+### Fixed
+* Fixed a problem where events are accumulated when repeating DragableRect on/off
+* Added exception handling missing when there is no parent for LayoutUpdate
+
 ## 2.0.3
 
 ### Date
