@@ -2,6 +2,24 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.4
+
+### Date
+
+* 2020.05.03
+
+### Updated
+* ContentSizeSetter
+    * ExecuteInEditMode changed to ExcuteAlways as a popup issue in prefab mode
+* LayoutUpdate
+    * ExecuteInEditMode changed to ExcuteAlways as a popup issue in prefab mode
+
+### Fixed
+* DragableRect 
+    * Fixed a problem where events are accumulated when repeating on/off
+* LayoutUpdate
+    * Added exception handling when parent RectTransform does not exist.
+
 ## 2.0.3
 
 ### Date

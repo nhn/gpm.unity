@@ -2,6 +2,24 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.4
+
+### Date
+
+* 2020.05.03
+
+### Updated
+* ContentSizeSetter
+    * ExecuteInEditMode 프리팹 모드 팝업 이슈로 ExcuteAlways로 변경
+* LayoutUpdate
+    * ExecuteInEditMode 프리팹 모드 팝업 이슈로 ExcuteAlways로 변경
+
+### Fixed
+* DragableRect 
+    * 온/오프 반복 시 이벤트 누적되는 문제 수정
+* LayoutUpdate
+    * 부모 RectTransform가 없을 경우에 대한 예외 처리를 추가합니다.
+
 ## 2.0.3
 
 ### Date
