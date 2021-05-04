@@ -17,8 +17,8 @@
 ### Fixed
 * DragableRect 
     * 온/오프 반복 시 이벤트 누적되는 문제 수정
-* LayoutUpdate 
-    * 부모 없을 때 예외처리 빠진 것 추가
+* LayoutUpdate
+    * 부모 RectTransform가 없을 경우에 대한 예외 처리를 추가합니다.
 
 ## 2.0.3
 

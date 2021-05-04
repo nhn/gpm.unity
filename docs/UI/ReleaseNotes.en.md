@@ -18,7 +18,7 @@
 * DragableRect 
     * Fixed a problem where events are accumulated when repeating on/off
 * LayoutUpdate
-    * Added exception handling missing when there is no parent
+    * Added exception handling when parent RectTransform does not exist.
 
 ## 2.0.3
 
