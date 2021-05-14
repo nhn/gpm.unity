@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.5
+
+### Date
+
+* 2020.05.13
+
+### Changed
+* DragableRect renamed to DraggableRect
+
 ## 2.0.4
 
 ### Date
