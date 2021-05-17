@@ -2,6 +2,18 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.3
+
+### Date
+
+* 2021.05.17
+
+### Changed
+
+* Changed internal indicators
+
+---
+
 ## 2.0.1
 
 ### Date
