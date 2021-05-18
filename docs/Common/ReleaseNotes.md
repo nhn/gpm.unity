@@ -2,7 +2,7 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
-## 2.0.3
+## 2.0.2
 
 ### Date
 
