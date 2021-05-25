@@ -47,9 +47,9 @@
 
 ![memory_profiler](images/memory_profiler.gif)
 1. reserved
-    * OS에서 앱에 예약 한 총 메모리
+    * OS에서 앱에 예약된 총메모리
 2. allocated
-    * OS에서 앱에 할당 한 메모리
+    * OS에서 앱에 할당한 메모리
 3. Gfx
     * Graphic Driver의 예상 메모리 사용량
     * Development 활성화 시 사용
@@ -69,15 +69,15 @@
 ![render_profiler](images/render_profiler.png)
 
 1. SetPass
-    * 한 프레임을 렌더링할 때 호출한 쉐이더 Pass의 수를 보여줍니다.
+    * 한 프레임을 렌더링할 때 호출한 셰이더 Pass의 수를 보여줍니다.
 2. Draw Calls
-    * 한 프레임을 렌더링할 때 호출한 DrawCall수를 보여줍니다.
+    * 한 프레임을 렌더링할 때 호출한 DrawCall 수를 보여줍니다.
 3. Total batch
-    * 한 프레임을 렌더링할 때 호출한 총 Batch수를 보여줍니다.
+    * 한 프레임을 렌더링할 때 호출한 총Batch 수를 보여줍니다.
 4. Triangles
     * 한 프레임을 렌더링할 때 처리한 삼각형 수를 보여줍니다.
 5. Vetices
-    * 한 프레임을 렌더링할 때 처리한 정점 수를 보여줍니다.
+    * 한 프레임을 렌더링할 때 처리한 정점  수를 보여줍니다.
 
 #### 원하는 옵션만 따로 확인할 수 있습니다.
 ![profiler_edit_rendering](images/profiler_edit_rendering.gif)
@@ -88,7 +88,7 @@
 ![system_profiler](images/system_profiler.png)
 
 1. Os
-    * 버전을 포함하여 장치의 운영 체제에 대한 자세한 정보를 보여줍니다.
+    * 버전을 포함하여 장치의 OS에 대한 자세한 정보를 보여줍니다.
 2. Device model
     * 디바이스의 모델명을 보여줍니다.
 3. Processor type(CPU)
@@ -117,11 +117,11 @@
 
 * 플랫폼별 편집 방법
     * 플랫폼 공통
-        * **F5** Key로 편집창을 활성화합니다.
-    * iOS/Android 플랫폼은 제스처로 편집창을 활성화합니다.
-        * 손가락 네개로 2초간 화면을 터치합니다.
+        * **F5** Key로 편집 창을 활성화합니다.
+    * iOS/Android 플랫폼은 제스처로 편집 창을 활성화합니다.
+        * 손가락 네 개로 2초간 화면을 터치합니다.
 
 * 편집창 활성화 이후
-    * 활성화 상태에서 드래그 하면 원하는 위치로 이동합니다.
-    * 보길 원하는 옵션만 따로 확인할 수 있습니다.
+    * 활성화 상태에서 드래그하면 원하는 위치로 이동합니다.
+    * 원하는 옵션만 따로 확인할 수 있습니다.
     ![profiler_edit_main](images/profiler_edit_main.gif)
