@@ -34,7 +34,7 @@
 3. Script
     * 스크립트의 FrameTime을 보여줍니다.
 4. Render
-    * LastUpdate 이후 프레임이 렌더링이 끝날 때까지의 FrameTime을 보여붖니다..
+    * LastUpdate 이후 프레임이 렌더링이 끝날 때까지의 FrameTime을 보여줍니다.
 5. Graph
     * Script와 Render의 FrameTime을 시각적으로 보여줍니다.
 
