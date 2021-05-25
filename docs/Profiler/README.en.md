@@ -1,189 +1,127 @@
-# LogViewer
+# Profiler
 
-🌏 [한국어](README.md)
+🌏 [English](README.en.md)
 
-## 🚩 Table of Contents
+##  Table of Contents
 
 * [Overview](#Overview)
 * [Specification](#Specification)
-* [Features](#Features)
-* [Usage](#-Usage)
+* [Function Description](#Function-Description)
+* [How to use](#How-to-Use)
 
 ## Overview
 
-* LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers.
+* **Profiler** is a tool that helps the optimization as it allows users to see the device performance and system information on the screen. 
 
 ## Specification
 
-### Unity Support Version
+### Versions that support Unity 
 
 * 2018.4.0 or higher
 
-## Features
+## Function description
 
-### Console
+### Performance Profiler
+* It allows users to see the CPU and GPU performance in real time. 
 
-* Display the Unity logs on the screen.
-* View only the desired logs using the `Category` or `Filter` features.
-* Enable or disable the log type you need.
-* Send logs via email
+![performance_profiler](images/performance_profiler.gif)
+1. FPS
+    * Shows tie FPS and FrameTime. 
+2. AvgGroup
+    * Shows the average FrameTime. 
+    * Shows the minimum FrameTime. 
+    * Shows the maximum FrameTime. 
+3. Script
+    * Shows the script's FrameTime. 
+4. Render
+    * Shows FrameTime after LastUpdate until the frame ends rendering. 
+5. Graph
+    * Visually shows FrameTime of Script and Render. 
 
-![console](./images/console.png)
+#### Can see only the options you want. 
+![profiler_edit_performance](images/profiler_edit_performance.gif)
+    
 
-1. Menu
-    * Category
-    * Filter
-        * Search 
-            *  Print out only such logs that contain input characters.
-        * Ignore Case
-            * Select: Case sensitive
-            * Clear: Case insensitive
-    * Play Time
-        * Configure whether to display the time elapsed from the start of an app to when a log is created. 
-        * Displays in seconds.
-    * Scene
-        * Configure whether to display the name of the scene in playing when there is a log.
-    * Send Mail
-        * Send all logs to specified email address.
-    * Clear
-        * Delete all logs. 
+### Memory Profiler
+* Can check the real-time memory allocation and usage.
 
-2. Log Type
-    * ![logtype_info](./images/logtype_info.png)
-        * Check log count of the LogType.Log type.
-    * ![logtype_warning](./images/logtype_warning.png)
-        * Check log count of the LogType.Warning type.
-    * ![logtype_error](./images/logtype_error.png)
-        * Check log count of the LogType.Assert, LogType.Error, and LogType.Exception types.
-    * Click each log type to enable or disable it.
+![memory_profiler](images/memory_profiler.gif)
+1. reserved
+    * Total memory reserved for the apps on the OS
+2. allocated
+    * Memory allocated to the apps on the OS
+3. Gfx
+    * Estimated memory usage for the graphic driver
+    * Used when the development is activated
+4. GC Heap
+    * Heap memory allocated in the script
+5. GC Used
+    * Memory used in the script
 
-3. Log View
-    * Check the list of logs.
-
-4. Log Details
-    *  View details of a selected log from the list.
+#### Can see only the options you want.
+![profiler_edit_memory](images/profiler_edit_memory.gif)
 
 
-### Function
+### Rendering Profiler
+* Can check the values used for rendering in real time.
+* Available for Unity 2020.2 or higher.
 
-* User can call APIs added by developers from LogViewer.
+![render_profiler](images/render_profiler.png)
 
-![function](./images/function.png)
+1. SetPass
+    * Shows the number of shader passes called when rendering a frame.
+2. Draw Calls
+    * Shows the number of DrawCalls called when rendering a frame.
+3. Total batch
+    * Shows the total number of batches called when rendering a frame.
+4. Triangles
+    * Shows the number of triangles processed when rendering a frame.
+5. Vetices
+    * Shows the number of vertices processed when rendering a frame.
 
-1. Cheat Key          
-    * Pass string entered with callback registered through the AddCheatKeyCallback API.
-2. Command
-    * Call API registered by using the AddCommand API.
+#### Can see only the options you want.
+![profiler_edit_rendering](images/profiler_edit_rendering.gif)
 
-#### System
+### System Profiler
+* Can check the system information.
 
-* View the device system information.
+![system_profiler](images/system_profiler.png)
 
-![system](./images/system.png)
+1. Os
+    * Displays detailed information on the operating system of the device, including its version.
+2. Device model
+    * Shows the device model name.
+3. Processor type(CPU)
+    * Shows the processor name.
+4. Processor count
+    * Shows the number of processors.
+5. Graphics device name(GPU)
+    * Shows the graphics card name.
+6. Graphics device vender
+    * Shows the supplier of the graphics device.
+7. Graphics device version
+    * Shows the graphic API type and driver version.
 
-* Update Button
-    * Update system information.
+#### You can see only the options you want.
+![profiler_edit_system](images/profiler_edit_system.gif)
+    
 
+## How to use
 
-## 🔨 Usage
+### Preparing for use
 
-### Preparation
+* GpmProfiler GameObject settings    
+    * Add the **GPM/Profiler/Prefabs/GpmProfiler.prefab** file to Scene. 
 
-* Configuring GpmLogViewer GameObject
-    * Add the GPM/LogViewer/Prefabs/GpmLogViewer.prefab file to the scene.
-    *  Configuring Inspector </br>
-    ![inspector](./images/inspector.png)
-        * Set Gesture Enable
-            * Enable or disable LogView gesture.
-        * Mail Setting 
-            * To: The Recipient's email address
-            * User Name: Sender's email address
-            * User Password: Sender's email password
-            * Smtp Host: SMTP Host
-            * Smpt Port: SMTP Port
-            * Cc: Email address to be added for reference)            
+### Editing   Profiler in Runtime
 
-#### Precautions for Email Setting
-* All Platforms
-  
-    * Change API compatibility level to .NET 2.0 or above, or .NET Standard 2.0 or above.
-* iOS
-    * When building using IL2CPP, create `link.xml` under the Assets folder and include the following.
-        ```xml
-        <linker>
-            <assembly fullname="System">
-                <type fullname="System.Net.Configuration.MailSettingsSectionGroup" preserve="all"/>
-                <type fullname="System.Net.Configuration.SmtpSection" preserve="all"/>
-                <type fullname="System.Net.Configuration.SmtpNetworkElement" preserve="all"/>
-                <type fullname="System.Net.Configuration.SmtpSpecifiedPickupDirectoryElement" preserve="all"/>
-            </assembly>
-        </linker>
-        ```
-> Configuring Gmail
-> * Smtp Host : smtp.gmail.com
-> * Smtp Port : 587
-> * If the `535-5.7.8 Username and Password not accepted` error occurs, `Allow less secure apps` must be activated from the [user's gmail account setting](https://myaccount.google.com/lesssecureapps).
-            
-### Enabling LogViewer in Runtime
+* How to edit on each platform
+    * Common method for all platforms
+        * Activate the edit window with the **F5** Key.
+    * The iOS/Android platform activates the edit window with gestures.
+        * Touch the screen with four fingers for two seconds.
 
-* Enabling Each Platform
-    * All Platforms
-        * Enable using the Back Quote Key.</br>
-            ![backquote](./images/backquote.png)
-    * Use gesture to enable iOS/Android platforms.
-        * Touch the screen for a second with five fingers.
-
-* The following types of logs automatically trigger the LogViewer.
-    * LogType.Error
-    * LogType.Exception
-
-### Code
-
-#### Console
-1. Category
-    * Inputting Categories
-        ```cs
-        Debug.Log(GpmLogViewer.Instance.MakeLogWithCategory("TestLog", "UserCategory"));
-        ```
-
-2.  Log Type
-    * Log        
-        ```cs
-        Debug.Log("");
-        ```
-    * Warnning        
-        ```cs
-        Debug.LogWarning("");
-        ```
-    * Assert/Error/Exception        
-        ```cs
-        Debug.LogAssertion("");
-        Debug.LogError("");
-        Debug.LogException("");
-        ```
-#### Command
-
-1. Cheat Key      
-    * Adding Cheat Keys
-        ```cs
-        public void AddCheatKeySample()
-        {
-            Function.Instance.AddCheatKeyCallback((cheatKey) =>
-            {
-                Debug.Log("Call cheat key callback with : " + cheatKey);
-            });
-        }
-        ```
-2. Command
-    * Adding Commands
-        ```cs
-        private void TestCommand(int index)
-        {       
-            Debug.Log("Index : " + index);         
-        }
-
-        public void AddCommandSample()
-        {
-            Function.Instance.AddCommand(this, "TestCommand", new object[] { 2 });
-        }
-        ```
+* After activating the edit window
+    * While activated, drag it to the desired position.
+    * Can see only the options you want to see.
+    ![profiler_edit_main](images/profiler_edit_main.gif)
