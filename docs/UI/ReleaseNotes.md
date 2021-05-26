@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.6
+
+### Date
+
+* 2020.05.26
+
+### Fixed
+* InfiniteScroll
+    * 초기화 전 Clear 호출할 때 오류 수정
+
 ## 2.0.5
 
 ### Date

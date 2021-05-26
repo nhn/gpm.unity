@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="9">
+<info version="10">
     <title>UI</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
     <dependencies>
         <unity>
             <version>2018.4.0+</version>
         </unity>
     </dependencies>
     <packageList>
+        <package>
+            <version>2.0.6</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.6.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>2.0.5</version>
             <installList>

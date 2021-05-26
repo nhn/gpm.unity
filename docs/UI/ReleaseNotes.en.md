@@ -2,6 +2,17 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+
+## 2.0.6
+
+### Date
+
+* 2020.05.26
+
+### Fixed
+* InfiniteScroll
+    * Correction of error when calling Clear before initialization
+
 ## 2.0.5
 
 ### Date
