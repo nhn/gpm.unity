@@ -1,6 +1,6 @@
 # Profiler
 
-🌏 [English](README.en.md)
+🌏 [한국어](README.md)
 
 ##  Table of Contents
 
