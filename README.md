@@ -73,6 +73,12 @@ Communicator는 하나의 공통화된 인터페이스를 제공해 Native와 Da
 
 * [AssetManagement 서비스로 이동](docs/AssetManagement/README.md)
 
+### Profiler
+
+Unity에서 디바이스 성능과 시스템 정보를 화면에서 확인할 수 있어 최적화에 도움을 주는 툴입니다.
+
+* [Profiler 서비스로 이동](docs/Profiler/README.md)
+
 ## 📜 License
 
 This software is licensed under the [MPL](https://github.com/nhn/gpm.unity/blob/master/LICENSE) © [NHN](https://github.com/nhn).
