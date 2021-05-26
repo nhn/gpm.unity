@@ -72,6 +72,12 @@ AssetManagement is a tool that allows you to easily manage your Unity assets.
 
 * [Go to AssetManagement service](docs/AssetManagement/README.en.md)
 
+### Profiler
+
+Profiler is a tool that helps the optimization as it allows users to see the device performance and system information on the screen.
+
+* [Go to Profiler service](docs/Profiler/README.en.md)
+
 ## 📜 License
 
 This software is licensed under the [MPL](https://github.com/nhn/gpm.unity/blob/master/LICENSE) © [NHN](https://github.com/nhn).
