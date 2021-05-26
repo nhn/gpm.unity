@@ -32,4 +32,8 @@
         <name>AssetManagement</name>
         <version>1.2.1</version>
     </service>
+    <service>
+        <name>Profiler</name>
+        <version>1.0.0</version>
+    </service>
 </serviceList>
