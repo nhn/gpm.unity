@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.2
+
+### Date
+
+* 2020.05.27
+
+### Updated
+
+* Common 2.0.3 버전으로 업데이트
+
 ## 2.0.1
 
 ### Date
