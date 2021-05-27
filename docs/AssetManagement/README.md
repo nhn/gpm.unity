@@ -1,4 +1,4 @@
-# Aassetmanagement
+# AssetManagement
 
 🌏 [English](README.en.md)
 
