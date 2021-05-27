@@ -8,6 +8,7 @@
 * [Specifications](#Specifications)
 * [API](#-api)
 * [Usage](#-Usage)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
