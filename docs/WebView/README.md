@@ -8,6 +8,7 @@
 * [스펙](#스펙)
 * [플랫폼별 설정](#-플랫폼별-설정)
 * [API](#-api)
+* [Release notes](./ReleaseNotes.md)
 
 
 ## 개요
