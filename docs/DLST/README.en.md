@@ -8,6 +8,7 @@
 * [Specifications](#specifications)
 * [Search Rules](#search-rules)
 * [Usage](#-usage)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
