@@ -7,6 +7,8 @@
 * [개요](#개요)
 * [스펙](#스펙)
 * [Components](#components)
+* [Release notes](./ReleaseNotes.md)
+
 
 ## 개요
 
