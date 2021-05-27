@@ -8,6 +8,7 @@
 * [스펙](#스펙)
 * [AdapterTool](#-adaptertool)
 * [API](#-api)
+* [Release notes](./ReleaseNotes.md)
 
 ## 개요
 

@@ -8,6 +8,7 @@
 * [Specification](#specification)
 * [AdapterTool](#-adaptertool)
 * [API](#-api)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
