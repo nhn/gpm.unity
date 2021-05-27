@@ -7,6 +7,7 @@
 * [Overview](#overview)
 * [Specification](#specification)
 * [Usage](#-usage)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
