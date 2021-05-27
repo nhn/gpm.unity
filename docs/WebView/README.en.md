@@ -8,6 +8,7 @@
 * [Specifications](#Specifications)
 * [Platform specific settings](#-Platform-specific-settings)
 * [API](#-API)
+* [Release notes](./ReleaseNotes.en.md)
 
 
 ## Overview
