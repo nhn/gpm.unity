@@ -8,6 +8,7 @@
 * [Specification](#Specification)
 * [Function Description](#Function-Description)
 * [How to use](#How-to-Use)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
