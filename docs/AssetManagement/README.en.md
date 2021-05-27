@@ -1,4 +1,4 @@
-# Aassetmanagement
+# AssetManagement
 
 🌏 [한국어](README.md)
 
@@ -21,6 +21,7 @@
     * [Removing unnecessary assets](#Removing-unnecessary-assets)
     ### 
 * [Practice with the sample](#Practice-with-the-sample)
+* [Release notes](./ReleaseNotes.en.md)
     
 
 ## Overview
