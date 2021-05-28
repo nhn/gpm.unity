@@ -12,6 +12,9 @@
 
 * Update to Common 2.0.2 version
 
+### Fixed
+* Fixed service list slipping caused by update icon
+
 ## 2.0.2
 
 ### Date
