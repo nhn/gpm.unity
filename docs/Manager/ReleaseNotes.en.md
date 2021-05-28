@@ -2,21 +2,31 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
-## 2.0.2
+## 2.0.3
 
 ### Date
 
-* 2020.05.27
+* 2021.05.28
 
 ### Updated
 
 * Update to Common 2.0.3 version
 
+## 2.0.2
+
+### Date
+
+* 2021.03.12
+
+### Fixed
+
+* Fix compilation errors at build time
+
 ## 2.0.1
 
 ### Date
 
-* 2020.03.05
+* 2021.03.05
 
 ### Added
 
