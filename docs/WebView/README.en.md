@@ -43,7 +43,7 @@ Provides a WebView used in various ways in the game.
 | Navigation | Visibility |
 |   | Title |
 |   | Back |
-|   | Forword |
+|   | Forward |
 |   | Close |
 | Show API | URL, HTML file, HTML string |
 |   | Open Callback |
