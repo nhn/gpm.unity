@@ -43,7 +43,7 @@
 | Navigation | Visibility |
 |   | Title |
 |   | Back |
-|   | Forword |
+|   | Forward |
 |   | Close |
 | Show API | URL, HTML file, HTML string |
 |   | Open Callback |
