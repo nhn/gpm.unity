@@ -19,7 +19,7 @@ Add **DraggableRect** component to the UI object.
 * Raycast Target must be enabled within the added UI in order for it to work.
 * If you want to control the drag event only, add the **DragaEventHandler** component instead.
 
-![DraggableRect.png](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DraggableRect/images/DragableRect.png?raw=true)
+![DraggableRect.png](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DraggableRect/images/DraggableRect.png?raw=true)
 
 1. You can add an event that will start upon mouse dragging.
 2. You can add an event that will be triggered during mouse dragging.
@@ -30,4 +30,4 @@ Add **DraggableRect** component to the UI object.
 
 Assets/GPM/UI/Sample/DraggableRect
 
-![dragableRectSample.gif](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DraggableRect/images/dragableRectSample.gif?raw=true)
+![dragableRectSample.gif](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DraggableRect/images/draggableRectSample.gif?raw=true)
