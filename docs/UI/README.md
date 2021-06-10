@@ -30,9 +30,9 @@
 
 * [Infinite Scroll 이동](InfiniteScroll/README.md)
 
-### DragableRect
+### DraggableRect
 
-* [DragableRect 이동](DragableRect/README.md)
+* [DraggableRect 이동](DraggableRect/README.md)
 
 ### ContentSizeSetter
 

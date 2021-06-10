@@ -1,4 +1,4 @@
-# DragableRect
+# DraggableRect
 
 🌏 [English](README.en.md)
 
@@ -13,11 +13,11 @@
 UI를 드래그 할수 있게 만드는 컴포넌트입니다.
 
 ## 사용 방법
-UI 오브젝트에 **DragableRect** 컴포넌트를 추가합니다.
+UI 오브젝트에 **DraggableRect** 컴포넌트를 추가합니다.
 * 추가된 UI내에 Raycast Target이 활성화되어야 동작합니다.
 * 드래그 이벤트만 제어하고 싶다면 **DragaEventHandler** 컴포넌트를 대신 추가할수 있습니다.
 
-![DragableRect.png](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DragableRect/images/DragableRect.png?raw=true)
+![DraggableRect.png](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DraggableRect/images/DraggableRect.png?raw=true)
 
 1. 드레그가 시작될때의 이벤트를 추가할수 있습니다.
 2. 드레그가 중일때의 이벤트를 추가할수 있습니다.
@@ -27,6 +27,6 @@ UI 오브젝트에 **DragableRect** 컴포넌트를 추가합니다.
 
 ## Sample
 
-Assets/GPM/UI/Sample/DragableRect
+Assets/GPM/UI/Sample/DraggableRect
 
-![dragableRectSample.gif](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DragableRect/images/dragableRectSample.gif?raw=true)
+![draggableRectSample.gif](https://github.com/nhn/gpm.unity/blob/main/docs/UI/DraggableRect/images/draggableRectSample.gif?raw=true)
