@@ -3,6 +3,18 @@
 🌏 [한국어](ReleaseNotes.md)
 
 
+🌏 [English](ReleaseNotes.en.md)
+
+## 2.0.7
+
+### Date
+
+* 2020.06.21
+
+### Added
+* InfiniteScroll
+    * Added scroll item spacing function
+
 ## 2.0.6
 
 ### Date

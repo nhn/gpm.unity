@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.7
+
+### Date
+
+* 2020.06.21
+
+### Added
+* InfiniteScroll
+    * 스크롤 아이템 간격 기능 추가
+
 ## 2.0.6
 
 ### Date
