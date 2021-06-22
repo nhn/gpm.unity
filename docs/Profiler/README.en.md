@@ -77,7 +77,7 @@
     * Shows the total number of batches called when rendering a frame.
 4. Triangles
     * Shows the number of triangles processed when rendering a frame.
-5. Vetices
+5. Vertices
     * Shows the number of vertices processed when rendering a frame.
 
 #### Can see only the options you want.

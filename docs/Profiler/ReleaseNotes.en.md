@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.0.1
+
+### Date
+
+* 2021.06.22
+
+### Fixed
+
+* Fixed typo in RenderProfiler Vertices UI
+
 ## 1.0.0
 
 ### Date
