@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.0.1
+
+### Date
+
+* 2021.06.22
+
+### Fixed
+
+* RenderProfiler Vertices UI 오타 수정
+
 ## 1.0.0
 
 ### Date
