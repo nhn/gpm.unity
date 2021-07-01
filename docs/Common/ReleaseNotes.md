@@ -2,6 +2,19 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+
+## 2.0.3
+
+### Date
+
+* 2021.07.02
+
+### Fixed
+
+* deprecated api 수정
+
+---
+
 ## 2.0.2
 
 ### Date
