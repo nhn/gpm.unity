@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Common 2.0.3의 Unity 2020.2버전에서 compile에러 수정
+* Unity 2020.2버전에서 컴파일 오류 수정
 
 ---
 

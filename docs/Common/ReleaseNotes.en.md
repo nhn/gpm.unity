@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Fixed by compile error in Unity 2020.2 version of Common 2.0.3
+* Fixed by compile error in Unity 2020.2 version
 
 ---
 
