@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Fixed by compile error in Unity 2020.2 version
+* Fixed by compile error in Unity 2020.2
 
 ---
 
