@@ -11,7 +11,7 @@
 
 ### Fixed
 
-* deprecated api 수정
+* UnityWebRequest isNetworkError API가 Unity2020.2이후로 Deprecated 되어 수정
 
 ---
 

@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Fixed deprecated api
+* Fixed UnityWebRequest isNetworkError API being deprecated after Unity2020.2
 
 ---
 
