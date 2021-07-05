@@ -2,6 +2,17 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.4
+
+### Date
+
+* 2021.07.05
+
+### Fixed
+
+* Common 2.0.3의 Unity 2020.2버전에서 compile에러 수정
+
+---
 
 ## 2.0.3
 
