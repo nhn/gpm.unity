@@ -2,6 +2,18 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.4
+
+### Date
+
+* 2021.07.05
+
+### Fixed
+
+* Fixed by compile error in Unity 2020.2 version of Common 2.0.3
+
+---
+
 ## 2.0.3
 
 ### Date
