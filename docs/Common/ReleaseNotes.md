@@ -2,6 +2,19 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+
+## 2.0.3
+
+### Date
+
+* 2021.07.05
+
+### Fixed
+
+* UnityWebRequest isNetworkError API가 Unity2020.2이후로 Deprecated 되어 수정
+
+---
+
 ## 2.0.2
 
 ### Date
