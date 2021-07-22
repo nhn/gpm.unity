@@ -13,7 +13,7 @@
 * Common 2.0.4 버전으로 업데이트
 
 ### Fixed
-* Unity 2020.2버전에서 컴파일 오류 수정
+* UnityWebRequest isNetworkError API가 Unity2020.2이후로 Deprecated 되어 수정
 
 ## 2.0.3
 

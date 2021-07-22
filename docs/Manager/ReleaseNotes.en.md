@@ -13,7 +13,7 @@
 * Update to Common 2.0.4 version
 
 ### Fixed
-* Fixed by compile error in Unity 2020.2
+* Fixed UnityWebRequest isNetworkError API being deprecated after Unity2020.2
 
 ## 2.0.3
 
