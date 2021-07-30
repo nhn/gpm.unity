@@ -2,11 +2,25 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.3.0
+
+### Date
+
+* 2021.07.31
+
+### Added
+
+* Configuration
+    * navigationBarColor
+    * supportMultipleWindows (Android only)
+
+---
+
 ## 1.2.0
 
 ### Date
 
-* 2020.03.12
+* 2021.03.12
 
 ### Added
 
@@ -21,7 +35,7 @@
 
 ### Date
 
-* 2020.02.23
+* 2021.02.23
 
 ### Added
 
