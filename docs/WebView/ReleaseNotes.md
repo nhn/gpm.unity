@@ -13,6 +13,7 @@
 * Configuration
     * navigationBarColor
     * supportMultipleWindows (Android only)
+* Assembly definition
 
 ---
 
