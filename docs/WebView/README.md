@@ -41,6 +41,7 @@
 | Style | Popup |
 |   | Fullscreen |
 | Navigation | Visibility |
+|   | Color |
 |   | Title |
 |   | Back |
 |   | Forward |
@@ -53,6 +54,7 @@
 | Other | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
+|   | Multiple Windows |
 
 ## 🔨 플랫폼별 설정
 
@@ -124,6 +126,7 @@ WebView를 표시합니다.
 | isClearCookie             | bool                                      | 쿠키 제거 |
 | isClearCache              | bool                                      | 캐시 제거 |
 | isNavigationBarVisible    | bool                                      | 네비게이션 바 활성 또는 비활성 |
+| navigationBarColor        | string                                    | 네비게이션 바 색상 |
 | title                     | string                                    | WebView의 제목 |
 | orientation               | UnityEngine.ScreenOrientation             | GPM WebView v1.1.0에서 제거되었습니다. |
 | isBackButtonVisible       | bool                                      | 뒤로 가기 버튼 활성 또는 비활성  |
@@ -131,6 +134,7 @@ WebView를 표시합니다.
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | 현재 플랫폼 추천 브라우저 |
 |                           | GamebaseWebViewContentMode.MOBILE         | 모바일 브라우저 |
 |                           | GamebaseWebViewContentMode.DESKTOP        | 데스크탑 브라우저 |
+| supportMultipleWindows</br>(Android) only)    | bool                  | GPM WebView의 다중 창의 지원 여부 |
 
 **API**
 
@@ -157,11 +161,14 @@ public void ShowUrl()
             isClearCookie = false,
             isClearCache = false,
             isNavigationBarVisible = true,
+            navigationBarColor = "#4B96E6",
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
@@ -265,13 +272,16 @@ public void ShowHtmlFile()
             isClearCookie = false,
             isClearCache = false,
             isNavigationBarVisible = true,
+            navigationBarColor = "#4B96E6",
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
 #endif
-    },
+        },
         OnOpenCallback,
         OnCloseCallback,
         new List<string>()
@@ -352,11 +362,14 @@ public void ShowHtmlString()
             isClearCookie = false,
             isClearCache = false,
             isNavigationBarVisible = true,
+            navigationBarColor = "#4B96E6",
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
