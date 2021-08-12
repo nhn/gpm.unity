@@ -2,6 +2,19 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.3.1
+
+### Date
+
+* 2021.08.12
+
+### Fixed
+
+* Assembly definitions의 Exclude Platforms 속성에서 Lumin을 비활성화
+* Configuration.navigationBarColor의 기본 값 추가
+
+---
+
 ## 1.3.0
 
 ### Date
