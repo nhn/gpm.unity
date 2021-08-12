@@ -2,6 +2,19 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.3.1
+
+### Date
+
+* 2021.08.12
+
+### Fixed
+
+* Disable Lumin in the Exclude Platforms attribute of assembly definitions.
+* Add the default value for Configuration.navigationBarColor
+
+---
+
 ## 1.3.0
 
 ### Date
