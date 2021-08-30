@@ -2,6 +2,17 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.5
+
+### Date
+
+* 2021.08.30
+
+### Fixed
+
+* Fix Unity package import failure issue
+* Compatible with .net runtime 4.0 or lower
+
 ## 2.0.4
 
 ### Date
