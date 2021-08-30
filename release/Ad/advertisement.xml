@@ -44,5 +44,19 @@
                 </day>
             </timeInfo>
         </advertisement>
+        <advertisement>
+            <name>NHN Recruit</name>
+            <imageName>nhn_recruit.png</imageName>
+            <link>https://nhncareers.oopy.io/</link>
+            <description>NHN 그룹사 게임부문 신입/경력 공개채용</description>
+            <timeInfo>
+                <startTime>2021-08-30 11:00</startTime>
+                <endTime>2021-09-14 23:59</endTime>
+                <day>
+                    <start>00</start>
+                    <end>24</end>
+                </day>
+            </timeInfo>
+        </advertisement>
     </advertisements>
 </info>
