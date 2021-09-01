@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.6
+
+### Date
+
+* 2021.09.01
+
+### Fixed
+
+* Unity bulit-in component와 같은 이름의 스크립트 파일명 수정
+
 ## 2.0.5
 
 ### Date
