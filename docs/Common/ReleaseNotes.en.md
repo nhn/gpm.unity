@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.6
+
+### Date
+
+* 2021.09.01
+
+### Fixed
+
+* Fixed the script file name with the same name as Unity build-in component
+
 ## 2.0.5
 
 ### Date
