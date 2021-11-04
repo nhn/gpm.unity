@@ -21,62 +21,17 @@ GitHub Issue : https://github.com/nhn/gpm.unity/issues
 
 ## Service
 
-### Manager
-
-Check the service list from Manager, while you install, remove, or update services as you need.
-
-* [Download Manager from Asset Store](https://assetstore.unity.com/packages/slug/147711)
-* [Go to Manager](docs/Manager/README.en.md)
-
-### Adapter
-
-IdPs, such as Facebook or Google, provide Unity SDK to apply IdP functions faster and more easily in applications under development for Unity.<br/> However, as each IdP has different API, sufficient learning and time is required to implement each and every IdP function. <br/>
-Adapter provides a common interface so as to easily apply different IdP fuctions.
-
-* [Go to Adapter service](docs/Adapter/README.en.md)
-
-### DLST(Duplicate Library Search Tool)
-
-When a multiple number of external libraries are used, you may encounter duplicate library issues.<br/>
-Duplicate Library Search Tool, or DLST,  searches and removes duplicate libraries.
-
-* [Go to DLST service](docs/DLST/README.en.md)
-
-### UI
-
-Provide components to use Unity UI more efficiently.
-
-* [Go to UI service](docs/UI/README.en.md)
-
-### LogViewer
-
-LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers.
-
-* [Go to LogViewer service](docs/LogViewer/README.en.md)
-
-### Communicator
-
-Communicator is a framework that can easily exchange data with native by providing one common interface.
-
-* [Go to Communicator service](docs/Communicator/README.en.md)
-
-### WebView
-
-Provides a web view that can be used in various ways in the game.
-
-* [Go to WebView service](docs/WebView/README.en.md)
-
-### AssetManagement
-
-AssetManagement is a tool that allows you to easily manage your Unity assets.
-
-* [Go to AssetManagement service](docs/AssetManagement/README.en.md)
-
-### Profiler
-
-Profiler is a tool that helps the optimization as it allows users to see the device performance and system information on the screen.
-
-* [Go to Profiler service](docs/Profiler/README.en.md)
+|서비스| 설명 |
+| --- | --- |
+| [Manager](docs/Manager/README.en.md)<br>[Download from Asset Store](https://assetstore.unity.com/packages/slug/147711) | Check the service list from Manager, while you install, remove, or update services as you need.|
+| [WebView](docs/WebView/README.en.md) | Provides a web view that can be used in various ways in the game.|
+| [AssetManagement](docs/AssetManagement/README.en.md) | AssetManagement is a tool that allows you to easily manage your Unity assets. |
+| [UI](docs/UI/README.en.md) | Provide components to use Unity UI more efficiently. |
+| [LogViewer](docs/LogViewer/README.en.md) | LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers. |
+| [Communicator](docs/Communicator/README.en.md) | Communicator is a framework that can easily exchange data with native by providing one common interface. |
+| [Profiler](docs/Profiler/README.en.md) | Profiler is a tool that helps the optimization as it allows users to see the device performance and system information on the screen. |
+| [Adapter](docs/Adapter/README.en.md) | Adapter provides a common interface so as to easily apply different IdP fuctions. |
+| [DLST](docs/DLST/README.en.md) | Duplicate Library Search Tool, or DLST,  searches and removes duplicate libraries. |
 
 ## 📜 License
 
