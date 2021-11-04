@@ -21,63 +21,17 @@ GitHub Issue : https://github.com/nhn/gpm.unity/issues
 
 ## 서비스
 
-### Manager
-
-Manager에서 서비스 목록을 확인할 수 있고, 원하는 서비스를 설치, 제거, 업데이트할 수 있습니다.
-
-* [Asset Store에서 Manager 다운로드](https://assetstore.unity.com/packages/slug/147711)
-* [Manager로 이동](docs/Manager/README.md)
-
-### Adapter
-
-Facebook, Google 등의 IdP는 Unity로 개발 중인 애플리케이션에서 쉽고 빠르게 IdP의 기능을 사용할 수 있도록 Unity SDK를 제공하고 있습니다.<br/>
-하지만 IdP마다 API가 서로 다르므로, 여러 IdP의 기능을 각각 구현 시 많은 학습과 시간이 필요합니다.<br/>
-Adapter는 하나의 공통화된 인터페이스를 제공해 여러 IdP의 기능을 쉽게 적용할 수 있습니다.
-
-* [Adapter 서비스로 이동](docs/Adapter/README.md)
-
-### DLST(Duplicate Library Search Tool)
-
-많은 외부 라이브러리들을 사용할 경우, 라이브러리 중복 문제가 발생할 수 있습니다.<br/>
-DLST는 중복되는 라이브러리들을 검색해서 지울 수 있는 툴입니다.
-
-* [DLST 서비스로 이동](docs/DLST/README.md)
-
-### UI
-
-Unity UI를 보다 효율적으로 사용할 수 있는 컴포넌트 제공.
-
-* [UI 서비스로 이동](docs/UI/README.md)
-
-### LogViewer
-
-Unity Log와 디바이스 시스템 정보를 화면에서 확인할 수 있고, 개발자가 미리 등록한 API를 호출해 볼 수 있는 툴입니다.
-
-* [LogViewer 서비스로 이동](docs/LogViewer/README.md)
-
-### Communicator
-
-Communicator는 하나의 공통화된 인터페이스를 제공해 Native와 Data를 쉽게 주고 받을 수 있는 프레임웍입니다.
-
-* [Communicator 서비스로 이동](docs/Communicator/README.md)
-
-### WebView
-
-게임에서 다양하게 사용할 수 있는 웹뷰를 제공합니다.
-
-* [WebView 서비스로 이동](docs/WebView/README.md)
-
-### AssetManagement
-
-유니티 에셋들을 손쉽게 관리할 수 있는 툴입니다.
-
-* [AssetManagement 서비스로 이동](docs/AssetManagement/README.md)
-
-### Profiler
-
-Unity에서 디바이스 성능과 시스템 정보를 화면에서 확인할 수 있어 최적화에 도움을 주는 툴입니다.
-
-* [Profiler 서비스로 이동](docs/Profiler/README.md)
+|서비스| 설명 |
+| --- | --- |
+| [Manager](docs/Manager/README.md)<br>[Asset Store에서 다운로드](https://assetstore.unity.com/packages/slug/147711) | Manager에서 서비스 목록을 확인할 수 있고, 원하는 서비스를 설치, 제거, 업데이트할 수 있습니다.|
+| [WebView](docs/WebView/README.md) | 게임에서 다양하게 사용할 수 있는 웹뷰를 제공합니다.|
+| [AssetManagement](docs/AssetManagement/README.md) | 유니티 에셋들을 손쉽게 관리할 수 있는 툴입니다. |
+| [UI](docs/UI/README.md) | Unity UI를 보다 효율적으로 사용할 수 있는 컴포넌트 제공. |
+| [LogViewer](docs/LogViewer/README.md) | Unity Log와 디바이스 시스템 정보를 화면에서 확인할 수 있고, 개발자가 미리 등록한 API를 호출해 볼 수 있는 툴입니다. |
+| [Communicator](docs/Communicator/README.md) | Communicator는 하나의 공통화된 인터페이스를 제공해 Native와 Data를 쉽게 주고 받을 수 있는 프레임웍입니다. |
+| [Profiler](docs/Profiler/README.md) | 디바이스 성능과 시스템 정보를 화면에서 확인할 수 있어 최적화에 도움을 주는 툴입니다. |
+| [Adapter](docs/Adapter/README.md) | Adapter는 하나의 공통화된 인터페이스를 제공해 여러 IdP의 기능을 쉽게 적용할 수 있습니다. |
+| [DLST](docs/DLST/README.md) | DLST는 중복되는 라이브러리들을 검색해서 지울 수 있는 툴입니다. |
 
 ## 📜 License
 
