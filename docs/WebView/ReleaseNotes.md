@@ -2,6 +2,22 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.3.2
+
+### Date
+
+* 2021.11.29
+
+### Fixed
+
+* Fixed a bug that caused certain web pages to reload on iOS
+
+### Improved
+
+* Add warning log when the method is called in the editor.
+
+---
+
 ## 1.3.1
 
 ### Date
