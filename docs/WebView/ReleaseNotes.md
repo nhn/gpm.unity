@@ -9,12 +9,12 @@
 * 2021.11.29
 
 ### Fixed
-
-* Fixed a bug that caused certain web pages to reload on iOS
+#### iOS
+* 일부 웹페이지에서 링크된 페이지로 이동하려고 할 때 이전의 페이지가 다시 로드되는 문제 수정
 
 ### Improved
 
-* Add warning log when the method is called in the editor.
+* Unity Editor에서 동작하지 않는 WebView API를 호출하면 warning log가 발생하도록 수정
 
 ---
 
