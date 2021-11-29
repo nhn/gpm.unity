@@ -155,7 +155,7 @@ public static void ShowUrl(
 public void ShowUrl()
 {
     GpmWebView.ShowUrl(
-        "http://gameplatform.toast.com/",
+        "https://gameplatform.toast.com/",
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
