@@ -2,6 +2,23 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.3.2
+
+### Date
+
+* 2021.11.29
+
+### Fixed
+#### iOS
+
+* Fixed a bug that caused the previous page to reload when trying to navigate to a linked page on certain webpages.
+
+### Improved
+
+* Add warning log when calling the WebView API that does not work in Unity Editor.
+
+---
+
 ## 1.3.1
 
 ### Date
