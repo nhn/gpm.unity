@@ -2,6 +2,19 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.7
+
+### Date
+
+* 2021.12.12
+
+### Added
+* Added support for json Single type
+
+### Changed
+* Modified to make multiLanguage Loader extensibility
+* Improved indicator logic
+
 ## 2.0.6
 
 ### Date

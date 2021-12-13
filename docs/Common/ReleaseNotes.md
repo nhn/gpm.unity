@@ -2,6 +2,19 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.7
+
+### Date
+
+* 2021.12.12
+
+### Added
+* json Single 타입 지원 추가
+
+### Changed
+* multiLanguage Loader 확장 가능하도록 수정
+* indicator 로직 개선
+
 ## 2.0.6
 
 ### Date
