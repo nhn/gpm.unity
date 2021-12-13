@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2021.12.12
+* 2021.12.13
 
 ### Added
 * Added support for json Single type
