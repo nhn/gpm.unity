@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.8
+
+### Date
+
+* 2021.12.14
+
+### Fixed
+* Fixed warring issue when building
+* Fixed typo in coroutine object variable
+
 ## 2.0.7
 
 ### Date
