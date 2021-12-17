@@ -9,7 +9,7 @@
 * 2021.12.14
 
 ### Fixed
-* Fixed warring issue when building
+* Fixed warning issue when building
 * Fixed typo in coroutine object variable
 
 ## 2.0.7
