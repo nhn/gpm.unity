@@ -9,8 +9,9 @@
 * 2022.01.13
 
 ### Fixed
-* 코드에서 warring 나오는것 수정
-* LogViewer와 같이 사용할 때 발생하는 warring수정
+* 사용하지 않는 코드 warring 수정
+* 초기화 되지 않는 필드 warring 수정
+* LogViewer 리소스와 guid로 발생하는 warring수정
 
 ## 1.0.1
 

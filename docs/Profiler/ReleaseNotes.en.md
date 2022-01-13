@@ -9,8 +9,9 @@
 * 2022.01.13
 
 ### Fixed
-* Fix warring in code
 * Fix warring that occurs when using with LogViewer
+* Fix uninitialized field warring
+* Fix warring caused by guid of icon in LogViewer
 
 ## 1.0.1
 
