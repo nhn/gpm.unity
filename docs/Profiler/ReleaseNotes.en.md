@@ -9,9 +9,9 @@
 * 2022.01.13
 
 ### Fixed
-* Fix warring that occurs when using with LogViewer
-* Fix uninitialized field warring
-* Fix warring caused by guid of icon in LogViewer
+* Fixed a warning due to unused code
+* Fixed a warning due to uninitialized fields
+* Fixed a warning due to the same GUID as the resource used by LogViewer
 
 ## 1.0.1
 

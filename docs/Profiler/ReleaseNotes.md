@@ -9,9 +9,9 @@
 * 2022.01.13
 
 ### Fixed
-* 사용하지 않는 코드 warring 수정
-* 초기화 되지 않는 필드 warring 수정
-* LogViewer 리소스와 guid로 발생하는 warring수정
+* 사용하지 않는 코드로 인한 warning 수정
+* 초기화 되지 않는 필드로 인한 warning 수정
+* LogViewer에서 사용하는 리소스와 동일한 GUID로 인한 충돌로 발생하는 warning 수정
 
 ## 1.0.1
 
