@@ -2,6 +2,25 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.1.0
+
+### Date
+
+* 2022.01.13
+
+### Added
+* InfiniteScroll
+    * ScrollItem active 함수 추가
+    * ScrollItem Item size 설정 함수 추가
+
+### Updated
+* InfiniteScroll
+    * dynamicItemSize 환경에서 가변길이 ScrollItem 대응 가능하도록 수정 로직 수정[(165)](https://github.com/nhn/gpm.unity/issues/165)
+
+### Fixed
+* InfiniteScroll
+    * dynamicItemSize 환경에서 보이지 않는 ScrollItem 오브젝트 활성화 되는 문제 수정
+
 ## 2.0.7
 
 ### Date
