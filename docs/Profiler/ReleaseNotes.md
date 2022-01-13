@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.0.2
+
+### Date
+
+* 2022.01.13
+
+### Fixed
+* 코드에서 warring 나오는것 수정
+* LogViewer와 같이 사용할 때 발생하는 warring수정
+
 ## 1.0.1
 
 ### Date

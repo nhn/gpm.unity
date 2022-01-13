@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.0.2
+
+### Date
+
+* 2022.01.13
+
+### Fixed
+* Fix warring in code
+* Fix warring that occurs when using with LogViewer
+
 ## 1.0.1
 
 ### Date
