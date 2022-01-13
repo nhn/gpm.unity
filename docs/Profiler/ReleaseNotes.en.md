@@ -2,6 +2,17 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.0.2
+
+### Date
+
+* 2022.01.13
+
+### Fixed
+* Fixed a warning due to unused code
+* Fixed a warning due to uninitialized fields
+* Fixed a warning due to the same GUID as the resource used by LogViewer
+
 ## 1.0.1
 
 ### Date
