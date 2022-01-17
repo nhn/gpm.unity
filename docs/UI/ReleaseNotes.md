@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.1.1
+
+### Date
+
+* 2022.01.17
+
+### Fixed
+* InfiniteScroll
+    * ScrollItem Item size 전체 사이즈 0으로 잘못 계산하는 문제 수정
+
 ## 2.1.0
 
 ### Date
