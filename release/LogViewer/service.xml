@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="6">
+<info version="7">
     <title>LogViewer</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
     <dependencies>
         <unity>
             <version>2018.4.0+</version>
         </unity>
         <UI>
-            <version>2.0.2</version>
+            <version>2.2.0</version>
             <install>auto</install>
         </UI>
     </dependencies>
     <packageList>
+        <package>
+            <version>2.0.3</version>
+            <installList>
+                <install>
+                    <name>gpm_logviewer_v2.0.3.unitypackage</name>
+                    <path>GPM/LogViewer</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>2.0.2</version>
             <installList>
