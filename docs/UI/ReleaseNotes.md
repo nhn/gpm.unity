@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.2.0
+
+### Date
+
+* 2022.02.21
+
+### Added
+* WrapLayoutGroup 추가
+
 ## 2.1.1
 
 ### Date
