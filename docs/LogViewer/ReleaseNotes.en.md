@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.3
+
+### Date
+
+* 2022.02.21
+
+### Updated
+* Improved structure to make it easier to add extension functions
+
 ## 2.0.2
 
 ### Date
