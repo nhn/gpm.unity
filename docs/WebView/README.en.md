@@ -49,12 +49,17 @@ Provides a WebView used in various ways in the game.
 | Show API | URL, HTML file, HTML string |
 |   | Open Callback |
 |   | Close Callback |
+|   | Page load Callback |
 |   | Scheme Callback |
 |   | Scheme List |
 | Other | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
 |   | Multiple Windows |
+|   | Can Go Back |
+|   | Can Go Forward |
+|   | Go Back |
+|   | Go Forward |
 
 ## 🔨 Platform specific settings
 
@@ -112,6 +117,7 @@ Displays the WebView.
 
 * configuration: With GpmWebViewRequest.Configuration, WebView options can be changed.
 * closeCallback: The closing of WebView is notified to users via a callback.
+* PageLoadCallback : The WebView page load complete is notified to users via a callback.
 * schemeList: Specifies the list of custom schemes that users want to receive.
     * Entering 'https://' allows you receive all URLs that begin with 'https://' as schemeEvent.
     * A scheme received as schemeEvent is not redirected.
@@ -143,10 +149,11 @@ Displays the WebView.
 public static void ShowUrl(
     string url,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
-    List<string> schemeList,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
 ```
 
 **Example**
@@ -155,7 +162,7 @@ public static void ShowUrl(
 public void ShowUrl()
 {
     GpmWebView.ShowUrl(
-        "https://gameplatform.toast.com/",
+        "https://google.com/",
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
@@ -174,6 +181,7 @@ public void ShowUrl()
         },
         OnOpenCallback,
         OnCloseCallback,
+        OnPageLoadCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
@@ -202,6 +210,14 @@ private void OnCloseCallback(GpmWebViewError error)
     else
     {
         Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
+    }
+}
+
+private void OnPageLoadCallback(string url)
+{
+    if (string.IsNullOrEmpty(url) == false)
+    {
+        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
     }
 }
 
@@ -247,10 +263,11 @@ See the code below to enter the filePath value of ShowHtmlFile API.
 public static void ShowHtmlFile(
     string filePath,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
-    List<string> schemeList,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
 ```
 
 **Example**
@@ -285,6 +302,7 @@ public void ShowHtmlFile()
     },
         OnOpenCallback,
         OnCloseCallback,
+        OnPageLoadCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
@@ -313,6 +331,14 @@ private void OnCloseCallback(GpmWebViewError error)
     else
     {
         Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
+    }
+}
+
+private void OnPageLoadCallback(string url)
+{
+    if (string.IsNullOrEmpty(url) == false)
+    {
+        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
     }
 }
 
@@ -344,10 +370,11 @@ Loads the HTML string into the WebView.
 public static void ShowHtmlString(
     string htmlString,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
-    List<string> schemeList,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null)
 ```
 
 **Example**
@@ -379,7 +406,8 @@ public void ShowHtmlString()
         {
             "USER_ CUSTOM_SCHEME"
         },
-        OnSchemeEvent);
+        OnSchemeEvent,
+        OnPageLoadCallback);
 }
 
 private void OnOpenCallback(GpmWebViewError error)
@@ -420,6 +448,14 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
     else
     {
         Debug.Log(string.Format("[OnSchemeEvent] failed. error:{0}", error));
+    }
+}
+
+private void OnPageLoadCallback(string url)
+{
+    if (string.IsNullOrEmpty(url) == false)
+    {
+        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
     }
 }
 ```
@@ -459,5 +495,60 @@ public static void Close()
 public void Close()
 {
     GpmWebView.Close();
+}
+```
+### CanGoBack
+
+Gets whether the WebView has a back history item.
+
+**API**
+
+```cs
+public static bool CanGoBack()
+```
+
+### CangoForward
+
+Gets whether the WebView has a forward history item.
+
+```cs
+public static bool CanGoForward()
+```
+
+### GoBack
+
+Goes back in the history of the WebView.
+
+**API**
+
+```cs
+public static void GoBack()
+```
+
+**Example**
+
+```cs
+public void GoBack()
+{
+    GpmWebView.GoBack();
+}
+```
+
+### GoForward
+
+Goes forward in the history of the WebView.
+
+**API**
+
+```cs
+public static void GoForward()
+```
+
+**Example**
+
+```cs
+public void GoForward()
+{
+    GpmWebView.GoForward();
 }
 ```

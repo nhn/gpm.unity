@@ -49,12 +49,17 @@
 | Show API | URL, HTML file, HTML string |
 |   | Open Callback |
 |   | Close Callback |
+|   | Page load Callback |
 |   | Scheme Callback |
 |   | Scheme List |
 | Other | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
 |   | Multiple Windows |
+|   | Can Go Back |
+|   | Can Go Forward |
+|   | Go Back |
+|   | Go Forward |
 
 ## 🔨 플랫폼별 설정
 
@@ -112,6 +117,7 @@ WebView를 표시합니다.
 
 * configuration : GpmWebViewRequest.Configuration으로 WebView의 옵션을 변경할 수 있습니다.
 * closeCallback : WebView가 종료될 때 사용자에게 콜백으로 알려줍니다.
+* pageLoadCallback : WebView에서 페이지 로드가 완료되면 사용자에게 콜백으로 알려줍니다.
 * schemeList : 사용자가 받고 싶은 커스텀 스킴(scheme) 목록을 지정합니다.
     * 'https://'를 입력하면 'https://'로 시작하는 모든 url을 schemeEvent로 받을 수 있습니다.
     * schemeEvent로 받은 scheme은 redirect 되지 않습니다.
@@ -142,10 +148,11 @@ WebView를 표시합니다.
 public static void ShowUrl(
     string url,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
-    List<string> schemeList,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
 ```
 
 **Example**
@@ -154,7 +161,7 @@ public static void ShowUrl(
 public void ShowUrl()
 {
     GpmWebView.ShowUrl(
-        "https://gameplatform.toast.com/",
+        "https://google.com/",
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
@@ -173,6 +180,7 @@ public void ShowUrl()
         },
         OnOpenCallback,
         OnCloseCallback,
+        OnPageLoadCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
@@ -201,6 +209,14 @@ private void OnCloseCallback(GpmWebViewError error)
     else
     {
         Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
+    }
+}
+
+private void OnPageLoadCallback(string url)
+{
+    if (string.IsNullOrEmpty(url) == false)
+    {
+        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
     }
 }
 
@@ -246,10 +262,11 @@ ShowHtmlFile API의 filePath 값은 아래 코드를 참고하여 입력하십�
 public static void ShowHtmlFile(
     string filePath,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
-    List<string> schemeList,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
 ```
 
 **Example**
@@ -284,6 +301,7 @@ public void ShowHtmlFile()
         },
         OnOpenCallback,
         OnCloseCallback,
+        OnPageLoadCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
@@ -312,6 +330,14 @@ private void OnCloseCallback(GpmWebViewError error)
     else
     {
         Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
+    }
+}
+
+private void OnPageLoadCallback(string url)
+{
+    if (string.IsNullOrEmpty(url) == false)
+    {
+        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
     }
 }
 
@@ -343,10 +369,11 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
 public static void ShowHtmlString(
     string htmlString,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
-    List<string> schemeList,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null)
 ```
 
 **Example**
@@ -378,7 +405,8 @@ public void ShowHtmlString()
         {
             "USER_ CUSTOM_SCHEME"
         },
-        OnSchemeEvent);
+        OnSchemeEvent,
+        OnPageLoadCallback);
 }
 
 private void OnOpenCallback(GpmWebViewError error)
@@ -419,6 +447,14 @@ private void OnSchemeEvent(string data, GpmWebViewError error)
     else
     {
         Debug.Log(string.Format("[OnSchemeEvent] failed. error:{0}", error));
+    }
+}
+
+private void OnPageLoadCallback(string url)
+{
+    if (string.IsNullOrEmpty(url) == false)
+    {
+        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
     }
 }
 ```
@@ -458,5 +494,60 @@ public static void Close()
 public void Close()
 {
     GpmWebView.Close();
+}
+```
+### CanGoBack
+
+WebView에 이전 방문 기록이 있는지 확인합니다.
+
+**API**
+
+```cs
+public static bool CanGoBack()
+```
+
+### CangoForward
+
+WebView에 다음 방문 기록이 있는지 확인합니다.
+
+```cs
+public static bool CanGoForward()
+```
+
+### GoBack
+
+WebView의 이전 방문 기록으로 이동합니다.
+
+**API**
+
+```cs
+public static void GoBack()
+```
+
+**Example**
+
+```cs
+public void GoBack()
+{
+    GpmWebView.GoBack();
+}
+```
+
+### GoForward
+
+WebView의 다음 방문 기록으로 이동합니다.
+
+**API**
+
+```cs
+public static void GoForward()
+```
+
+**Example**
+
+```cs
+public void GoForward()
+{
+    GpmWebView.GoForward();
 }
 ```

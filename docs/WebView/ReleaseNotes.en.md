@@ -2,6 +2,24 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.4.0
+
+### Date
+
+* 2022.03.04
+
+### Improved
+
+* Modify WebView API
+  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString
+* Added WebView API
+  * CanGoBack
+  * CanGoForward
+  * GoBack
+  * GoForward
+* Added WebView Sample scene
+---
+
 ## 1.3.2
 
 ### Date
