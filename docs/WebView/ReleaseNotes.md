@@ -8,16 +8,19 @@
 
 * 2022.03.04
 
-### Improved
+### Added
 
-* WebView API 수정
-  * ShowUrl, ShowHtmlFile, ShowHtmlString에 OnPageLoadCallback 매개변수 추가
 * WebView API 추가
   * CanGoBack
   * CanGoForward
   * GoBack
   * GoForward
 * WebView Sample scene 추가
+
+### Updated
+
+* WebView API 수정
+  * ShowUrl, ShowHtmlFile, ShowHtmlString에 OnPageLoadCallback 매개변수 추가
 
 ---
 
@@ -31,7 +34,7 @@
 #### iOS
 * 일부 웹페이지에서 링크된 페이지로 이동하려고 할 때 이전의 페이지가 다시 로드되는 문제 수정
 
-### Improved
+### Updated
 
 * Unity Editor에서 동작하지 않는 WebView API를 호출하면 warning log가 발생하도록 수정
 
@@ -96,10 +99,10 @@
     * ShowHtmlString
     * ExecuteJavaScript
 
-### Removed
+### Updated
 
 * Configuration
-    * Orientation
+    * Orientation 제거
 
 ---
 

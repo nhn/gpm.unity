@@ -8,16 +8,20 @@
 
 * 2022.03.04
 
-### Improved
+### Added
 
-* Modify WebView API
-  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString
 * Added WebView API
   * CanGoBack
   * CanGoForward
   * GoBack
   * GoForward
 * Added WebView Sample scene
+
+### Updated
+
+* Modify WebView API
+  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString
+
 ---
 
 ## 1.3.2
@@ -31,7 +35,7 @@
 
 * Fixed a bug that caused the previous page to reload when trying to navigate to a linked page on certain webpages.
 
-### Improved
+### Updated
 
 * Add warning log when calling the WebView API that does not work in Unity Editor.
 
@@ -96,10 +100,10 @@
     * ShowHtmlString
     * ExecuteJavaScript
 
-### Removed
+### Updated
 
 * Configuration
-    * Orientation
+    * Orientation removed
 
 ---
 
