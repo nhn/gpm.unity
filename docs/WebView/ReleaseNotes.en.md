@@ -2,6 +2,28 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.4.0
+
+### Date
+
+* 2022.03.04
+
+### Added
+
+* Added WebView API
+  * CanGoBack
+  * CanGoForward
+  * GoBack
+  * GoForward
+* Added WebView Sample scene
+
+### Updated
+
+* Modify WebView API
+  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString([#71](https://github.com/nhn/gpm.unity/issues/71))
+
+---
+
 ## 1.3.2
 
 ### Date
@@ -13,7 +35,7 @@
 
 * Fixed a bug that caused the previous page to reload when trying to navigate to a linked page on certain webpages.
 
-### Improved
+### Updated
 
 * Add warning log when calling the WebView API that does not work in Unity Editor.
 
@@ -78,10 +100,10 @@
     * ShowHtmlString
     * ExecuteJavaScript
 
-### Removed
+### Updated
 
 * Configuration
-    * Orientation
+    * Orientation removed
 
 ---
 
