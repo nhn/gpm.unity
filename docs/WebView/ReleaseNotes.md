@@ -20,7 +20,7 @@
 ### Updated
 
 * WebView API 수정
-  * ShowUrl, ShowHtmlFile, ShowHtmlString에 OnPageLoadCallback 매개변수 추가
+  * ShowUrl, ShowHtmlFile, ShowHtmlString에 OnPageLoadCallback 매개변수 추가([#71](https://github.com/nhn/gpm.unity/issues/71))
 
 ---
 

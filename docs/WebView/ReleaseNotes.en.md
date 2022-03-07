@@ -20,7 +20,7 @@
 ### Updated
 
 * Modify WebView API
-  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString
+  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString([#71](https://github.com/nhn/gpm.unity/issues/71))
 
 ---
 
