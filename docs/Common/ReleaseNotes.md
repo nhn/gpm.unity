@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.9
+
+### Date
+
+* 2022.03.10
+
+### Updated
+* FileStream Access 권한 명시적으로 개선 [(#184)](https://github.com/nhn/gpm.unity/issues/184)
+
 ## 2.0.8
 
 ### Date
