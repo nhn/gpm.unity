@@ -9,7 +9,7 @@
 * 2022.03.10
 
 ### Updated
-* FileStream Access 권한 명시적으로 개선 [(#184)](https://github.com/nhn/gpm.unity/issues/184)
+* Explicitly improved FileStream Access permissions [(#184)](https://github.com/nhn/gpm.unity/issues/184)
 
 ## 2.0.8
 
