@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* SamepleWebView의 일관성 없는 line ending 수정
+* SamepleWebView.cs 파일의 일관성 없는 line ending 수정
 
 #### iOS
 

@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Fixed inconsistent line endings in SampleWebView.
+* Fixed inconsistent line endings in SampleWebView.cs file.
 
 #### iOS
 
