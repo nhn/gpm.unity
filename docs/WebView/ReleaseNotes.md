@@ -2,6 +2,20 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.4.1
+
+### Date
+
+* 2022.03.11
+
+### Fixed
+
+* SamepleWebView의 일관성 없는 line ending 수정
+
+#### iOS
+
+* 한글이 포함된 URL 인코딩 오류 수정 ([#186](https://github.com/nhn/gpm.unity/issues/186))
+
 ## 1.4.0
 
 ### Date
@@ -15,12 +29,12 @@
   * CanGoForward
   * GoBack
   * GoForward
-* WebView Sample scene 추가
+* WebView Sample scene 추가 ([#105](https://github.com/nhn/gpm.unity/issues/105))
 
 ### Updated
 
 * WebView API 수정
-  * ShowUrl, ShowHtmlFile, ShowHtmlString에 OnPageLoadCallback 매개변수 추가([#71](https://github.com/nhn/gpm.unity/issues/71))
+  * ShowUrl, ShowHtmlFile, ShowHtmlString에 OnPageLoadCallback 매개변수 추가 ([#71](https://github.com/nhn/gpm.unity/issues/71))
 
 ---
 
