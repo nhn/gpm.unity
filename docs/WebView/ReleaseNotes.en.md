@@ -2,6 +2,20 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.4.1
+
+### Date
+
+* 2022.03.11
+
+### Fixed
+
+* Fixed inconsistent line endings in SampleWebView.cs file.
+
+#### iOS
+
+* Fixed URL with Korean characters encoding error. ([#186](https://github.com/nhn/gpm.unity/issues/186))
+
 ## 1.4.0
 
 ### Date
@@ -15,12 +29,12 @@
   * CanGoForward
   * GoBack
   * GoForward
-* Added WebView Sample scene
+* Added WebView Sample scene ([#105](https://github.com/nhn/gpm.unity/issues/105))
 
 ### Updated
 
 * Modify WebView API
-  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString([#71](https://github.com/nhn/gpm.unity/issues/71))
+  * Added OnPageLoadCallback parameter to ShowUrl, ShowHtmlFile, ShowHtmlString ([#71](https://github.com/nhn/gpm.unity/issues/71))
 
 ---
 
