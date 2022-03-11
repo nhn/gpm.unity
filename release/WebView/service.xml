@@ -18,7 +18,7 @@
         </Communicator>
     </dependencies>
     <packageList>
-	    <package>
+        <package>
             <version>1.4.1</version>
             <installList>
                 <install>
