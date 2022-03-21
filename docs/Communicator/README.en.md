@@ -12,14 +12,19 @@
 
 ## Overview
 
-Unity provides a feature that enables transmitting data to/from Native. However, it takes much time and learning to get used to the built-in features provided by Unity. 
-Communicator allows you to easily send and receive data through a single common interface.
+* Unity provides the feature that enables transmitting data to/from Native.
+* Android uses AndroidJavaClass and iOS uses DllImport to connect with Native.
+* Communicator provides Unity and Native with a common interface that allows data to be transmitted and received to facilitate data transmission.
 
 ### Standard structures that implement plugins and their weaknesses
 
 ![console](./images/Communicator_ASIS.png)
 
 * Require many resources to develop plugins.
+    * In Unity requires a native connection by AndroidJavaClass or DllImport.
+    * In Native requires registering Unity's GameObject and Callback.
+    * For Android requires a connection with unity-classes.jar.
+    * Additional tasks such as registering Callback in Unity class that use native feature are required.
 * For plugins developed for different purposes, most of their codes overlap with one another.
 
 ### The structure of Communicator and its benefits
@@ -27,6 +32,10 @@ Communicator allows you to easily send and receive data through a single common 
 ![console](./images/Communicator_TOBE.png)
 
 * Allows communication with Native through the unified interface.
+    * ~~In Unity requires a native connection by AndroidJavaClass or DllImport.~~
+    * ~~In Native requires registering Unity's GameObject and Callback.~~
+    * ~~For Android requires a connection with unity-classes.jar.~~
+    * ~~Additional tasks such as registering Callback in Unity class that use native feature are required.~~
 
 ## Specifications
 
@@ -80,7 +89,7 @@ static void AddReceiver(string domain, GpmCommunicatorCallback.CommunicatorCallb
 ```cs
 public void AddReceiver()
 {
-    GpmCommunicator.AddReceiver("DOMAIN", OnReceiver); 
+    GpmCommunicator.AddReceiver("${DOMAIN}", OnReceiver); 
 }
 
 private void OnReceiver(GpmCommunicatorVO.Message message)
@@ -166,10 +175,17 @@ Install Communicator with GPM Manager.
 
 #### 1. Android
 
-Create a project and files in Android Studio.
+1. Create a project with Android Studio. (e.g. com.gpm.communicator.sample)
+2. Create a folder within the project. (e.g. Project/externalLibs)
+
+    ![console](./images/Communicator_createFolder.png)
+
+3. Copy the Unity **Assets/GPM/Communicator/Plugins/Android/GpmCommunicatorPlugin.aar** file to the folder you created.
+4. **File/New/New Module/Android Library** in Android Studio.
+5. Create the GpmCommunicatorSample.java file and paste the code below.
 
 ```java
-// Sample.java 
+// GpmCommunicatorSample.java 
 // Check the Package path.
 package com.gpm.communicator.sample;
 
@@ -201,16 +217,32 @@ public class GpmCommunicatorSample {
     }
 }  
 ```
+6. Add the following syntax to the bundle.gradle file.
 
-Creates an aar file.
-Place the created aar file in **Asset/Plugins/Android** folder of the Unity project.
+    ![console](./images/Communicator_bundle_gradle.png)
+
+```java
+dependencies {
+    // Add
+    compileOnly files('../externalLibs/GpmCommunicatorPlugin.aar')
+
+    ...
+}
+```
+7. Proceed to gradle sync.
+
+    ![console](./images/Communicator_sync_now.png)
+
+8. Proceed to aar build.
+
+    ![console](./images/Communicator_release.png)
  
 #### 2. iOS
 
 Create the file in **Asset/Plugins/IOS** folder of the Unity project.
 
 ```objc
-// Sample.h
+// GPMCommunicatorSample.h
 #import <Foundation/Foundation.h>
 
 @interface GPMCommunicatorSample: NSObject
@@ -218,7 +250,7 @@ Create the file in **Asset/Plugins/IOS** folder of the Unity project.
 ```
 
 ```objc
-// Sample.mm
+// GPMCommunicatorSample.mm
 #import "GPMCommunicatorSample.h"
 #import "GPMCommunicator.h"
 #import "GPMCommunicatorReceiver.h"
@@ -236,13 +268,12 @@ Create the file in **Asset/Plugins/IOS** folder of the Unity project.
     // Creates a Receiver.
     GPMCommunicatorReceiver* receiver = [[GPMCommunicatorReceiver alloc] init];
 
-    receiver.onRequestMessageSync = ^NSString *(Message *message) {
+    receiver.onRequestMessageSync = ^GPMCommunicatorMessage *(GPMCommunicatorMessage *message) {
         // Processes a Sync Message.
-        [[GPMCommunicator sharedGPMCommunicator] sendResponseWithMessage:message];
-        return @"Retuen Sync Data";
+        return message;
     };
 
-    receiver.onRequestMessageAsync = ^(Message *message) {
+    receiver.onRequestMessageAsync = ^(GPMCommunicatorMessage *message) {
         // Processes a Async Message.
         [[GPMCommunicator sharedGPMCommunicator] sendResponseWithMessage:message];
     };
@@ -261,65 +292,47 @@ Create Sample.cs
 ```cs
 namespace Gpm.Communicator.Sample
 {
-    public class GpmCommunicatorSample
+    using UnityEngine;
+    using Gpm.Communicator;
+    using System.Text;
+
+    public class Sample : MonoBehaviour
     {
         private const string DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
         private const string ANDROID_CLASS_NAME = "com.gpm.communicator.sample.GpmCommunicatorSample";
         private const string IOS_CLASS_NAME = "GPMCommunicatorSample";
-    }
-}
-```
 
-### Initializing Native Class
+        private void Awake()
+        {
+            Initialize();
+            AddReceiver();
+        }
 
-Add the Initialize method to Sample.cs.
-
-```cs
-namespace Gpm.Communicator.Sample
-{
-    using Gpm.Communicator;
-
-    public class GpmCommunicatorSample
-    {
-        // ...
-        
+        /// <summary>
+        /// Initialize Native class
+        /// </summary>
         public void Initialize()
         {
             GpmCommunicatorVO.Configuration configuration = new GpmCommunicatorVO.Configuration()
             {
-#if UNITY_ANDROID
-                className = "${ANDROID_CLASS_NAME}"
-#elif UNITY_IOS
-                className = "${IOS_CLASS_NAME}"
-#endif
+    #if UNITY_ANDROID
+                className = ANDROID_CLASS_NAME
+    #elif UNITY_IOS
+                className = IOS_CLASS_NAME
+    #endif
             };
 
             GpmCommunicator.InitializeClass(configuration);
         }
-    }
-}
-```
 
-### Registering Unity Receiver
-
-Add the AddReceiver method to Sample.cs.
-
-```cs
-namespace Gpm.Communicator.Sample
-{
-    using Gpm.Communicator;
-    using System.Text;
-    using UnityEngine;
-
-    public class GpmCommunicatorSample
-    {
-        // ...
-        
+        /// <summary>
+        /// Register Unity Receiver
+        /// </summary>
         public void AddReceiver()
-        {            
-            GpmCommunicator.AddReceiver("${DOMAIN}", OnReceiver);
+        {
+            GpmCommunicator.AddReceiver(DOMAIN, OnReceiver);
         }
-        
+
         private void OnReceiver(GpmCommunicatorVO.Message message)
         {
             StringBuilder sb = new StringBuilder();
@@ -332,28 +345,15 @@ namespace Gpm.Communicator.Sample
 
             Debug.Log(sb.ToString());
         }
-    }
-}
-```
 
-### Adding Async/Sync
-
-Sample.cs
-
-```cs
-namespace Gpm.Communicator.Sample
-{
-    using Gpm.Communicator;
-    using System.Text;    
-    using UnityEngine;
-
-    public class GpmCommunicatorSample
-    {        
+        /// <summary>
+        /// Call Async
+        /// </summary>
         public void CallAsync()
         {
             GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
             {
-                domain = "${DOMAIN}",
+                domain = DOMAIN,
                 data = "USER_ASYNC_DATA",
                 extra = "USER_ASYNC_EXTRA"
             };
@@ -361,11 +361,14 @@ namespace Gpm.Communicator.Sample
             GpmCommunicator.CallAsync(message);
         }
 
+        /// <summary>
+        /// Call Sync
+        /// </summary>
         public void CallSync()
         {
             GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
             {
-                domain = "${DOMAIN}",
+                domain = DOMAIN,
                 data = "USER_SYNC_DATA",
                 extra = "USER_SYNC_EXTRA"
             };
@@ -377,7 +380,7 @@ namespace Gpm.Communicator.Sample
             sb.AppendLine("Domain : " + responseMessage.domain);
             sb.AppendLine("Data : " + responseMessage.data);
             sb.AppendLine("Extra : " + responseMessage.extra);
-            
+
             Debug.Log(sb.ToString());
         }
     }
