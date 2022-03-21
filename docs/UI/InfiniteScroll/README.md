@@ -5,6 +5,7 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [사용 방법](#사용-방법)
 * [API](#-api)
 * [Sample](#-sample)
 
@@ -16,6 +17,38 @@
     * InfiniteScroll.InsertData()
 * 콘텐츠의 요소로 사용할 프리팹(Prefab)에서는 InfiniteScrollItem(혹은 상속받은) 클래스를 연결해서 사용해야 합니다.
     * InfiniteScrollItem.UpdateData()에서 프리팹 로직 구현
+
+## 사용 방법
+
+### 생성
+![inspector](images/inspector.png)
+* 스크롤 사각 영역(Scroll Rect(Scroll View))이 붙어있는 오브젝트에 Infinite Scroll 컴포넌트를 추가합니다.
+* Item Prefab에 InfiniteScrollItem을 상속받은 클래스가 붙어있는 프리팹을 추가합니다.
+
+### 스크롤 데이타 적용
+* InfiniteScrollItem 상속받은 클래스 내에서 콘텐츠(Content)의 데이타(Data)를 적용하여 사용합니다.
+    ```
+    public override void UpdateData(InfiniteScrollData scrollData)
+    {
+        base.UpdateData(scrollData);
+
+        // InfiniteScrollData 콘텐츠로 데이타 적용
+    }
+    ```
+
+### 아이템 동적 크기 조정
+* Dynamic Item Size 옵션을 활성화합니다.
+* InfiniteScrollItem 상속 받은 클래스
+    * SetSize를 사용하여 크기를 변경합니다.
+    * SetSize를 사용하지 않고 크기 변경 시 OnUpdateItemSize() 함수를 호출해 스크롤에 반영합니다.
+
+### 스크롤 그리드 적용
+* Layout의 Values 그리드를 분할할 크기를 설정합니다.
+* Values의 Element의 비율로 그리드를 비율을 설정합니다.
+    * ![grid_2](images/grid_2.png)
+    * 아래와 같이 2:1:1 비율로 나눈 결과입니다.
+    * 200, 100, 100등 1이 넘어간 값으로 크기에 맞춰서 지정할 수도 있습니다.
+    * ![grid_1](images/grid_1.png)
 
 ## 🔨 API
 
