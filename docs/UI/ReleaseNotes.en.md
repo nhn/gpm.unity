@@ -5,6 +5,19 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.3.0
+
+### Date
+
+* 2022.03.21
+
+### Added
+* InfiniteScroll
+    * Added a function to split into a Grid [(161)](https://github.com/nhn/gpm.unity/issues/161)
+
+### Fixed
+* InfiniteScroll
+    * Fixed the problem that the list is not displayed according to the initialization order
 
 ## 2.2.0
 

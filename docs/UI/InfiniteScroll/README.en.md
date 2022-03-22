@@ -5,6 +5,7 @@
 ## 🚩 Table of Contents
 
 * [Overview](#overview)
+* [How to use](#how-to-use)
 * [API](#-api)
 * [Sample](#-sample)
 
@@ -16,6 +17,38 @@ Scroll Rect (Scroll View) creates items to fit in content and allows them to b
     * InfiniteScroll.InsertData()
 * In the Prefab which is to be used as element of content, the InfiniteScrollItem (or inherited) class must be attached before use.
     * Implement Prefab on InfiniteScrollItem.UpdateData()
+
+## How to use
+
+### produce
+![inspector](images/inspector.png)
+* Add an Infinite Scroll component to the object to which the scroll rectangle (Scroll Rect(Scroll View)) is attached.
+* Add a prefab with a class that inherits InfiniteScrollItem to the Item Prefab.
+
+### Apply scroll data
+* InfiniteScrollItem is used by applying the data of the content within the inherited class.
+    ```
+    public override void UpdateData(InfiniteScrollData scrollData)
+    {
+        base.UpdateData(scrollData);
+
+        // Apply data as InfiniteScrollData content
+    }
+    ```
+
+### Item Dynamic Resizing
+* Enable the Dynamic Item Size option.
+* InfiniteScrollItem inherited class
+    * Use SetSize to change the size.
+    * When the size is changed without using SetSize, the OnUpdateItemSize() function is called to reflect it on the scroll.
+
+### Apply scroll grid
+* Set the size to divide the Values ​​grid of Layout.
+* Set the grid ratio with the ratio of the Element of Values.
+    * ![grid_2](images/grid_2.png)
+    * This is the result of dividing the ratio of 2:1:1 as shown below.
+    * It can be specified according to the size with a value exceeding 1, such as 200, 100, or 100.
+    * ![grid_1](images/grid_1.png)
 
 ## 🔨 API
 

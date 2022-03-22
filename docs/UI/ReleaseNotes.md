@@ -2,6 +2,20 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.3.0
+
+### Date
+
+* 2022.03.21
+
+### Added
+* InfiniteScroll
+    * 정렬 Grid로 분할할 수 있도록 기능 추가 [(161)](https://github.com/nhn/gpm.unity/issues/161)
+
+### Fixed
+* InfiniteScroll
+    * 초기화 순서에 따라 리스트 보이지 않는 문제 수정
+
 ## 2.2.0
 
 ### Date
