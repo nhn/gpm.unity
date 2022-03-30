@@ -19,7 +19,7 @@
  
 ## 개요
 * Installer는 Game Package Manager 서비스를 관리하는 툴입니다.
-* 참조 : [Game Package Manager](https://github.nhnent.com/game-platform/gpm.unity)
+* 참조 : [Game Package Manager](https://github.com/nhn/gpm.unity)
 
 ## 스펙
 ### Unity 지원 버전
@@ -29,7 +29,7 @@
 
 ### Installer 다운로드
 * 아래 링크에서 유니티 패키지를 다운로드 받아 설치합니다.
-* [다운로드](https://github.nhnent.com/game-platform/gpm.unity/raw/master/release/Internal/Installer/gpm_installer.unitypackage)
+* [다운로드](https://github.com/nhn/gpm.unity/raw/service/installer/release/Internal/Installer/gpm_installer.unitypackage)
     
     
 
