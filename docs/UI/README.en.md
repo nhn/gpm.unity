@@ -37,3 +37,6 @@ Provide components to use [Unity UI](https://docs.unity3d.com/Manual/com.unity.u
 
 * [Go to ContentSizeSetter](ContentSizeSetter/README.en.md)
 
+### WrapLayoutGroup
+
+* [Go to WrapLayoutGroup](WrapLayoutGroup/README.en.md)

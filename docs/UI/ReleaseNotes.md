@@ -2,6 +2,24 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.4.0
+
+### Date
+
+* 2022.04.18
+
+### Added
+* InfiniteScroll
+    * 스크롤 이벤트 추가 [(180)](https://github.com/nhn/gpm.unity/issues/180)
+        * OnChangeValue
+        * OnChangeActiveItem
+        * OnStartLine
+        * OnEndLine
+
+* WrapLayoutGroup
+    * 셈플 추가
+    * 문서 추가
+
 ## 2.3.0
 
 ### Date

@@ -50,6 +50,67 @@
     * 200, 100, 100등 1이 넘어간 값으로 크기에 맞춰서 지정할 수도 있습니다.
     * ![grid_1](images/grid_1.png)
 
+### 스크롤 이벤트
+ScrollView의 상태 변화에 따라 호출하는 이벤트 입니다.
+
+Inspector나 AddListener를 통해 콜백 함수를 등록하여 활용할 수 있습니다.
+
+#### 인스팩터
+![event](images/event.png)
+
+#### onChangeValue
+ScrollView의 값이 변경되었을 때 호출하는 이벤트 입니다.
+* (int)firstDataIndex
+    * 스크롤에서 보이는 첫번째 Data의 Index
+* (int)lastDataIndex
+    * 스크롤에서 보이는 마지막 Data의 Index
+* (bool)isStartLine
+    * 스크롤이 시작 지점인지 여부
+* (bool)isEndLine
+    * 스크롤이 마지막 지점인지 여부
+```cs
+onChangeValue.AddListener(firstDataIndex, lastDataIndex, isStartLine, isEndLine =>
+{
+    // funtion
+});
+```
+
+#### onChangeActiveItem
+Scroll Item이 보이거나 사라질때 호출하는 이벤트 입니다.
+* (int)dataIndex
+    * 변경된 스크롤 Data의 Index
+* (bool)active
+    * 스크롤 아이템의 활성화 여부
+```cs
+onChangeActiveItem.AddListener(dataIndex, active =>
+{
+    // funtion
+});
+```
+
+#### onStartLine
+ScrollView의 시작 지점인지 여부가 바뀔때 호출하는 이벤트 입니다.
+* (bool)isStartLine
+    * 스크롤이 시작 지점인지 여부
+```cs
+onStartLine.AddListener((bool)isStartLine =>
+{
+    // funtion
+});
+```
+
+#### onEndLine
+ScrollView의 마지막 지점인지 여부가 바뀔때 호출하는 이벤트 입니다.
+* (bool)isEndLine
+    * 스크롤이 마지막 지점인지 여부
+```cs
+onEndLine.AddListener((bool)isEndLine =>
+{
+    // funtion
+});
+```
+
+
 ## 🔨 API
 
 API 사용 방법은 Assets/GPM/UI/Sample/InfiniteScroll/Scripts/InfiniteScrollSample.cs를 참고하시기 바랍니다.
