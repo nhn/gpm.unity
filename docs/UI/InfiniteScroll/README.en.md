@@ -50,6 +50,66 @@ Scroll Rect (Scroll View) creates items to fit in content and allows them to b
     * It can be specified according to the size with a value exceeding 1, such as 200, 100, or 100.
     * ![grid_1](images/grid_1.png)
 
+### Scroll Events
+Events called according to changes in the status of ScrollView.
+
+You can register and utilize the callback function through the Inspector or AddListener.
+
+#### Inspector
+![event](images/event.png)
+
+#### onChangeValue
+The event that is called when the value of ScrollView is changed.
+* (int)firstDataIndex
+    * Index of the first data as seen in the scroll
+* (int)lastDataIndex
+    * Index of the last data seen in the scroll
+* (bool)isStartLine
+    * Whether the scroll is the starting point
+* (bool)isEndLine
+    * Whether the scroll is the last point
+```cs
+onChangeValue.AddListener(firstDataIndex, lastDataIndex, isStartLine, isEndLine =>
+{
+    // funtion
+});
+```
+
+#### onChangeActiveItem
+Event called when Scroll Item is visible or disappeared.
+* (int)dataIndex
+    * Index of changed scroll data
+* (bool)active
+    * Whether scroll items are enabled
+```cs
+onChangeActiveItem.AddListener(dataIndex, active =>
+{
+    // funtion
+});
+```
+
+#### onStartLine
+This event is called when the start point of ScrollView changes.
+* (bool)isStartLine
+    * Whether the scroll is the starting point
+```cs
+onStartLine.AddListener((bool)isStartLine =>
+{
+    // funtion
+});
+```
+
+#### onEndLine
+This event is called when the last point in ScrollView changes.
+* (bool)isEndLine
+    * Whether the scroll is the last point
+```cs
+onEndLine.AddListener((bool)isEndLine =>
+{
+    // funtion
+});
+```
+
 ## 🔨 API
 
 Regarding how to use API, see Assets/GPM/UI/Sample/InfiniteScroll/Scripts/InfiniteScrollSample.cs.

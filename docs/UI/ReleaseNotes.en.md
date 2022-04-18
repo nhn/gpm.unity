@@ -2,8 +2,23 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.4.0
 
-🌏 [English](ReleaseNotes.en.md)
+### Date
+
+* 2022.04.18
+
+### Added
+* InfiniteScroll
+    * Added Scroll Event [(180)](https://github.com/nhn/gpm.unity/issues/180)
+        * OnChangeValue
+        * OnChangeActiveItem
+        * OnStartLine
+        * OnEndLine
+
+* WrapLayoutGroup
+    * Added Samples
+    * Added a document
 
 ## 2.3.0
 
