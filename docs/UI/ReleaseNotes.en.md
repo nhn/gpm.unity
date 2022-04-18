@@ -10,7 +10,7 @@
 
 ### Added
 * InfiniteScroll
-    * Added Scroll Event [(181)](https://github.com/nhn/gpm.unity/issues/180)
+    * Added Scroll Event [(180)](https://github.com/nhn/gpm.unity/issues/180)
         * OnChangeValue
         * OnChangeActiveItem
         * OnStartLine

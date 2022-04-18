@@ -71,7 +71,7 @@ The event that is called when the value of ScrollView is changed.
 ```cs
 onChangeValue.AddListener(firstDataIndex, lastDataIndex, isStartLine, isEndLine =>
 {
-// funtion
+    // funtion
 });
 ```
 
@@ -84,7 +84,7 @@ Event called when Scroll Item is visible or disappeared.
 ```cs
 onChangeActiveItem.AddListener(dataIndex, active =>
 {
-// funtion
+    // funtion
 });
 ```
 
@@ -95,7 +95,7 @@ This event is called when the start point of ScrollView changes.
 ```cs
 onStartLine.AddListener((bool)isStartLine =>
 {
-// funtion
+    // funtion
 });
 ```
 
@@ -106,7 +106,7 @@ This event is called when the last point in ScrollView changes.
 ```cs
 onEndLine.AddListener((bool)isEndLine =>
 {
-// funtion
+    // funtion
 });
 ```
 
