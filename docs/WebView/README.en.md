@@ -52,7 +52,11 @@ Provides a WebView used in various ways in the game.
 |   | Page load Callback |
 |   | Scheme Callback |
 |   | Scheme List |
-| Other | Execute JavaScript |
+| Position, Size API | SetPosition |
+|   | SetSize |
+|   | SetMargins |
+| Other | IsActive |
+|   | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
 |   | Multiple Windows |
@@ -132,11 +136,16 @@ Displays the WebView.
 | isClearCookie             | bool                                      | Clear cookies |
 | isClearCache              | bool                                      | Clear cache |
 | isNavigationBarVisible    | bool                                      | Activate/Deactivate Navigation Bar |
+|                           |                                           | Activate/Deactivate Close Button of Popup WebView (iOS only) |
 | navigationBarColor        | string                                    | Navigation Bar Color |
 | title                     | string                                    | WebView title |
 | orientation               | UnityEngine.ScreenOrientation             | Removed in GPM WebView v1.1.0. |
 | isBackButtonVisible       | bool                                      | Activate/Deactivate Go Back Button |
 | isForwardButtonVisible    | bool                                      | Activate/Deactivate Go Forward Button |
+| position                  | GpmWebViewRequest.Position                | Sets Popup WebView position |
+| size                      | GpmWebViewRequest.Size                    | Sets Popup WebView size |
+| margins                   | GpmWebViewRequest.Margins                 | Sets Popup WebView margins |
+| isMaskViewVisible</br>(iOS only) | bool                               | Activate/Deactivate background mask view of Popup WebView |
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | recommended browsers for the current platform |
 |                           | GamebaseWebViewContentMode.MOBILE         | mobile browser |
 |                           | GamebaseWebViewContentMode.DESKTOP        | desktop browser |
@@ -159,7 +168,8 @@ public static void ShowUrl(
 **Example**
 
 ```cs
-public void ShowUrl()
+// FullScreen
+public void ShowUrlFullScreen()
 {
     GpmWebView.ShowUrl(
         "https://google.com/",
@@ -175,6 +185,110 @@ public void ShowUrl()
             isForwardButtonVisible = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
+#endif
+        },
+        OnOpenCallback,
+        OnCloseCallback,
+        OnPageLoadCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        },
+        OnSchemeEvent);
+}
+
+// Popup default
+public void ShowUrlPopupDefault()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = false,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+            isMaskViewVisible = true,
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
+#endif
+        },
+        OnOpenCallback,
+        OnCloseCallback,
+        OnPageLoadCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        },
+        OnSchemeEvent);
+}
+
+// Popup custom position and size
+public void ShowUrlPopupPositionSize()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = false,
+            position = new GpmWebViewRequest.Position
+            {
+                hasValue = true,
+                x = (int)(Screen.width * 0.1f),
+                y = (int)(Screen.height * 0.1f)
+            },
+            size = new GpmWebViewRequest.Size
+            {
+                hasValue = true,
+                width = (int)(Screen.width * 0.8f),
+                height = (int)(Screen.height * 0.8f)
+            },
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+            isMaskViewVisible = true,
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
+#endif
+        },
+        OnOpenCallback,
+        OnCloseCallback,
+        OnPageLoadCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        },
+        OnSchemeEvent);
+}
+
+// Popup custom margins
+public void ShowUrlPopupMargins()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = false,
+            margins = new GpmWebViewRequest.Margins
+            {
+                hasValue = true,
+                left = (int)(Screen.width * 0.1f),
+                top = (int)(Screen.height * 0.1f),
+                right = (int)(Screen.width * 0.1f),
+                bottom = (int)(Screen.height * 0.1f)
+            },
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+            isMaskViewVisible = true,
 #elif UNITY_ANDROID
             supportMultipleWindows = true
 #endif
@@ -299,7 +413,7 @@ public void ShowHtmlFile()
 #elif UNITY_ANDROID
             supportMultipleWindows = true
 #endif
-    },
+        },
         OnOpenCallback,
         OnCloseCallback,
         OnPageLoadCallback,
@@ -497,6 +611,28 @@ public void Close()
     GpmWebView.Close();
 }
 ```
+
+### IsActive
+
+Gets whether the Popup WebView is enabled.
+
+**API**
+
+```cs
+public static bool IsActive()
+```
+
+**Example**
+
+```cs
+public bool Something()
+{
+    if (GpmWebView.IsActive() == true)
+    {
+        ...
+    }
+}
+
 ### CanGoBack
 
 Gets whether the WebView has a back history item.
@@ -550,5 +686,88 @@ public static void GoForward()
 public void GoForward()
 {
     GpmWebView.GoForward();
+}
+```
+### SetPosition
+
+Sets the position of the Popup WebView.
+
+**API**
+
+```cs
+public static void SetPosition(int x, int y)
+```
+
+**Example**
+
+```cs
+public IEnumerator SetPosition()
+{
+    while (true)
+    {
+        if (GpmWebView.IsActive() == true)
+        {
+            break;
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+    GpmWebView.SetPosition((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
+}
+```
+
+### SetSize
+
+Sets the size of the Popup WebView.
+
+**API**
+
+```cs
+public static void SetSize(int width, int height)
+```
+
+**Example**
+
+```cs
+public IEnumerator SetSize()
+{
+    while (true)
+    {
+        if (GpmWebView.IsActive() == true)
+        {
+            break;
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+    GpmWebView.SetSize((int)(Screen.width * 0.8f), (int)(Screen.height * 0.8f));
+}
+```
+
+### SetMargins
+
+Sets the margins of the Popup WebView.
+
+**API**
+
+```cs
+public static void SetMargins(int left, int top, int right, int bottom)
+```
+
+**Example**
+
+```cs
+public IEnumerator SetMargins()
+{
+    while (true)
+    {
+        if (GpmWebView.IsActive() == true)
+        {
+            break;
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+    GpmWebView.SetMargins((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f), (int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
 }
 ```

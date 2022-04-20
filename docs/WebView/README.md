@@ -52,7 +52,11 @@
 |   | Page load Callback |
 |   | Scheme Callback |
 |   | Scheme List |
-| Other | Execute JavaScript |
+| Position, Size API | SetPosition |
+|   | SetSize |
+|   | SetMargins |
+| Other | IsActive |
+|   | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
 |   | Multiple Windows |
@@ -132,15 +136,20 @@ WebView를 표시합니다.
 | isClearCookie             | bool                                      | 쿠키 제거 |
 | isClearCache              | bool                                      | 캐시 제거 |
 | isNavigationBarVisible    | bool                                      | 네비게이션 바 활성 또는 비활성 |
+|                           |                                           | Popup WebView Close 버튼 활성 또는 비활성 (iOS only) |
 | navigationBarColor        | string                                    | 네비게이션 바 색상 |
 | title                     | string                                    | WebView의 제목 |
 | orientation               | UnityEngine.ScreenOrientation             | GPM WebView v1.1.0에서 제거되었습니다. |
 | isBackButtonVisible       | bool                                      | 뒤로 가기 버튼 활성 또는 비활성  |
 | isForwardButtonVisible    | bool                                      | 앞으로 가기 버튼 활성 또는 비활성 |
+| position                  | GpmWebViewRequest.Position                | Popup WebView 위치 지정 |
+| size                      | GpmWebViewRequest.Size                    | Popup WebView 크기 지정 |
+| margins                   | GpmWebViewRequest.Margins                 | Popup WebView 여백 지정 |
+| isMaskViewVisible</br>(iOS only) | bool                               | Popup WebView 배경 활성 또는 비활성 |
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | 현재 플랫폼 추천 브라우저 |
 |                           | GamebaseWebViewContentMode.MOBILE         | 모바일 브라우저 |
 |                           | GamebaseWebViewContentMode.DESKTOP        | 데스크탑 브라우저 |
-| supportMultipleWindows</br>(Android) only)    | bool                  | GPM WebView의 다중 창 지원 여부 |
+| supportMultipleWindows</br>(Android only)    | bool                  | GPM WebView의 다중 창 지원 여부 |
 
 **API**
 
@@ -158,7 +167,8 @@ public static void ShowUrl(
 **Example**
 
 ```cs
-public void ShowUrl()
+// FullScreen
+public void ShowUrlFullScreen()
 {
     GpmWebView.ShowUrl(
         "https://google.com/",
@@ -174,6 +184,110 @@ public void ShowUrl()
             isForwardButtonVisible = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
+#endif
+        },
+        OnOpenCallback,
+        OnCloseCallback,
+        OnPageLoadCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        },
+        OnSchemeEvent);
+}
+
+// Popup default
+public void ShowUrlPopupDefault()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = false,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+            isMaskViewVisible = true,
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
+#endif
+        },
+        OnOpenCallback,
+        OnCloseCallback,
+        OnPageLoadCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        },
+        OnSchemeEvent);
+}
+
+// Popup custom position and size
+public void ShowUrlPopupPositionSize()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = false,
+            position = new GpmWebViewRequest.Position
+            {
+                hasValue = true,
+                x = (int)(Screen.width * 0.1f),
+                y = (int)(Screen.height * 0.1f)
+            },
+            size = new GpmWebViewRequest.Size
+            {
+                hasValue = true,
+                width = (int)(Screen.width * 0.8f),
+                height = (int)(Screen.height * 0.8f)
+            },
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+            isMaskViewVisible = true,
+#elif UNITY_ANDROID
+            supportMultipleWindows = true
+#endif
+        },
+        OnOpenCallback,
+        OnCloseCallback,
+        OnPageLoadCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        },
+        OnSchemeEvent);
+}
+
+// Popup custom margins
+public void ShowUrlPopupMargins()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            isClearCookie = false,
+            isClearCache = false,
+            isNavigationBarVisible = false,
+            margins = new GpmWebViewRequest.Margins
+            {
+                hasValue = true,
+                left = (int)(Screen.width * 0.1f),
+                top = (int)(Screen.height * 0.1f),
+                right = (int)(Screen.width * 0.1f),
+                bottom = (int)(Screen.height * 0.1f)
+            },
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+            isMaskViewVisible = true,
 #elif UNITY_ANDROID
             supportMultipleWindows = true
 #endif
@@ -496,6 +610,29 @@ public void Close()
     GpmWebView.Close();
 }
 ```
+
+### IsActive
+
+WebView 활성화 여부를 확인합니다.
+
+**API**
+
+```cs
+public static bool IsActive()
+```
+
+**Example**
+
+```cs
+public bool Something()
+{
+    if (GpmWebView.IsActive() == true)
+    {
+        ...
+    }
+}
+```
+
 ### CanGoBack
 
 WebView에 이전 방문 기록이 있는지 확인합니다.
@@ -549,5 +686,89 @@ public static void GoForward()
 public void GoForward()
 {
     GpmWebView.GoForward();
+}
+```
+
+### SetPosition
+
+Popup WebView의 위치를 조정합니다.
+
+**API**
+
+```cs
+public static void SetPosition(int x, int y)
+```
+
+**Example**
+
+```cs
+public IEnumerator SetPosition()
+{
+    while (true)
+    {
+        if (GpmWebView.IsActive() == true)
+        {
+            break;
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+    GpmWebView.SetPosition((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
+}
+```
+
+### SetSize
+
+Popup WebView의 크기를 조정합니다.
+
+**API**
+
+```cs
+public static void SetSize(int width, int height)
+```
+
+**Example**
+
+```cs
+public IEnumerator SetSize()
+{
+    while (true)
+    {
+        if (GpmWebView.IsActive() == true)
+        {
+            break;
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+    GpmWebView.SetSize((int)(Screen.width * 0.8f), (int)(Screen.height * 0.8f));
+}
+```
+
+### SetMargins
+
+Popup WebView의 여백을 조정합니다.
+
+**API**
+
+```cs
+public static void SetMargins(int left, int top, int right, int bottom)
+```
+
+**Example**
+
+```cs
+public IEnumerator SetMargins()
+{
+    while (true)
+    {
+        if (GpmWebView.IsActive() == true)
+        {
+            break;
+        }
+        yield return new WaitForEndOfFrame();
+    }
+
+    GpmWebView.SetMargins((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f), (int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
 }
 ```
