@@ -15,6 +15,7 @@
     * iOS Popup WebView close button 활성화/비활성화
 
 * Sample.scene, SampleWebView.cs
+  * API와 configuration으로 Popup WebView를 사용하는 방법
 
 ### Added
 

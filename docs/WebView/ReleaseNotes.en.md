@@ -15,6 +15,7 @@
     * Activate/Deactivate close button of iOS Popup WebView.
 
 * Sample.scene, SampleWebView.cs
+  * How to use Popup WebView as APIs and configurations.
 
 ### Added
 
