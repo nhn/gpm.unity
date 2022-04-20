@@ -2,6 +2,36 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.5.0
+
+### Date
+
+* 2022.04.20
+
+### Updated
+
+* WebView configuration
+  * isNavigationBarVisible
+    * Activate/Deactivate close button of iOS Popup WebView.
+
+* Sample.scene, SampleWebView.cs
+  * How to use Popup WebView as APIs and configurations.
+
+### Added
+
+* Added WebView API
+  * SetPosition
+  * SetSize
+  * SetMargins
+  * IsActive
+
+* Added WebView configuration variables
+  * position
+  * size
+  * margins
+  * isMaskViewVisible
+    * Activate/Deactivate background mask view of Popup WebView (iOS only)
+
 ## 1.4.1
 
 ### Date
