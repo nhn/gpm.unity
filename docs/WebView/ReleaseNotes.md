@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.5.1
+
+### Date
+
+* 2022.05.11
+
+### Fixed
+
+* iOS WebView custom scheme callback
+
 ## 1.5.0
 
 ### Date
