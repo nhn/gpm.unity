@@ -8,16 +8,13 @@
 
 * 2022.05.16
 
-### Updated
-
-* Supports multiple windows (new window on the WebView)
-* Supports file upload
-
 ### Added
+
+* Supports file upload
 
 * Added WebView configuration variables
   * userAgentString
-  * supportMultipleWindows
+  * supportMultipleWindows (new window on the WebView)
 
 * Added WebView API
   * getX

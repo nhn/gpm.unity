@@ -8,16 +8,13 @@
 
 * 2022.05.16
 
-### Updated
-
-* Multiple windows 지원 (WebView의 새창 지원)
-* File upload 지원
-
 ### Added
+
+* File upload 지원
 
 * WebView configuration 변수 추가
   * userAgentString
-  * supportMultipleWindows
+  * supportMultipleWindows (WebView의 새창 지원)
 
 * WebView API 추가
   * getX
