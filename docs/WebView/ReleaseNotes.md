@@ -12,9 +12,11 @@
 
 * File upload 지원
 
-* WebView configuration 변수 추가
-  * userAgentString
-  * supportMultipleWindows (WebView의 새창 지원)
+* Custom user agent string 추가
+  * WebView configuration 변수 : userAgentString
+
+* Multiple windows 지원 (WebView의 새창 지원)
+  * WebView configuration 변수 : supportMultipleWindows
 
 * WebView API 추가
   * getX

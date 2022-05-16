@@ -12,9 +12,11 @@
 
 * Supports file upload
 
-* Added WebView configuration variables
-  * userAgentString
-  * supportMultipleWindows (new window on the WebView)
+* Added custom user agent string
+  * WebView configuration variable : userAgentString
+  
+* Supports multiple windows (new window on the WebView)
+  * WebView configuration variable : supportMultipleWindows
 
 * Added WebView API
   * getX
