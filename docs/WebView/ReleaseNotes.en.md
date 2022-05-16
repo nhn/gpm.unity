@@ -2,6 +2,29 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.6.0
+
+### Date
+
+* 2022.05.16
+
+### Updated
+
+* Supports multiple windows (new window on the WebView)
+* Supports file upload
+
+### Added
+
+* Added WebView configuration variables
+  * userAgentString
+  * supportMultipleWindows
+
+* Added WebView API
+  * getX
+  * getY
+  * getWidth
+  * getHeight
+
 ## 1.5.1
 
 ### Date
