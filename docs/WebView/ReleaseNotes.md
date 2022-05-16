@@ -2,6 +2,28 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.6.0
+
+### Date
+
+* 2022.05.16
+
+### Added
+
+* File upload 지원
+
+* Custom user agent string 추가
+  * WebView configuration 변수 : userAgentString
+
+* Multiple windows 지원 (WebView의 새창 지원)
+  * WebView configuration 변수 : supportMultipleWindows
+
+* WebView API 추가
+  * getX
+  * getY
+  * getWidth
+  * getHeight
+
 ## 1.5.1
 
 ### Date

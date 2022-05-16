@@ -52,18 +52,20 @@
 |   | Page load Callback |
 |   | Scheme Callback |
 |   | Scheme List |
-| Position, Size API | SetPosition |
-|   | SetSize |
+| Position, Size API | SetPosition, GetX, GetY |
+|   | SetSize, GetWidth, GetHeight |
 |   | SetMargins |
 | Other | IsActive |
 |   | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
-|   | Multiple Windows |
 |   | Can Go Back |
 |   | Can Go Forward |
 |   | Go Back |
 |   | Go Forward |
+|   | Multiple Windows |
+|   | File upload |
+|   | User agent string |
 
 ## 🔨 플랫폼별 설정
 
@@ -142,6 +144,8 @@ WebView를 표시합니다.
 | orientation               | UnityEngine.ScreenOrientation             | GPM WebView v1.1.0에서 제거되었습니다. |
 | isBackButtonVisible       | bool                                      | 뒤로 가기 버튼 활성 또는 비활성  |
 | isForwardButtonVisible    | bool                                      | 앞으로 가기 버튼 활성 또는 비활성 |
+| supportMultipleWindows    | bool                                      | GPM WebView의 다중 창 지원 여부 |
+| userAgentString           | string                                    | GPM WebView의 userAgentString 설정 |
 | position                  | GpmWebViewRequest.Position                | Popup WebView 위치 지정 |
 | size                      | GpmWebViewRequest.Size                    | Popup WebView 크기 지정 |
 | margins                   | GpmWebViewRequest.Margins                 | Popup WebView 여백 지정 |
@@ -149,7 +153,6 @@ WebView를 표시합니다.
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | 현재 플랫폼 추천 브라우저 |
 |                           | GamebaseWebViewContentMode.MOBILE         | 모바일 브라우저 |
 |                           | GamebaseWebViewContentMode.DESKTOP        | 데스크탑 브라우저 |
-| supportMultipleWindows</br>(Android only)    | bool                  | GPM WebView의 다중 창 지원 여부 |
 
 **API**
 
@@ -182,10 +185,9 @@ public void ShowUrlFullScreen()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
-#elif UNITY_ANDROID
-            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
@@ -209,11 +211,10 @@ public void ShowUrlPopupDefault()
             isClearCookie = false,
             isClearCache = false,
             isNavigationBarVisible = false,
+            supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
             isMaskViewVisible = true,
-#elif UNITY_ANDROID
-            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
@@ -249,11 +250,10 @@ public void ShowUrlPopupPositionSize()
                 width = (int)(Screen.width * 0.8f),
                 height = (int)(Screen.height * 0.8f)
             },
+            supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
             isMaskViewVisible = true,
-#elif UNITY_ANDROID
-            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
@@ -285,11 +285,10 @@ public void ShowUrlPopupMargins()
                 right = (int)(Screen.width * 0.1f),
                 bottom = (int)(Screen.height * 0.1f)
             },
+            supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
             isMaskViewVisible = true,
-#elif UNITY_ANDROID
-            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
@@ -407,10 +406,9 @@ public void ShowHtmlFile()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
-#elif UNITY_ANDROID
-            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
@@ -507,10 +505,9 @@ public void ShowHtmlString()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
-#elif UNITY_ANDROID
-            supportMultipleWindows = true
 #endif
         },
         OnOpenCallback,
@@ -770,5 +767,55 @@ public IEnumerator SetMargins()
     }
 
     GpmWebView.SetMargins((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f), (int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
+}
+```
+
+### GetX, GetY
+
+WebView의 위치를 반환합니다.
+
+**API**
+
+```cs
+public static int GetX()
+public static int GetY()
+```
+
+**Example**
+
+```cs
+public void Something()
+{
+    if (GpmWebView.IsActive() == true)
+    {
+        int x = GpmWebView.GetX();
+        int y = GpmWebView.GetY();
+        ...
+    }
+}
+```
+
+### GetWidth, GetHeight
+
+WebView의 크기를 반환합니다.
+
+**API**
+
+```cs
+public static int GetWidth()
+public static int GetHeight()
+```
+
+**Example**
+
+```cs
+public void Something()
+{
+    if (GpmWebView.IsActive() == true)
+    {
+        int width = GpmWebView.GetWidth();
+        int height = GpmWebView.GetHeight();
+        ...
+    }
 }
 ```
