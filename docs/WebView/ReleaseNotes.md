@@ -11,6 +11,7 @@
 ### Added
 
 * File upload 지원
+  * Android API 21 이상
 
 * Custom user agent string 추가
   * WebView configuration 변수 : userAgentString
