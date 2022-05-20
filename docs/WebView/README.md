@@ -64,7 +64,7 @@
 |   | Go Back |
 |   | Go Forward |
 |   | Multiple Windows |
-|   | File upload |
+|   | File upload</br>(Android API 21 이상) |
 |   | User agent string |
 
 ## 🔨 플랫폼별 설정

@@ -64,7 +64,7 @@ Provides a WebView used in various ways in the game.
 |   | Go Back |
 |   | Go Forward |
 |   | Multiple Windows |
-|   | File upload |
+|   | File upload</br>(Android API 21 or later) |
 |   | User agent string |
 
 ## 🔨 Platform specific settings
