@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.10
+
+### Date
+
+* 2022.05.26
+
+### Added
+* Added network and coroutine management function
+
 ## 2.0.9
 
 ### Date
