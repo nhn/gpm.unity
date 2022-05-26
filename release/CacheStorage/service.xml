@@ -18,7 +18,7 @@
             <version>0.0.1</version>
             <installList>
                 <install>
-                    <name>gpm_cachestorage_v0.0.1</name>
+                    <name>gpm_cachestorage_v0.0.1.unitypackage</name>
                     <path>GPM/CacheStorage</path>
                 </install>
             </installList>
