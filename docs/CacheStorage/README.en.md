@@ -6,7 +6,7 @@
 
 * [Overview](#overview)
 * [Specification](#Specification)
-* [API](#-api)
+* [API](#api)
 * [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
@@ -20,7 +20,7 @@ CacheStorage is a service that can improve performance by supporting Cache durin
 
 * 2018.4.0 or higher
 
-## 🔨 API
+## API
 
 ### RequestHttpCache
 

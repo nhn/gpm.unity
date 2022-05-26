@@ -6,7 +6,7 @@
 
 * [개요](#개요)
 * [스펙](#스펙)
-* [API](#-api)
+* [API](#api)
 * [Release notes](./ReleaseNotes.md)
 
 ## 개요
@@ -19,7 +19,7 @@
 
 * 2018.4.0 이상
 
-## 🔨 API
+## API
 
 ### RequestHttpCache
 
