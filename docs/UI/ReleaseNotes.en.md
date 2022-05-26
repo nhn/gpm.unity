@@ -2,6 +2,19 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.5.0
+
+### Date
+
+* 2022.05.26
+
+### Added
+* Added WebCacheImage
+
+### Fixed
+* InfiniteScroll
+    * Fixed the problem that scroll items are not reused after clearing the list
+
 ## 2.4.0
 
 ### Date
