@@ -23,6 +23,60 @@
   * iOS only
   * Screen.orientation을 수동 설정하지 않을 때만 true로 지정
 
+### Updated
+
+* Deprecated API
+
+```cs
+[System.Obsolete("This method is deprecated.")]
+public static void ShowUrl(
+    string url,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
+    List<string> schemeList,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowUrl(
+    string url,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowHtmlFile(
+    string filePath,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
+    List<string> schemeList,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowHtmlFile(
+    string filePath,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowHtmlString(
+    string htmlString,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null)
+```
+
 ## 1.6.0
 
 ### Date
