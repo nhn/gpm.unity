@@ -2,6 +2,27 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.7.0
+
+### Date
+
+* 2022.05.27
+
+### Added
+
+* Supports SafeBrowsing
+  * Android Chrome CustomTabsIntent
+  * iOS SFSafariViewController
+
+* Added WebView Show API callback
+  * Deprecated each callback
+  * WebView event processing based on CallbackType
+
+* Added auto rotation
+  * WebView configuration variable : isAutoRotation
+  * iOS only
+  * Specifies true only when Screen.orientation is not set manually.
+
 ## 1.6.0
 
 ### Date
