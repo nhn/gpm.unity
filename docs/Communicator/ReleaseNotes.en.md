@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.1.0
+
+### Date
+
+* 2022.05.27
+
+### Updated
+
+* Change native "initialize" method naming
+
 ## 1.0.2
 
 ### Date

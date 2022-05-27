@@ -2,6 +2,18 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.1.0
+
+### Date
+
+* 2022.05.27
+
+### Updated
+
+* native "initialize" method naming 변경
+
+---
+
 ## 1.0.2
 
 ### Date
