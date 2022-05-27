@@ -6,10 +6,14 @@
 
 ### Date
 
-* 2022.05.26
+* 2022.05.30
 
 ### Added
 * Added WebCacheImage
+
+### Updated
+* Added Common v2.1.0 dependency
+* Added CacheStorage v0.1.0 dependency
 
 ### Fixed
 * InfiniteScroll

@@ -6,10 +6,14 @@
 
 ### Date
 
-* 2022.05.26
+* 2022.05.30
 
 ### Added
 * WebCacheImage 추가
+
+### Updated
+* Common v2.1.0 의존성 추가
+* CacheStorage v0.1.0 의존성 추가
 
 ### Fixed
 * InfiniteScroll
