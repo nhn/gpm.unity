@@ -2,6 +2,23 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.5.0
+
+### Date
+
+* 2022.05.30
+
+### Added
+* Added WebCacheImage
+
+### Updated
+* Added Common v2.1.0 dependency
+* Added CacheStorage v0.1.0 dependency
+
+### Fixed
+* InfiniteScroll
+    * Fixed the problem that scroll items are not reused after clearing the list
+
 ## 2.4.0
 
 ### Date

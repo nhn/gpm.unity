@@ -2,6 +2,23 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.5.0
+
+### Date
+
+* 2022.05.30
+
+### Added
+* WebCacheImage 추가
+
+### Updated
+* Common v2.1.0 의존성 추가
+* CacheStorage v0.1.0 의존성 추가
+
+### Fixed
+* InfiniteScroll
+    * 리스트 클리어 시 후 스크롤 아이템 재사용 하지 않는 문제 수정
+
 ## 2.4.0
 
 ### Date
