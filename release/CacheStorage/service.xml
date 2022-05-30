@@ -3,22 +3,22 @@
     <title>CacheStorage</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
     <dependencies>
         <unity>
             <version>2018.4.0+</version>
         </unity>
         <Common>
-            <version>2.0.10</version>
+            <version>2.1.0</version>
             <install>auto</install>
         </Common>
     </dependencies>
     <packageList>
         <package>
-            <version>0.0.1</version>
+            <version>0.1.0</version>
             <installList>
                 <install>
-                    <name>gpm_cachestorage_v0.0.1</name>
+                    <name>gpm_cachestorage_v0.1.0.unitypackage</name>
                     <path>GPM/CacheStorage</path>
                 </install>
             </installList>

@@ -6,7 +6,7 @@
 
 * [개요](#개요)
 * [스펙](#스펙)
-* [API](#-api)
+* [API](#api)
 * [Release notes](./ReleaseNotes.md)
 
 ## 개요
@@ -19,7 +19,7 @@
 
 * 2018.4.0 이상
 
-## 🔨 API
+## API
 
 ### RequestHttpCache
 
@@ -97,7 +97,7 @@ cacheInfo = GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
 
 **Example**
 ```cs
-GpmWebView.GetCacheCount();
+GpmCacheStorage.GetCacheCount();
 ```
 
 ### GetCacheSize
@@ -106,7 +106,7 @@ GpmWebView.GetCacheCount();
 
 **Example**
 ```cs
-GpmWebView.GetCacheSize();
+GpmCacheStorage.GetCacheSize();
 ```
 
 ### ClearCache
@@ -115,7 +115,7 @@ GpmWebView.GetCacheSize();
 
 **Example**
 ```cs
-GpmWebView.ClearCache();
+GpmCacheStorage.ClearCache();
 ```
 
 ### SetCachePath
@@ -126,7 +126,7 @@ GpmWebView.ClearCache();
 **Example**
 ```cs
 string path = Application.temporaryCachePath;
-GpmWebView.SetCachePath(path);
+GpmCacheStorage.SetCachePath(path);
 ```
 
 ### GetCachePath
@@ -135,5 +135,5 @@ GpmWebView.SetCachePath(path);
 
 **Example**
 ```cs
-GpmWebView.GetCachePath();
+GpmCacheStorage.GetCachePath();
 ```

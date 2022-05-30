@@ -6,7 +6,7 @@
 
 * [Overview](#overview)
 * [Specification](#Specification)
-* [API](#-api)
+* [API](#api)
 * [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
@@ -20,7 +20,7 @@ CacheStorage is a service that can improve performance by supporting Cache durin
 
 * 2018.4.0 or higher
 
-## 🔨 API
+## API
 
 ### RequestHttpCache
 
@@ -98,7 +98,7 @@ Can see the number of caches used.
 
 **Example**
 ```cs
-GpmWebView.GetCacheCount();
+GpmCacheStorage.GetCacheCount();
 ```
 
 ### GetCacheSize
@@ -106,7 +106,7 @@ Can see the amount of cache used.
 
 **Example**
 ```cs
-GpmWebView.GetCacheSize();
+GpmCacheStorage.GetCacheSize();
 ```
 
 ### ClearCache
@@ -115,7 +115,7 @@ Remove the managed cache.
 
 **Example**
 ```cs
-GpmWebView.ClearCache();
+GpmCacheStorage.ClearCache();
 ```
 
 ### SetCachePath
@@ -126,7 +126,7 @@ The default is Application.temporaryCachePath .
 **Example**
 ```cs
 string path = Application.temporaryCachePath;
-GpmWebView.SetCachePath(path);
+GpmCacheStorage.SetCachePath(path);
 ```
 
 ### GetCachePath
@@ -135,5 +135,5 @@ Can know the path to the managed cache.
 
 **Example**
 ```cs
-GpmWebView.GetCachePath();
+GpmCacheStorage.GetCachePath();
 ```
