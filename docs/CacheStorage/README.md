@@ -23,8 +23,8 @@
 
 ### RequestHttpCache
 
-url로 데이타를 요청합니다.
-캐시된 데이타와 웹 데이타가 동일한 데이타인 경우 캐시 된 데이타를 사용합니다.
+url로 데이터를 요청합니다.
+캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 데이터를 사용합니다.
 
 **Example**
 ```cs
@@ -40,7 +40,7 @@ GpmCacheStorage.RequestHttpCache(url, (result) =>
 
 ### RequestLocalCache
 
-url로 이미 캐시 된 데이타를 요청합니다. 
+url로 이미 캐시 된 데이터를 요청합니다. 
 캐시 되어있지 않은 경우 실패합니다.
 
 **Example**
@@ -57,8 +57,8 @@ GpmCacheStorage.RequestLocalCache(url, (result) =>
 
 ### GetCachedTexture
 
-url로 이미 캐시 된 텍스쳐를 요청합니다.
-앱 실행 후 로드한 텍스쳐라면 재사용합니다.
+url로 이미 캐시 된 텍스처를 요청합니다.
+앱 실행 후 로드한 텍스처라면 재사용합니다.
 
 **Example**
 ```cs
@@ -75,9 +75,9 @@ cacheInfo = GpmCacheStorage.GetCachedTexture(url, (cachedTexture) =>
 
 ### RequestTexture
 
-url로 캐시 된 데이타를 요청합니다. 
-앱 실행 후 로드한 텍스쳐라면 재사용합니다.
-캐시 된 데이타와 웹 데이타가 동일한 데이타인 경우 캐시 된 텍스쳐를 로드하여 사용합니다.
+url로 캐시 된 데이터를 요청합니다. 
+앱 실행 후 로드한 텍스처라면 재사용합니다.
+캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
 
 **Example**
 ```cs
