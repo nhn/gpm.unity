@@ -11,6 +11,7 @@
 ### Updated
 
 * Change native "initialize" method naming
+  * Only the part that connects to the native has been renamed, so there is no impact on the use of Communicator
 
 ## 1.0.2
 
