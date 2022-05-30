@@ -11,7 +11,7 @@
 
 ## 개요
 
-* CacheStorage는 Unity에서 웹 통신을 할 때 Cache를 지원해 성능을 개선할 수 있는 서비스 입니다.
+* CacheStorage는 Unity에서 웹 통신을 할 때 Cache를 지원해 성능을 개선할 수 있는 서비스입니다.
 
 ## 스펙
 
@@ -77,7 +77,7 @@ cacheInfo = GpmCacheStorage.GetCachedTexture(url, (cachedTexture) =>
 
 url로 캐시 된 데이타를 요청합니다. 
 앱 실행 후 로드한 텍스쳐라면 재사용합니다.
-캐시된 데이타와 웹 데이타가 동일한 데이타인 경우 캐시 된 텍스쳐를 로드하여 사용합니다.
+캐시 된 데이타와 웹 데이타가 동일한 데이타인 경우 캐시 된 텍스쳐를 로드하여 사용합니다.
 
 **Example**
 ```cs
@@ -121,7 +121,7 @@ GpmWebView.ClearCache();
 ### SetCachePath
 
 관리되는 캐시의 경로를 설정합니다.
-기본은 Application.temporaryCachePath 입니다.
+기본은 Application.temporaryCachePath입니다.
 
 **Example**
 ```cs
