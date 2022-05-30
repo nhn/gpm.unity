@@ -47,14 +47,13 @@ Provides a WebView used in various ways in the game.
 |   | Forward |
 |   | Close |
 | Show API | URL, HTML file, HTML string |
-|   | Open Callback |
-|   | Close Callback |
-|   | Page load Callback |
-|   | Scheme Callback |
+|   | Callback |
 |   | Scheme List |
 | Position, Size API | SetPosition, GetX, GetY |
 |   | SetSize, GetWidth, GetHeight |
 |   | SetMargins |
+| Show SafeBrowsing | |
+|   | Callback |
 | Other | IsActive |
 |   | Execute JavaScript |
 |   | Clear Cookies |
@@ -66,6 +65,7 @@ Provides a WebView used in various ways in the game.
 |   | Multiple Windows |
 |   | File upload</br>(Android API 21 or later) |
 |   | User agent string |
+|   | Set auto rotation |
 
 ## 🔨 Platform specific settings
 
@@ -92,6 +92,9 @@ For smooth WebView experience, PostProcessBuild script enables **hardwareAcceler
     ```gradle
     dependencies {
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+
+        // Add if you are using the ShowSafeBrowsing API
+        implementation "androidx.browser:browser:1.3.0"
     }
     ```
     * If they are already added in another package, you may skip this step.
@@ -117,17 +120,14 @@ Displays the WebView.
 **Required parameter**
 
 * url: the url transmitted to the parameter must be a valid value.
-* openCallback: When WebView is open, the success result is notified via a callback.
+* configuration: With GpmWebViewRequest.Configuration, WebView options can be changed.
 
 **Optional parameter**
 
-* configuration: With GpmWebViewRequest.Configuration, WebView options can be changed.
-* closeCallback: The closing of WebView is notified to users via a callback.
-* PageLoadCallback : The WebView page load complete is notified to users via a callback.
+* callback: Events of WebView is notified to users via a callback.
 * schemeList: Specifies the list of custom schemes that users want to receive.
     * Entering 'https://' allows you receive all URLs that begin with 'https://' as schemeEvent.
     * A scheme received as schemeEvent is not redirected.
-* schemeEvent: Any URL that includes a custom scheme specified using schemeList is notified via a callback.
 
 #### Configuration
 
@@ -153,6 +153,7 @@ Displays the WebView.
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | recommended browsers for the current platform |
 |                           | GamebaseWebViewContentMode.MOBILE         | mobile browser |
 |                           | GamebaseWebViewContentMode.DESKTOP        | desktop browser |
+| isAutoRotation</br>(iOS only) | bool                                  | Sets auto rotatio of WebView</br>Specify true only when Screen.orientation is not set manually. |
 
 
 **API**
@@ -161,11 +162,8 @@ Displays the WebView.
 public static void ShowUrl(
     string url,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
-    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
-    List<string> schemeList = null,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
+    GpmWebViewCallback.GpmWebViewDelegate callback,
+    List<string> schemeList)
 ```
 
 **Example**
@@ -179,8 +177,8 @@ public void ShowUrlFullScreen()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            isClearCookie = false,
-            isClearCache = false,
+            isClearCookie = true,
+            isClearCache = true,
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
@@ -191,14 +189,11 @@ public void ShowUrlFullScreen()
             contentMode = GpmWebViewContentMode.MOBILE
 #endif
         },
-        OnOpenCallback,
-        OnCloseCallback,
-        OnPageLoadCallback,
+        OnCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
-        },
-        OnSchemeEvent);
+        });
 }
 
 // Popup default
@@ -209,8 +204,8 @@ public void ShowUrlPopupDefault()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            isClearCookie = false,
-            isClearCache = false,
+            isClearCookie = true,
+            isClearCache = true,
             isNavigationBarVisible = false,
             supportMultipleWindows = true,
 #if UNITY_IOS
@@ -218,14 +213,11 @@ public void ShowUrlPopupDefault()
             isMaskViewVisible = true,
 #endif
         },
-        OnOpenCallback,
-        OnCloseCallback,
-        OnPageLoadCallback,
+        OnCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
-        },
-        OnSchemeEvent);
+        });
 }
 
 // Popup custom position and size
@@ -236,8 +228,8 @@ public void ShowUrlPopupPositionSize()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            isClearCookie = false,
-            isClearCache = false,
+            isClearCookie = true,
+            isClearCache = true,
             isNavigationBarVisible = false,
             position = new GpmWebViewRequest.Position
             {
@@ -256,15 +248,7 @@ public void ShowUrlPopupPositionSize()
             contentMode = GpmWebViewContentMode.MOBILE
             isMaskViewVisible = true,
 #endif
-        },
-        OnOpenCallback,
-        OnCloseCallback,
-        OnPageLoadCallback,
-        new List<string>()
-        {
-            "USER_ CUSTOM_SCHEME"
-        },
-        OnSchemeEvent);
+        }, null, null);
 }
 
 // Popup custom margins
@@ -275,8 +259,8 @@ public void ShowUrlPopupMargins()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            isClearCookie = false,
-            isClearCache = false,
+            isClearCookie = true,
+            isClearCache = true,
             isNavigationBarVisible = false,
             margins = new GpmWebViewRequest.Margins
             {
@@ -291,63 +275,52 @@ public void ShowUrlPopupMargins()
             contentMode = GpmWebViewContentMode.MOBILE
             isMaskViewVisible = true,
 #endif
-        },
-        OnOpenCallback,
-        OnCloseCallback,
-        OnPageLoadCallback,
-        new List<string>()
-        {
-            "USER_ CUSTOM_SCHEME"
-        },
-        OnSchemeEvent);
+        }, null, null);
 }
 
-private void OnOpenCallback(GpmWebViewError error)
+private void OnCallback(
+    GpmWebViewCallback.CallbackType callbackType,
+    string data,
+    GpmWebViewError error)
 {
-    if (error == null)
+    Debug.Log("OnCallback: " + callbackType);
+    switch (callbackType)
     {
-        Debug.Log("[OnOpenCallback] succeeded.");
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnOpenCallback] failed. error:{0}", error));
-    }
-}
-
-private void OnCloseCallback(GpmWebViewError error)
-{
-    if (error == null)
-    {
-        Debug.Log("[OnCloseCallback] succeeded.");
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
-    }
-}
-
-private void OnPageLoadCallback(string url)
-{
-    if (string.IsNullOrEmpty(url) == false)
-    {
-        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
-    }
-}
-
-private void OnSchemeEvent(string data, GpmWebViewError error)
-{
-    if (error == null)
-    {
-        Debug.Log("[OnSchemeEvent] succeeded.");
-        
-        if (data.Equals("USER_ CUSTOM_SCHEME") == true || data.Contains("CUSTOM_SCHEME") == true)
-        {
-            Debug.Log(string.Format("scheme:{0}", data));
-        }
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnSchemeEvent] failed. error:{0}", error));
+        case GpmWebViewCallback.CallbackType.Open:
+            if (error != null)
+            {
+                Debug.LogFormat("Fail to open WebView. Error:{0}", error);
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.Close:
+            if (error != null)
+            {
+                Debug.LogFormat("Fail to close WebView. Error:{0}", error);
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.PageLoad:
+            if (string.IsNullOrEmpty(data) == false)
+            {
+                Debug.LogFormat("Loaded Page:{0}", data);
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.MultiWindowOpen:
+            break;
+        case GpmWebViewCallback.CallbackType.MultiWindowClose:
+            break;
+        case GpmWebViewCallback.CallbackType.Scheme:
+            if (error == null)
+            {
+                if (data.Equals("USER_ CUSTOM_SCHEME") == true || data.Contains("CUSTOM_SCHEME") == true)
+                {
+                    Debug.Log(string.Format("scheme:{0}", data));
+                }
+            }
+            else
+            {
+                Debug.Log(string.Format("Fail to custom scheme. Error:{0}", error));
+            }
+            break;
     }
 }
 ```
@@ -376,11 +349,8 @@ See the code below to enter the filePath value of ShowHtmlFile API.
 public static void ShowHtmlFile(
     string filePath,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
-    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
-    List<string> schemeList = null,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
+    GpmWebViewCallback.GpmWebViewDelegate callback,
+    List<string> schemeList)
 ```
 
 **Example**
@@ -400,8 +370,8 @@ public void ShowHtmlFile()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            isClearCookie = false,
-            isClearCache = false,
+            isClearCookie = true,
+            isClearCache = true,
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
@@ -412,63 +382,11 @@ public void ShowHtmlFile()
             contentMode = GpmWebViewContentMode.MOBILE
 #endif
         },
-        OnOpenCallback,
-        OnCloseCallback,
-        OnPageLoadCallback,
+        OnCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
-        },
-        OnSchemeEvent);
-}
-
-private void OnOpenCallback(GpmWebViewError error)
-{
-    if (error == null)
-    {
-        Debug.Log("[OnOpenCallback] succeeded.");
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnOpenCallback] failed. error:{0}", error));
-    }
-}
-
-private void OnCloseCallback(GpmWebViewError error)
-{
-    if (error == null)
-    {
-        Debug.Log("[OnCloseCallback] succeeded.");
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
-    }
-}
-
-private void OnPageLoadCallback(string url)
-{
-    if (string.IsNullOrEmpty(url) == false)
-    {
-        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
-    }
-}
-
-private void OnSchemeEvent(string data, GpmWebViewError error)
-{
-    if (error == null)
-    {
-        Debug.Log("[OnSchemeEvent] succeeded.");
-        
-        if (data.Equals("USER_ CUSTOM_SCHEME") == true || data.Contains("CUSTOM_SCHEME") == true)
-        {
-            Debug.Log(string.Format("scheme:{0}", data));
-        }
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnSchemeEvent] failed. error:{0}", error));
-    }
+        });
 }
 ```
 
@@ -482,11 +400,8 @@ Loads the HTML string into the WebView.
 public static void ShowHtmlString(
     string htmlString,
     GpmWebViewRequest.Configuration configuration,
-    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
-    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
-    List<string> schemeList = null,
-    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null,
-    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null)
+    GpmWebViewCallback.GpmWebViewDelegate callback,
+    List<string> schemeList)
 ```
 
 **Example**
@@ -499,8 +414,8 @@ public void ShowHtmlString()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            isClearCookie = false,
-            isClearCache = false,
+            isClearCookie = true,
+            isClearCache = true,
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
@@ -511,63 +426,56 @@ public void ShowHtmlString()
             contentMode = GpmWebViewContentMode.MOBILE
 #endif
         },
-        OnOpenCallback,
-        OnCloseCallback,
+        OnCallback,
         new List<string>()
         {
             "USER_ CUSTOM_SCHEME"
-        },
-        OnSchemeEvent,
-        OnPageLoadCallback);
+        });
 }
+```
 
-private void OnOpenCallback(GpmWebViewError error)
-{
-    if (error == null)
-    {
-        Debug.Log("[OnOpenCallback] succeeded.");
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnOpenCallback] failed. error:{0}", error));
-    }
-}
+### ShowSafeBrowsing
 
-private void OnCloseCallback(GpmWebViewError error)
-{
-    if (error == null)
-    {
-        Debug.Log("[OnCloseCallback] succeeded.");
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnCloseCallback] failed. error:{0}", error));
-    }
-}
+The App displays the Android Chrome or iOS Safari browser.</br>
+👉 Use the **GpmWebViewSafeBrowsing** class.
 
-private void OnSchemeEvent(string data, GpmWebViewError error)
+**Required parameter**
+
+* url : the url transmitted to the parameter must be a valid value.
+
+**Optional parameter**
+
+* configuration: With GpmWebViewRequest.ConfigurationSafeBrowsing, Navigation bar colors can be changed.
+* callback: Open and Close events of the Browser is notified to users via a callback.
+
+#### Configuration
+
+| Parameter | Values | Description |
+| ------------------------- | ----------------------------------------- | -------------------------------- |
+| navigationBarColor        | string                                    | Navigation bar color |
+| navigationTextColor</br>(iOS only) | string                           | Navigation text color |
+
+**API**
+
+```cs
+public static void ShowSafeBrowsing(
+    string url,
+    GpmWebViewRequest.ConfigurationSafeBrowsing configuration = null,
+    GpmWebViewCallback.GpmWebViewDelegate callback = null)
+```
+
+**Example**
+
+```cs
+public void OpenSafeBrowsing()
 {
-    if (error == null)
-    {
-        Debug.Log("[OnSchemeEvent] succeeded.");
-        
-        if (data.Equals("USER_ CUSTOM_SCHEME") == true || data.Contains("CUSTOM_SCHEME") == true)
+    GpmWebViewSafeBrowsing.ShowSafeBrowsing(sampleUrl,
+        new GpmWebViewRequest.ConfigurationSafeBrowsing()
         {
-            Debug.Log(string.Format("scheme:{0}", data));
-        }
-    }
-    else
-    {
-        Debug.Log(string.Format("[OnSchemeEvent] failed. error:{0}", error));
-    }
-}
-
-private void OnPageLoadCallback(string url)
-{
-    if (string.IsNullOrEmpty(url) == false)
-    {
-        Debug.LogFormat("[OnPageLoadCallback] Loaded Page:{0}", url);
-    }
+            navigationBarColor = "#4B96E6",
+            navigationTextColor = "#FFFFFF"
+        },
+        OnCallback);
 }
 ```
 

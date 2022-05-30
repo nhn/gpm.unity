@@ -2,6 +2,81 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.7.0
+
+### Date
+
+* 2022.05.27
+
+### Added
+
+* SafeBrowsing 지원
+  * Android Chrome CustomTabsIntent
+  * iOS SFSafariViewController
+
+* WebView Show API callback 수정
+  * 개별 callback 지원 deprecated
+  * CallbackType에 따라 WebView 이벤트 처리
+
+* auto rotation 변수 추가
+  * WebView configuration 변수 : isAutoRotation
+  * iOS only
+  * Screen.orientation을 수동 설정하지 않을 때만 true로 지정
+
+### Updated
+
+* Deprecated API
+
+```cs
+[System.Obsolete("This method is deprecated.")]
+public static void ShowUrl(
+    string url,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
+    List<string> schemeList,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowUrl(
+    string url,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowHtmlFile(
+    string filePath,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback,
+    List<string> schemeList,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowHtmlFile(
+    string filePath,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null)
+
+[System.Obsolete("This method is deprecated.")]
+public static void ShowHtmlString(
+    string htmlString,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewErrorDelegate openCallback = null,
+    GpmWebViewCallback.GpmWebViewErrorDelegate closeCallback = null,
+    List<string> schemeList = null,
+    GpmWebViewCallback.GpmWebViewDelegate<string> schemeEvent = null,
+    GpmWebViewCallback.GpmWebViewPageLoadDelegate pageLoadCallback = null)
+```
+
 ## 1.6.0
 
 ### Date
