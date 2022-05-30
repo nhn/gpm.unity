@@ -2,6 +2,19 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.1.0
+
+### Date
+
+* 2022.05.27
+
+### Updated
+
+* native "initialize" method naming 변경
+  * native와 연결되는 부분의 이름만 변경되어 Communicator 사용에 영향 없음
+
+---
+
 ## 1.0.2
 
 ### Date
