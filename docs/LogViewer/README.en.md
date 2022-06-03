@@ -120,11 +120,37 @@
             </assembly>
         </linker>
         ```
-> Configuring Gmail
-> * Smtp Host : smtp.gmail.com
-> * Smtp Port : 587
-> * If the `535-5.7.8 Username and Password not accepted` error occurs, `Allow less secure apps` must be activated from the [user's gmail account setting](https://myaccount.google.com/lesssecureapps).
-            
+
+
+* Configuring Gmail
+    * Must be set using [app password](https://support.google.com/accounts/answer/185833).
+    
+    * <b>Allow less secure apps</b> will be unavailable after May 31, 2022.
+    > To : The Recipient's email address
+    > User Name : User Name: Sender's email address
+    > User Password : [app password] of the sending Sender's email address 
+    > Smtp Host : smtp.gmail.com
+    > Smtp Port : 587
+#### Configuring gmail app password
+1. Select the Security tab in your Google Account.
+![google_app_password_1_en](./images/google_app_password_1_en.png)
+
+2. In the Security tab, under Signing in to Google, select App password.
+    * 2-Step Verification must be enabled to set the App password.
+![google_app_password_2_en](./images/google_app_password_2_en.png)
+
+3. Under App password, tap Select app.
+![google_app_password_3_en](./images/google_app_password_3_en.png)
+
+4. In the app selection area, tap Other (Custom Name).
+![google_app_password_4_en](./images/google_app_password_4_en.png)
+
+5. Put <b>Smtp Client</b> in the name to Generate it.
+![google_app_password_5_en](./images/google_app_password_5_en.png)
+
+6. For User Password, use the app password for your device.
+![google_app_password_6_en](./images/google_app_password_6_en.png)
+
 ### Enabling LogViewer in Runtime
 
 * Enabling Each Platform
