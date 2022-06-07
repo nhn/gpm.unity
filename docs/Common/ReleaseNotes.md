@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.1.1
+
+### Date
+
+* 2022.06.07
+
+### Update
+* 임포트 할 때 기본적으로 overwrite 적용되도록 개선
+
 ## 2.1.0
 
 ### Date

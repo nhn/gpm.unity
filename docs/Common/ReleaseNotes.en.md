@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.1.1
+
+### Date
+
+* 2022.06.07
+
+### Update
+* Improved to apply overwrite by default when importing
+
 ## 2.1.0
 
 ### Date
