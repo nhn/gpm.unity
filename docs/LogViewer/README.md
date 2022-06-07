@@ -131,22 +131,28 @@
     > Smtp Port : 587
 #### gmail 앱 비밀번호 설정
 1. 구글 계정에서 보안 텝을 선택합니다.
+
 ![google_app_password_1_kr](./images/google_app_password_1_kr.png)
 
 2. 보안 텝 내의 Google에 로그인에서 앱 비밀번호를 선택합니다.
     * 앱 비밀번호 설정을 위해선 2단계 인증이 활성화돼야 합니다.
+
 ![google_app_password_2_kr](./images/google_app_password_2_kr.png)
 
 3. 앱 비밀번호에서 앱 선택을 누릅니다.
+
 ![google_app_password_3_kr](./images/google_app_password_3_kr.png)
 
 4. 앱 선택 영역에ㅐ서 기타(맞춤 이름)을 누릅니다.
+
 ![google_app_password_4_kr](./images/google_app_password_4_kr.png)
 
 5. 이름에 <b>Smtp Client</b>를 넣어 생성합니다.
+
 ![google_app_password_5_kr](./images/google_app_password_5_kr.png)
 
 6. User Password에 기기용 앱 비밀번호를 사용합니다.
+
 ![google_app_password_6_kr](./images/google_app_password_6_kr.png)
 
 ### 런타임에서  LogViewer 활성화하기

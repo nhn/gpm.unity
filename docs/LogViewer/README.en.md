@@ -133,22 +133,28 @@
     > Smtp Port : 587
 #### Configuring gmail app password
 1. Select the Security tab in your Google Account.
+
 ![google_app_password_1_en](./images/google_app_password_1_en.png)
 
 2. In the Security tab, under Signing in to Google, select App password.
     * 2-Step Verification must be enabled to set the App password.
+	
 ![google_app_password_2_en](./images/google_app_password_2_en.png)
 
 3. Under App password, tap Select app.
+
 ![google_app_password_3_en](./images/google_app_password_3_en.png)
 
 4. In the app selection area, tap Other (Custom Name).
+
 ![google_app_password_4_en](./images/google_app_password_4_en.png)
 
 5. Put <b>Smtp Client</b> in the name to Generate it.
+
 ![google_app_password_5_en](./images/google_app_password_5_en.png)
 
 6. For User Password, use the app password for your device.
+
 ![google_app_password_6_en](./images/google_app_password_6_en.png)
 
 ### Enabling LogViewer in Runtime
