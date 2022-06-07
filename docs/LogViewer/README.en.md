@@ -126,11 +126,12 @@
     * Must be set using [app password](https://support.google.com/accounts/answer/185833).
     
     * <b>Allow less secure apps</b> will be unavailable after May 31, 2022.
-    > To : The Recipient's email address
-    > User Name : User Name: Sender's email address
-    > User Password : [app password] of the sending Sender's email address 
-    > Smtp Host : smtp.gmail.com
-    > Smtp Port : 587
+        * To : The Recipient's email address
+        * User Name : User Name: Sender's email address
+        * User Password : [app password] of the sending Sender's email address 
+        * Smtp Host : smtp.gmail.com
+        * Smtp Port : 587
+
 #### Configuring gmail app password
 1. Select the Security tab in your Google Account.
 

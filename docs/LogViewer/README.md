@@ -122,19 +122,20 @@
         ```
 
 * gmail로 설정하기
-    * gmail은 [앱 비밀번호](https://support.google.com/accounts/answer/185833)을 사용하여 설정하여야 합니다.
+    * gmail은 [앱 비밀번호](https://support.google.com/accounts/answer/185833)를 사용하여 설정하여야 합니다.
     * <b>보안 수준이 낮은 앱 허용</b>은 2022.5.31일 이후로 사용할 수 없습니다.
-    > To : 받는 이메일 주소
-    > User Name : 보내는 이메일 주소
-    > User Password : 보내는 이메일 주소의 [앱 비밀번호](https://support.google.com/accounts/answer/185833)
-    > Smtp Host : smtp.gmail.com
-    > Smtp Port : 587
+        * To : 받는 이메일 주소
+        * User Name : 보내는 이메일 주소
+        * User Password : 보내는 이메일 주소의 [앱 비밀번호](https://support.google.com/accounts/answer/185833)
+        * Smtp Host : smtp.gmail.com
+        * Smtp Port : 587
+
 #### gmail 앱 비밀번호 설정
-1. 구글 계정에서 보안 텝을 선택합니다.
+1. 구글 계정에서 보안 탭을 선택합니다.
 
 ![google_app_password_1_kr](./images/google_app_password_1_kr.png)
 
-2. 보안 텝 내의 Google에 로그인에서 앱 비밀번호를 선택합니다.
+2. 보안 탭 내의 Google에 로그인에서 앱 비밀번호를 선택합니다.
     * 앱 비밀번호 설정을 위해선 2단계 인증이 활성화돼야 합니다.
 
 ![google_app_password_2_kr](./images/google_app_password_2_kr.png)
@@ -143,7 +144,7 @@
 
 ![google_app_password_3_kr](./images/google_app_password_3_kr.png)
 
-4. 앱 선택 영역에ㅐ서 기타(맞춤 이름)을 누릅니다.
+4. 앱 선택 영역에서 기타(맞춤 이름)을 누릅니다.
 
 ![google_app_password_4_kr](./images/google_app_password_4_kr.png)
 
