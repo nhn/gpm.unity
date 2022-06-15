@@ -30,6 +30,7 @@ GitHub Issue : https://github.com/nhn/gpm.unity/issues
 | [LogViewer](docs/LogViewer/README.en.md) | LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers. |
 | [Communicator](docs/Communicator/README.en.md) | Communicator is a framework that can easily exchange data with native by providing one common interface. |
 | [Profiler](docs/Profiler/README.en.md) | Profiler is a tool that helps the optimization as it allows users to see the device performance and system information on the screen. |
+| [CacheStorage](docs/CacheStorage/README.en.md) | CacheStorage is a service that can improve performance by supporting Cache during web communication in Unity. |
 | [Adapter](docs/Adapter/README.en.md) | Adapter provides a common interface so as to easily apply different IdP fuctions. |
 | [DLST](docs/DLST/README.en.md) | Duplicate Library Search Tool, or DLST,  searches and removes duplicate libraries. |
 
