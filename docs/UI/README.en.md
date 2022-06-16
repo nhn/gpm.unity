@@ -21,22 +21,11 @@ Provide components to use [Unity UI](https://docs.unity3d.com/Manual/com.unity.u
 
 ## Components
 
-### Multi Layout
-
-* [Go to Multi Layout](MultiLayout/README.en.md)
-
-### Infinite Scroll
-
-* [Go to Infinite Scroll](InfiniteScroll/README.en.md)
-
-### DraggableRect
-
-* [Go to DraggableRect](DraggableRect/README.en.md)
-
-### ContentSizeSetter
-
-* [Go to ContentSizeSetter](ContentSizeSetter/README.en.md)
-
-### WrapLayoutGroup
-
-* [Go to WrapLayoutGroup](WrapLayoutGroup/README.en.md)
+|Component| 설명 |
+| --- | --- |
+| [Multi Layout](MultiLayout/README.en.md) | The multi-layout component configures RectTransform data of UI component into many layouts so as to deal with resolution or orientation. |
+| [Infinite Scroll](InfiniteScroll/README.en.md) | Scroll Rect (Scroll View) creates items to fit in content and allows them to be reusable. |
+| [DraggableRect](DraggableRect/README.en.md) | This component allows you to drag UI. |
+| [ContentSizeSetter](ContentSizeSetter/README.en.md) | This component sets the size of other UI content.|
+| [WrapLayoutGroup](WrapLayoutGroup/README.md) | A component that aligns child elements vertically or horizontally within the UI rectangle (RectTanform).|
+| [WebCacheImage](WebCacheImage/README.en.md) | This is a component that caches and displays web images using URLs.|
