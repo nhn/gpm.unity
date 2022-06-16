@@ -10,7 +10,7 @@
 
 ## Overview
 
-This component allows you to drag UI.
+This component displays images by caching web images using URLs.
 
 ## How to use
 Add a **WebCacheImage** component to your UI object.
