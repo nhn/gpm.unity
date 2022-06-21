@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<info version="1">
+    <title>Shader</title>
+    <status>publish</status>
+    <description>$DESCRIPTION</description>
+    <version>0.0.1</version>
+    <dependencies>
+        <unity>
+            <version>2018.4.0+</version>
+        </unity>
+    </dependencies>
+    <packageList>
+        <package>
+            <version>0.0.1</version>
+            <installList>
+                <install>
+                    <name>gpm_shader_v0.0.1.unitypackage</name>
+                    <path>GPM/Shader</path>
+                </install>
+            </installList>
+        </package>
+    </packageList>  
+    <linkList>
+        <link>
+            <name>$VIEW_DOCUMENTATION</name>
+            <url>README.md</url>
+            <path>$PATH_DOCUMENTATION</path>
+        </link>
+        <link>
+            <name>$VIEW_RELEASE_NOTES</name>
+            <url>ReleaseNotes.md</url>
+            <path>$PATH_RELEASE_NOTES</path>
+        </link>
+    </linkList>
+</info>
