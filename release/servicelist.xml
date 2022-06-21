@@ -17,6 +17,10 @@
         <version>2.5.0</version>
     </service>
     <service>
+        <name>Shader</name>
+        <version>0.0.1</version>
+    </service>
+    <service>
         <name>LogViewer</name>
         <version>2.0.3</version>
     </service>
