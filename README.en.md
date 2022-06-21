@@ -27,6 +27,7 @@ GitHub Issue : https://github.com/nhn/gpm.unity/issues
 | [WebView](docs/WebView/README.en.md) | Provides a web view that can be used in various ways in the game.|
 | [AssetManagement](docs/AssetManagement/README.en.md) | AssetManagement is a tool that allows you to easily manage your Unity assets. |
 | [UI](docs/UI/README.en.md) | Provide components to use Unity UI more efficiently. |
+| [Shader](docs/Shader/README.en.md) | Provides components that have various effects on the game. |
 | [LogViewer](docs/LogViewer/README.en.md) | LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers. |
 | [Communicator](docs/Communicator/README.en.md) | Communicator is a framework that can easily exchange data with native by providing one common interface. |
 | [Profiler](docs/Profiler/README.en.md) | Profiler is a tool that helps the optimization as it allows users to see the device performance and system information on the screen. |
