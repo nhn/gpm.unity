@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="7">
+<info version="8">
     <title>LogViewer</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
@@ -8,10 +8,18 @@
         <unity>
             <version>2018.4.0+</version>
         </unity>
+        <Common>
+            <version>2.1.1</version>
+            <install>auto</install>
+        </Common>
         <UI>
-            <version>2.2.0</version>
+            <version>2.5.0</version>
             <install>auto</install>
         </UI>
+        <CacheStorage>
+            <version>0.1.0</version>
+            <install>auto</install>
+        </CacheStorage>
     </dependencies>
     <packageList>
         <package>
