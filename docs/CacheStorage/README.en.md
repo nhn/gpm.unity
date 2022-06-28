@@ -34,14 +34,17 @@ public static CacheInfo RequestHttpCache(string url, Action<Result> onResult)
 
 **Example**
 ```cs
-string url;
-GpmCacheStorage.RequestHttpCache(url, (result) =>
+public void Something()
 {
-    if (result.success == true)
+    string url;
+    GpmCacheStorage.RequestHttpCache(url, (result) =>
     {
-        bytes[] data = result.data;
-    }
-});
+        if (result.success == true)
+        {
+            bytes[] data = result.data;
+        }
+    });
+}
 ```
 
 ### RequestLocalCache
@@ -71,19 +74,20 @@ If the texture is loaded after running the app, it will be reused.
 
 **API**
 ```cs
-public static CacheInfo RequestLocalCache(string url, Action<Result> onResult)
+public static CacheInfo GetCachedTexture(string url, Action<CachedTexture> onResult)
 ```
 
 **Example**
 ```cs
+
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestLocalCache(url, (result) =>
+    CacheInfo cacheInfo = GpmCacheStorage.GetCachedTexture(url, (cachedTexture) =>
     {
-        if (result.success == true)
+        if (cachedTexture != null)
         {
-            bytes[] data = result.data;
+            Texture texture = cachedTexture.texture;
         }
     });
 }
@@ -217,6 +221,7 @@ Can set the maximum number of caches to manage.
 * appplayStorage
     * When true, adjust the size of the storage capacity
     * When false, only the setting value is modified and applied when a file is added.
+
 **API**
 ```cs
 public static void SetMaxCount(int count = 0, bool applyStorage = true)
