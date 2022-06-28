@@ -52,12 +52,17 @@ public void Something()
 Request already cached data by url.
 Fails if not cached.
 
+**API**
+```cs
+public static CacheInfo RequestLocalCache(string url, Action<Result> onResult)
+```
+
 **Example**
 ```cs
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestHttpCache(url, (result) =>
+    GpmCacheStorage.RequestLocalCache(url, (result) =>
     {
         if (result.success == true)
         {
@@ -66,7 +71,6 @@ public void Something()
     });
 }
 ```
-
 ### GetCachedTexture
 
 Request an already cached texture by url.
