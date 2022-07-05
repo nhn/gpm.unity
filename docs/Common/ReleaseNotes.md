@@ -2,11 +2,11 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
-## 2.1.3
+## 2.1.2
 
 ### Date
 
-* 2022.07.05
+* 2022.07.06
 
 ### Update
 
