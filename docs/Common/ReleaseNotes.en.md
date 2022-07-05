@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.1.3
+
+### Date
+
+* 2022.07.05
+
+### Update
+
+* Improved internal logic.
+
 ## 2.1.1
 
 ### Date
