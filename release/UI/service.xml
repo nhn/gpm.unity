@@ -8,10 +8,10 @@
         <unity>
             <version>2018.4.0+</version>
         </unity>
-		<Common>
-            <version>2.1.0</version>
+        <Common>
+            <version>2.1.2</version>
         </Common>
-		<CacheStorage>
+        <CacheStorage>
             <version>0.1.0</version>
         </CacheStorage>
     </dependencies>
