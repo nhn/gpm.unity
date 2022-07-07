@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.5.1
+
+### Date
+
+* 2022.07.08
+
+### Updated
+
+* Common 2.1.0을 2.1.2로 업데이트
+
 ## 2.5.0
 
 ### Date
