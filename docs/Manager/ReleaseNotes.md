@@ -9,24 +9,12 @@
 * 2021.09.02
 
 ### Updated
-* Common 2.0.6 update
+
+* Common 2.0.6 업데이트
 
 ### Fixed
-* Fixed a problem of not being able to download due to a certificate error in a specific network environment
-* Fixed a problem that could be stuck when package import fails
-
-## 2.0.4
-
-### Date
-
-* 2021.07.27
-
-### Updated
-
-* Common 2.0.4 버전으로 업데이트
-
-### Fixed
-* UnityWebRequest isNetworkError API가 Unity2020.2이후로 Deprecated 되어 수정
+* 특정 네트워크 환경에서 인증서 오류로 다운로드 안되는 문제 수정
+* 패키지 임포트 실패시 먹통될수 있는 문제 해결
 
 ## 2.0.4
 
