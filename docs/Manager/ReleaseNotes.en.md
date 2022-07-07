@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.6
+
+### Date
+
+* 2022.07.08
+
+### Updated
+
+* Update to Common 2.1.2 version
+
 ## 2.0.5
 
 ### Date
@@ -9,7 +19,7 @@
 * 2021.09.02
 
 ### Updated
-* Common 2.0.6 update
+* Update to Common 2.0.4 version
 
 ### Fixed
 * Fixed a problem of not being able to download due to a certificate error in a specific network environment

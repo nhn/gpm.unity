@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.6
+
+### Date
+
+* 2022.07.08
+
+### Updated
+
+* Common 2.1.2 버전으로 업데이트
+
 ## 2.0.5
 
 ### Date
@@ -10,7 +20,7 @@
 
 ### Updated
 
-* Common 2.0.6 업데이트
+* Common 2.0.6 버전으로 업데이트
 
 ### Fixed
 * 특정 네트워크 환경에서 인증서 오류로 다운로드 안되는 문제 수정
