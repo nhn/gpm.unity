@@ -1,5 +1,14 @@
 # Release notes
 
+## 1.0.2
+
+### Date
+
+* 2022.07.08
+
+### Updated
+* Commmon 2.1.2 업데이트
+
 ## 1.0.1
 
 ### Date
