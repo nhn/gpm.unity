@@ -2,6 +2,19 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.5
+
+### Date
+
+* 2021.09.02
+
+### Updated
+* Update to Common 2.0.4 version
+
+### Fixed
+* Fixed a problem of not being able to download due to a certificate error in a specific network environment
+* Fixed a problem that could be stuck when package import fails
+
 ## 2.0.4
 
 ### Date
