@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.7.1
+
+### Date
+* 2022.07.08
+
+### Updated
+* Updated Common 2.0.4 to 2.1.2
+* Updated Communicator 1.0.2 to 1.1.0
+
 ## 1.7.0
 
 ### Date
