@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.2.0
+
+### Date
+
+* 2022.07.13
+
+### Added
+* Log On/Off 기능 추가
+* LogLevel 설정 기능 추가
+
 ## 2.1.2
 
 ### Date

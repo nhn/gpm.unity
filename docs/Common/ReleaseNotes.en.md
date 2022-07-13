@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.0
+
+### Date
+
+* 2022.07.13
+
+### Added
+* Added Log On/Off
+* Added LogLevel setting
+
 ## 2.1.2
 
 ### Date
