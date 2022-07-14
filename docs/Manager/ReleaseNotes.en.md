@@ -2,6 +2,22 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.1.0
+
+### Date
+
+* 2022.07.14
+
+### Added
+* Added service image flip function
+
+### Fixed
+* Fixed the problem of not installing sub-dependent services of dependent services
+ 
+### Updated
+* Common v2.2.0 update
+* Improved version display of updatable services
+
 ## 2.0.5
 
 ### Date
