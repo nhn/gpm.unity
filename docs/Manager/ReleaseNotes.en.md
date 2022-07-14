@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2022.07.18
+* 2022.07.14
 
 ### Added
 * Added service image flip function
