@@ -18,6 +18,17 @@ If you have ideas regarding service upgrades or inquiries, please do not hesitat
 Email : dl_gpm_help@nhn.com<br>
 GitHub Issue : https://github.com/nhn/gpm.unity/issues
 
+## Usage
+
+### Execute
+
+* Menu > Tools > GPM > Manager
+
+![Manager](https://github.com/nhn/gpm.unity/raw/main/docs/Manager/images/gpm_manager_004.png)
+
+* Click [Install] to install service.
+* Click [Remove] to remove service.
+* Click [Update] to update service.
 
 ## Service
 
