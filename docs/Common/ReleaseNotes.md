@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.2.1
+
+### Date
+
+* 2022.07.25
+
+### Fixed
+* dispose 경고 나오지 않도록 수정
+
 ## 2.2.0
 
 ### Date

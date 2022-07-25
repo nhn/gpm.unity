@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.1
+
+### Date
+
+* 2022.07.25
+
+### Fixed
+* Fixed so that dispose warning does not appear
+
 ## 2.2.0
 
 ### Date
