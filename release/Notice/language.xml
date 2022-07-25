@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<multilanguage>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>NOTICE_TEXT_1</key>
+            <language>
+                <ko>Game Package Manager v2.1.1 업데이트</ko>
+				<en>Update Game Package Manager v2.1.1</en>
+            </language>
+        </string>
+        <string>
+            <key>NOTICE_LINK_1</key>
+            <language>
+                <ko>https://github.com/nhn/gpm.unity/blob/main/docs/Manager/ReleaseNotes.md</ko>
+				<en>https://github.com/nhn/gpm.unity/blob/main/docs/Manager/ReleaseNotes.en.md</en>
+            </language>
+        </string>
+    </list>
+</multilanguage>
