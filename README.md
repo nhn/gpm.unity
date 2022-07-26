@@ -18,6 +18,17 @@ Game Package Manager는 NHN에서 게임 제작에 필요한 서비스들을 무
 Email : dl_gpm_help@nhn.com<br>
 GitHub Issue : https://github.com/nhn/gpm.unity/issues
 
+## 사용 방법
+
+### 실행
+
+* Menu > Tools > GPM > Manager
+
+![Manager](https://github.com/nhn/gpm.unity/raw/main/docs/Manager/images/gpm_manager_003.png)
+
+* [설치] 버튼을 클릭하면 서비스를 설치할 수 있습니다.
+* [제거] 버튼을 클릭하면 서비스를 제거할 수 있습니다.
+* [업데이트] 버튼을 클릭하면 서비스를 업데이트할 수 있습니다.
 
 ## 서비스
 
