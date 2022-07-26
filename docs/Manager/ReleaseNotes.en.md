@@ -2,6 +2,20 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.0
+
+### Date
+
+* 2022.07.26
+
+### Added
+* Added document, issue, store menu
+* Added Update Manageable Manageability
+* Added Announcement Features
+
+### Updated
+* Updated Common v2.2.1
+
 ## 2.1.0
 
 ### Date
