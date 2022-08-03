@@ -2,6 +2,14 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.8.0
+
+### Date
+* 2022.08.04
+
+### Added
+* Android WebChromeClient 권한 허용 기능 추가
+
 ## 1.7.1
 
 ### Date
