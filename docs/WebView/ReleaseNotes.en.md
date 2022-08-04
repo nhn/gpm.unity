@@ -2,6 +2,14 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.8.0
+
+### Date
+* 2022.08.04
+
+### Added
+* Android WebChromeClient permissions
+
 ## 1.7.1
 
 ### Date
