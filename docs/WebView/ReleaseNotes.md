@@ -2,6 +2,14 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.8.1
+
+### Date
+* 2022.08.09
+
+### Updated
+* iOS redirect scheme 업데이트
+
 ## 1.8.0
 
 ### Date
