@@ -10,17 +10,307 @@
 * [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
-
-CacheStorage is a service that can improve performance by supporting Cache during web communication in Unity
-
+* CacheStorage supports Cache when web communications are performed in Unity.
+* Cache can be used to improve performance by reusing the data received when communicating.
 
 ## Specification
 
 ### Versions that support Unity
 
-* 2018.4.0 or higher
+* 2019.4.0 or higher
+
+## How to Use
+
+1. using Gpm.Declares Cache Storage.
+2. Most features are defined in GpmCacheStorage.
+3. Request Cache using GpmCacheStorage.Request.
+
+### Request
+Request data from url through Request.
+* Data is stored in cache and reused when invoking the same url.
+* CacheRequestType lets you define when to validate to a server.
+* If the data is the same when validating to the server, reuse the cache without receiving it again.
+
+```cs
+using Gpm.CacheStorage;
+
+public void Something()
+{
+    string url;
+    GpmCacheStorage.Request(url, (result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            bytes[] data = result.Data;
+        }
+    });
+}
+```
+
+### GpmCacheResult
+Result value of cached data. Returns cache information and data.
+* IsSuccess allows you to obtain success or not.
+* By default, data is stored as Data.
+* Text or Json can be converted by encoding and the default is utf8.
+
+```cs
+* boolean IsSuccess() // Returns whether the result was successful or not.
+* CacheInfoInfo; // Returns cache information.
+* byte[] Data; // Returns cache data.
+* Returns data encoded in string Text; // utf8.
+
+
+* Returns data encoded in string GetTextData() // utf8.
+* string GetTextData (EncodingEncoding) // Returns encoded data.
+
+* T GetJsonData() // returns json data encoded in utf8.
+* T GetJson Data (Encoding Encoding) // Return json data encoded in utf8.
+```
+
+
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.Request(url, (result) =>
+    {
+        // success
+        if (result.IsSuccess() == true)
+        {
+            // date
+            bytes[] data = result.Data;
+
+            // text - Encoding.UTF8
+            string text = result.Text;
+
+            // text - Encoding.UTF8
+            text = result.GetTextData();
+
+            // text - Encoding.Default
+            text = result.GetTextData(Encoding.Default);    
+
+            // json - Encoding.UTF8
+            JsonClass json = result.GetJsonData<JsonClass>();
+
+            // json - Encoding.Default
+            json = result.GetJsonData<JsonClass>(Encoding.Default);           
+        }
+    });
+}
+```
+
+### Texture caching request
+Can request a texture cache using GpmCacheStorage.RequestTexture.
+* If the texture is loaded after running the app, reuse them will be reused.
+* Load and use cached textures when cached data and web data are the same data.
+
+```cs
+public void Something()
+{
+    string url;
+    CacheInfo cacheInfo = GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            Texture texture = cachedTexture.texture;
+        }
+    });
+}
+```
+
+### CacheRequestType
+Can decide when to re-validate cached data to the server.
+The default is FIRSTPLAY You can make changes through SetCacheRequestType.
+
+* ALWAYS
+    * Validate that data has changed on the server at every request.
+    * Same as GpmCacheStorage.RequestHttpCache.
+* FIRSTPLAY
+    * Verifies to the server the first time you call after the app is launched.
+* ONCE
+    * Use cached data until it expires.
+* LOCAL
+    * Uses cached data.
+    * Same as GpmCacheStorage.RequestLocalCache.
+
+```cs
+public void Something()
+{
+    // whenever he requests to re-confirm adequacy of settings.
+    CacheRequestType requestType = CacheRequestType.ALWAYS;
+    GpmCacheStorage.SetCacheRequestType(requestType);
+}
+```
+
+Can request and able to request.
+
+
+```cs
+using Gpm.CacheStorage;
+
+public void Something()
+{
+    // Revalidate every time requested
+    string url;
+    CacheRequestType requestType = CacheRequestType.ALWAYS;
+    GpmCacheStorage.Request(url, requestType, (result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            bytes[] data = result.Data;
+        }
+    });
+}
+```
+
+### ReRequestTime
+FIRSTPLAY, ONCE will reuse the cache until it expires based on the data received.
+However, you can set the frequency of revalidation requests within the cluster.
+
+The SetRequestTime setting allows you to set the request period in the cla.
+* After a set number of seconds, the server will be re-validated upon callback.
+* The default is 0.
+* Do not re-request when set to 0.
+
+```cs
+public void Something()
+{
+    // Cache after 5 minutes of request is re-validated to the server
+    double fiveMinutes = 5 * 60;
+    GpmCacheStorage.SetReRequestTime(fiveMinutes);
+}
+```
+
+Can request and a factor when request
+
+```cs
+using Gpm.CacheStorage;
+
+public void Something()
+{
+    // Cache that has been requested for 5 minutes is revalidated to the server
+    string url;
+    double fiveMinutes = 5 * 60;
+    GpmCacheStorage.Request(url, fiveMinutes, (result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            bytes[] data = result.Data;
+        }
+    });
+}
+```
+
+
+### Cache Expiration
+Calculates expiration based on the header received from the server and verifies it again.
+* If the max-age of CacheControl is present, re-validate it after seconds of that value.
+* If Expired has a header, request it again after that time.
+
+### CacheControl Settings
+* If CacheControl has noStore, disable the cache.
+* Always revalidate if noCache is present in CacheControl.
+* Same as CacheRequestType.ALWAYS setting or max-age 0
+
+
+### Capacity control
+Can adjust the cache capacity and number so that there are not too many caches.
+
+#### SetMaxSize
+Sets the maximum capacity.
+```cs
+public void Something()
+{
+    // Delete from unnecessary cache when cache capacity exceeds 10MB
+    long maxSize = 10 * 1024 * 1024; // 10 MB
+    boolean appplayStorage = true; // apply storage (automatic deletion)
+    GpmCacheStorage.SetMaxSize(maxSize, applayStorage);
+}
+```
+
+#### SetMaxCount
+Can set the maximum number.
+```cs
+public void Something()
+{
+    // Delete from unnecessary cache when more than 50000 caches are exceeded
+    int maxCount = 50000;
+    boolean appplayStorage = true; // apply storage (automatic deletion)
+    GpmCacheStorage.SetMaxCount(maxCount, applayStorage);
+}
+```
+
+### SetUnusedPeriodTime
+Caches that have not been used for that time period (seconds) are automatically deleted.
+```cs
+public void Something()
+{
+    // Delete cache that has not been used for 1 month
+    double month = 24 * 60 * 60 * 30;
+    GpmCacheStorage.SetUnusedPeriodTime(mont);
+}
+```
+
+### SetRemoveCycle
+Removes the cache of the destination to be removed every corresponding number of seconds.
+If you delete many caches at once, it can be loaded and distributed.
+```cs
+public void Something()
+{
+    // Delete cache to be removed every 2
+    double twoSeconds = 2;
+    GpmCacheStorage.SetRemoveCycle(mont);
+}
+```
 
 ## API
+
+### Request
+
+Request data with url.
+If cached data and web data are the same data, use cached data.
+
+**API**
+```cs
+public static CacheInfo Request(string url, Action<GpmCacheResult> onResult)
+```
+```cs
+public static CacheInfo Request(string url, CacheRequestType requestType, Action<GpmCacheResult> onResult)
+```
+```cs
+public static CacheInfo Request(string url, double reRequestTime, Action<GpmCacheResult> onResult)
+```
+```cs
+public static CacheInfo Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
+```
+
+**Example**
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.Request(url, (result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            bytes[] data = result.Data;
+        }
+    });
+}
+```
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.Request(url, CacheRequestType.ALWAYS, (result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            bytes[] data = result.Data;
+        }
+    });
+}
+```
 
 ### RequestHttpCache
 
@@ -29,7 +319,7 @@ If the cached data and the web data are the same data, the cached data is used.
 
 **API**
 ```cs
-public static CacheInfo RequestHttpCache(string url, Action<Result> onResult)
+public static CacheInfo RequestHttpCache(string url, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -39,9 +329,9 @@ public void Something()
     string url;
     GpmCacheStorage.RequestHttpCache(url, (result) =>
     {
-        if (result.success == true)
+        if (result.IsSuccess() == true)
         {
-            bytes[] data = result.data;
+            bytes[] data = result.Data;
         }
     });
 }
@@ -54,7 +344,7 @@ Fails if not cached.
 
 **API**
 ```cs
-public static CacheInfo RequestLocalCache(string url, Action<Result> onResult)
+public static CacheInfo RequestLocalCache(string url, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -64,9 +354,9 @@ public void Something()
     string url;
     GpmCacheStorage.RequestLocalCache(url, (result) =>
     {
-        if (result.success == true)
+        if (result.IsSuccess() == true)
         {
-            bytes[] data = result.data;
+            bytes[] data = result.Data;
         }
     });
 }
@@ -300,12 +590,12 @@ public void SetCachePath()
 
 **API**
 ```cs
-public static long GetReRequestTime()
+public static double GetReRequestTime()
 ```
 
 **Example**
 ```cs
-public long GetReRequestTime()
+public double GetReRequestTime()
 {
     return GpmCacheStorage.GetReRequestTime();
 }
@@ -314,7 +604,7 @@ public long GetReRequestTime()
 ### SetReRequestTime
 
 Can set the webcache re-request time.
-Default is 0. The unit is Tick.
+Default is 0. The unit is seconds.
 
 
 **API**
@@ -326,7 +616,123 @@ public static void SetReRequestTime(long value)
 ```cs
 public void SetReRequestTime()
 {
-    long reRequestTime = TimeSpan.TicksPerHour * 4;
+    double reRequestTime = 5 * 60;
     GpmCacheStorage.SetReRequestTime(reRequestTime);
+}
+```
+
+
+### GetUnusedPeriodTime
+
+Can know how long to delete unnecessary assets.
+
+**API**
+```cs
+public static double GetUnusedPeriodTime()
+```
+
+**Example**
+```cs
+public double GetUnusedPeriodTime()
+{
+    return GpmCacheStorage.GetUnusedPeriodTime();
+}
+```
+
+### SetUnusedPeriodTime
+
+Sets the deletion period for unnecessary assets.
+The default is 0. The unit is seconds.
+
+**API**
+```cs
+public static void SetUnusedPeriodTime(double value)
+```
+
+**Example**
+```cs
+public void SetUnusedPeriodTime()
+{
+    double unUsedPeriodTime = 5 * 60 * 60;
+    GpmCacheStorage.SetUnusedPeriodTime(unUsedPeriodTime);
+}
+
+### GetReRequestTime
+Can see the deletion of delay.
+
+**API**
+```cs
+public static double GetRemoveCycle()
+```
+
+**Example**
+```cs
+public double GetRemoveCycle()
+{
+    return GpmCacheStorage.GetRemoveCycle();
+}
+```
+
+### SetRemoveCycle
+Setting the deletion of delay.
+The default value is 0.It was early units.
+
+**API**
+```cs
+public static void SetRemoveCycle(double value)
+```
+
+**Example**
+```cs
+public void SetRemoveCycle()
+{
+    double reRequestTime = 5 * 60;
+    GpmCacheStorage.SetRemoveCycle(reRequestTime);
+}
+```
+
+### GetCacheRequestType
+
+Can see the basic Cache request type.
+Default setting when requesting GpmCacheStorage.Request.
+
+**Type**
+```cs
+CacheRequestType.ALWAYS: Continuous cache checking on the server
+CacheRequestType.FIRSTPLAY: Requesting the server to check the cache only once during execution
+CacheRequestType.ONCE: Use local data after one request
+CacheRequestType.LOCAL: Use local data
+```
+
+
+**API**
+```cs
+public static CacheRequestType GetCacheRequestType()
+```
+
+**Example**
+```cs
+public CacheRequestType GetCacheRequestType()
+{
+    return GpmCacheStorage.GetCacheRequestType();
+}
+```
+
+### SetRemovePeriodTime
+
+Sets the default Cache request type.
+Default setting when requesting GpmCacheStorage.Request.
+
+**API**
+```cs
+public static void SetCacheRequestType(CacheRequestType value)
+```
+
+**Example**
+```cs
+public void SetCacheRequestType()
+{
+    CacheRequestType reRequestTime = 5 * 60;
+    GpmCacheStorage.SetCacheRequestType(reRequestTime);
 }
 ```
