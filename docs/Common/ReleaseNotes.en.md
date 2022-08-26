@@ -6,9 +6,9 @@
 
 ### Date
 
-* 2022.08.25
+* 2022.08.26
 
-### Update
+### Updated
 * Modified to include both property get set in thirdparty Json must be readable
 * Fields are now added when using the SerializeField attribute in a thirdparty Json.
 * Fields are now ignored when using the JsonSkip attribute in a thirdparty Json.
