@@ -425,7 +425,7 @@ public static long GetCacheSize()
 
 **Example**
 ```cs
-public long GetCacheCount()
+public long GetCacheSize()
 {
     return GpmCacheStorage.GetCacheSize();
 }
