@@ -2,6 +2,17 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.2.2
+
+### Date
+
+* 2022.08.26
+
+### Updated
+* thirdparty Json에서 프로퍼티 get set 둘 다 읽을 수 있어야 포함하도록 수정
+* 이제 thirdparty Json에서 SerializeField 속성을 사용하면 필드가 추가됩니다.
+* 이제 thirdparty Json에서 JsonSkip 속성을 사용하면 필드가 무시됩니다.
+
 ## 2.2.1
 
 ### Date
