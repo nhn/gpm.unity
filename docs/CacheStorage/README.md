@@ -241,7 +241,7 @@ public void Something()
 }
 ```
 
-### SetUnusedPeriodTime
+#### SetUnusedPeriodTime
 해당 기간(초) 만큼 사용하지 않은 캐시를 자동적으로 삭제됩니다.
 ```cs
 public void Something()
@@ -252,7 +252,7 @@ public void Something()
 }
 ```
 
-### SetRemoveCycle
+#### SetRemoveCycle
 해당 기간(초)마다 제거할 대상의 캐시를 제거합니다.
 한 번에 많은 캐시를 삭제하게 되면 부하가 갈수 있어 분산시켜줍니다.
 ```cs
@@ -261,21 +261,6 @@ public void Something()
     // 2 마다 제거 예정 캐시 삭제
     double twoSeconds = 2;
     GpmCacheStorage.SetRemoveCycle(mont);
-}
-```
-
-**Example**
-```cs
-public void Something()
-{
-    string url;
-    GpmCacheStorage.Request(url, (result) =>
-    {
-        if (result.IsSuccess() == true)
-        {
-            bytes[] data = result.Data;
-        }
-    });
 }
 ```
 
