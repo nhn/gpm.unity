@@ -242,7 +242,7 @@ public void Something()
 }
 ```
 
-### SetUnusedPeriodTime
+#### SetUnusedPeriodTime
 Caches that have not been used for that time period (seconds) are automatically deleted.
 ```cs
 public void Something()
@@ -253,7 +253,7 @@ public void Something()
 }
 ```
 
-### SetRemoveCycle
+#### SetRemoveCycle
 Removes the cache of the destination to be removed every corresponding number of seconds.
 If you delete many caches at once, it can be loaded and distributed.
 ```cs
@@ -300,6 +300,7 @@ public void Something()
     });
 }
 ```
+
 ```cs
 public void Something()
 {
