@@ -6,19 +6,22 @@
 
 ### Date
 
-* 2022.08.25
+* 2022.08.26
 
 ### Added
 * 캐싱 유효기간에 따른 백그라운드 자동 삭제 지원
 * CacheControl 기능 지원
 * CacheResult text, json 변환 기능 추가
 * 만료, 설정된 재요청 시간이 안되었을 경우 Request 타입 추가
-    * ALWAYS : 서버에 지속적으로 캐시 확인
-    * FIRSTPLAY : 실행 중 1번만 서버에 캐시 확인 요청
-    * ONCE : 1회 요청 후 로컬 데이터 사용
-    * LOCAL : 로컬 데이터 사용
+    * ALWAYS : 요청할 때마다 서버에 데이터가 바뀌었는지 검증
+    * FIRSTPLAY :  앱 실행 후 처음 요청할 때마다 서버에 검증
+    * ONCE : 최초 요청 이후 서버에 검증하지 않고 캐시 된 데이터를 사용
+    * LOCAL : 캐시 된 데이터를 사용합니다.
 
 ### Updated
+* Unity Guidelines의 1.3.a Versions of Unity 내용에 따라 최소 버전을 2019.4로 상향합니다.
+    * 참조 : [Unity Guidelines](https://assetstore.unity.com/publishing/submission-guidelines)
+
 * Common v2.2.2 업데이트
 * 캐시 계산 최적화
 * 임포트 데이터 최적화

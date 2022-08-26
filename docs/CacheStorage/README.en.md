@@ -126,9 +126,11 @@ The default is FIRSTPLAY You can make changes through SetCacheRequestType.
     * Validate that data has changed on the server at every request.
     * Same as GpmCacheStorage.RequestHttpCache.
 * FIRSTPLAY
-    * Verifies to the server the first time you call after the app is launched.
+    * Verify to the server every time you make the first request after running the app.
+    * Revalidates based on expiration or RequestTime settings.
 * ONCE
-    * Use cached data until it expires.
+    * Use cached data without validating to the server since the initial request.
+    * Revalidates based on expiration or RequestTime settings.
 * LOCAL
     * Uses cached data.
     * Same as GpmCacheStorage.RequestLocalCache.
@@ -656,8 +658,9 @@ public void SetUnusedPeriodTime()
     double unUsedPeriodTime = 5 * 60 * 60;
     GpmCacheStorage.SetUnusedPeriodTime(unUsedPeriodTime);
 }
+```
 
-### GetReRequestTime
+### GetRemoveCycle
 Can see the deletion of delay.
 
 **API**
@@ -693,17 +696,7 @@ public void SetRemoveCycle()
 
 ### GetCacheRequestType
 
-Can see the basic Cache request type.
-Default setting when requesting GpmCacheStorage.Request.
-
-**Type**
-```cs
-CacheRequestType.ALWAYS: Continuous cache checking on the server
-CacheRequestType.FIRSTPLAY: Requesting the server to check the cache only once during execution
-CacheRequestType.ONCE: Use local data after one request
-CacheRequestType.LOCAL: Use local data
-```
-
+Can determine the CacheRequestType that is applied when requesting GpmCacheStorage.Request.
 
 **API**
 ```cs
@@ -718,10 +711,9 @@ public CacheRequestType GetCacheRequestType()
 }
 ```
 
-### SetRemovePeriodTime
+### SetCacheRequestType
 
-Sets the default Cache request type.
-Default setting when requesting GpmCacheStorage.Request.
+Sets the CacheRequestType that is applied when requesting GpmCacheStorage.Request.
 
 **API**
 ```cs

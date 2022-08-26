@@ -126,9 +126,11 @@ public void Something()
     * 요청할 때마다 서버에 데이터가 바뀌었는지 검증합니다.
     * GpmCacheStorage.RequestHttpCache과 동일합니다.
 * FIRSTPLAY
-    * 앱 실행 이후 처음 호출했을 때 서버에 검증합니다.
+    * 앱 실행 후 처음 요청할 때마다 서버에 검증합니다.
+    * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
 * ONCE
-    * 만료되기 전까지 캐시 된 데이터를 사용합니다.
+    * 최초 요청 이후 서버에 검증하지 않고 캐시 된 데이터를 사용합니다.
+    * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
 * LOCAL
     * 캐시 된 데이터를 사용합니다.
     * GpmCacheStorage.RequestLocalCache과 동일합니다.
@@ -672,8 +674,9 @@ public void SetUnusedPeriodTime()
     double unUsedPeriodTime = 5 * 60 * 60;
     GpmCacheStorage.SetUnusedPeriodTime(unUsedPeriodTime);
 }
+```
 
-### GetReRequestTime
+### GetRemoveCycle
 
 지연 삭제 주기를 알 수 있습니다.
 
@@ -711,17 +714,7 @@ public void SetRemoveCycle()
 
 ### GetCacheRequestType
 
-기본적인 Cache 요청 타입을 알 수 있습니다.
-GpmCacheStorage.Request를 요청할 때 기본 설정입니다.
-
-**Type**
-```cs
-CacheRequestType.ALWAYS : 서버에 지속적으로 캐시 확인
-CacheRequestType.FIRSTPLAY : 실행 중 1번만 서버에 캐시 확인 요청
-CacheRequestType.ONCE : 1회 요청 후 로컬 데이터 사용
-CacheRequestType.LOCAL : 로컬 데이터 사용
-```
-
+GpmCacheStorage.Request를 요청할 때 적용되는 CacheRequestType를 알 수 있습니다.
 
 **API**
 ```cs
@@ -736,10 +729,9 @@ public CacheRequestType GetCacheRequestType()
 }
 ```
 
-### SetRemovePeriodTime
+### SetCacheRequestType
 
-기본적인 Cache요청 타입을 설정합니다.
-GpmCacheStorage.Request를 요청할 때 기본 설정입니다.
+GpmCacheStorage.Request를 요청할 때 적용되는 CacheRequestType를 설정합니다.
 
 **API**
 ```cs
