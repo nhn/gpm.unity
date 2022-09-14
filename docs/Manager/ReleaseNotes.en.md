@@ -12,7 +12,7 @@
 * Common v2.2.2 업데이트
 
 ### Fixed
-* 유니티 버전에 c1이 들어갔을때 발생하는 에러 수정[(279)](https://github.com/nhn/gpm.unity/issues/279)
+* 유니티 버전에 c1이 들어갔을 때 발생하는 에러 수정[(279)](https://github.com/nhn/gpm.unity/issues/279)
 
 
 ## 2.2.0
