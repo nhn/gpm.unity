@@ -2,6 +2,18 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.1
+
+### Date
+
+* 2022.09.14
+
+### Updated
+* Updated Common v2.2.2
+
+### Fixed
+* Fixed an error that occurs when c1 is included in the Unity version [(279)](https://github.com/nhn/gpm.unity/issues/279)
+
 ## 2.2.0
 
 ### Date
