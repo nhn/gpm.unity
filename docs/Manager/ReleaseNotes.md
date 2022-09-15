@@ -9,10 +9,10 @@
 * 2022.09.14
 
 ### Updated
-* Updated Common v2.2.2
+* Common v2.2.2 업데이트
 
 ### Fixed
-* Fixed an error that occurs when c1 is included in the Unity version [(279)](https://github.com/nhn/gpm.unity/issues/279)
+* 유니티 버전에 c1이 들어갔을 때 발생하는 에러 수정[(279)](https://github.com/nhn/gpm.unity/issues/279)
 
 ## 2.2.0
 
