@@ -2,6 +2,20 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.9.0
+
+### Date
+* 2022.09.20
+
+### Added
+* Screen rotation support options
+* Device default browser call API
+* File download function (Android only)
+
+### Updated
+* Raise the minimum version to 2019.4 according to the 1.3.a Versions of Unity contents of the Unity Guidelines.
+  * Link : [Unity Guidelines](https://assetstore.unity.com/publishing/submission-guidelines)
+
 ## 1.8.1
 
 ### Date

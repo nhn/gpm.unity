@@ -19,7 +19,7 @@ Provides a WebView used in various ways in the game.
 
 ### Supported Unity Version
 
-* 2018.4.0 or higher
+* 2019.4.0 or higher
 
 ### Supported Android version
 
@@ -55,6 +55,7 @@ Provides a WebView used in various ways in the game.
 | Show SafeBrowsing | |
 |   | Callback |
 | Other | IsActive |
+|   | Screen orientation |
 |   | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
@@ -63,9 +64,11 @@ Provides a WebView used in various ways in the game.
 |   | Go Back |
 |   | Go Forward |
 |   | Multiple Windows |
+|   | File download</br>(Android only) |
 |   | File upload</br>(Android API 21 or later) |
 |   | User agent string |
 |   | Set auto rotation |
+|   | Show WebBrowser |
 
 ## 🔨 Platform specific settings
 
@@ -94,7 +97,7 @@ For smooth WebView experience, PostProcessBuild script enables **hardwareAcceler
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
 
         // Add if you are using the ShowSafeBrowsing API
-        implementation "androidx.browser:browser:1.3.0"
+        implementation 'androidx.browser:browser:1.3.0'
     }
     ```
     * If they are already added in another package, you may skip this step.
@@ -135,6 +138,7 @@ Displays the WebView.
 | ------------------------- | ----------------------------------------- | -------------------------------- |
 | style                     | GpmWebViewStyle.POPUP                     | Popup moode |
 |                           | GpmWebViewStyle.FULLSCREEN                | Fullscreen mode |
+| orientation               | GpmOrientation                            | Screen orientation |
 | isClearCookie             | bool                                      | Clear cookies |
 | isClearCache              | bool                                      | Clear cache |
 | isNavigationBarVisible    | bool                                      | Activate/Deactivate Navigation Bar |
@@ -177,6 +181,7 @@ public void ShowUrlFullScreen()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = true,
@@ -204,12 +209,13 @@ public void ShowUrlPopupDefault()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = false,
             supportMultipleWindows = true,
 #if UNITY_IOS
-            contentMode = GpmWebViewContentMode.MOBILE
+            contentMode = GpmWebViewContentMode.MOBILE,
             isMaskViewVisible = true,
 #endif
         },
@@ -228,6 +234,7 @@ public void ShowUrlPopupPositionSize()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = false,
@@ -245,7 +252,7 @@ public void ShowUrlPopupPositionSize()
             },
             supportMultipleWindows = true,
 #if UNITY_IOS
-            contentMode = GpmWebViewContentMode.MOBILE
+            contentMode = GpmWebViewContentMode.MOBILE,
             isMaskViewVisible = true,
 #endif
         }, null, null);
@@ -259,6 +266,7 @@ public void ShowUrlPopupMargins()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = false,
@@ -272,7 +280,7 @@ public void ShowUrlPopupMargins()
             },
             supportMultipleWindows = true,
 #if UNITY_IOS
-            contentMode = GpmWebViewContentMode.MOBILE
+            contentMode = GpmWebViewContentMode.MOBILE,
             isMaskViewVisible = true,
 #endif
         }, null, null);
@@ -305,8 +313,10 @@ private void OnCallback(
             }
             break;
         case GpmWebViewCallback.CallbackType.MultiWindowOpen:
+            Debug.Log("MultiWindowOpen");
             break;
         case GpmWebViewCallback.CallbackType.MultiWindowClose:
+            Debug.Log("MultiWindowClose");
             break;
         case GpmWebViewCallback.CallbackType.Scheme:
             if (error == null)
@@ -320,6 +330,13 @@ private void OnCallback(
             {
                 Debug.Log(string.Format("Fail to custom scheme. Error:{0}", error));
             }
+            break;
+            break;
+        case GpmWebViewCallback.CallbackType.GoBack:
+            Debug.Log("GoBack");
+            break;
+        case GpmWebViewCallback.CallbackType.GoForward:
+            Debug.Log("GoForward");
             break;
     }
 }
@@ -370,6 +387,7 @@ public void ShowHtmlFile()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = true,
@@ -414,6 +432,7 @@ public void ShowHtmlString()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = true,
@@ -726,5 +745,27 @@ public void Something()
         int height = GpmWebView.GetHeight();
         ...
     }
+}
+```
+### ShowWebBrowser
+
+Open the default browser for Android/iOS.</br>
+
+**Required 파라미터**
+
+* url : the url transmitted to the parameter must be a valid value.
+
+**API**
+
+```cs
+public static void ShowWebBrowser(string url)
+```
+
+**Example**
+
+```cs
+public void OpenWebBrowser()
+{
+    GpmWebView.ShowWebBrowser(sampleUrl);
 }
 ```

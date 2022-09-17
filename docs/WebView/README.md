@@ -19,7 +19,7 @@
 
 ### Unity 지원 버전
 
-* 2018.4.0 이상
+* 2019.4.0 이상
 
 ### Android 지원 버전
 
@@ -55,6 +55,7 @@
 | Show SafeBrowsing | |
 |   | Callback |
 | Other | IsActive |
+|   | Screen orientation |
 |   | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
@@ -63,9 +64,11 @@
 |   | Go Back |
 |   | Go Forward |
 |   | Multiple Windows |
+|   | File download</br>(Android only) |
 |   | File upload</br>(Android API 21 이상) |
 |   | User agent string |
 |   | Set auto rotation |
+|   | Show WebBrowser |
 
 ## 🔨 플랫폼별 설정
 
@@ -93,7 +96,7 @@ Unity 2019.3 이전 버전의 프로젝트에서는 **Internal** 빌드 설정�
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
         
         // ShowSafeBrowsing API를 사용할 경우 추가
-        implementation "androidx.browser:browser:1.3.0"
+        implementation 'androidx.browser:browser:1.3.0'
     }
     ```
     * 다른 패키지에서 이미 추가한 경우 해당 과정을 제외할 수 있습니다.
@@ -135,6 +138,7 @@ WebView를 표시합니다.
 | ------------------------- | ----------------------------------------- | -------------------------------- |
 | style                     | GpmWebViewStyle.POPUP                     | 팝업 모드 |
 |                           | GpmWebViewStyle.FULLSCREEN                | 전체 화면 모드 |
+| orientation               | GpmOrientation                            | 화면 회전 |
 | isClearCookie             | bool                                      | 쿠키 제거 |
 | isClearCache              | bool                                      | 캐시 제거 |
 | isNavigationBarVisible    | bool                                      | 네비게이션 바 활성 또는 비활성 |
@@ -176,6 +180,7 @@ public void ShowUrlFullScreen()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = true,
@@ -203,12 +208,13 @@ public void ShowUrlPopupDefault()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = false,
             supportMultipleWindows = true,
 #if UNITY_IOS
-            contentMode = GpmWebViewContentMode.MOBILE
+            contentMode = GpmWebViewContentMode.MOBILE,
             isMaskViewVisible = true,
 #endif
         },
@@ -227,6 +233,7 @@ public void ShowUrlPopupPositionSize()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = false,
@@ -244,7 +251,7 @@ public void ShowUrlPopupPositionSize()
             },
             supportMultipleWindows = true,
 #if UNITY_IOS
-            contentMode = GpmWebViewContentMode.MOBILE
+            contentMode = GpmWebViewContentMode.MOBILE,
             isMaskViewVisible = true,
 #endif
         }, null, null);
@@ -258,6 +265,7 @@ public void ShowUrlPopupMargins()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = false,
@@ -271,7 +279,7 @@ public void ShowUrlPopupMargins()
             },
             supportMultipleWindows = true,
 #if UNITY_IOS
-            contentMode = GpmWebViewContentMode.MOBILE
+            contentMode = GpmWebViewContentMode.MOBILE,
             isMaskViewVisible = true,
 #endif
         }, null, null);
@@ -304,8 +312,10 @@ private void OnCallback(
             }
             break;
         case GpmWebViewCallback.CallbackType.MultiWindowOpen:
+            Debug.Log("MultiWindowOpen");
             break;
         case GpmWebViewCallback.CallbackType.MultiWindowClose:
+            Debug.Log("MultiWindowClose");
             break;
         case GpmWebViewCallback.CallbackType.Scheme:
             if (error == null)
@@ -319,6 +329,13 @@ private void OnCallback(
             {
                 Debug.Log(string.Format("Fail to custom scheme. Error:{0}", error));
             }
+            break;
+            break;
+        case GpmWebViewCallback.CallbackType.GoBack:
+            Debug.Log("GoBack");
+            break;
+        case GpmWebViewCallback.CallbackType.GoForward:
+            Debug.Log("GoForward");
             break;
     }
 }
@@ -369,6 +386,7 @@ public void ShowHtmlFile()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = true,
@@ -414,6 +432,7 @@ public void ShowHtmlString()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
             isNavigationBarVisible = true,
@@ -726,5 +745,28 @@ public void Something()
         int height = GpmWebView.GetHeight();
         ...
     }
+}
+```
+
+### ShowWebBrowser
+
+Android/iOS의 기본 브라우저를 표시합니다.</br>
+
+**Required 파라미터**
+
+* url : 파라미터로 전송되는 url은 유효한 값이어야 합니다.
+
+**API**
+
+```cs
+public static void ShowWebBrowser(string url)
+```
+
+**Example**
+
+```cs
+public void OpenWebBrowser()
+{
+    GpmWebView.ShowWebBrowser(sampleUrl);
 }
 ```
