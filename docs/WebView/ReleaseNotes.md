@@ -2,6 +2,20 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.9.0
+
+### Date
+* 2022.09.20
+
+### Added
+* 화면 회전 지원을 위한 옵션 추가
+* 디바이스 기본 브라우저 호출 API
+* 파일 다운로드 기능 (Android only)
+
+### Updated
+* Unity Guidelines의 1.3.a Versions of Unity 내용에 따라 최소 버전을 2019.4로 상향
+  * 참조 : [Unity Guidelines](https://assetstore.unity.com/publishing/submission-guidelines)
+
 ## 1.8.1
 
 ### Date
