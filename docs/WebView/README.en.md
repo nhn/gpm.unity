@@ -751,7 +751,7 @@ public void Something()
 
 Open the default browser for Android/iOS.</br>
 
-**Required 파라미터**
+**Required parameter**
 
 * url : the url transmitted to the parameter must be a valid value.
 
