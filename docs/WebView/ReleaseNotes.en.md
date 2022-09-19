@@ -8,7 +8,7 @@
 * 2022.09.20
 
 ### Added
-* Screen rotation support options
+* Added options for screen rotation support
 * Device default browser call API
 * File download function (Android only)
 
