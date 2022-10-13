@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## v1.0.1
+
+### Date
+
+* 2022.10.13
+
+### Fixed
+* Fixed local file read button connection invalid bug in sample
+* Fixed a bug that did not format the last Mercury date when communicating with http
+
 ## v1.0.0
 
 ### Date
