@@ -9,6 +9,8 @@
 
 ### Updated
 * Android WebViewClient 클래스의 shouldOverrideUrlLoading 로직 개선
+  * URL에 대한 scheme key 수정("intent://" -> "intent:")
+  * "intent:", "market://" 이외의 scheme을 ACTION_VIEW로 처리
 
 ## 1.9.0
 

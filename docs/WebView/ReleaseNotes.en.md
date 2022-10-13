@@ -9,6 +9,8 @@
 
 ### Updated
 * Improved the shouldOverrideUrlLoading logic of the Android WebViewClient class
+  * Modified scheme key for URL("intent://" -> "intent:")
+  * Proceed to ACTION_VIEW except for "intent:", "market://"
 
 ## 1.9.0
 
