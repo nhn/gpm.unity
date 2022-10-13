@@ -2,6 +2,14 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.9.1
+
+### Date
+* 2022.10.13
+
+### Updated
+* Android WebViewClient 클래스의 shouldOverrideUrlLoading 로직 개선
+
 ## 1.9.0
 
 ### Date
