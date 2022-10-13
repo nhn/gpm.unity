@@ -2,7 +2,7 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
-## v1.0.1
+## 1.0.1
 
 ### Date
 
@@ -12,7 +12,7 @@
 * Fixed local file read button connection invalid bug in sample
 * Fixed a bug that did not format the last Mercury date when communicating with http
 
-## v1.0.0
+## 1.0.0
 
 ### Date
 
@@ -36,7 +36,7 @@
 * Optimize import data
 * Change based on re-request time (Tick -> Seconds)
 
-## v0.2.1
+## 0.2.1
 
 ### Date
 
@@ -45,7 +45,7 @@
 ### Updated
 * Updated Common 2.1.0 to 2.1.2
 
-## v0.2.0
+## 0.2.0
 
 ### Date
 
