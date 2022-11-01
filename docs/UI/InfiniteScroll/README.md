@@ -187,11 +187,11 @@ public bool IsMoveToLastData()
 해당 데이터로 콘텐츠를 이동합니다.
 
 ```cs
-public void MoveTo(InfiniteScrollData data, MoveToType moveToType)
+public void MoveTo(InfiniteScrollData data, MoveToType moveToType, float time = 0)
 ```
 
 ```cs
-public void MoveTo(int dataIndex, MoveToType moveToType)
+public void MoveTo(int dataIndex, MoveToType moveToType, float time = 0)
 ```
 
 ### ResizeScrollView
