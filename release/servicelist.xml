@@ -30,7 +30,7 @@
     </service>
     <service>
         <name>WebView</name>
-        <version>1.9.1</version>
+        <version>1.9.2</version>
     </service>
     <service>
         <name>AssetManagement</name>
