@@ -2,6 +2,14 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.9.2
+
+### Date
+* 2022.11.02
+
+### Updated
+* Removed "itms-services" out of the scheme list used in iOS WebView because it was rejected by App Review.
+
 ## 1.9.1
 
 ### Date
