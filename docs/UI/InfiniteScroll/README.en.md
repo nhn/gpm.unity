@@ -186,11 +186,11 @@ public bool IsMoveToLastData()
 Move content to the specified data.
 
 ```cs
-public void MoveTo(InfiniteScrollData data, MoveToType moveToType)
+public void MoveTo(InfiniteScrollData data, MoveToType moveToType, float time = 0)
 ```
 
 ```cs
-public void MoveTo(int dataIndex, MoveToType moveToType)
+public void MoveTo(int dataIndex, MoveToType moveToType, float time = 0)
 ```
 
 ### ResizeScrollView

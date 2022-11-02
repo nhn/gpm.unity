@@ -2,6 +2,18 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.6.0
+
+### Date
+
+* 2022.11.02
+
+### Added
+* InfiniteScroll
+    * Added smooth scroll movement
+* ResizeLayoutHandler
+    * Added a module that lets you know events when they are resized
+
 ## 2.5.1
 
 ### Date
