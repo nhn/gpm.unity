@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2022.11.01
+* 2022.11.02
 
 ### Added
 * InfiniteScroll
