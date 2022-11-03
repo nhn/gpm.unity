@@ -5,6 +5,7 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [설치](#설치)
 * [스펙](#스펙)
 * [API](#api)
 * [Release notes](./ReleaseNotes.md)
@@ -13,6 +14,12 @@
 
 * CacheStorage는 Unity에서 웹 통신을 할 때 Cache를 지원합니다.
 * Cache를 이용하여 통신을 할 때 받은 데이터를 재사용하여 성능을 개선할 수 있습니다.
+
+## 설치
+
+1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. 실행 : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. 서비스 설치 : CacheStorage
 
 ## 스펙
 
@@ -25,6 +32,11 @@
 1. using Gpm.CacheStorage를 선언합니다.
 2. 대부분의 기능은 GpmCacheStorage에 정의되어 있습니다.
 3. GpmCacheStorage.Request를 사용하여 Cache를 요청합니다.
+
+### NameSpace
+```cs
+using Gpm.CacheStorage;
+```
 
 ### Request
 Request를 통해 url의 데이터를 요청합니다.

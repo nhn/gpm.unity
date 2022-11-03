@@ -5,13 +5,20 @@
 ## 🚩 Table of Contents
 
 * [Overview](#overview)
-* [Specification](#Specification)
+* [Installation](#installation)
+* [Specification](#specification)
 * [API](#api)
 * [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 * CacheStorage supports Cache when web communications are performed in Unity.
 * Cache can be used to improve performance by reusing the data received when communicating.
+
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : CacheStorage
 
 ## Specification
 
@@ -24,6 +31,11 @@
 1. using Gpm.Declares Cache Storage.
 2. Most features are defined in GpmCacheStorage.
 3. Request Cache using GpmCacheStorage.Request.
+
+### NameSpace
+```cs
+using Gpm.CacheStorage;
+```
 
 ### Request
 Request data from url through Request.
