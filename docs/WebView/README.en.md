@@ -123,6 +123,11 @@ When performing an iOS build in certain Unity versions, the buttons on **Navigat
 
 ## 🔨 API
 
+### Namespace
+```cs
+using Gpm.WebView;
+```
+
 ### ShowUrl
 
 Displays the WebView.
