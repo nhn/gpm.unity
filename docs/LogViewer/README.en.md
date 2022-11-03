@@ -5,6 +5,7 @@
 ## 🚩 Table of Contents
 
 * [Overview](#Overview)
+* [Installation](#Installation)
 * [Specification](#Specification)
 * [Features](#Features)
 * [Usage](#-Usage)
@@ -13,6 +14,12 @@
 ## Overview
 
 * LogViewer enables users to view Unity logs with device system information on the screen and to call APIs registered by developers.
+
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : LogViewer
 
 ## Specification
 
@@ -172,6 +179,11 @@
     * LogType.Exception
 
 ### Code
+
+#### NameSpace
+```cs
+using Gpm.LogViewer;
+```
 
 #### Console
 1. Category
