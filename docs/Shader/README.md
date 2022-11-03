@@ -5,6 +5,7 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [설치](#설치)
 * [스펙](#스펙)
 * [이펙트](#이펙트)
 * [Release notes](./ReleaseNotes.md)
@@ -13,6 +14,12 @@
 ## 개요
 
 다양한 효과의 셰이더를 제공합니다.
+
+## 설치
+
+1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. 실행 : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. 서비스 설치 : Shader
 
 ## 스펙
 
