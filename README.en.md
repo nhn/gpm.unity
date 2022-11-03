@@ -32,7 +32,7 @@ GitHub Issue : https://github.com/nhn/gpm.unity/issues
 
 ## Service
 
-|서비스| 설명 |
+|Service| Description |
 | --- | --- |
 | [Manager](docs/Manager/README.en.md)<br>[Download from Asset Store](https://assetstore.unity.com/packages/slug/147711) | Check the service list from Manager, while you install, remove, or update services as you need.|
 | [WebView](docs/WebView/README.en.md) | Provides a web view that can be used in various ways in the game.|
