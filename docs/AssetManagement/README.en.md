@@ -5,6 +5,7 @@
 ## 🚩 Table of Contents
 
 * [Overview](#Overview)
+* [Installation](#Installation)
 * [Specification](#Specification)
 * [Features](#Features)
     * [AssetMap](#AssetMap)
@@ -38,6 +39,13 @@
 4. Can manage and optimize projects.
     * Can easily and safely remove useless assets to reduce the size of a project.
     * Can minimize the complexity of assets to reduce the size of the build.
+
+
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : AssetManagerment
 
 ## Specification
 
