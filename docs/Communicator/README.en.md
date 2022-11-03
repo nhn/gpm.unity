@@ -20,7 +20,7 @@
 ## Installation
 
 1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
-2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
 3. Service installation : Communicator
 
 ### Standard structures that implement plugins and their weaknesses
