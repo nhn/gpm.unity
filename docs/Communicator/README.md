@@ -5,6 +5,7 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [설치](#설치)
 * [스펙](#스펙)
 * [API](#-api)
 * [사용방법](#-사용방법)
@@ -15,6 +16,12 @@
 * Unity에서는 Native와 데이터를 주고 받을 수 있는 기능을 제공하고 있습니다.
 * Android는 AndroidJavaClass를 이용하고, iOS는 DllImport를 이용해 Native와 연결합니다.
 * Communicator는 Unity와 Native를 연결하는 기능과 공통화된 인터페이스를 제공해 데이터를 쉽게 주고받을 수 있습니다.
+
+## 설치
+
+1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. 실행 : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. 서비스 설치 : Communicator
 
 ### 플러그인을 구현하는 일반적인 구조와 단점
 
