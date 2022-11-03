@@ -52,6 +52,11 @@
 
 ## 🔨 API
 
+### Namespace
+```cs
+using Gpm.Communicator;
+```
+
 ### InitializeClass
 
 Generates a Native Class to receive a message from Unity.

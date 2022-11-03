@@ -52,6 +52,11 @@
 
 ## 🔨 API
 
+### Namespace
+```cs
+using Gpm.Communicator;
+```
+
 ### InitializeClass
 
 Unity에서 보낸 메시지를 받을 Native Class를 생성합니다.
