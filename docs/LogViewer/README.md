@@ -5,6 +5,7 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [설치](#설치)
 * [스펙](#스펙)
 * [기능 설명](#기능-설명)
 * [사용방법](#-사용방법)
@@ -13,6 +14,12 @@
 ## 개요
 
 * LogViewer는 Unity Log와 디바이스 시스템 정보를 화면에서 확인할 수 있고, 개발자가 미리 등록한 API를 호출해 볼 수 있는 툴입니다.
+
+## 설치
+
+1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. 실행 : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. 서비스 설치 : LogViewer
 
 ## 스펙
 
@@ -170,6 +177,11 @@
     *  LogType.Exception 
 
 ### Code
+
+#### NameSpace
+```cs
+using Gpm.LogViewer;
+```
 
 #### Console
 1. Category
