@@ -5,6 +5,7 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [설치](#설치)
 * [스펙](#스펙)
 * [플랫폼별 설정](#-플랫폼별-설정)
 * [API](#-api)
@@ -14,6 +15,12 @@
 ## 개요
 
 게임에서 다양하게 사용할 수 있는 웹뷰를 제공합니다.
+
+## 설치
+
+1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. 실행 : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. 서비스 설치 : WebView
 
 ## 스펙
 
@@ -172,6 +179,8 @@ public static void ShowUrl(
 **Example**
 
 ```cs
+using Gpm.WebView;
+
 // FullScreen
 public void ShowUrlFullScreen()
 {
@@ -372,6 +381,8 @@ public static void ShowHtmlFile(
 **Example**
 
 ```cs
+using Gpm.WebView;
+
 public void ShowHtmlFile()
 {
     var htmlFilePath = string.Empty;
@@ -425,6 +436,8 @@ public static void ShowHtmlString(
 **Example**
 
 ```cs
+using Gpm.WebView;
+
 public void ShowHtmlString()
 {
     GpmWebView.ShowHtmlString(

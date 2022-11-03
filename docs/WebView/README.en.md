@@ -15,6 +15,12 @@
 
 Provides a WebView used in various ways in the game.
 
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. Service installation : WebView
+
 ## Specifications
 
 ### Supported Unity Version
@@ -173,6 +179,8 @@ public static void ShowUrl(
 **Example**
 
 ```cs
+using Gpm.WebView;
+
 // FullScreen
 public void ShowUrlFullScreen()
 {
@@ -373,6 +381,8 @@ public static void ShowHtmlFile(
 **Example**
 
 ```cs
+using Gpm.WebView;
+
 public void ShowHtmlFile()
 {
     var htmlFilePath = string.Empty;
@@ -425,6 +435,8 @@ public static void ShowHtmlString(
 **Example**
 
 ```cs
+using Gpm.WebView;
+
 public void ShowHtmlString()
 {
     GpmWebView.ShowHtmlString(
