@@ -5,6 +5,7 @@
 ## 🚩 Table of Contents
 
 * [Overview](#Overview)
+* [Installation](#Installation)
 * [Specifications](#Specifications)
 * [Platform specific settings](#-Platform-specific-settings)
 * [API](#-API)
