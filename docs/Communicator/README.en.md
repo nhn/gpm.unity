@@ -5,6 +5,7 @@
 ## 🚩 Table of Contents
 
 * [Overview](#Overview)
+* [Installation](#Installation)
 * [Specifications](#Specifications)
 * [API](#-api)
 * [Usage](#-Usage)
@@ -15,6 +16,12 @@
 * Unity provides the feature that enables transmitting data to/from Native.
 * Android uses AndroidJavaClass and iOS uses DllImport to connect with Native.
 * Communicator provides Unity and Native with a common interface that allows data to be transmitted and received to facilitate data transmission.
+
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : Communicator
 
 ### Standard structures that implement plugins and their weaknesses
 
@@ -44,6 +51,11 @@
 * 2018.4.0 or higher
 
 ## 🔨 API
+
+### Namespace
+```cs
+using Gpm.Communicator;
+```
 
 ### InitializeClass
 
