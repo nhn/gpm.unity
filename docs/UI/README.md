@@ -5,6 +5,7 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [설치](#설치)
 * [스펙](#스펙)
 * [Components](#components)
 * [Release notes](./ReleaseNotes.md)
@@ -14,11 +15,22 @@
 
 [Unity UI](https://docs.unity3d.com/Manual/com.unity.ugui.html)를 보다 효율적으로 사용할 수 있는 컴포넌트 제공
 
+## 설치
+
+1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. 실행 : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. 서비스 설치 : UI
+
 ## 스펙
 
 ### Unity 지원 버전
 
 * 2018.4.0 이상
+
+#### NameSpace
+```cs
+using Gpm.UI;
+```
 
 ## Components
 
