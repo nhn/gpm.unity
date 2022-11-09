@@ -33,7 +33,7 @@ using Gpm.UI;
 
 ## Components
 
-|Component| 설명 |
+|Component| Description |
 | --- | --- |
 | [Multi Layout](MultiLayout/README.en.md) | The multi-layout component configures RectTransform data of UI component into many layouts so as to deal with resolution or orientation. |
 | [Infinite Scroll](InfiniteScroll/README.en.md) | Scroll Rect (Scroll View) creates items to fit in content and allows them to be reusable. |
