@@ -2,6 +2,22 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.10.0
+
+### Date
+* 2022.12.09
+
+### Added
+* Added ExecuteJavascript result callback
+* Added JavaScript Injection feature
+  * GpmWebViewRequest.Configuration.addJavascript
+
+### Updated
+* Updated Android custom scheme to save to specified value
+
+### Fixed
+* Fixed partial cropped issue of the full screen
+
 ## 1.9.2
 
 ### Date

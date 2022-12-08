@@ -63,6 +63,7 @@ Provides a WebView used in various ways in the game.
 |   | Callback |
 | Other | IsActive |
 |   | Screen orientation |
+|   | Add JavaScript |
 |   | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
@@ -162,6 +163,7 @@ Displays the WebView.
 | isForwardButtonVisible    | bool                                      | Activate/Deactivate Go Forward Button |
 | supportMultipleWindows    | bool                                      | Multiple windows |
 | userAgentString           | string                                    | Sets userAgentString |
+| addJavascript             | string                                    | Add JavaScript to WebView |
 | position                  | GpmWebViewRequest.Position                | Sets Popup WebView position |
 | size                      | GpmWebViewRequest.Size                    | Sets Popup WebView size |
 | margins                   | GpmWebViewRequest.Margins                 | Sets Popup WebView margins |
@@ -351,6 +353,9 @@ private void OnCallback(
             break;
         case GpmWebViewCallback.CallbackType.GoForward:
             Debug.Log("GoForward");
+            break;
+        case GpmWebViewCallback.CallbackType.ExecuteJavascript:
+            Debug.LogFormat("ExecuteJavascript data : {0}, error : {1}", data, error);
             break;
     }
 }

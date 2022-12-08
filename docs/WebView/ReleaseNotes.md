@@ -2,6 +2,22 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.10.0
+
+### Date
+* 2022.12.09
+
+### Added
+* ExecuteJavascript 결과 콜백 추가
+* JavaScript Injection 기능 추가
+  * GpmWebViewRequest.Configuration.addJavascript
+
+### Updated
+* Android custom scheme을 지정한 값으로 저장되게 수정
+
+### Fixed
+* iOS 전체 화면이 일부 잘리는 현상 수정
+
 ## 1.9.2
 
 ### Date
