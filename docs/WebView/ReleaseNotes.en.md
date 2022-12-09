@@ -8,12 +8,12 @@
 * 2022.12.09
 
 ### Added
-* Added ExecuteJavascript result callback ([Issues 296](https://github.com/nhn/gpm.unity/issues/296))
-* Added JavaScript Injection feature ([Discussions 297](https://github.com/nhn/gpm.unity/discussions/297))
+* Added ExecuteJavascript result callback ([Issue 296](https://github.com/nhn/gpm.unity/issues/296))
+* Added JavaScript Injection feature ([Discussion 297](https://github.com/nhn/gpm.unity/discussions/297))
   * GpmWebViewRequest.Configuration.addJavascript
 
 ### Updated
-* Updated Android custom scheme to save to specified value ([Issues 288](https://github.com/nhn/gpm.unity/issues/288))
+* Updated Android custom scheme to save to specified value ([Issue 288](https://github.com/nhn/gpm.unity/issues/288))
 
 ### Fixed
 * Fixed partial cropped issue of the full screen ([Issue 313](https://github.com/nhn/gpm.unity/issues/313))
