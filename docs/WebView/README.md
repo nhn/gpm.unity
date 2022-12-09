@@ -63,6 +63,7 @@
 |   | Callback |
 | Other | IsActive |
 |   | Screen orientation |
+|   | Add JavaScript |
 |   | Execute JavaScript |
 |   | Clear Cookies |
 |   | Clear Cache |
@@ -162,6 +163,7 @@ WebView를 표시합니다.
 | isForwardButtonVisible    | bool                                      | 앞으로 가기 버튼 활성 또는 비활성 |
 | supportMultipleWindows    | bool                                      | GPM WebView의 다중 창 지원 여부 |
 | userAgentString           | string                                    | GPM WebView의 userAgentString 설정 |
+| addJavascript             | string                                    | GPM WebView에 JavaScript 추가 |
 | position                  | GpmWebViewRequest.Position                | Popup WebView 위치 지정 |
 | size                      | GpmWebViewRequest.Size                    | Popup WebView 크기 지정 |
 | margins                   | GpmWebViewRequest.Margins                 | Popup WebView 여백 지정 |
@@ -350,6 +352,9 @@ private void OnCallback(
             break;
         case GpmWebViewCallback.CallbackType.GoForward:
             Debug.Log("GoForward");
+            break;
+        case GpmWebViewCallback.CallbackType.ExecuteJavascript:
+            Debug.LogFormat("ExecuteJavascript data : {0}, error : {1}", data, error);
             break;
     }
 }
