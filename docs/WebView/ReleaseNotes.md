@@ -8,15 +8,15 @@
 * 2022.12.09
 
 ### Added
-* ExecuteJavascript 결과 콜백 추가
-* JavaScript Injection 기능 추가
+* ExecuteJavascript 결과 콜백 추가 ([Issues 296](https://github.com/nhn/gpm.unity/issues/296))
+* JavaScript Injection 기능 추가 ([Discussions 297](https://github.com/nhn/gpm.unity/discussions/297))
   * GpmWebViewRequest.Configuration.addJavascript
 
 ### Updated
-* Android custom scheme을 지정한 값으로 저장되게 수정
+* Android custom scheme을 지정한 값으로 저장되게 수정 ([Issues 288](https://github.com/nhn/gpm.unity/issues/288))
 
 ### Fixed
-* iOS 전체 화면이 일부 잘리는 현상 수정
+* iOS 전체 화면이 일부 잘리는 현상 수정 ([Issue 313](https://github.com/nhn/gpm.unity/issues/313))
 
 ## 1.9.2
 
