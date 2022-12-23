@@ -22,6 +22,7 @@
 ## 개요
 
 UI에서 자주 사용하는 Tab과 TabPage를 제어하는 컴포넌트입니다.
+
 ![tabcontrol](images/tabcontrol.gif)
 
 ### 구성요소
@@ -77,6 +78,7 @@ TabController에 연결하여 사용합니다.
     * Link
         * 연결된 TabController를 확인하고 수정할 수 있습니다.
         * 현재 편집 중인 Tab이 활성화됩니다.
+            
             ![tab_expend](images/tab_expend.png)
 
 #### State
@@ -121,6 +123,7 @@ TabPage는 선택 되는 Tab의 이벤트를 전달받습니다.
     * Link
         * 연결된 TabController를 확인하고 수정할 수 있습니다.
         * 현재 편집 중인 TabPage가 활성화됩니다.
+
         ![tabpage_expend](images/tabpage_expend.png)
 
 #### Option
@@ -166,6 +169,7 @@ Tab에 Data를 설정하여 사용합니다.
 * ITabData 인터페이스를 상속하여 Data 정의
 * Tab의 SetData를 통해 Data 설정
 * Tab의 GetData를 통해 Data 사용
+
 ![setdata](images/setdata.png)
 
 1. Data로 사용할 클래스를 정의합니다.
@@ -226,6 +230,7 @@ void SampleFunc()
 ```
 
 * Tab의 인스펙터에서도 추가할 수 있습니다.
+
 ![tabbutton_datasetting](images/tabbutton_datasetting.png)
 
 4. TabPage에서는 onNotify 이벤트를 통해 UI를 업데이트 할 수 있습니다.
@@ -264,6 +269,7 @@ void SampleFunc()
 ```
 
 * TabPage의 인스펙터에서도 추가할 수 있습니다.
+
 ![tabpage_datasetting](images/tabpage_datasetting.png)
 
 * TabDataSettingSample 참조

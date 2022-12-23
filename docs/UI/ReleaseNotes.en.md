@@ -12,6 +12,7 @@
 * Added TabControl
     * The TabControl component controls Tabs and TabPages that are frequently used in the UI.
     * [TabControl Guide](TabControl/README.en.md)
+
 ![preview](images/tabcontrol_preview.gif)
     
 ### Fixed
