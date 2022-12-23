@@ -2,6 +2,28 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.7.0
+
+### Date
+
+* 2022.12.23
+
+### Added
+* Added TabControl
+    * The TabControl component controls Tabs and TabPages that are frequently used in the UI.
+    * [TabControl Guide](TabControl/README.en.md)
+![preview](images/tabcontrol_preview.gif)
+    
+### Fixed
+* InfiniteScroll
+    * Fixed an issue where the scroll size was calculated incorrectly depending on the point in time when changing the item size in the CanvasUpdate logic
+    * Fixed an issue where a warning occurred when creating TextMeshPro in CanvasUpdate logic
+
+### Updated
+* InfiniteScroll
+    * change to delay update
+    * Optimized to create and reuse fewer scroll items
+
 ## 2.6.0
 
 ### Date

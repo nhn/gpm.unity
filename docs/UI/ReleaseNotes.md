@@ -2,6 +2,29 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.7.0
+
+### Date
+
+* 2022.12.23
+
+### Added
+* TabControl UI 신규 기능 추가
+    * UI에서 자주 사용하는 Tab과 TabPage를 제어하는 컴포넌트입니다.
+        * TabController, Tab, TabPage
+    * [TabControl 가이드](TabControl/README.md)
+![preview](images/tabcontrol_preview.gif)
+    
+### Fixed
+* InfiniteScroll
+    * CanvasUpdate 로직에서 아이템 사이즈 변경 시 시점에 따라서 스크롤 사이즈 계산 잘못하는 문제 수정
+    * CanvasUpdate 로직에서 TextMeshPro 생성 시 경고가 발생하던 문제 수정
+
+### Updated
+* InfiniteScroll
+    * 지연 업데이트 하도록 구조 변경
+    * 스크롤 아이템 더 적게 생성하여 재사용 하도록 최적화
+
 ## 2.6.0
 
 ### Date

@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="19">
+<info version="20">
     <title>UI</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>2.6.0</version>
+    <version>2.7.0</version>
     <dependencies>
         <unity>
-            <version>2018.4.0+</version>
+            <version>2019.4.0+</version>
         </unity>
         <Common>
-            <version>2.1.2</version>
+            <version>2.2.2</version>
         </Common>
         <CacheStorage>
-            <version>0.1.0</version>
+            <version>1.0.1</version>
         </CacheStorage>
     </dependencies>
     <packageList>
+        <package>
+            <version>2.7.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.7.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>2.6.0</version>
             <installList>
