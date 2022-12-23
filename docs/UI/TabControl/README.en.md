@@ -22,6 +22,7 @@
 ## Overview
 
 The Tab Control component controls Tabs and TabPages that are frequently used in the UI.
+
 ![tabcontrol](images/tabcontrol.gif)
 
 ### Component

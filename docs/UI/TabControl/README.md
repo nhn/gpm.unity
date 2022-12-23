@@ -27,7 +27,9 @@ UI에서 자주 사용하는 Tab과 TabPage를 제어하는 컴포넌트입니�
 
 ### 구성요소
 Tab Control은 3가지 요소로 구성됩니다.
+
 ![tabcontrol](images/tabcontrol.png)
+
 1. TabController
     * Tab과 TabPage를 연결하고 제어합니다.
 2. Tab
