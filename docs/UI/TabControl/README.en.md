@@ -26,7 +26,9 @@ The Tab Control component controls Tabs and TabPages that are frequently used in
 
 ### Component
 Tab Control consists of three components.
+
 ![tabcontrol](images/tabcontrol.png)
+
 1. TabController
     * Connect and control Tab and TabPage.
 2. Tab
@@ -76,6 +78,7 @@ Connect to TabController and use it.
     * Link
         * Can check and modify the TabController connected to it.
         * The Tab currently being edited is activated.
+
             ![tab_expend](images/tab_expend.png)
 
 #### State
@@ -120,6 +123,7 @@ TabPage receives the event of the tab being selected.
     * Link
         * Can check and modify the TabController connected to it.
         * The currently edited TabPage is activated.
+
         ![tabpage_expend](images/tabpage_expend.png)
 
 #### Option
@@ -165,6 +169,7 @@ Set and use data in Tab.
 * Define a data class by inheriting the ITabData interface
 * Apply data via SetData in Tab
 * Using data via GetData in Tab
+
 ![setdata](images/setdata.png)
 
 1. Define a class to use as data.
@@ -224,6 +229,7 @@ void SampleFunc()
 ```
 
 * Can also be added in the tab's inspector.
+
 ![tabbutton_datasetting](images/tabbutton_datasetting.png)
 
 4. In TabPage, Can update UI through onNotify event.
@@ -261,6 +267,7 @@ void SampleFunc()
 ```
 
 * Can also add it in TabPage's inspector.
+
 ![tabpage_datasetting](images/tabpage_datasetting.png)
 
 * See TabDataSettingSample
