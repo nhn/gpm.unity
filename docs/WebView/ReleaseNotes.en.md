@@ -12,10 +12,8 @@
 * Added JavaScript Injection feature ([Discussion 297](https://github.com/nhn/gpm.unity/discussions/297))
   * GpmWebViewRequest.Configuration.addJavascript
 
-### Updated
-* Updated Android custom scheme to save to specified value ([Issue 288](https://github.com/nhn/gpm.unity/issues/288))
-
 ### Fixed
+* Fixed Android custom scheme to save to specified value ([Issue 288](https://github.com/nhn/gpm.unity/issues/288))
 * Fixed partial cropped issue of the full screen ([Issue 313](https://github.com/nhn/gpm.unity/issues/313))
 
 ## 1.9.2

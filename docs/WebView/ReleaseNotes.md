@@ -12,10 +12,8 @@
 * JavaScript Injection 기능 추가 ([Discussion 297](https://github.com/nhn/gpm.unity/discussions/297))
   * GpmWebViewRequest.Configuration.addJavascript
 
-### Updated
-* Android custom scheme을 지정한 값으로 저장되게 수정 ([Issue 288](https://github.com/nhn/gpm.unity/issues/288))
-
 ### Fixed
+* Android custom scheme을 지정한 값으로 저장되게 수정 ([Issue 288](https://github.com/nhn/gpm.unity/issues/288))
 * iOS 전체 화면이 일부 잘리는 현상 수정 ([Issue 313](https://github.com/nhn/gpm.unity/issues/313))
 
 ## 1.9.2
