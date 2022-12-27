@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.3
+
+### Date
+
+* 2022.12.27
+
+### Updated
+* Internal domain change
+
 ## 2.2.2
 
 ### Date
