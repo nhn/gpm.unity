@@ -128,16 +128,16 @@ You can automate above process by using [OnPostprocessBuild](https://docs.unity3
 
 Setting Other Linker Flags
 
-    ```cs
-    pbxProject.AddBuildProperty(appGuid, "OTHER_LDFLAGS", "-ObjC");
-    ```
+```cs
+pbxProject.AddBuildProperty(appGuid, "OTHER_LDFLAGS", "-ObjC");
+```
  
 GPMWebView.bundle
 
-    ```cs
-    var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
-    pbxProject.AddFileToBuild(appGuid, webViewBundleGuid);
-    ```
+```cs
+var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
+pbxProject.AddFileToBuild(appGuid, webViewBundleGuid);
+```
     
 ## 🔨 API
 
