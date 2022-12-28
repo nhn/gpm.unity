@@ -137,17 +137,18 @@ public void OnPostprocessBuild(BuildReport report)
 {
     if (report.summary.platform == BuildTarget.iOS)
         {
-            // Initialize PBXProject
+            // Initialize PBXProject instance
             var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
             var pbxProject = new PBXProject();
             pbxProject.ReadFromFile(pbxprojPath);
+
             // Get GUID of target
             var targetGuid = pbxProject.GetUnityMainTargetGuid();
 
-            // Adding -ObjC to Other Linker Flags in Build Settings
+            // Setting Other Linker Flags (Adding -ObjC to Other Linker Flags in Build Settings)
             pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
 
-            // Adding GPMWebView.bundle to Copy Bundle Resources in Build Phases 
+            // GPMWebView.bundle (Adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
             var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
             pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
         }
