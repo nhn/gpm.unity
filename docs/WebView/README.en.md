@@ -126,7 +126,7 @@ When performing an iOS build in certain Unity versions, the buttons on **Navigat
 
 It is completely optional but you can automate above process by using [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html) and [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html).
 
-Tested and checked:
+Checked and tested:
 
 -  Unity 2020.3.21
 
@@ -137,10 +137,11 @@ public void OnPostprocessBuild(BuildReport report)
 {
     if (report.summary.platform == BuildTarget.iOS)
         {
-            // Initialize necessary variables
+            // Initialize PBXProject
             var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
             var pbxProject = new PBXProject();
             pbxProject.ReadFromFile(pbxprojPath);
+            // Get GUID of target
             var targetGuid = pbxProject.GetUnityMainTargetGuid();
 
             // Adding -ObjC to Other Linker Flags in Build Settings
