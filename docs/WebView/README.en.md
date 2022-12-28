@@ -145,15 +145,20 @@ public void OnPostprocessBuild(BuildReport report)
             // Get GUID of target
             var targetGuid = pbxProject.GetUnityMainTargetGuid();
 
-            // Setting Other Linker Flags (Adding -ObjC to Other Linker Flags in Build Settings)
+            // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
             pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
 
-            // GPMWebView.bundle (Adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
+            // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
             var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
             pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
         }
 }
 ```
+Note:
+
+-ObjC will be added only once because [AddBuildProperty](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.AddBuildProperty.html) ignores duplicate values. Same for `GPMWebView.bundle`.
+
+
     
 ## 🔨 API
 
