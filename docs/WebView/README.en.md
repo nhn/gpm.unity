@@ -126,15 +126,18 @@ When performing an iOS build in certain Unity versions, the buttons on **Navigat
 
 You can automate above process by using [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html) and [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html).
 
+Example, inside `OnPostprocessBuild()` add:
 Setting Other Linker Flags
 
 ```cs
+// adding -ObjC to Other Linker Flags in Build Settings
 pbxProject.AddBuildProperty(appGuid, "OTHER_LDFLAGS", "-ObjC");
 ```
  
 GPMWebView.bundle
 
 ```cs
+// adding GPMWebView.bundle to Copy Bundle Resources in Build Phases
 var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
 pbxProject.AddFileToBuild(appGuid, webViewBundleGuid);
 ```
