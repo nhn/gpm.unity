@@ -122,6 +122,23 @@ When performing an iOS build in certain Unity versions, the buttons on **Navigat
 
 ![GPMWebViewBundle.png](images/GPMWebViewBundle.png)
 
+#### Optional automation
+
+You can automate above process by using [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html) and [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html).
+
+Setting Other Linker Flags
+
+    ```cs
+    pbxProject.AddBuildProperty(appGuid, "OTHER_LDFLAGS", "-ObjC");
+    ```
+ 
+GPMWebView.bundle
+
+    ```cs
+    var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
+    pbxProject.AddFileToBuild(appGuid, webViewBundleGuid);
+    ```
+    
 ## 🔨 API
 
 ### Namespace
