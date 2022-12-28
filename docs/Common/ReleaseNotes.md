@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.2.3
+
+### Date
+
+* 2022.12.27
+
+### Updated
+* 내부 도메인 변경
+
 ## 2.2.2
 
 ### Date
