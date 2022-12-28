@@ -122,25 +122,35 @@ When performing an iOS build in certain Unity versions, the buttons on **Navigat
 
 ![GPMWebViewBundle.png](images/GPMWebViewBundle.png)
 
-#### Optional automation
+#### Optional automation (e.g. CI/CD)
 
-You can automate above process by using [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html) and [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html).
+It is completely optional but you can automate above process by using [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html) and [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html).
 
-Example, inside `OnPostprocessBuild()` add:
+Tested and checked:
 
-Setting Other Linker Flags
+-  Unity 2020.3.21
 
-```cs
-// adding -ObjC to Other Linker Flags in Build Settings
-pbxProject.AddBuildProperty(appGuid, "OTHER_LDFLAGS", "-ObjC");
-```
- 
-GPMWebView.bundle
+Example:
 
 ```cs
-// adding GPMWebView.bundle to Copy Bundle Resources in Build Phases
-var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
-pbxProject.AddFileToBuild(appGuid, webViewBundleGuid);
+public void OnPostprocessBuild(BuildReport report) 
+{
+    if (report.summary.platform == BuildTarget.iOS)
+        {
+            // Initialize necessary variables
+            var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
+            var pbxProject = new PBXProject();
+            pbxProject.ReadFromFile(pbxprojPath);
+            var targetGuid = pbxProject.GetUnityMainTargetGuid();
+
+            // Adding -ObjC to Other Linker Flags in Build Settings
+            pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
+
+            // Adding GPMWebView.bundle to Copy Bundle Resources in Build Phases 
+            var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
+            pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+        }
+}
 ```
     
 ## 🔨 API
