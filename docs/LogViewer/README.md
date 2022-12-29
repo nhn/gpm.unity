@@ -5,13 +5,21 @@
 ## 🚩 목차
 
 * [개요](#개요)
+* [설치](#설치)
 * [스펙](#스펙)
 * [기능 설명](#기능-설명)
 * [사용방법](#-사용방법)
+* [Release notes](./ReleaseNotes.md)
 
 ## 개요
 
 * LogViewer는 Unity Log와 디바이스 시스템 정보를 화면에서 확인할 수 있고, 개발자가 미리 등록한 API를 호출해 볼 수 있는 툴입니다.
+
+## 설치
+
+1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. 실행 : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity#%EC%8B%A4%ED%96%89)
+3. 서비스 설치 : LogViewer
 
 ## 스펙
 
@@ -119,11 +127,42 @@
             </assembly>
         </linker>
         ```
-> Gmail로 설정하기
-> * Smtp Host : smtp.gmail.com
-> * Smtp Port : 587
-> * `535-5.7.8 Username and Password not accepted` 오류가 발생하면 [링크](https://myaccount.google.com/lesssecureapps)에서 `보안 수준이 낮은 앱 허용`을 활성화해야 합니다.
-            
+
+* gmail로 설정하기
+    * gmail은 [앱 비밀번호](https://support.google.com/accounts/answer/185833)를 사용하여 설정하여야 합니다.
+    * <b>보안 수준이 낮은 앱 허용</b>은 2022.5.31일 이후로 사용할 수 없습니다.
+        * To : 받는 이메일 주소
+        * User Name : 보내는 이메일 주소
+        * User Password : 보내는 이메일 주소의 [앱 비밀번호](https://support.google.com/accounts/answer/185833)
+        * Smtp Host : smtp.gmail.com
+        * Smtp Port : 587
+
+#### gmail 앱 비밀번호 설정
+1. 구글 계정에서 보안 탭을 선택합니다.
+
+![google_app_password_1_kr](./images/google_app_password_1_kr.png)
+
+2. 보안 탭 내의 Google에 로그인에서 앱 비밀번호를 선택합니다.
+    * 앱 비밀번호 설정을 위해선 2단계 인증이 활성화돼야 합니다.
+
+![google_app_password_2_kr](./images/google_app_password_2_kr.png)
+
+3. 앱 비밀번호에서 앱 선택을 누릅니다.
+
+![google_app_password_3_kr](./images/google_app_password_3_kr.png)
+
+4. 앱 선택 영역에서 기타(맞춤 이름)을 누릅니다.
+
+![google_app_password_4_kr](./images/google_app_password_4_kr.png)
+
+5. 이름에 <b>Smtp Client</b>를 넣어 생성합니다.
+
+![google_app_password_5_kr](./images/google_app_password_5_kr.png)
+
+6. User Password에 기기용 앱 비밀번호를 사용합니다.
+
+![google_app_password_6_kr](./images/google_app_password_6_kr.png)
+
 ### 런타임에서  LogViewer 활성화하기
 
 * 플랫폼별 활성화 방법
@@ -138,6 +177,11 @@
     *  LogType.Exception 
 
 ### Code
+
+#### NameSpace
+```cs
+using Gpm.LogViewer;
+```
 
 #### Console
 1. Category

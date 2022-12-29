@@ -2,6 +2,31 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.1.0
+
+### Date
+
+* 2022.05.27
+
+### Updated
+
+* native "initialize" method naming 변경
+  * native와 연결되는 부분의 이름만 변경되어 Communicator 사용에 영향 없음
+
+---
+
+## 1.0.2
+
+### Date
+
+* 2021.04.23
+
+### Added
+
+* Assembly definition
+
+---
+
 ## 1.0.1
 
 ### Date
@@ -11,6 +36,8 @@
 ### Fixed
 
 * Unity Standalone 빌드 시 'INativeMessageSender could not be found' 에러를 수정
+
+---
 
 ## 1.0.0
 

@@ -19,10 +19,24 @@
       </language>
     </string>
     <string>
+      <key>$PATH_DOCUMENTATION</key>
+      <language>
+        <ko>README.md</ko>
+        <en>README.en.md</en>
+      </language>
+    </string>
+    <string>
       <key>$VIEW_RELEASE_NOTES</key>
       <language>
         <ko>릴리스 정보</ko>
         <en>Release notes</en>
+      </language>
+    </string>
+    <string>
+      <key>$PATH_RELEASE_NOTES</key>
+      <language>
+        <ko>ReleaseNotes.md</ko>
+        <en>ReleaseNotes.en.md</en>
       </language>
     </string>
   </list>

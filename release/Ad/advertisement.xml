@@ -5,11 +5,11 @@
         <advertisement>
             <name>Smart Downloader</name>
             <imageName>c_smartdownloader.jpg</imageName>
-            <link>https://docs.toast.com/ko/Game/Smart%20Downloader/ko/Overview/</link>
+            <link>https://docs.nhncloud.com/en/Game/Smart%20Downloader/en/Overview/</link>
             <description>Smart Downloader</description>
             <timeInfo>
                 <startTime>2019-07-23 00:00</startTime>
-                <endTime>2029-12-31 23:59</endTime>
+                <endTime>2099-12-31 23:59</endTime>
                 <day>
                     <start>00</start>
                     <end>24</end>
@@ -19,11 +19,11 @@
         <advertisement>
             <name>Leaderboard</name>
             <imageName>c_leaderboard.jpg</imageName>
-            <link>https://docs.toast.com/ko/Game/Leaderboard/ko/Overview/</link>
+            <link>https://docs.nhncloud.com/en/Game/Leaderboard/en/Overview/</link>
             <description>Leaderboard</description>
             <timeInfo>
                 <startTime>2019-07-23 00:00</startTime>
-                <endTime>2029-12-31 23:59</endTime>
+                <endTime>2099-12-31 23:59</endTime>
                 <day>
                     <start>00</start>
                     <end>24</end>
@@ -33,11 +33,39 @@
         <advertisement>
             <name>Gamebase</name>
             <imageName>c_gamebase.jpg</imageName>
-            <link>https://docs.toast.com/ko/Game/Gamebase/ko/Overview/</link>
+            <link>https://docs.nhncloud.com/en/Game/Gamebase/en/Overview/</link>
             <description>Gamebase</description>
             <timeInfo>
                 <startTime>2019-07-23 00:00</startTime>
-                <endTime>2029-12-31 23:59</endTime>
+                <endTime>2099-12-31 23:59</endTime>
+                <day>
+                    <start>00</start>
+                    <end>24</end>
+                </day>
+            </timeInfo>
+        </advertisement>
+        <advertisement>
+            <name>GameAnvil</name>
+            <imageName>c_gameanvil.jpg</imageName>
+            <link>https://docs.nhncloud.com/en/Game/GameAnvil/en/overview/</link>
+            <description>GameAnvil</description>
+            <timeInfo>
+                <startTime>2019-07-23 00:00</startTime>
+                <endTime>2099-12-31 23:59</endTime>
+                <day>
+                    <start>00</start>
+                    <end>24</end>
+                </day>
+            </timeInfo>
+        </advertisement>
+        <advertisement>
+            <name>NHN Recruit</name>
+            <imageName>nhn_recruit.png</imageName>
+            <link>https://nhncareers.oopy.io/</link>
+            <description>NHN 그룹사 게임부문 신입/경력 공개채용</description>
+            <timeInfo>
+                <startTime>2021-08-30 11:00</startTime>
+                <endTime>2021-09-14 23:59</endTime>
                 <day>
                     <start>00</start>
                     <end>24</end>

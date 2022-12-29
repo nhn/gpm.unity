@@ -4,68 +4,93 @@
 
 ## 🚩 Table of Contents
 
-* [Overview](#overview)
-* [Specification](#specification)
+* [Overview](#Overview)
+* [Installation](#Installation)
+* [Specifications](#Specifications)
 * [API](#-api)
 * [Usage](#-Usage)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
-Unity에서는  Native와 Data를 주고 받을 수 있는 기능을 제공하고 있습니다. 하지만 Unity에서 제공하는 기본 기능을 사용하는 것은 많은 학습과 시간이 필요합니다. 
-Communicator는 하나의 공통화된 인터페이스를 제공해 Data를 쉽게 주고 받을 수 있습니다.
+* Unity provides the feature that enables transmitting data to/from Native.
+* Android uses AndroidJavaClass and iOS uses DllImport to connect with Native.
+* Communicator provides Unity and Native with a common interface that allows data to be transmitted and received to facilitate data transmission.
 
-### 플러그인을 구현하는 일반적인 구조와 단점
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : Communicator
+
+### Standard structures that implement plugins and their weaknesses
 
 ![console](./images/Communicator_ASIS.png)
 
-* 플러그인 개발에 많은 리소스가 필요합니다.
-* 기능별로 개발된 플러그인은 많은 코드가 중복됩니다.
+* Require many resources to develop plugins.
+    * In Unity requires a native connection by AndroidJavaClass or DllImport.
+    * In Native requires registering Unity's GameObject and Callback.
+    * For Android requires a connection with unity-classes.jar.
+    * Additional tasks such as registering Callback in Unity class that use native feature are required.
+* For plugins developed for different purposes, most of their codes overlap with one another.
 
-### Communicator의 구조와 사용시 장점
+### The structure of Communicator and its benefits
 
 ![console](./images/Communicator_TOBE.png)
 
-* 통일된 인터페이스로 Native와 통신이 가능합니다
+* Allows communication with Native through the unified interface.
+    * ~~In Unity requires a native connection by AndroidJavaClass or DllImport.~~
+    * ~~In Native requires registering Unity's GameObject and Callback.~~
+    * ~~For Android requires a connection with unity-classes.jar.~~
+    * ~~Additional tasks such as registering Callback in Unity class that use native feature are required.~~
 
-## Specification
+## Specifications
 
-### Unity support version
+### Supported Unity Version
 
 * 2018.4.0 or higher
 
 ## 🔨 API
 
+### Namespace
+```cs
+using Gpm.Communicator;
+```
+
 ### InitializeClass
 
-Unity에서 보낸 Message를 받을 Native Class를 생성합니다.
-* Android의 경우 Package를 포함한 전체 경로와 Class 이름를 넣습니다
-* iOS의 경우 Class 이름만 넣습니다
+Generates a Native Class to receive a message from Unity.
+
+* For Android, enter the full path including the package and class name.
+* For iOS, enter only the class name.
 
 **API**
+
 ```cs
 static void InitializeClass(GpmCommunicatorVO.Configuration configuration)
 ```
 
 **Example**
+
 ```cs
 public void Initialize()
 {
     GpmCommunicatorVO.Configuration configuration = new GpmCommunicatorVO.Configuration()
     {
 #if UNITY_ANDROID
-        className = "ANDROID_CLASS_NAME"
+        className = "${ANDROID_CLASS_NAME}"
 #elif UNITY_IOS
-        className = "IOS_CLASS_NAME";
+        className = "${IOS_CLASS_NAME}"
 #endif
-
-        GpmCommunicator.InitializeClass(configuration);
-    }
+    };
+    
+    GpmCommunicator.InitializeClass(configuration);
 }
 ```
 
 ### AddReceiver
 
-Native에서 보낸 Message를 받을 Receiver를 등록합니다.
+Register a Receiver to receive a message from Native.
 
 **API**
 ```cs
@@ -76,12 +101,12 @@ static void AddReceiver(string domain, GpmCommunicatorCallback.CommunicatorCallb
 ```cs
 public void AddReceiver()
 {
-    GpmCommunicator.AddReceiver("DOMAIN", OnReceiver); 
+    GpmCommunicator.AddReceiver("${DOMAIN}", OnReceiver); 
 }
 
 private void OnReceiver(GpmCommunicatorVO.Message message)
 {
-    StringBuilder sb = new StringBuilder(resultText.text);
+    StringBuilder sb = new StringBuilder();
 
     sb.AppendLine();
     sb.AppendLine("OnReceiver");
@@ -95,8 +120,8 @@ private void OnReceiver(GpmCommunicatorVO.Message message)
 
 ### CallSync
 
-Native로 Message를 전송합니다.
-처리 결과를 즉시 return 값으로 받을 수 있습니다.
+Sends the message to Native.
+The process result can be immediately received as a return value.
 
 **API**
 ```cs
@@ -109,7 +134,7 @@ public void CallSync()
 {
     GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
     {
-        domain = DOMAIN,
+        domain = "${DOMAIN}",
         data = "USER_SYNC_DATA",
         extra = "USER_SYNC_EXTRA"
     };
@@ -129,8 +154,8 @@ public void CallSync()
 
 ### CallAsync
 
-Native로 Message를 전송합니다.
-비동기 처리 결과를 AddReceiver API를 통해 등록한 Receiver를 통해 받을 수 있습니다.
+Sends the message to Native.
+The Receiver registered using AddReceiver API can receive the async process result.
 
 **API**
 ```cs
@@ -143,7 +168,7 @@ public void CallAsync()
 {
     GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
     {
-        domain = DOMAIN,
+        domain = "${DOMAIN}",
         data = "USER_ASYNC_DATA",
         extra = "USER_ASYNC_EXTRA"
     };
@@ -154,232 +179,222 @@ public void CallAsync()
 
 ## 🔨 Usage
 
-### Communicator 설치
+### Installing Communicator
 
-* Manager에서 Communicator를 설치합니다
+Install Communicator with GPM Manager.
 
-### Native Class 만들기
+### Creating Native Class
 
-**Android**
-* Android Studio에 프로젝트를 생성하고 파일을 생성합니다
-    * Sample.java 
-        ```java
-        // Package 경로를 확인합니다.
-        package com.gpm.communicator.sample;
+#### 1. Android
 
-        import android.util.Log;
+1. Create a project with Android Studio. (e.g. com.gpm.communicator.sample)
+2. Create a folder within the project. (e.g. Project/externalLibs)
 
-        import com.gpm.communicator.Interface.GpmCommunicatorReceiver;
-        import com.gpm.communicator.GpmCommunicator;
-        import com.gpm.communicator.vo.GpmCommunicatorMessage;
+    ![console](./images/Communicator_createFolder.png)
 
-        public class GpmCommunicatorSample {
-            private final String DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
+3. Copy the Unity **Assets/GPM/Communicator/Plugins/Android/GpmCommunicatorPlugin.aar** file to the folder you created.
+4. **File/New/New Module/Android Library** in Android Studio.
+5. Create the GpmCommunicatorSample.java file and paste the code below.
 
-            public GpmCommunicatorSample() {
-                // Receiver 생성
-                GpmCommunicatorReceiver listener = new GpmCommunicatorReceiver() {
-                    @Override
-                    public void onRequestMessageAsync(GpmCommunicatorMessage message) {
-                        // Async Receiver 처리
-                        GpmCommunicator.sendResponseMessage(message);
-                    }
+```java
+// GpmCommunicatorSample.java 
+// Check the Package path.
+package com.gpm.communicator.sample;
 
-                    @Override
-                    public String onRequestMessageSync(GpmCommunicatorMessage message) {
-                        // Sync Receiver 처리
-                        GpmCommunicator.sendResponseMessage(message);
-                        return "Return Sync Data";
-                    }
-                };
+import com.gpm.communicator.Interface.GpmCommunicatorReceiver;
+import com.gpm.communicator.GpmCommunicatorPlugin;
+import com.gpm.communicator.vo.GpmCommunicatorMessage;
 
-                // Receiver 등록
-                GpmCommunicator.addReceiver(DOMAIN, listener);
+public class GpmCommunicatorSample {
+    private final String DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
+
+    public GpmCommunicatorSample() {
+        // Creates a Receiver.
+        GpmCommunicatorReceiver listener = new GpmCommunicatorReceiver() {
+            @Override
+            public void onRequestMessageAsync(GpmCommunicatorMessage message) {
+                // Processes a Async Receiver.
+                GpmCommunicatorPlugin.sendResponseMessage(message);
             }
-        }        
-        ```
-* aar 파일을 생성 합니다.
-* 생성된 aar 파일을 Unity 프로젝트의 **Asset/Plugins/Android** 폴더에 넣습니다
-        
-**iOS**
-* Unity 프로 젝트의 Asset/Plugins/IOS 폴더에 파일을 생성합니다.
-    * Sample.h
-        ```objc
-        #import <Foundation/Foundation.h>
 
-        @interface GPMCommunicatorSample: NSObject
-
-        @end
-        ```
-    * Sample.mm
-        ```objc
-        #import "GPMCommunicatorSample.h"
-        #import "GPMCommunicator.h"
-        #import "GPMCommunicatorReceiver.h"
-        #import "GPMCommunicatorMessage.h"
-
-        #define GPM_COMMUNICATOR_SAMPLE_DOMAIN @"GPM_COMMUNICATOR_SAMPLE"
-
-        @implementation GPMCommunicatorSample
-
-        - (id)init {
-            if((self = [super init]) == nil) {
-                return nil;
+            @Override
+            public GpmCommunicatorMessage onRequestMessageSync(GpmCommunicatorMessage message) {
+                // Processes a Sync Receiver.
+                return message;
             }
-            
-            // Receiver 생성
-            GPMCommunicatorReceiver* receiver = [[GPMCommunicatorReceiver alloc] init];
+        };
 
-            receiver.onRequestMessageSync = ^NSString *(Message *message) {
-                //Sync Message 처리
-                [[GPMCommunicator sharedGPMCommunicator] sendResponseWithMessage:message];
-                return @"Retuen Sync Data";
+        // Registers a Receiver.
+        GpmCommunicatorPlugin.addReceiver(DOMAIN, listener);
+    }
+}  
+```
+6. Add the following syntax to the bundle.gradle file.
+
+    ![console](./images/Communicator_bundle_gradle.png)
+
+```java
+dependencies {
+    // Add
+    compileOnly files('../externalLibs/GpmCommunicatorPlugin.aar')
+
+    ...
+}
+```
+7. Proceed to gradle sync.
+
+    ![console](./images/Communicator_sync_now.png)
+
+8. Proceed to aar build.
+
+    ![console](./images/Communicator_release.png)
+ 
+#### 2. iOS
+
+Create the file in **Asset/Plugins/IOS** folder of the Unity project.
+
+```objc
+// GPMCommunicatorSample.h
+#import <Foundation/Foundation.h>
+
+@interface GPMCommunicatorSample: NSObject
+@end
+```
+
+```objc
+// GPMCommunicatorSample.mm
+#import "GPMCommunicatorSample.h"
+#import "GPMCommunicator.h"
+#import "GPMCommunicatorReceiver.h"
+#import "GPMCommunicatorMessage.h"
+
+#define GPM_COMMUNICATOR_SAMPLE_DOMAIN @"GPM_COMMUNICATOR_SAMPLE"
+
+@implementation GPMCommunicatorSample
+
+- (id)init {
+    if((self = [super init]) == nil) {
+        return nil;
+    }
+    
+    // Creates a Receiver.
+    GPMCommunicatorReceiver* receiver = [[GPMCommunicatorReceiver alloc] init];
+
+    receiver.onRequestMessageSync = ^GPMCommunicatorMessage *(GPMCommunicatorMessage *message) {
+        // Processes a Sync Message.
+        return message;
+    };
+
+    receiver.onRequestMessageAsync = ^(GPMCommunicatorMessage *message) {
+        // Processes a Async Message.
+        [[GPMCommunicator sharedGPMCommunicator] sendResponseWithMessage:message];
+    };
+
+    // Registers a Receiver.
+    [[GPMCommunicator sharedGPMCommunicator] addReceiverWithDomain:GPM_COMMUNICATOR_SAMPLE_DOMAIN receiver:receiver];
+    return self;
+}
+@end
+```
+
+### Creating Unity Class
+
+Create Sample.cs
+    
+```cs
+namespace Gpm.Communicator.Sample
+{
+    using UnityEngine;
+    using Gpm.Communicator;
+    using System.Text;
+
+    public class Sample : MonoBehaviour
+    {
+        private const string DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
+        private const string ANDROID_CLASS_NAME = "com.gpm.communicator.sample.GpmCommunicatorSample";
+        private const string IOS_CLASS_NAME = "GPMCommunicatorSample";
+
+        private void Awake()
+        {
+            Initialize();
+            AddReceiver();
+        }
+
+        /// <summary>
+        /// Initialize Native class
+        /// </summary>
+        public void Initialize()
+        {
+            GpmCommunicatorVO.Configuration configuration = new GpmCommunicatorVO.Configuration()
+            {
+    #if UNITY_ANDROID
+                className = ANDROID_CLASS_NAME
+    #elif UNITY_IOS
+                className = IOS_CLASS_NAME
+    #endif
             };
 
-            receiver.onRequestMessageAsync = ^(Message *message) {
-                // Async Message 처리
-                [[GPMCommunicator sharedGPMCommunicator] sendResponseWithMessage:message];
+            GpmCommunicator.InitializeClass(configuration);
+        }
+
+        /// <summary>
+        /// Register Unity Receiver
+        /// </summary>
+        public void AddReceiver()
+        {
+            GpmCommunicator.AddReceiver(DOMAIN, OnReceiver);
+        }
+
+        private void OnReceiver(GpmCommunicatorVO.Message message)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine();
+            sb.AppendLine("OnReceiver");
+            sb.AppendLine("Domain : " + message.domain);
+            sb.AppendLine("Data : " + message.data);
+            sb.AppendLine("Extra : " + message.extra);
+
+            Debug.Log(sb.ToString());
+        }
+
+        /// <summary>
+        /// Call Async
+        /// </summary>
+        public void CallAsync()
+        {
+            GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
+            {
+                domain = DOMAIN,
+                data = "USER_ASYNC_DATA",
+                extra = "USER_ASYNC_EXTRA"
             };
 
-            // Receiver 등록
-            [[GPMCommunicator sharedGPMCommunicator] addReceiverWithDomain:GPM_COMMUNICATOR_SAMPLE_DOMAIN receiver:receiver];
-            return self;
+            GpmCommunicator.CallAsync(message);
         }
-        @end
-        ```
 
-### Unity Class 만들기
-
-* Sample.cs를 만듭니다
-    ```cs
-    namespace Gpm.Communicator.Sample
-    {
-        using System.Text;
-        using Gpm.Communicator;
-        using UnityEngine;
-        using UnityEngine.UI;
-
-        public class GpmCommunicatorSample
+        /// <summary>
+        /// Call Sync
+        /// </summary>
+        public void CallSync()
         {
-            private const string DOMAIN = "GPM_COMMUNICATOR_SAMPLE";
-            private const string ANDROID_CLASS_NAME = "com.gpm.communicator.sample.GpmCommunicatorSample";
-            private const string IOS_CLASS_NAME = "GPMCommunicatorSample";
+            GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
+            {
+                domain = DOMAIN,
+                data = "USER_SYNC_DATA",
+                extra = "USER_SYNC_EXTRA"
+            };
+
+            GpmCommunicatorVO.Message responseMessage = GpmCommunicator.CallSync(message);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("CallSync Response");
+            sb.AppendLine("Domain : " + responseMessage.domain);
+            sb.AppendLine("Data : " + responseMessage.data);
+            sb.AppendLine("Extra : " + responseMessage.extra);
+
+            Debug.Log(sb.ToString());
         }
     }
-    ```
-
-### Native Class 초기화 하기
-
-* Sample.cs에 Initialize Method를 추가 합니다.
-    ```cs
-    namespace Gpm.Communicator.Sample
-    {
-        using System.Text;
-        using Gpm.Communicator;
-        using UnityEngine;
-        using UnityEngine.UI;
-
-        public class GpmCommunicatorSample
-        {
-            ...
-            
-            public void Initialize()
-            {
-                GpmCommunicatorVO.Configuration configuration = new GpmCommunicatorVO.Configuration()
-                {
-        #if UNITY_ANDROID
-                className = ANDROID_CLASS_NAME;
-        #elif UNITY_IOS
-                className = IOS_CLASS_NAME;
-        #endif
-                };
-
-                GpmCommunicator.InitializeClass(configuration);
-            }
-        }
-    }
-    ```
-
-### Unity Receiver 등록하기
-
-* Sample.cs에 AddReceiver Method를 추가 합니다.
-    ```cs
-    namespace Gpm.Communicator.Sample
-    {
-        using System.Text;
-        using Gpm.Communicator;
-        using UnityEngine;
-        using UnityEngine.UI;
-
-        public class GpmCommunicatorSample
-        {
-            ...
-            
-            public void AddReceiver()
-            {            
-                GpmCommunicator.AddReceiver(DOMAIN, OnReceiver);
-            }
-            
-            private void OnReceiver(GpmCommunicatorVO.Message message)
-            {
-                StringBuilder sb = new StringBuilder(resultText.text);
-
-                sb.AppendLine();
-                sb.AppendLine("OnReceiver");
-                sb.AppendLine("Domain : " + message.domain);
-                sb.AppendLine("Data : " + message.data);
-                sb.AppendLine("Extra : " + message.extra);
-
-                Debug.Log(sb.ToString());
-            }
-        }
-    }
-    ```
-
-### Async/Sync 추가하기
-
-* Sample.cs
-    ```cs
-    namespace Gpm.Communicator.Sample
-    {
-        using System.Text;
-        using Gpm.Communicator;
-        using UnityEngine;
-        using UnityEngine.UI;
-
-        public class GpmCommunicatorSample
-        {        
-            public void CallAsync()
-            {
-                GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
-                {
-                    domain = DOMAIN,
-                    data = "USER_ASYNC_DATA",
-                    extra = "USER_ASYNC_EXTRA"
-                };
-
-                GpmCommunicator.CallAsync(message);
-            }
-
-            public void CallSync()
-            {
-                GpmCommunicatorVO.Message message = new GpmCommunicatorVO.Message()
-                {
-                    domain = DOMAIN,
-                    data = "USER_SYNC_DATA",
-                    extra = "USER_SYNC_EXTRA"
-                };
-
-                GpmCommunicatorVO.Message responseMessage = GpmCommunicator.CallSync(message);
-
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("CallSync Response");
-                sb.AppendLine("Domain : " + responseMessage.domain);
-                sb.AppendLine("Data : " + responseMessage.data);
-                sb.AppendLine("Extra : " + responseMessage.extra);
-                
-                Debug.Log(sb.ToString());
-            }
-        }
-    }
-    ```
+}
+```

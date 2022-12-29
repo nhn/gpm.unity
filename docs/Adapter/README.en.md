@@ -5,14 +5,22 @@
 ## 🚩 Table of Contents
 
 * [Overview](#overview)
+* [Installation](#Installation)
 * [Specification](#specification)
 * [AdapterTool](#-adaptertool)
 * [API](#-api)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
 IdPs, such as Facebook or Google, provide Unity SDK to apply IdP functions faster and more easily in applications under development for Unity. However, as each IdP has different API, sufficient learning and time is required to implement each and every IdP function. 
 Adapter provides a common interface so as to easily apply different IdP fuctions.
+
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : Adapter
 
 ## Specification
 

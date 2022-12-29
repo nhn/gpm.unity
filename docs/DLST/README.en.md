@@ -5,14 +5,22 @@
 ## 🚩 Table of Contents
 
 * [Overview](#overview)
+* [Installation](#Installation)
 * [Specifications](#specifications)
 * [Search Rules](#search-rules)
 * [Usage](#-usage)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
 * When a multiple number of external libraries are used, you may encounter duplicate library issues.  
 * Duplicate Library Search Tool, or DLST,  searches and removes duplicate libraries.
+
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : DLST
 
 ## Specifications
 

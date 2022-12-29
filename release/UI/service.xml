@@ -1,19 +1,165 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="4">
+<info version="21">
     <title>UI</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>2.0.0</version>
+    <version>2.7.0</version>
     <dependencies>
         <unity>
-            <version>2018.4.0+</version>
+            <version>2019.4.0+</version>
         </unity>
         <Common>
-            <version>2.0.0</version>
-            <install>auto</install>
+            <version>2.2.3</version>
         </Common>
+        <CacheStorage>
+            <version>1.0.1</version>
+        </CacheStorage>
     </dependencies>
     <packageList>
+        <package>
+            <version>2.7.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.7.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.6.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.6.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.5.1</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.5.1.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.5.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.5.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.4.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.4.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.3.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.3.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.2.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.2.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.1.1</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.1.1.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+		<package>
+            <version>2.1.0</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.1.0.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.0.7</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.7.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.0.6</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.6.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.0.5</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.5.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.0.4</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.4.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.0.3</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.3.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.0.2</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.2.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
+        <package>
+            <version>2.0.1</version>
+            <installList>
+                <install>
+                    <name>gpm_ui_v2.0.1.unitypackage</name>
+                    <path>GPM/UI</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>2.0.0</version>
             <installList>
@@ -28,10 +174,12 @@
         <link>
             <name>$VIEW_DOCUMENTATION</name>
             <url>README.md</url>
+            <path>$PATH_DOCUMENTATION</path>
         </link>
         <link>
             <name>$VIEW_RELEASE_NOTES</name>
             <url>ReleaseNotes.md</url>
+            <path>$PATH_RELEASE_NOTES</path>
         </link>
     </linkList>
 </info>

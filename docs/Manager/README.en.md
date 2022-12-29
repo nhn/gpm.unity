@@ -7,6 +7,7 @@
 * [Overview](#overview)
 * [Specification](#specification)
 * [Usage](#-usage)
+* [Release notes](./ReleaseNotes.en.md)
 
 ## Overview
 
@@ -25,7 +26,7 @@ Check the service list from Manager, while you install, remove, or update servic
 
 * Menu > Tools > GPM > Manager
 
-![Manager](./images/gpm_manager_001.png)
+![Manager](./images/gpm_manager_002.png)
 
 ### 1. Service List
 
@@ -43,12 +44,25 @@ Check the service list from Manager, while you install, remove, or update servic
 * Click [Update] to update service.
 * Service which under preparation shows [Under Preparation].
 
-### 3. Language
+### 3. Menu
+* Lets you open the Association page.
+    * Click [Document] to view Game Package Manger documents.
+    * Click [Issues,suggest] to suggest issues such as bug fixes, new functions, etc.
+    * Click [AssetStore] to view the Game Package Manger Asset Store page.
+
+### 4. Language
 
 * Change the language. 
 
-### 4. Information
+### 5. Information
 
 * Check your manager information.  
     * Version information
     * Supporting mail
+
+### 6. Version
+* Can check the version of Game Package Manger.
+
+### 7. Notice
+* Can check the notice in Game Package Manger.
+    * Clicking the notice opens a detailed page.

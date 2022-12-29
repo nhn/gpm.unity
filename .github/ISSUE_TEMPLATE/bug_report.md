@@ -9,14 +9,15 @@ assignees: ''
 
 ## Service
 
-* [ ] Adapter
+* [ ] WebView
 * [ ] AssetManagement
 * [ ] Communicator
-* [ ] DLST
 * [ ] LogViewer
 * [ ] Manager
 * [ ] UI
-* [ ] WebView
+* [ ] Profiler
+* [ ] Adapter
+* [ ] DLST
 
 ## Version
 Write the version that you are currently using.

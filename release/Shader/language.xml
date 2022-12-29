@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<multilanguage>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>$DESCRIPTION</key>
+            <language>
+                <ko>Shader는 게임에 다양한 효과를 주는 기능을 제공합니다.</ko>
+                <en>Shader provides components that have various effects on the game.</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_DOCUMENTATION</key>
+            <language>
+                <ko>문서 보기</ko>
+                <en>View documentation</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_DOCUMENTATION</key>
+            <language>
+                <ko>README.md</ko>
+                <en>README.en.md</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_RELEASE_NOTES</key>
+            <language>
+                <ko>릴리스 정보</ko>
+                <en>Release notes</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_RELEASE_NOTES</key>
+            <language>
+                <ko>ReleaseNotes.md</ko>
+                <en>ReleaseNotes.en.md</en>
+            </language>
+        </string>
+    </list>
+</multilanguage>
