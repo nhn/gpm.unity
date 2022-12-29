@@ -128,9 +128,9 @@ It is completely optional but you can automate above process by using [OnPostpro
 
 Checked and tested:
 
--  Unity 2020.3.21
+*  Unity 2020.3.21
 
-Example:
+**Example**
 
 ```cs
 public void OnPostprocessBuild(BuildReport report) 
@@ -154,12 +154,11 @@ public void OnPostprocessBuild(BuildReport report)
         }
 }
 ```
-Note:
+
+**Note**
 
 -ObjC will be added only once because [AddBuildProperty](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.AddBuildProperty.html) ignores duplicate values. Same for `GPMWebView.bundle`.
 
-
-    
 ## 🔨 API
 
 ### Namespace
