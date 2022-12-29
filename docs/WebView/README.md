@@ -126,9 +126,10 @@ Unity 특정 버전에서 iOS 빌드 시, **내비게이션 바**의 버튼이 �
 선택 사항으로 프로세스 자동화를 위해 [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html)와 [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html) class를 사용할 수 있습니다.
 
 확인 및 테스트 버전 :
+
 * Unity 2020.3.21
 
-Example:
+**Example**
 
 ```cs
 public void OnPostprocessBuild(BuildReport report) 
@@ -153,7 +154,7 @@ public void OnPostprocessBuild(BuildReport report)
 }
 ```
 
-참고:
+**참고**
 
 [AddBuildProperty](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.AddBuildProperty.html)가 중복 빌드 속성을 무시하므로 `-ObjC`와 `GPMWebView.bundle`이 한 번만 추가됩니다.
 
