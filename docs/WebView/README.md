@@ -122,6 +122,41 @@ Unity 특정 버전에서 iOS 빌드 시, **내비게이션 바**의 버튼이 �
 
 ![GPMWebViewBundle.png](images/GPMWebViewBundle.png)
 
+### 자동화 선택
+선택 사항으로 프로세스 자동화를 위해 [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html)와 [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html) class를 사용할 수 있습니다.
+
+확인 및 테스트 버전 :
+* Unity 2020.3.21
+
+Example:
+
+```cs
+public void OnPostprocessBuild(BuildReport report) 
+{
+    if (report.summary.platform == BuildTarget.iOS)
+        {
+            // Initialize PBXProject instance
+            var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
+            var pbxProject = new PBXProject();
+            pbxProject.ReadFromFile(pbxprojPath);
+
+            // Get GUID of target
+            var targetGuid = pbxProject.GetUnityMainTargetGuid();
+
+            // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
+            pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
+
+            // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
+            var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
+            pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+        }
+}
+```
+
+참고:
+
+[AddBuildProperty](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.AddBuildProperty.html)가 중복 빌드 속성을 무시하므로 `-ObjC`와 `GPMWebView.bundle`이 한 번만 추가됩니다.
+
 ## 🔨 API
 
 ### Namespace
