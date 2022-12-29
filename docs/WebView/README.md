@@ -135,22 +135,22 @@ Unity 특정 버전에서 iOS 빌드 시, **내비게이션 바**의 버튼이 �
 public void OnPostprocessBuild(BuildReport report) 
 {
     if (report.summary.platform == BuildTarget.iOS)
-        {
-            // Initialize PBXProject instance
-            var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
-            var pbxProject = new PBXProject();
-            pbxProject.ReadFromFile(pbxprojPath);
+    {
+        // Initialize PBXProject instance
+        var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
+        var pbxProject = new PBXProject();
+        pbxProject.ReadFromFile(pbxprojPath);
 
-            // Get GUID of target
-            var targetGuid = pbxProject.GetUnityMainTargetGuid();
+        // Get GUID of target
+        var targetGuid = pbxProject.GetUnityMainTargetGuid();
 
-            // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
-            pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
+        // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
+        pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
 
-            // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
-            var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
-            pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
-        }
+        // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
+        var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
+        pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+    }
 }
 ```
 
