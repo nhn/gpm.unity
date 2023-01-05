@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.2
+
+### Date
+
+* 2022.01.05
+
+### Updated
+* Updated Common v2.2.3
+* Change Internal domain
+
 ## 2.2.1
 
 ### Date
