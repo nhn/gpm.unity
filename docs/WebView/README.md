@@ -72,6 +72,7 @@
 |   | Go Back |
 |   | Go Forward |
 |   | Multiple Windows |
+|   | Scheme command |
 |   | File download</br>(Android only) |
 |   | File upload</br>(Android API 21 이상) |
 |   | User agent string |
@@ -200,6 +201,7 @@ WebView를 표시합니다.
 | supportMultipleWindows    | bool                                      | GPM WebView의 다중 창 지원 여부 |
 | userAgentString           | string                                    | GPM WebView의 userAgentString 설정 |
 | addJavascript             | string                                    | GPM WebView에 JavaScript 추가 |
+| customSchemePostCommand   | GpmWebViewRequest.CustomSchemePostCommand | Custom scheme 후처리 명령 추가 |
 | position                  | GpmWebViewRequest.Position                | Popup WebView 위치 지정 |
 | size                      | GpmWebViewRequest.Size                    | Popup WebView 크기 지정 |
 | margins                   | GpmWebViewRequest.Margins                 | Popup WebView 여백 지정 |

@@ -72,6 +72,7 @@ Provides a WebView used in various ways in the game.
 |   | Go Back |
 |   | Go Forward |
 |   | Multiple Windows |
+|   | Scheme command |
 |   | File download</br>(Android only) |
 |   | File upload</br>(Android API 21 or later) |
 |   | User agent string |
@@ -201,6 +202,7 @@ Displays the WebView.
 | supportMultipleWindows    | bool                                      | Multiple windows |
 | userAgentString           | string                                    | Sets userAgentString |
 | addJavascript             | string                                    | Add JavaScript to WebView |
+| customSchemePostCommand   | GpmWebViewRequest.CustomSchemePostCommand | Add Custom scheme postprocessing command |
 | position                  | GpmWebViewRequest.Position                | Sets Popup WebView position |
 | size                      | GpmWebViewRequest.Size                    | Sets Popup WebView size |
 | margins                   | GpmWebViewRequest.Margins                 | Sets Popup WebView margins |

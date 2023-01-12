@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.11.0
+
+### Date
+* 2023.01.12
+
+### Added
+* Add Custom scheme postprocessing command([Issue 328](https://github.com/nhn/gpm.unity/issues/328))
+  * Command : Close, LoadUrl, ExecuteJavascript
+
 ## 1.10.0
 
 ### Date
