@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.2.2
+
+### Date
+
+* 2022.01.05
+
+### Updated
+* Common v2.2.3 업데이트
+* 내부 도메인 변경
+
 ## 2.2.1
 
 ### Date
