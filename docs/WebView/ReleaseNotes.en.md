@@ -8,7 +8,7 @@
 * 2023.01.30
 
 ### Fixed
-* Fixed NullReferenceException of GpmWebViewRequest.Configuration([Issue 348](https://github.com/nhn/gpm.unity/issues/348)
+* Fixed NullReferenceException of GpmWebViewRequest.Configuration([Issue 348](https://github.com/nhn/gpm.unity/issues/348))
 
 ## 1.11.0
 
