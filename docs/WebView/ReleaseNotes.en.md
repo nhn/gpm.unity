@@ -2,6 +2,14 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.11.1
+
+### Date
+* 2023.01.30
+
+### Fixed
+* Fixed NullReferenceException of GpmWebViewRequest.Configuration([Issue 348](https://github.com/nhn/gpm.unity/issues/348)
+
 ## 1.11.0
 
 ### Date
