@@ -2,6 +2,23 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.7.1
+
+### Date
+
+* 2023.2.21
+
+### Fixed
+
+* InfiniteScroll
+    * Fixed a problem where the UpdateData function was called many times unnecessarily([355](https://github.com/nhn/gpm.unity/issues/355))
+    
+    * Fixed so that it works normally when Move is called immediately after calling InsertData([356](https://github.com/nhn/gpm.unity/issues/355))
+    
+### Updated
+* InfiniteScroll
+    * Improved to update Item when calling UpdateData function
+
 ## 2.7.0
 
 ### Date
