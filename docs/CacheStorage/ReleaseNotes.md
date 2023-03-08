@@ -2,6 +2,26 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.1.0
+
+### Date
+
+* 2023.03.08
+
+### Added
+* CacheStorage 뷰어 툴 추가
+* RequestTexture RequestType 넣을 수 있도록 함수 추가
+
+### Updated
+* NotModified 코드 발생시에도 유효기간 정보 갱신하도록 개선
+* maxCount 기본값 10000 설정
+* maxSize 기본값 256MB 설정
+
+### Fixed
+* LastModified 값이 0일때 읽지 못하던 버그 수정
+* ReRequest 시간 설정 시 계싼 잘못하던 문제 수정
+* 캐시 새로 받을때 용량 계산 잘못하던 문제 수정
+
 ## 1.0.1
 
 ### Date

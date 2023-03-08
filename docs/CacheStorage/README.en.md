@@ -14,6 +14,54 @@
 * CacheStorage supports Cache when web communications are performed in Unity.
 * Cache can be used to improve performance by reusing the data received when communicating.
 
+### Performance Improvements
+
+Store and reuse content based on HTTP when communicating on a network.
+If the content is not modified, the response does not include the content, which significantly improves performance.
+
+![](Images/1_en.png)
+UnityWebrequest: 28ms
+WebCache: 14ms
+Local: 1ms 
+
+When you use the web cache, Can see that it is about twice as fast as normal communication.
+
+### Easy management
+It is easy to manage because management points are centralized as URL.
+
+![](Images/2_en.png)
+
+When you reuse content, it's very fast.
+In order to keep up-to-date data, we often manage the version of the content, or change the connection point by changing the URL to receive new ones.
+
+Web cache simplifies management by enabling you to verify and reuse the latest content with the same url.
+
+## More effective web cache
+Web cache is about twice as fast as normal requests.
+Importing locally is faster, but cannot determine if it is up to date.
+
+![](Images/3_en.png)
+
+Can use the web cache more effectively by validating it only when you need it.
+
+### Web Cache Validation Strategy
+
+If security is critical or requires continuous renewal, use normal network communications to ensure integrity.
+In addition, different verification strategies depending on whether content is more important for performance or integrity can further improve performance.
+
+![](Images/4_en.png)
+
+Cache Storage supports 4 validation strategies:
+* ALWAYS
+    * Always request cache validation from the server. Fast and consistent.
+* FIRSTPLAY
+    * Revalidate after the cache expires.
+    * When the app shuts down and reruns, the incoming cache requests verification from the server.
+* ONCE
+    * Revalidate after the cache expires.
+* LOCAL
+    * Reads the cache directly from the file without validating it.
+
 ## Installation
 
 1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
@@ -111,6 +159,34 @@ public void Something()
 }
 ```
 
+### Viewer
+Can view cache information for Cache Storage.
+
+* How to use
+    * Can be opened through GPM/CacheStorage/Viewer in the menu.
+
+![](Images/viewer.png)
+
+1. About Cache Management
+    * Size : Current Cache Size / Max Cache Size (in bytes)
+    * Count : Current Cache Count / Max Cache Count
+    * Default RequestType : Set RequestType Default
+    * ReRequest : Set Request Value (in seconds)
+    * UnusedPeriodTime : Set UnusedPeriodTime value (in seconds)
+    * RemoveCycle : Set RemoveCycle value (in seconds)
+2. About Cache Data
+    * Name : Cache Name
+    * Url : Cache Url
+    * Szie : Cache Size (in bytes)
+    * Exfires : The remaining period until the expiration date
+    * ReRequest : Cache ReRequest Time
+        * Response time / Set ReRequest Value (in seconds)
+        * Disable if Management ReRequest value is 0
+    * Remove Unused : Remove unused cache
+        * Accessed time / Set UnusedPeriodTime로 Value (in seconds)
+        * Disable if Management UnusedPeriodTime value is 0
+3. About Cache details
+
 ### Texture caching request
 Can request a texture cache using GpmCacheStorage.RequestTexture.
 * If the texture is loaded after running the app, reuse them will be reused.
@@ -147,17 +223,7 @@ The default is FIRSTPLAY You can make changes through SetCacheRequestType.
     * Uses cached data.
     * Same as GpmCacheStorage.RequestLocalCache.
 
-```cs
-public void Something()
-{
-    // whenever he requests to re-confirm adequacy of settings.
-    CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.SetCacheRequestType(requestType);
-}
-```
-
-Can request and able to request.
-
+#### Can request and able to request
 
 ```cs
 using Gpm.CacheStorage;
@@ -174,6 +240,18 @@ public void Something()
             bytes[] data = result.Data;
         }
     });
+}
+```
+
+#### Cache Request Settings Type lets you change the default value
+Default is FIRSTPLAY.
+
+```cs
+public void Something()
+{
+    // whenever he requests to re-confirm adequacy of settings.
+    CacheRequestType requestType = CacheRequestType.ALWAYS;
+    GpmCacheStorage.SetCacheRequestType(requestType);
 }
 ```
 
@@ -298,6 +376,18 @@ public static CacheInfo Request(string url, double reRequestTime, Action<GpmCach
 public static CacheInfo Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
 
+* url
+    * Cache url to request.
+* requestType
+    * The type of data that determines when cached data should be re-validated to the server.
+    * Default is FIRSTPLAY. Can change it through SetCacheRequestType.
+
+* reRequestTime.
+    * Can set the frequency of re-verification requests on a per-function basis.
+    * The criterion is seconds. If set to 10, the cache that is past 10 seconds will be revalidated.
+    * If you do not set 0 or 0, the time set to SetRequestTime is applied.
+    * SetRequestTime defaults to 0. If neither is set, re-verify based on the requestType.
+
 **Example**
 ```cs
 public void Something()
@@ -412,6 +502,27 @@ If the cached data and web data are the same data, the cached texture is loaded 
 ```cs
 public static CacheInfo RequestTexture(string url, Action<CachedTexture> onResult)
 ```
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
+```
+```cs
+public static CacheInfo RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
+```
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, Action<CachedTexture> onResult)
+```
+
+* url
+    * Cache url to request.
+* requestType
+    * The type of data that determines when cached data should be re-validated to the server.
+    * Default is FIRSTPLAY. Can change it through SetCacheRequestType.
+
+* reRequestTime.
+    * Can set the frequency of re-verification requests on a per-function basis.
+    * The criterion is seconds. If set to 10, the cache that is past 10 seconds will be revalidated.
+    * If you do not set 0 or 0, the time set to SetRequestTime is applied.
+    * SetRequestTime defaults to 0. If neither is set, re-verify based on the requestType.
 
 **Example**
 ```cs

@@ -15,6 +15,55 @@
 * CacheStorage는 Unity에서 웹 통신을 할 때 Cache를 지원합니다.
 * Cache를 이용하여 통신을 할 때 받은 데이터를 재사용하여 성능을 개선할 수 있습니다.
 
+### 성능 향상
+
+네트워크 통신을 할 때 HTTP 기반으로 콘텐츠를 저장하고 재사용합니다.
+이때 콘텐츠가 수정되지 않은 경우에는 응답에 콘텐츠를 포함하지 않기 때문에 전송 속도가 크게 향상됩니다
+
+![](Images/1.png)
+UnityWebrequest: 28ms
+WebCache: 14ms
+Local: 1ms 
+
+웹 캐시를 사용했을 때 일반적인 통신보다 2배 정도 빨라진 것을 확인할 수 있습니다.
+
+### 쉬운 관리
+관리 포인트가 URL 하나로 일원화되어 관리가 간편합니다.
+
+![](Images/2.png)
+
+콘텐츠를 재사용 하는 경우 속도가 매우 빠릅니다.
+이때 최신 데이터를 유지하기 위해 콘텐츠의 버전을 관리하거나, URL 변경으로 연결 지점을 변경해 새로운 것을 받게 하는 방법을 많이 사용합니다.
+
+웹 캐시를 사용하게 되면 동일한 url로 최신 콘텐츠인지 검증하며 재사용할 수 있어 관리가 간편해집니다.
+
+
+## 더 효과적인 웹 캐시 사용
+웹 캐시를 사용하면 일반 요청보다 속도가 2배 정도 빠릅니다.
+로컬에서 불러오는 것은 더욱 빠르지만 최신 상태 여부를 확인할 수 없습니다.
+
+![](Images/3.png)
+
+이러한 특성을 활용하여 필요할 때만 검증하면 웹 캐시를 더욱 효과적으로 사용할 수 있습니다.
+
+### 웹 캐시 검증 전략
+
+보안이 중요하거나 지속적인 갱신이 필요할 경우는 일반적인 네트워크 통신을 이용해 무결성을 보장합니다.
+그리고 콘텐츠가 성능이 더 중요한지 무결성이 더 중요한지에 따라 검증 전략을 달리하면 성능을 더욱 향상시킬 수 있습니다.
+
+![](Images/4.png)
+
+CacheStorage에서는 아래와 같이 4가지 검증 전략을 지원하고 있습니다.
+* ALWAYS
+    * 항상 서버에 캐시 검증을 요청합니다. 빠르면서 무결성이 보장됩니다.
+* FIRSTPLAY
+    * 캐시의 유효 기간이 지나면 재검증합니다.
+    * 앱이 종료된 후 다시 실행했을 때 불러오는 캐시는 서버에 검증을 요청합니다.
+* ONCE
+    * 캐시의 유효 기간이 지나면 재검증합니다.
+* LOCAL
+    * 캐시를 검증하지 않고 파일에서 바로 읽습니다.
+
 ## 설치
 
 1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
@@ -111,6 +160,34 @@ public void Something()
 }
 ```
 
+### Viewer
+CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
+
+* 사용 방법
+    * 메뉴의 GPM/CacheStorage/Viewer 를 통해 오픈 가능합니다.
+
+![](Images/viewer.png)
+
+1. 캐시 관리 정보
+    * Size : 현재 캐시 크기 / 최대 크기 (byte 단위)
+    * Count : 현재 캐시 개수 / 최대 개수
+    * Default RequestType : 설정된 RequestType 기본값
+    * ReRequest : 설정된 ReRequest 값 (초 단위)
+    * UnusedPeriodTime : 설정된 UnusedPeriodTime 값 (초 단위)
+    * RemoveCycle : 설정된 RemoveCycle 값 (초 단위)
+2. 캐시 데이터 정보
+    * Name : 캐시 이름
+    * Url : 캐시 경로
+    * Szie : 캐시 크기 (byte 단위)
+    * Exfires : 유효기간 까지 남은 시간
+    * ReRequest : 캐시 재요청 시간
+        * 저장된 시간 / 설정된 ReRequest 값 (초 단위)
+        * 캐시 정보 ReRequest값이 0이라면 Disable
+    * Remove Unused : 사용되지 않은 캐시 제거
+        * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
+        * 캐시 정보 UnusedPeriodTime값이 0이라면 Disable
+3. 캐시 상세 정보
+
 ### 텍스처 캐싱 요청
 GpmCacheStorage.RequestTexture를 이용하여 텍스처 캐시를 요청할 수 있습니다.
 * 앱 실행 후 로드한 텍스처라면 재사용합니다.
@@ -147,16 +224,8 @@ public void Something()
     * 캐시 된 데이터를 사용합니다.
     * GpmCacheStorage.RequestLocalCache과 동일합니다.
 
-```cs
-public void Something()
-{
-    // 요청할 때마다 재검증하도록 설정
-    CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.SetCacheRequestType(requestType);
-}
-```
 
-Request 할 떄 인자를 넣어서 요청할 수 있습니다.
+#### Request 할 떄 인자를 넣어서 요청할 수 있습니다.
 
 ```cs
 using Gpm.CacheStorage;
@@ -175,6 +244,18 @@ public void Something()
     });
 }
 ```
+
+#### SetCacheRequestType 통해 기본값을 변경할 수 있습니다.
+기본값은 FIRSTPLAY입니다
+```cs
+public void Something()
+{
+    // 요청할 때마다 재검증하도록 설정
+    CacheRequestType requestType = CacheRequestType.ALWAYS;
+    GpmCacheStorage.SetCacheRequestType(requestType);
+}
+```
+
 
 
 ### ReRequestTime
@@ -297,6 +378,18 @@ public static CacheInfo Request(string url, double reRequestTime, Action<GpmCach
 public static CacheInfo Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
 
+* url
+    * 요청할 캐시 경로입니다.
+* requestType
+    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
+
+* reRequestTime.
+    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
+    * 기준은 초입니다. 10으로 설정한 다면 10초가 지난 캐시는 재검증합니다.
+    * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
+    * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
+
 **Example**
 ```cs
 public void Something()
@@ -407,9 +500,34 @@ url로 캐시 된 데이터를 요청합니다.
 앱 실행 후 로드한 텍스처라면 재사용합니다.
 캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
 
+* url
+    * 요청할 캐시 경로입니다.
+* requestType
+    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
+
+* reRequestTime.
+    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
+    * 기준은 초입니다. 10으로 설정한 다면 10초가 지난 캐시는 재검증합니다.
+    * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
+    * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
+
 **API**
 ```cs
 public static CacheInfo RequestTexture(string url, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, Action<CachedTexture> onResult)
+
 ```
 
 **Example**
