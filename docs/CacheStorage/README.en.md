@@ -20,47 +20,40 @@ Store and reuse content based on HTTP when communicating on a network.
 If the content is not modified, the response does not include the content, which significantly improves performance.
 
 ![](Images/1_en.png)
-UnityWebrequest: 28ms
-WebCache: 14ms
-Local: 1ms 
+
+* CacheStorage sample-based performance test
+    * UnityWebrequest: 28ms
+    * WebCache: 14ms
+    * Local: 1ms 
 
 When you use the web cache, Can see that it is about twice as fast as normal communication.
 
-### Easy management
-It is easy to manage because management points are centralized as URL.
+### Ease of Use
+It is simple as the management point is unified with one URL.
 
-![](Images/2_en.png)
+Reusing content is very fast. At the same time, data management of up-to-date content is also required.
+If you use the web cache, it is easy to verify that the content is up-to-date with the same URL and can be reused.
 
-When you reuse content, it's very fast.
-In order to keep up-to-date data, we often manage the version of the content, or change the connection point by changing the URL to receive new ones.
+### Capacity management
+Can control the capacity by managing the cache.
 
-Web cache simplifies management by enabling you to verify and reuse the latest content with the same url.
+![](Images/CacheStorage_logic_en.png)
 
-## More effective web cache
-Web cache is about twice as fast as normal requests.
-Importing locally is faster, but cannot determine if it is up to date.
+1. Runtime Management
+* It removes content that has not been used for a long time in real time.
+* Both UnusedPeriodTime and RemoveCycle must be set to operate.
+    * UnusedPeriodTime
+        * Content that has not been used for a set period of time is deleted.
+    * RemoveCycle
+        * Remove one at each set cycle so that performance is not affected.
 
-![](Images/3_en.png)
-
-Can use the web cache more effectively by validating it only when you need it.
-
-### Web Cache Validation Strategy
-
-If security is critical or requires continuous renewal, use normal network communications to ensure integrity.
-In addition, different verification strategies depending on whether content is more important for performance or integrity can further improve performance.
-
-![](Images/4_en.png)
-
-Cache Storage supports 4 validation strategies:
-* ALWAYS
-    * Always request cache validation from the server. Fast and consistent.
-* FIRSTPLAY
-    * Revalidate after the cache expires.
-    * When the app shuts down and reruns, the incoming cache requests verification from the server.
-* ONCE
-    * Revalidate after the cache expires.
-* LOCAL
-    * Reads the cache directly from the file without validating it.
+2.  Conditional Management
+* When receiving new content, it is removed so that it does not exceed the set capacity and number.
+* Removes caches with lower priority.
+    * SetMaxSize
+        * Set the maximum capacity.
+    * SetMaxCount
+        * Set the maximum number.
 
 ## Installation
 
@@ -167,25 +160,53 @@ Can view cache information for Cache Storage.
 
 ![](Images/viewer.png)
 
-1. About Cache Management
-    * Size : Current Cache Size / Max Cache Size (in bytes)
-    * Count : Current Cache Count / Max Cache Count
-    * Default RequestType : Set RequestType Default
-    * ReRequest : Set Request Value (in seconds)
-    * UnusedPeriodTime : Set UnusedPeriodTime value (in seconds)
-    * RemoveCycle : Set RemoveCycle value (in seconds)
-2. About Cache Data
-    * Name : Cache Name
-    * Url : Cache Url
-    * Szie : Cache Size (in bytes)
-    * Exfires : The remaining period until the expiration date
-    * ReRequest : Cache ReRequest Time
-        * Response time / Set ReRequest Value (in seconds)
-        * Disable if Management ReRequest value is 0
-    * Remove Unused : Remove unused cache
-        * Accessed time / Set UnusedPeriodTime로 Value (in seconds)
-        * Disable if Management UnusedPeriodTime value is 0
-3. About Cache details
+1. Management
+This is the Managed Cache menu.
+    * Size: Current cache capacity / maximum capacity (byte unit)
+        * The current cache capacity and the set maximum capacity.
+        * Keeps the maximum capacity not exceeded.
+    * Count: Current cache count / maximum count
+        * The current cache number and the set maximum number.
+        * Keeps the maximum number not exceeded.
+
+2. Request Info
+This information is used when requesting cache.
+    *Default RequestType
+        * The set CacheRequestType value.
+        * Validate content according to conditions.
+        * Used when CacheRequestType is not put in Request.
+    *ReRequest
+        * This is the set ReRequest value.
+        * Contents are verified after the set time (in seconds).
+        * Used when ReRequest is not included in Request.
+        * The default value is 0 and is not used when 0.
+
+3. Auto Remove
+It removes content that has not been used for a long time in real time.
+Both UnusedPeriodTime and RemoveCycle must be set for this to work.
+    * UnusedPeriodTime
+        * This is the set UnusedPeriodTime value.
+        * Content that has not been used for the set time (in seconds) is deleted.
+        * The default value is 0, and when it is 0, Auto Remove does not work.
+    *RemoveCycle
+        * Set RemoveCycle value.
+        * Contents are removed one by one every set time (in seconds).
+        * The default value is 1, and when it is 0, Auto Remove does not work.
+
+4. Cache data information
+    * Name: Cache name
+    * Url: cache path
+    * Size : Cache size (byte unit)
+    * Exfires: Remaining time until expiration date
+    * Remain: Remaining time until cache validation
+        * Re-verification after the remaining time has elapsed.
+        * The shorter of the remaining time until the expiration date and the ReRequest time (in seconds)
+    * Remove: Remaining time until removal
+        * If not used for the remaining time, it will be removed.
+        * Time Used / Time set as UnusedPeriodTime (in seconds)
+        * Auto Remove operates only when UnusedPeriodTime and RemoveCycle values ​​are not 0.
+
+5. Cache Details Info
 
 ### Texture caching request
 Can request a texture cache using GpmCacheStorage.RequestTexture.
@@ -206,6 +227,24 @@ public void Something()
 }
 ```
 
+
+## More effective web cache
+Web cache is about twice as fast as normal requests.
+Importing locally is faster, but cannot determine if it is up to date.
+
+![](Images/3_en.png)
+
+Can use the web cache more effectively by validating it only when you need it.
+
+### Web Cache Validation Strategy
+
+If security is critical or requires continuous renewal, use normal network communications to ensure integrity.
+In addition, different verification strategies depending on whether content is more important for performance or integrity can further improve performance.
+
+![](Images/4_en.png)
+
+Cache Storage supports 4 validation strategies
+
 ### CacheRequestType
 Can decide when to re-validate cached data to the server.
 The default is FIRSTPLAY You can make changes through SetCacheRequestType.
@@ -214,10 +253,10 @@ The default is FIRSTPLAY You can make changes through SetCacheRequestType.
     * Validate that data has changed on the server at every request.
     * Same as GpmCacheStorage.RequestHttpCache.
 * FIRSTPLAY
-    * Verify to the server every time you make the first request after running the app.
+    * It is revalidated once every time the app is launched.
     * Revalidates based on expiration or RequestTime settings.
 * ONCE
-    * Use cached data without validating to the server since the initial request.
+    * No revalidation within the validity period.
     * Revalidates based on expiration or RequestTime settings.
 * LOCAL
     * Uses cached data.
@@ -381,12 +420,14 @@ public static CacheInfo Request(string url, CacheRequestType requestType, double
 * requestType
     * The type of data that determines when cached data should be re-validated to the server.
     * Default is FIRSTPLAY. Can change it through SetCacheRequestType.
-
 * reRequestTime.
     * Can set the frequency of re-verification requests on a per-function basis.
-    * The criterion is seconds. If set to 10, the cache that is past 10 seconds will be revalidated.
+    * After the set time (in seconds) has elapsed since the last verification, it will be verified again.
     * If you do not set 0 or 0, the time set to SetRequestTime is applied.
     * SetRequestTime defaults to 0. If neither is set, re-verify based on the requestType.
+* preLoad.
+    * Read pre-stored cache before verifying on the web.
+    * The callback is called again if the content has changed since validation.
 
 **Example**
 ```cs
@@ -502,14 +543,30 @@ If the cached data and web data are the same data, the cached texture is loaded 
 ```cs
 public static CacheInfo RequestTexture(string url, Action<CachedTexture> onResult)
 ```
+
+```cs
+public static CacheInfo RequestTexture(string url, bool preLoad, Action<CachedTexture> onResult)
+```
+
 ```cs
 public static CacheInfo RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
 ```
+
+
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, bool preLoad, Action<CachedTexture> onResult)
+```
+
 ```cs
 public static CacheInfo RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
 ```
+
 ```cs
-public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, Action<CachedTexture> onResult)
+public static CacheInfo RequestTexture(string url, double reRequestTime,  bool preLoad, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, bool preLoad, Action<CachedTexture> onResult)
 ```
 
 * url
