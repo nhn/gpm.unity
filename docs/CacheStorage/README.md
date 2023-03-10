@@ -22,8 +22,8 @@
 
 ![](Images/1.png)
 
-* CacheStorage 셈플 기반 성능 테스트
-    * UnityWebrequest: 28ms
+* CacheStorage 샘플 기반 성능 테스트
+    * UnityWebRequest: 28ms
     * WebCache: 14ms
     * Local: 1ms 
 
@@ -161,7 +161,7 @@ CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
 ![](Images/viewer.png)
 
 1. Management
-관리되는 캐시 메뉴입니다.
+* 관리되는 캐시 메뉴입니다.
     * Size : 현재 캐시 용량 / 최대 용량 (byte 단위)
         * 현재 Cache 용량과 설정된 최대 용량입니다.
         * 최대 용량이 넘지 않게 유지해줍니다.
@@ -170,20 +170,20 @@ CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
         * 최대 개수가 넘지 않게 유지해줍니다.
 
 2. Request Info
-캐시를 요청할때 사용되는 정보입니다.
+* 캐시를 요청할때 사용되는 정보입니다.
     * Default RequestType
         * 설정된 CacheRequestType 값입니다.
         * 조건에 따라 콘텐츠를 검증합니다.
         * Request에 CacheRequestType를 넣지 않을 때 사용됩니다.
     * ReRequest
         * 설정된 ReRequest 값입니다.
-        * 설정한 시간(초 단위)이 지나면 콘첸츠를 검증합니다.
+        * 설정한 시간(초 단위)이 지나면 콘텐츠를 검증합니다.
         * Request에 ReRequest를 넣지 않을 때 사용됩니다.
-        * 기본값은 0 이며 0일 때 사용하지 않습니다.
+        * 기본값은 0이며 0일 때 사용하지 않습니다.
 
 3. Auto Remove
-오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
-UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
+* 오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
+* UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
     * UnusedPeriodTime
         * 설정된 UnusedPeriodTime 값입니다.
         * 설정한 시간(초 단위) 동안 사용하지 않은 콘텐츠는 지워줍니다.
@@ -422,7 +422,7 @@ public static CacheInfo Request(string url, CacheRequestType requestType, double
     * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
     * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
 
-* reRequestTime.
+* reRequestTime
     * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
     * 기준은 초입니다. 10으로 설정한 다면 10초가 지난 캐시는 재검증합니다.
     * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
@@ -574,13 +574,13 @@ public static CacheInfo RequestTexture(string url, CacheRequestType requestType,
     * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
     * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
 
-* reRequestTime.
+* reRequestTime
     * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
     * 마지막 검증한 이후 설정한 시간(초 단위)가 지나면 재검증합니다.
     * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
     * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
 
-* preLoad.
+* preLoad
     * 웹에 검증하기 전에 미리 저장된 캐시를 읽어옵니다.
     * 검증 이후 콘텐츠가 바뀌었을 경우 콜백이 다시 호출됩니다.
 
