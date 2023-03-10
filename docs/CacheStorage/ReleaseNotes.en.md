@@ -2,6 +2,32 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.1.0
+
+### Date
+
+* 2023.03.10
+
+### Added
+* Added CacheStorage viewer tool
+* Added function to put RequestTexture RequestType
+* Add RequestTexture preload
+
+### Updated
+* Improved to update expiration date information even when NotModified code occurs
+* maxCount default set to 10000
+* maxSize default set to 256MB
+* Improved to maintain the same data internally even when receiving cache again
+
+### Fixed
+* Fixed a bug that could not be read when the LastModified value was 0
+* Fixed an incorrect calculation when setting the ReRequest time
+* Fixed an issue where capacity was calculated incorrectly when receiving a new cache
+* Fixed access permission problem due to folder change in ios
+* Fixed to receive callback when requesting at the same time
+* Fixed to work normally even if StringToValue is null
+* Fixed to calculate caches that are being automatically deleted when deleting due to size restrictions
+
 ## 1.0.1
 
 ### Date

@@ -15,6 +15,47 @@
 * CacheStorage는 Unity에서 웹 통신을 할 때 Cache를 지원합니다.
 * Cache를 이용하여 통신을 할 때 받은 데이터를 재사용하여 성능을 개선할 수 있습니다.
 
+### 성능 향상
+
+네트워크 통신을 할 때 HTTP 기반으로 콘텐츠를 저장하고 재사용합니다.
+이때 콘텐츠가 수정되지 않은 경우에는 응답에 콘텐츠를 포함하지 않기 때문에 전송 속도가 크게 향상됩니다
+
+![](Images/1.png)
+
+* CacheStorage 샘플 기반 성능 테스트
+    * UnityWebRequest: 28ms
+    * WebCache: 14ms
+    * Local: 1ms 
+
+웹 캐시를 사용했을 때 일반적인 통신보다 2배 정도 빨라진 것을 확인할 수 있습니다.
+
+### 간편한 사용
+관리 포인트가 URL 하나로 일원화되어 간편합니다.
+
+콘텐츠를 재사용 하는 경우 속도가 매우 빠릅니다. 동시에 최신 콘텐츠의 데이터 관리도 필요합니다.
+웹 캐시를 사용하게 되면 동일한 url로 최신 콘텐츠인지 검증하며 재사용할 수 있어 간편해집니다.
+
+### 용량 관리
+캐시를 관리하여 용량을 제어할 수 있습니다.
+
+![](Images/CacheStorage_logic.png)
+
+1. 실시간 관리
+* 오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
+* UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
+    * UnusedPeriodTime
+        * 설정한 시간 동안 사용하지 않은 콘텐츠는 지워줍니다.
+    * RemoveCycle
+        * 성능에 영향이 가지 않도록 설정한 주기마다 하나씩 제거합니다.
+
+2. 조건 관리
+* 새로운 콘텐츠를 받을 때 설정한 용량, 개수가 넘지 않도록 제거해 줍니다.
+* 우선순위가 낮은 캐시부터 제거해 줍니다.
+    * SetMaxSize
+        * 최대 용량을 설정합니다.
+    * SetMaxCount
+        * 최대 개수를 설정합니다.
+
 ## 설치
 
 1. [Game Package Manger 설치](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
@@ -61,7 +102,7 @@ public void Something()
 ```
 
 ### GpmCacheResult
-캐시 된 데이터의 결과 값입니다. 캐시 정보와 데이터를 반환합니다.
+캐시된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
 * IsSuccess 통해 성공 여부를 받아올 수 있습니다.
 * 기본적으로 데이터는 Data로 저장됩니다.
 * Text나 Json은 인코딩을 통해 변환할 수 있으며 기본값은 utf8입니다.
@@ -70,14 +111,14 @@ public void Something()
 * bool IsSuccess() // 결과 성공 여부를 반환합니다.
 * CacheInfo Info; // 캐시 정보를 반환합니다.
 * byte[] Data;  // 캐시 데이터를 반환합니다.
-* string Text;  // utf8로 인코딩 된 데이터를 반환합니다.
+* string Text;  // utf8로 인코딩된 데이터를 반환합니다.
 
 
-* string GetTextData() // utf8로 인코딩 된 데이터를 반환합니다.
-* string GetTextData(Encoding encoding) // 인코딩 된 데이터를 반환합니다.
+* string GetTextData() // utf8로 인코딩된 데이터를 반환합니다.
+* string GetTextData(Encoding encoding) // 인코딩된 데이터를 반환합니다.
 
-* T GetJsonData<T>() // utf8로 인코딩 된 json 데이터를 반환합니다.
-* T GetJsonData<T>(Encoding encoding) // utf8로 인코딩 된 json 데이터를 * 반환합니다.
+* T GetJsonData<T>() // utf8로 인코딩된 json 데이터를 반환합니다.
+* T GetJsonData<T>(Encoding encoding) // utf8로 인코딩된 json 데이터를 반환합니다.
 ```
 
 ```cs
@@ -111,10 +152,72 @@ public void Something()
 }
 ```
 
+### Viewer
+CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
+
+* 사용 방법
+    * 메뉴의 GPM/CacheStorage/Viewer 를 통해 오픈 가능합니다.
+
+![](Images/viewer.png)
+
+#### 1. Management
+관리되는 캐시 메뉴입니다.
+
+* Size : 현재 캐시 용량 / 최대 용량 (byte 단위)
+    * 현재 Cache 용량과 설정된 최대 용량입니다.
+    * 최대 용량이 넘지 않게 유지해줍니다.
+* Count : 현재 캐시 개수 / 최대 개수
+    * 현재 Cache 개수와 설정된 최대 개수입니다.
+    * 최대 개수가 넘지 않게 유지해줍니다.
+
+#### 2. Request Info
+캐시를 요청할때 사용되는 정보입니다.
+
+* Default RequestType
+    * 설정된 CacheRequestType 값입니다.
+    * 조건에 따라 콘텐츠를 검증합니다.
+    * Request에 CacheRequestType를 넣지 않을 때 사용됩니다.
+* ReRequest
+    * 설정된 ReRequest 값입니다.
+    * 설정한 시간(초 단위)이 지나면 콘텐츠를 검증합니다.
+    * Request에 ReRequest를 넣지 않을 때 사용됩니다.
+    * 기본값은 0이며 0일 때 사용하지 않습니다.
+
+#### 3. Auto Remove
+오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
+UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
+
+* UnusedPeriodTime
+    * 설정된 UnusedPeriodTime 값입니다.
+    * 설정한 시간(초 단위) 동안 사용하지 않은 콘텐츠는 지워줍니다.
+    * 기본값은 0이며 0일 때 Auto Remove가 동작하지 않습니다.
+* RemoveCycle
+    * 설정된 RemoveCycle 값입니다.
+    * 설정한 시간(초 단위)마다 콘텐츠가 하나씩 제거합니다.
+    * 기본값은 1이며 0일 때 Auto Remove가 동작하지 않습니다.
+
+#### 4. 캐시 데이터 리스트
+관리하고 있는 캐시 데이터 리스트입니다.
+
+* Name : 캐시 이름
+* Url : 캐시 경로
+* Size : 캐시 크기 (byte 단위)
+* Exfires : 유효기간까지 남은 시간
+* Remain : 캐시 검증까지 남은 시간
+    * 남은 시간이 지나면 재검증합니다.
+    * 유효기간까지 남은 시간과 ReRequest(초 단위) 시간 중 짧은 시간
+* Remove : 제거될 때까지 남은 시간
+    * 남은 시간 동안 사용하지 않으면 제거됩니다.
+    * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
+    * UnusedPeriodTime와 RemoveCycle 값이 0이 아니어야 Auto Remove가 동작합니다.
+
+#### 5. 캐시 상세 정보
+리스트에서 선택된 캐시 데이터 상세 정보입니다.
+
 ### 텍스처 캐싱 요청
 GpmCacheStorage.RequestTexture를 이용하여 텍스처 캐시를 요청할 수 있습니다.
 * 앱 실행 후 로드한 텍스처라면 재사용합니다.
-* 캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
+* 캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
 
 ```cs
 public void Something()
@@ -130,33 +233,43 @@ public void Something()
 }
 ```
 
+
+## 더 효과적인 웹 캐시 사용
+웹 캐시를 사용하면 일반 요청보다 속도가 2배 정도 빠릅니다.
+로컬에서 불러오는 것은 더욱 빠르지만 최신 상태 여부를 확인할 수 없습니다.
+
+![](Images/3.png)
+
+이러한 특성을 활용하여 필요할 때만 검증하면 웹 캐시를 더욱 효과적으로 사용할 수 있습니다.
+
+### 웹 캐시 검증 전략
+
+보안이 중요하거나 지속적인 갱신이 필요할 경우는 일반적인 네트워크 통신을 이용해 무결성을 보장합니다.
+그리고 콘텐츠가 성능이 더 중요한지 무결성이 더 중요한지에 따라 검증 전략을 달리하면 성능을 더욱 향상시킬 수 있습니다.
+
+![](Images/4.png)
+
+CacheStorage에서는 아래와 같이 4가지 검증 전략을 지원하고 있습니다.
+
 ### CacheRequestType
-캐시 된 데이터를 언제 서버에 다시 검증할지를 결정할 수 있습니다.
+캐시된 데이터를 언제 서버에 다시 검증할지를 결정할 수 있습니다.
 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
 
 * ALWAYS
     * 요청할 때마다 서버에 데이터가 바뀌었는지 검증합니다.
     * GpmCacheStorage.RequestHttpCache과 동일합니다.
 * FIRSTPLAY
-    * 앱 실행 후 처음 요청할 때마다 서버에 검증합니다.
+    * 앱 실행 시 때마다 한 번씩 재검증합니다.
     * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
 * ONCE
-    * 최초 요청 이후 서버에 검증하지 않고 캐시 된 데이터를 사용합니다.
+    * 유효기간 내 재검증하지 않습니다.
     * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
 * LOCAL
-    * 캐시 된 데이터를 사용합니다.
+    * 캐시된 데이터를 사용합니다.
     * GpmCacheStorage.RequestLocalCache과 동일합니다.
 
-```cs
-public void Something()
-{
-    // 요청할 때마다 재검증하도록 설정
-    CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.SetCacheRequestType(requestType);
-}
-```
 
-Request 할 떄 인자를 넣어서 요청할 수 있습니다.
+#### Request 할 때 인자를 넣어서 요청할 수 있습니다.
 
 ```cs
 using Gpm.CacheStorage;
@@ -175,6 +288,18 @@ public void Something()
     });
 }
 ```
+
+#### SetCacheRequestType 통해 기본값을 변경할 수 있습니다.
+기본값은 FIRSTPLAY입니다
+```cs
+public void Something()
+{
+    // 요청할 때마다 재검증하도록 설정
+    CacheRequestType requestType = CacheRequestType.ALWAYS;
+    GpmCacheStorage.SetCacheRequestType(requestType);
+}
+```
+
 
 
 ### ReRequestTime
@@ -218,7 +343,7 @@ public void Something()
 ### 캐시 만료
 서버에서 받아온 헤더를 기반으로 만료를 계산해 다시 검증합니다.
 * CacheControl의 max-age가 있을 경우 해당 값의 초 후에 재검증합니다.
-* Expired가 헤더 있을 경우 해당 시간이 지나면 재요청합니다.
+* Expires가 헤더에 있을 경우 해당 시간이 지나면 재요청합니다.
 
 ### CacheControl 설정
 * CacheControl에 noStore가 있을 경우 캐시를 사용하지 않습니다.
@@ -281,7 +406,7 @@ public void Something()
 ### Request
 
 url로 데이터를 요청합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 데이터를 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 데이터를 사용합니다.
 
 **API**
 ```cs
@@ -296,6 +421,18 @@ public static CacheInfo Request(string url, double reRequestTime, Action<GpmCach
 ```cs
 public static CacheInfo Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
+
+* url
+    * 요청할 캐시 경로입니다.
+* requestType
+    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
+
+* reRequestTime
+    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
+    * 기준은 초입니다. 10으로 설정한 다면 10초가 지난 캐시는 재검증합니다.
+    * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
+    * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
 
 **Example**
 ```cs
@@ -328,7 +465,7 @@ public void Something()
 ### RequestHttpCache
 
 url로 데이터를 요청합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 데이터를 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 데이터를 사용합니다.
 
 **API**
 ```cs
@@ -352,7 +489,7 @@ public void Something()
 
 ### RequestLocalCache
 
-url로 이미 캐시 된 데이터를 요청합니다. 
+url로 이미 캐시된 데이터를 요청합니다. 
 캐시 되어있지 않은 경우 실패합니다.
 
 **API**
@@ -377,7 +514,7 @@ public void Something()
 
 ### GetCachedTexture
 
-url로 이미 캐시 된 텍스처를 요청합니다.
+url로 이미 캐시된 텍스처를 요청합니다.
 앱 실행 후 로드한 텍스처라면 재사용합니다.
 
 **API**
@@ -403,14 +540,53 @@ public void Something()
 
 ### RequestTexture
 
-url로 캐시 된 데이터를 요청합니다. 
+url로 캐시된 데이터를 요청합니다. 
 앱 실행 후 로드한 텍스처라면 재사용합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
 
 **API**
 ```cs
 public static CacheInfo RequestTexture(string url, Action<CachedTexture> onResult)
 ```
+
+```cs
+public static CacheInfo RequestTexture(string url, bool preLoad, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
+```
+
+
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, bool preLoad, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, double reRequestTime,  bool preLoad, Action<CachedTexture> onResult)
+```
+
+```cs
+public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, bool preLoad, Action<CachedTexture> onResult)
+```
+
+* url
+    * 요청할 캐시 경로입니다.
+* requestType
+    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
+* reRequestTime
+    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
+    * 마지막 검증한 이후 설정한 시간(초 단위)가 지나면 재검증합니다.
+    * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
+    * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
+* preLoad
+    * 웹에 검증하기 전에 미리 저장된 캐시를 읽어옵니다.
+    * 검증 이후 콘텐츠가 바뀌었을 경우 콜백이 다시 호출됩니다.
 
 **Example**
 ```cs
