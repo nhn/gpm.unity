@@ -160,53 +160,59 @@ CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
 
 ![](Images/viewer.png)
 
-1. Management
-* 관리되는 캐시 메뉴입니다.
-    * Size : 현재 캐시 용량 / 최대 용량 (byte 단위)
-        * 현재 Cache 용량과 설정된 최대 용량입니다.
-        * 최대 용량이 넘지 않게 유지해줍니다.
-    * Count : 현재 캐시 개수 / 최대 개수
-        * 현재 Cache 개수와 설정된 최대 개수입니다.
-        * 최대 개수가 넘지 않게 유지해줍니다.
+#### 1. Management
+관리되는 캐시 메뉴입니다.
 
-2. Request Info
-* 캐시를 요청할때 사용되는 정보입니다.
-    * Default RequestType
-        * 설정된 CacheRequestType 값입니다.
-        * 조건에 따라 콘텐츠를 검증합니다.
-        * Request에 CacheRequestType를 넣지 않을 때 사용됩니다.
-    * ReRequest
-        * 설정된 ReRequest 값입니다.
-        * 설정한 시간(초 단위)이 지나면 콘텐츠를 검증합니다.
-        * Request에 ReRequest를 넣지 않을 때 사용됩니다.
-        * 기본값은 0이며 0일 때 사용하지 않습니다.
+* Size : 현재 캐시 용량 / 최대 용량 (byte 단위)
+    * 현재 Cache 용량과 설정된 최대 용량입니다.
+    * 최대 용량이 넘지 않게 유지해줍니다.
+* Count : 현재 캐시 개수 / 최대 개수
+    * 현재 Cache 개수와 설정된 최대 개수입니다.
+    * 최대 개수가 넘지 않게 유지해줍니다.
 
-3. Auto Remove
-* 오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
-* UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
-    * UnusedPeriodTime
-        * 설정된 UnusedPeriodTime 값입니다.
-        * 설정한 시간(초 단위) 동안 사용하지 않은 콘텐츠는 지워줍니다.
-        * 기본값은 0이며 0일 때 Auto Remove가 동작하지 않습니다.
-    * RemoveCycle
-        * 설정된 RemoveCycle 값입니다.
-        * 설정한 시간(초 단위)마다 콘텐츠가 하나씩 제거합니다.
-        * 기본값은 1이며 0일 때 Auto Remove가 동작하지 않습니다.
+#### 2. Request Info
+캐시를 요청할때 사용되는 정보입니다.
 
-4. 캐시 데이터 정보
-    * Name : 캐시 이름
-    * Url : 캐시 경로
-    * Size : 캐시 크기 (byte 단위)
-    * Exfires : 유효기간까지 남은 시간
-    * Remain : 캐시 검증까지 남은 시간
-        * 남은 시간이 지나면 재검증합니다.
-        * 유효기간까지 남은 시간과 ReRequest(초 단위) 시간 중 짧은 시간
-    * Remove : 제거될 때까지 남은 시간
-        * 남은 시간 동안 사용하지 않으면 제거됩니다.
-        * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
-        * UnusedPeriodTime와 RemoveCycle 값이 0이 아니어야 Auto Remove가 동작합니다.
+* Default RequestType
+    * 설정된 CacheRequestType 값입니다.
+    * 조건에 따라 콘텐츠를 검증합니다.
+    * Request에 CacheRequestType를 넣지 않을 때 사용됩니다.
+* ReRequest
+    * 설정된 ReRequest 값입니다.
+    * 설정한 시간(초 단위)이 지나면 콘텐츠를 검증합니다.
+    * Request에 ReRequest를 넣지 않을 때 사용됩니다.
+    * 기본값은 0이며 0일 때 사용하지 않습니다.
 
-5. 캐시 상세 정보
+#### 3. Auto Remove
+오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
+UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
+
+* UnusedPeriodTime
+    * 설정된 UnusedPeriodTime 값입니다.
+    * 설정한 시간(초 단위) 동안 사용하지 않은 콘텐츠는 지워줍니다.
+    * 기본값은 0이며 0일 때 Auto Remove가 동작하지 않습니다.
+* RemoveCycle
+    * 설정된 RemoveCycle 값입니다.
+    * 설정한 시간(초 단위)마다 콘텐츠가 하나씩 제거합니다.
+    * 기본값은 1이며 0일 때 Auto Remove가 동작하지 않습니다.
+
+#### 4. 캐시 데이터 리스트
+관리하고 있는 캐시 데이터 리스트입니다.
+
+* Name : 캐시 이름
+* Url : 캐시 경로
+* Size : 캐시 크기 (byte 단위)
+* Exfires : 유효기간까지 남은 시간
+* Remain : 캐시 검증까지 남은 시간
+    * 남은 시간이 지나면 재검증합니다.
+    * 유효기간까지 남은 시간과 ReRequest(초 단위) 시간 중 짧은 시간
+* Remove : 제거될 때까지 남은 시간
+    * 남은 시간 동안 사용하지 않으면 제거됩니다.
+    * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
+    * UnusedPeriodTime와 RemoveCycle 값이 0이 아니어야 Auto Remove가 동작합니다.
+
+#### 5. 캐시 상세 정보
+리스트에서 선택된 캐시 데이터 상세 정보입니다.
 
 ### 텍스처 캐싱 요청
 GpmCacheStorage.RequestTexture를 이용하여 텍스처 캐시를 요청할 수 있습니다.

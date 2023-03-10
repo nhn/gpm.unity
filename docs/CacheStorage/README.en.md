@@ -160,53 +160,59 @@ Can view cache information for Cache Storage.
 
 ![](Images/viewer.png)
 
-1. Management
+#### 1. Management
 This is the Managed Cache menu.
-    * Size: Current cache capacity / maximum capacity (byte unit)
-        * The current cache capacity and the set maximum capacity.
-        * Keeps the maximum capacity not exceeded.
-    * Count: Current cache count / maximum count
-        * The current cache number and the set maximum number.
-        * Keeps the maximum number not exceeded.
 
-2. Request Info
+* Size: Current cache capacity / maximum capacity (byte unit)
+    * The current cache capacity and the set maximum capacity.
+    * Keeps the maximum capacity not exceeded.
+* Count: Current cache count / maximum count
+    * The current cache number and the set maximum number.
+    * Keeps the maximum number not exceeded.
+
+#### 2. Request Info
 This information is used when requesting cache.
-    *Default RequestType
-        * The set CacheRequestType value.
-        * Validate content according to conditions.
-        * Used when CacheRequestType is not put in Request.
-    *ReRequest
-        * This is the set ReRequest value.
-        * Contents are verified after the set time (in seconds).
-        * Used when ReRequest is not included in Request.
-        * The default value is 0 and is not used when 0.
 
-3. Auto Remove
+* Default RequestType
+    * The set CacheRequestType value.
+    * Validate content according to conditions.
+    * Used when CacheRequestType is not put in Request.
+* ReRequest
+    * This is the set ReRequest value.
+    * Contents are verified after the set time (in seconds).
+    * Used when ReRequest is not included in Request.
+    * The default value is 0 and is not used when 0.
+
+#### 3. Auto Remove
 It removes content that has not been used for a long time in real time.
 Both UnusedPeriodTime and RemoveCycle must be set for this to work.
-    * UnusedPeriodTime
-        * This is the set UnusedPeriodTime value.
-        * Content that has not been used for the set time (in seconds) is deleted.
-        * The default value is 0, and when it is 0, Auto Remove does not work.
-    *RemoveCycle
-        * Set RemoveCycle value.
-        * Contents are removed one by one every set time (in seconds).
-        * The default value is 1, and when it is 0, Auto Remove does not work.
 
-4. Cache data information
-    * Name: Cache name
-    * Url: cache path
-    * Size : Cache size (byte unit)
-    * Exfires: Remaining time until expiration date
-    * Remain: Remaining time until cache validation
-        * Re-verification after the remaining time has elapsed.
-        * The shorter of the remaining time until the expiration date and the ReRequest time (in seconds)
-    * Remove: Remaining time until removal
-        * If not used for the remaining time, it will be removed.
-        * Time Used / Time set as UnusedPeriodTime (in seconds)
-        * Auto Remove operates only when UnusedPeriodTime and RemoveCycle values ​​are not 0.
+* UnusedPeriodTime
+    * This is the set UnusedPeriodTime value.
+    * Content that has not been used for the set time (in seconds) is deleted.
+    * The default value is 0, and when it is 0, Auto Remove does not work.
+*RemoveCycle
+    * Set RemoveCycle value.
+    * Contents are removed one by one every set time (in seconds).
+    * The default value is 1, and when it is 0, Auto Remove does not work.
+
+#### 4. Cache data list
+This is a list of managed cache data.
+
+* Name: Cache name
+* Url: cache path
+* Size : Cache size (byte unit)
+* Exfires: Remaining time until expiration date
+* Remain: Remaining time until cache validation
+    * Re-verification after the remaining time has elapsed.
+    * The shorter of the remaining time until the expiration date and the ReRequest time (in seconds)
+* Remove: Remaining time until removal
+    * If not used for the remaining time, it will be removed.
+    * Time Used / Time set as UnusedPeriodTime (in seconds)
+    * Auto Remove operates only when UnusedPeriodTime and RemoveCycle values ​​are not 0.
 
 5. Cache Details Info
+Cache data details selected from the list.
 
 ### Texture caching request
 Can request a texture cache using GpmCacheStorage.RequestTexture.
