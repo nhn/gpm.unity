@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.1.1
+
+### Date
+
+* 2023.03.10
+
+### Fixed
+
+* Fixed the problem that callback is called in common with url
+
 ## 1.1.0
 
 ### Date
