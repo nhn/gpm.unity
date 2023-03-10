@@ -191,7 +191,7 @@ Both UnusedPeriodTime and RemoveCycle must be set for this to work.
     * This is the set UnusedPeriodTime value.
     * Content that has not been used for the set time (in seconds) is deleted.
     * The default value is 0, and when it is 0, Auto Remove does not work.
-*RemoveCycle
+* RemoveCycle
     * Set RemoveCycle value.
     * Contents are removed one by one every set time (in seconds).
     * The default value is 1, and when it is 0, Auto Remove does not work.
@@ -211,7 +211,7 @@ This is a list of managed cache data.
     * Time Used / Time set as UnusedPeriodTime (in seconds)
     * Auto Remove operates only when UnusedPeriodTime and RemoveCycle values ​​are not 0.
 
-5. Cache Details Info
+#### 5. Cache Details Info
 Cache data details selected from the list.
 
 ### Texture caching request
