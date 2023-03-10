@@ -10,7 +10,7 @@
 
 ### Fixed
 
-* Fixed the problem that callback is called in common with url
+* Fixed a problem that all request callbacks are called regardless of the url when a request is received
 
 ## 1.1.0
 
