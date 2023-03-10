@@ -347,7 +347,7 @@ Calculates expiration based on the header received from the server and verifies 
 ### CacheControl Settings
 * If CacheControl has noStore, disable the cache.
 * Always revalidate if noCache is present in CacheControl.
-* Same as CacheRequestType.ALWAYS setting or max-age 0
+    * Same as CacheRequestType.ALWAYS setting or max-age 0
 
 
 ### Capacity control
@@ -431,9 +431,6 @@ public static CacheInfo Request(string url, CacheRequestType requestType, double
     * After the set time (in seconds) has elapsed since the last verification, it will be verified again.
     * If you do not set 0 or 0, the time set to SetRequestTime is applied.
     * SetRequestTime defaults to 0. If neither is set, re-verify based on the requestType.
-* preLoad
-    * Read pre-stored cache before verifying on the web.
-    * The callback is called again if the content has changed since validation.
 
 **Example**
 ```cs
@@ -580,12 +577,14 @@ public static CacheInfo RequestTexture(string url, CacheRequestType requestType,
 * requestType
     * The type of data that determines when cached data should be re-validated to the server.
     * Default is FIRSTPLAY. Can change it through SetCacheRequestType.
-
 * reRequestTime
     * Can set the frequency of re-verification requests on a per-function basis.
     * The criterion is seconds. If set to 10, the cache that is past 10 seconds will be revalidated.
     * If you do not set 0 or 0, the time set to SetRequestTime is applied.
     * SetRequestTime defaults to 0. If neither is set, re-verify based on the requestType.
+* preLoad
+    * Read pre-stored cache before verifying on the web.
+    * The callback is called again if the content has changed since validation.
 
 **Example**
 ```cs

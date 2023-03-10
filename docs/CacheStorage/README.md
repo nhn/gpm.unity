@@ -579,13 +579,11 @@ public static CacheInfo RequestTexture(string url, CacheRequestType requestType,
 * requestType
     * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
     * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
-
 * reRequestTime
     * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
     * 마지막 검증한 이후 설정한 시간(초 단위)가 지나면 재검증합니다.
     * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
     * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
-
 * preLoad
     * 웹에 검증하기 전에 미리 저장된 캐시를 읽어옵니다.
     * 검증 이후 콘텐츠가 바뀌었을 경우 콜백이 다시 호출됩니다.
