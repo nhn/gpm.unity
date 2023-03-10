@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.1.1
+
+### Date
+
+* 2023.03.10
+
+### Fixed
+
+* Fixed a problem that all request callbacks are called regardless of the url when a request is received
+
 ## 1.1.0
 
 ### Date
