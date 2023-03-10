@@ -102,7 +102,7 @@ public void Something()
 ```
 
 ### GpmCacheResult
-캐시 된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
+캐시된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
 * IsSuccess 통해 성공 여부를 받아올 수 있습니다.
 * 기본적으로 데이터는 Data로 저장됩니다.
 * Text나 Json은 인코딩을 통해 변환할 수 있으며 기본값은 utf8입니다.
@@ -211,7 +211,7 @@ CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
 ### 텍스처 캐싱 요청
 GpmCacheStorage.RequestTexture를 이용하여 텍스처 캐시를 요청할 수 있습니다.
 * 앱 실행 후 로드한 텍스처라면 재사용합니다.
-* 캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
+* 캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
 
 ```cs
 public void Something()
@@ -246,7 +246,7 @@ public void Something()
 CacheStorage에서는 아래와 같이 4가지 검증 전략을 지원하고 있습니다.
 
 ### CacheRequestType
-캐시 된 데이터를 언제 서버에 다시 검증할지를 결정할 수 있습니다.
+캐시된 데이터를 언제 서버에 다시 검증할지를 결정할 수 있습니다.
 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
 
 * ALWAYS
@@ -259,7 +259,7 @@ CacheStorage에서는 아래와 같이 4가지 검증 전략을 지원하고 있
     * 유효기간 내 재검증하지 않습니다.
     * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
 * LOCAL
-    * 캐시 된 데이터를 사용합니다.
+    * 캐시된 데이터를 사용합니다.
     * GpmCacheStorage.RequestLocalCache과 동일합니다.
 
 
@@ -337,7 +337,7 @@ public void Something()
 ### 캐시 만료
 서버에서 받아온 헤더를 기반으로 만료를 계산해 다시 검증합니다.
 * CacheControl의 max-age가 있을 경우 해당 값의 초 후에 재검증합니다.
-* Expired가 헤더 있을 경우 해당 시간이 지나면 재요청합니다.
+* Expires가 헤더에 있을 경우 해당 시간이 지나면 재요청합니다.
 
 ### CacheControl 설정
 * CacheControl에 noStore가 있을 경우 캐시를 사용하지 않습니다.
@@ -400,7 +400,7 @@ public void Something()
 ### Request
 
 url로 데이터를 요청합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 데이터를 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 데이터를 사용합니다.
 
 **API**
 ```cs
@@ -419,7 +419,7 @@ public static CacheInfo Request(string url, CacheRequestType requestType, double
 * url
     * 요청할 캐시 경로입니다.
 * requestType
-    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
     * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
 
 * reRequestTime
@@ -459,7 +459,7 @@ public void Something()
 ### RequestHttpCache
 
 url로 데이터를 요청합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 데이터를 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 데이터를 사용합니다.
 
 **API**
 ```cs
@@ -483,7 +483,7 @@ public void Something()
 
 ### RequestLocalCache
 
-url로 이미 캐시 된 데이터를 요청합니다. 
+url로 이미 캐시된 데이터를 요청합니다. 
 캐시 되어있지 않은 경우 실패합니다.
 
 **API**
@@ -508,7 +508,7 @@ public void Something()
 
 ### GetCachedTexture
 
-url로 이미 캐시 된 텍스처를 요청합니다.
+url로 이미 캐시된 텍스처를 요청합니다.
 앱 실행 후 로드한 텍스처라면 재사용합니다.
 
 **API**
@@ -534,9 +534,9 @@ public void Something()
 
 ### RequestTexture
 
-url로 캐시 된 데이터를 요청합니다. 
+url로 캐시된 데이터를 요청합니다. 
 앱 실행 후 로드한 텍스처라면 재사용합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
 
 **API**
 ```cs
@@ -571,7 +571,7 @@ public static CacheInfo RequestTexture(string url, CacheRequestType requestType,
 * url
     * 요청할 캐시 경로입니다.
 * requestType
-    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
     * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
 
 * reRequestTime

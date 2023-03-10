@@ -336,7 +336,7 @@ public void Something()
 ### Cache Expiration
 Calculates expiration based on the header received from the server and verifies it again.
 * If the max-age of CacheControl is present, re-validate it after seconds of that value.
-* If Expired has a header, request it again after that time.
+* If Expires is present in the header, re-request after that time has elapsed.
 
 ### CacheControl Settings
 * If CacheControl has noStore, disable the cache.
