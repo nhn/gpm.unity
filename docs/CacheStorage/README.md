@@ -102,7 +102,7 @@ public void Something()
 ```
 
 ### GpmCacheResult
-캐시 된 데이터의 결과 값입니다. 캐시 정보와 데이터를 반환합니다.
+캐시 된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
 * IsSuccess 통해 성공 여부를 받아올 수 있습니다.
 * 기본적으로 데이터는 Data로 저장됩니다.
 * Text나 Json은 인코딩을 통해 변환할 수 있으며 기본값은 utf8입니다.
@@ -111,14 +111,14 @@ public void Something()
 * bool IsSuccess() // 결과 성공 여부를 반환합니다.
 * CacheInfo Info; // 캐시 정보를 반환합니다.
 * byte[] Data;  // 캐시 데이터를 반환합니다.
-* string Text;  // utf8로 인코딩 된 데이터를 반환합니다.
+* string Text;  // utf8로 인코딩된 데이터를 반환합니다.
 
 
-* string GetTextData() // utf8로 인코딩 된 데이터를 반환합니다.
-* string GetTextData(Encoding encoding) // 인코딩 된 데이터를 반환합니다.
+* string GetTextData() // utf8로 인코딩된 데이터를 반환합니다.
+* string GetTextData(Encoding encoding) // 인코딩된 데이터를 반환합니다.
 
-* T GetJsonData<T>() // utf8로 인코딩 된 json 데이터를 반환합니다.
-* T GetJsonData<T>(Encoding encoding) // utf8로 인코딩 된 json 데이터를 * 반환합니다.
+* T GetJsonData<T>() // utf8로 인코딩된 json 데이터를 반환합니다.
+* T GetJsonData<T>(Encoding encoding) // utf8로 인코딩된 json 데이터를 반환합니다.
 ```
 
 ```cs
@@ -204,7 +204,7 @@ CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
     * Remove : 제거될 때까지 남은 시간
         * 남은 시간 동안 사용하지 않으면 제거됩니다.
         * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
-        * UnusedPeriodTime와 RemoveCycle 값이 0이 아니여야 Auto Remove가 동작합니다.
+        * UnusedPeriodTime와 RemoveCycle 값이 0이 아니어야 Auto Remove가 동작합니다.
 
 5. 캐시 상세 정보
 
