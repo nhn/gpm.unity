@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="8">
+<info version="9">
     <title>CacheStorage</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <dependencies>
         <unity>
             <version>2019.4.0+</version>
@@ -14,7 +14,16 @@
         </Common>
     </dependencies>
     <packageList>
-		<package>
+        <package>
+            <version>1.1.2</version>
+            <installList>
+                <install>
+                    <name>gpm_cachestorage_v1.1.2.unitypackage</name>
+                    <path>GPM/CacheStorage</path>
+                </install>
+            </installList>
+        </package>
+        <package>
             <version>1.1.1</version>
             <installList>
                 <install>
@@ -23,7 +32,7 @@
                 </install>
             </installList>
         </package>
-		<package>
+        <package>
             <version>1.1.0</version>
             <installList>
                 <install>

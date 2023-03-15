@@ -756,25 +756,6 @@ public string GetCachePath()
 }
 ```
 
-### SetCachePath
-
-관리되는 캐시의 경로를 설정합니다.
-기본값은 Application.temporaryCachePath입니다.
-
-**API**
-```cs
-public static void SetCachePath(string path)
-```
-
-**Example**
-```cs
-public void SetCachePath()
-{
-    string path = Application.temporaryCachePath;
-    GpmCacheStorage.SetCachePath(path);
-}
-```
-
 
 ### GetReRequestTime
 

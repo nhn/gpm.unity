@@ -753,25 +753,6 @@ public string GetCachePath()
 }
 ```
 
-### SetCachePath
-
-Sets the path to the managed cache.
-The default is Application.temporaryCachePath .
-
-**API**
-```cs
-public static void SetCachePath(string path)
-```
-
-**Example**
-```cs
-public void SetCachePath()
-{
-    string path = Application.temporaryCachePath;
-    GpmCacheStorage.SetCachePath(path);
-}
-```
-
 ### GetReRequestTime
 
  Can see the webcache re-request time.

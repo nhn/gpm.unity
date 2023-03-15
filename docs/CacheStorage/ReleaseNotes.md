@@ -2,6 +2,18 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.1.2
+
+### Date
+
+* 2023.03.15
+
+### Updated
+* SetCachePath 기능 제거
+
+### Fixed
+* IOS에서 업데이트 시 폴더 Access Denied 문제 수정
+
 ## 1.1.1
 
 ### Date
