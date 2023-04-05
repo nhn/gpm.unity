@@ -1,6 +1,14 @@
 # Release notes
 
 🌏 [한국어](ReleaseNotes.md)
+## 2.2.4
+
+### Date
+
+* 2023.04.06
+
+### Updated
+* Optimize internal network logic
 
 ## 2.2.3
 
