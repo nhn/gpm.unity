@@ -2,6 +2,18 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.1.3
+
+### Date
+
+* 2023.04.06
+
+### Updated
+* Common 2.2.4 업데이트
+
+### Fixed
+* Callback에서 Exception 발생했을 때 이전 Callback 지워주지 않는 문제 수정
+
 ## 1.1.2
 
 ### Date

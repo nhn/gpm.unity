@@ -2,6 +2,18 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.1.3
+
+### Date
+
+* 2023.04.06
+
+### Updated
+* Updated Common 2.2.4
+
+### Fixed
+* Fixed a problem that the previous callback was not cleared when an exception occurred in the callback
+
 ## 1.1.2
 
 ### Date
