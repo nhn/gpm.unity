@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.7.2
+
+### Date
+
+* 2023.4.24
+
+### Updated
+* Common 2.3.0 업데이트
+* CacheStorage 1.2.0 업데이트
+
 ## 2.7.1
 
 ### Date
@@ -9,7 +19,6 @@
 * 2023.2.21
 
 ### Fixed
-
 * InfiniteScroll
     * UpdateData 함수가 불필요하게 많이 호출되는 현상 수정([355](https://github.com/nhn/gpm.unity/issues/355))
     * InsertData 호출 이후 즉시 Move 호출했을 때 정상 작동되도록 수정([356](https://github.com/nhn/gpm.unity/issues/355))

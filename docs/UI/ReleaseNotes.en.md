@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.7.2
+
+### Date
+
+* 2023.4.24
+
+### Updated
+* Updated Common 2.3.0
+* Updated CacheStorage 1.2.0
+
 ## 2.7.1
 
 ### Date
@@ -9,7 +19,6 @@
 * 2023.2.21
 
 ### Fixed
-
 * InfiniteScroll
     * Fixed a problem where the UpdateData function was called many times unnecessarily([355](https://github.com/nhn/gpm.unity/issues/355))
     
