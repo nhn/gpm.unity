@@ -44,17 +44,18 @@
 * 오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
 * UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
     * UnusedPeriodTime
-        * 설정한 시간 동안 사용하지 않은 콘텐츠는 지워줍니다.
+        * 설정한 시간(초) 동안 사용하지 않은 캐시를 지워줍니다.
     * RemoveCycle
-        * 성능에 영향이 가지 않도록 설정한 주기마다 하나씩 제거합니다.
+        * 제거되는 캐시들을 성능에 영향이 가지 않도록 설정한 시간(초)마다 하나씩 제거합니다.
 
 2. 조건 관리
 * 새로운 콘텐츠를 받을 때 설정한 용량, 개수가 넘지 않도록 제거해 줍니다.
 * 우선순위가 낮은 캐시부터 제거해 줍니다.
-    * SetMaxSize
-        * 최대 용량을 설정합니다.
-    * SetMaxCount
-        * 최대 개수를 설정합니다.
+    * MaxCount
+        * 관리되는 캐시가 설정한 개수가 넘으면 우선순위가 낮은 것부터 지워줍니다.
+    * MaxSize
+        * 관리되는 캐시가 설정한 용량이 넘으면 우선순위가 낮은 것부터 지워줍니다.
+    
 
 ## 설치
 
@@ -72,11 +73,60 @@
 
 1. using Gpm.CacheStorage를 선언합니다.
 2. 대부분의 기능은 GpmCacheStorage에 정의되어 있습니다.
-3. GpmCacheStorage.Request를 사용하여 Cache를 요청합니다.
+3. GpmCacheStorage.Initialize를 사용하여 초기화합니다.
+4. GpmCacheStorage.Request를 사용하여 Cache를 요청합니다.
 
 ### NameSpace
 ```cs
 using Gpm.CacheStorage;
+```
+
+### Initialize
+CacheStorage를 사용하기 위해서는 반드시 초기화를 해야 합니다.
+* GpmCacheStorage.Initialize를 호출합니다.
+
+CacheStorage에 사용될 매개변수를 설정합니다.
+
+* maxCount
+    * 설정한 최대 개수가 넘으면 우선순위가 낮은 캐시부터 지워줍니다.
+    * 0으로 설정 시 무제한입니다.
+* maxSize
+    * 설정한 최대 용량이 넘으면 우선순위가 낮은 캐시부터 지워줍니다.
+    * 0으로 설정 시 무제한입니다.
+* reRequestTime
+    * 요청할 때 설정한 시간(초)이 지난 캐시는 재검증합니다.
+    * 0으로 설정 시 요청 시간 기반으로 재검증하지 않습니다.
+* defaultRequestType
+    * 요청할 때 설정한 타입 기반으로 재검증합니다.
+        * ALWAYS
+            * 요청할 때마다 재검증합니다.
+        * FIRSTPLAY
+            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을때도 재검증합니다.
+        * Once
+            * 재사용 하고 유효기간이 끝났을때 재검증합니다.
+        * LOCAL
+            * 저장된 캐시를 사용합니다.
+* unusedPeriodTime
+    * 설정한 시간(초) 동안 사용하지 않은 캐시를 지워줍니다.
+    * unusedPeriodTime 또는 removeCycle가 0으로 설정 시 실시간 제거를 하지 않습니다.
+* removeCycle
+    * 제거되는 캐시들을 성능에 영향이 가지 않도록 설정한 시간(초)마다 하나씩 제거합니다.
+    * unusedPeriodTime 또는 removeCycle가 0으로 설정 시 실시간 제거를 하지 않습니다.
+
+```cs
+using Gpm.CacheStorage;
+
+public void Something()
+{
+    int maxCount = 10000;
+    int maxSize = 5 * 1024 * 1024; // 5 MB
+    double reRequestTime = 30 * 24 * 60 * 60; // 30 Days
+    CacheRequestType defaultRequestType = CacheRequestType.FIRSTPLAY;
+    double unusedPeriodTime = 365 * 24 * 60 * 60; // 1 Years
+    double removeCycle = 1; // 1 Seconds
+             
+    GpmCacheStorage.Initialize(maxCount, maxSize, reRequestTime, defaultRequestType, unusedPeriodTime, removeCycle);
+}
 ```
 
 ### Request
@@ -112,7 +162,6 @@ public void Something()
 * CacheInfo Info; // 캐시 정보를 반환합니다.
 * byte[] Data;  // 캐시 데이터를 반환합니다.
 * string Text;  // utf8로 인코딩된 데이터를 반환합니다.
-
 
 * string GetTextData() // utf8로 인코딩된 데이터를 반환합니다.
 * string GetTextData(Encoding encoding) // 인코딩된 데이터를 반환합니다.
@@ -171,30 +220,32 @@ CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
     * 최대 개수가 넘지 않게 유지해줍니다.
 
 #### 2. Request Info
-캐시를 요청할때 사용되는 정보입니다.
+캐시를 요청할 때 사용되는 정보입니다.
 
 * Default RequestType
-    * 설정된 CacheRequestType 값입니다.
-    * 조건에 따라 콘텐츠를 검증합니다.
-    * Request에 CacheRequestType를 넣지 않을 때 사용됩니다.
+    * 요청할 때 설정한 타입 기반으로 재검증합니다.
+        * ALWAYS
+            * 요청할 때마다 재검증합니다.
+        * FIRSTPLAY
+            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
+        * Once
+            * 유효기간이 끝났을 때 재검증합니다.
+        * LOCAL
+            * 저장된 캐시를 사용합니다.
 * ReRequest
-    * 설정된 ReRequest 값입니다.
-    * 설정한 시간(초 단위)이 지나면 콘텐츠를 검증합니다.
-    * Request에 ReRequest를 넣지 않을 때 사용됩니다.
-    * 기본값은 0이며 0일 때 사용하지 않습니다.
+    * 요청할 때 설정한 시간(초)이 지난 캐시는 재검증합니다.
+    * 0으로 설정 시 요청 시간 기반으로 재검증하지 않습니다.
 
 #### 3. Auto Remove
 오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
 UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
 
 * UnusedPeriodTime
-    * 설정된 UnusedPeriodTime 값입니다.
-    * 설정한 시간(초 단위) 동안 사용하지 않은 콘텐츠는 지워줍니다.
-    * 기본값은 0이며 0일 때 Auto Remove가 동작하지 않습니다.
+    * 설정한 시간(초) 동안 사용하지 않은 캐시를 지워줍니다.
+    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
 * RemoveCycle
-    * 설정된 RemoveCycle 값입니다.
-    * 설정한 시간(초 단위)마다 콘텐츠가 하나씩 제거합니다.
-    * 기본값은 1이며 0일 때 Auto Remove가 동작하지 않습니다.
+    * 제거되는 캐시들을 성능에 영향이 가지 않도록 설정한 시간(초)마다 하나씩 제거합니다.
+    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
 
 #### 4. 캐시 데이터 리스트
 관리하고 있는 캐시 데이터 리스트입니다.
@@ -209,7 +260,7 @@ UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
 * Remove : 제거될 때까지 남은 시간
     * 남은 시간 동안 사용하지 않으면 제거됩니다.
     * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
-    * UnusedPeriodTime와 RemoveCycle 값이 0이 아니어야 Auto Remove가 동작합니다.
+    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
 
 #### 5. 캐시 상세 정보
 리스트에서 선택된 캐시 데이터 상세 정보입니다.
@@ -252,24 +303,24 @@ public void Something()
 CacheStorage에서는 아래와 같이 4가지 검증 전략을 지원하고 있습니다.
 
 ### CacheRequestType
-캐시된 데이터를 언제 서버에 다시 검증할지를 결정할 수 있습니다.
-기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
+캐시 된 데이터를 언제 서버에 다시 검증할지를 결정할 수 있습니다.
+재검증이 많을수록 무결성을 보장해 주며 재사용이 많을수록 성능이 향상됩니다.
 
 * ALWAYS
-    * 요청할 때마다 서버에 데이터가 바뀌었는지 검증합니다.
+    * 요청할 때마다 재검증합니다.
     * GpmCacheStorage.RequestHttpCache과 동일합니다.
 * FIRSTPLAY
-    * 앱 실행 시 때마다 한 번씩 재검증합니다.
+    * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
     * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
 * ONCE
-    * 유효기간 내 재검증하지 않습니다.
+    * 유효기간이 끝났을 때 재검증합니다.
     * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
 * LOCAL
-    * 캐시된 데이터를 사용합니다.
+    * 캐시 된 데이터를 사용합니다.
     * GpmCacheStorage.RequestLocalCache과 동일합니다.
 
-
 #### Request 할 때 인자를 넣어서 요청할 수 있습니다.
+* 인자를 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
 
 ```cs
 using Gpm.CacheStorage;
@@ -289,38 +340,14 @@ public void Something()
 }
 ```
 
-#### SetCacheRequestType 통해 기본값을 변경할 수 있습니다.
-기본값은 FIRSTPLAY입니다
-```cs
-public void Something()
-{
-    // 요청할 때마다 재검증하도록 설정
-    CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.SetCacheRequestType(requestType);
-}
-```
-
-
-
 ### ReRequestTime
 FIRSTPLAY, ONCE는 받아온 데이터 기반으로 캐시가 만료되기 전까지 재사용합니다.
 그러나 클라 내에서 재검증 요청 주기를 설정할 수 있습니다.
-
-SetReRequestTime 설정을 통해 클라에서 재요청 주기를 설정할 수 있습니다.
 * 설정된 초가 지나면 재 호출 시 서버에 다시 검증합니다.
-* 기본값은 0입니다.
 * 0으로 설정될 때 재요청을 하지 않습니다.
 
-```cs
-public void Something()
-{
-    // 요청한지 5분이 지난 캐시는 서버에 재검증하도록 설정
-    double fiveMinutes = 5 * 60;
-    GpmCacheStorage.SetReRequestTime(fiveMinutes);
-}
-```
-
-Request 할 때 인자를 넣어서 요청할 수 있습니다.
+#### Request 할 때 인자를 넣어서 사용할 수 있습니다.
+* 인자가 0이거나 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
 
 ```cs
 using Gpm.CacheStorage;
@@ -350,63 +377,71 @@ public void Something()
 * CacheControl에 noCache가 있을 경우 항상 재검증합니다.
     * CacheRequestType.ALWAYS 설정 또는 max-age 0과 동일합니다
 
-
-### 용량 제어
-캐시가 너무 많아지지 않도록 캐시 용량과 개수를 조정할 수 있습니다.
-
-#### SetMaxSize
-최대 용량을 설정합니다.
-```cs
-public void Something()
-{
-    // 캐시 용량이 10MB가 넘었을 때 필요 없는 캐시부터 삭제
-    long maxSize = 10 * 1024 * 1024; // 10 MB
-    bool applayStorage = true; // 저장소 적용(자동 삭제)
-    GpmCacheStorage.SetMaxSize(maxSize, applayStorage);
-}
-```
-
-#### SetMaxCount
- 최대 개수를 설정할 수 있습니다.
-```cs
-public void Something()
-{
-    // 캐시가 50000개가 넘었을 때 필요 없는 캐시부터 삭제
-    int maxCount = 50000;
-    bool applayStorage = true; // 저장소 적용(자동 삭제)
-    GpmCacheStorage.SetMaxCount(maxCount, applayStorage);
-}
-```
-
-#### SetUnusedPeriodTime
-해당 기간(초) 만큼 사용하지 않은 캐시를 자동적으로 삭제됩니다.
-```cs
-public void Something()
-{
-    // 1 달 동안 사용하지 않은 캐시는 삭제
-    double month = 24 * 60 * 60 * 30;
-    GpmCacheStorage.SetUnusedPeriodTime(mont);
-}
-```
-
-#### SetRemoveCycle
-해당 기간(초)마다 제거할 대상의 캐시를 제거합니다.
-한 번에 많은 캐시를 삭제하게 되면 부하가 갈수 있어 분산시켜줍니다.
-```cs
-public void Something()
-{
-    // 2 마다 제거 예정 캐시 삭제
-    double twoSeconds = 2;
-    GpmCacheStorage.SetRemoveCycle(mont);
-}
-```
-
 ## API
+
+### Initialize
+CacheStorage를 사용하기 위해서는 반드시 초기화를 해야 합니다.
+
+* maxCount
+    * 설정한 최대 개수가 넘으면 우선순위가 낮은 캐시부터 지워줍니다.
+    * 0으로 설정 시 무제한입니다.
+* maxSize
+    * 설정한 최대 용량이 넘으면 우선순위가 낮은 캐시부터 지워줍니다.
+    * 0으로 설정 시 무제한입니다.
+* reRequestTime
+    * 요청할 때 설정한 시간(초)이 지난 캐시는 재검증합니다.
+    * 0으로 설정 시 요청 시간 기반으로 재검증하지 않습니다.
+* defaultRequestType
+    * 요청할 때 설정한 타입 기반으로 재검증합니다.
+        * ALWAYS
+            * 요청할 때마다 재검증합니다.
+        * FIRSTPLAY
+            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
+        * Once
+            * 재사용 하고 유효기간이 끝났을 때 재검증합니다.
+        * LOCAL
+            * 저장된 캐시를 사용합니다.
+* unusedPeriodTime
+    * 설정한 시간(초) 동안 사용하지 않은 캐시를 지워줍니다.
+    * unusedPeriodTime 또는 removeCycle가 0으로 설정 시 실시간 제거를 하지 않습니다.
+* removeCycle
+    * 제거되는 캐시들을 성능에 영향이 가지 않도록 설정한 시간(초)마다 하나씩 제거합니다.
+    * unusedPeriodTime 또는 removeCycle가 0으로 설정 시 실시간 제거를 하지 않습니다.
+
+**API**
+```cs
+public static void Initialize(int maxCount, int maxSize, double reRequestTime, CacheRequestType defaultRequestType, double unusedPeriodTime, double removeCycle)
+```
+
+**Example**
+```cs
+public void Something()
+{
+    int maxCount = 10000;
+    int maxSize = 5 * 1024 * 1024; // 5 MB
+    double reRequestTime = 30 * 24 * 60 * 60; // 30 Days
+    CacheRequestType defaultRequestType = CacheRequestType.FIRSTPLAY;
+    double unusedPeriodTime = 365 * 24 * 60 * 60; // 1 Years
+    double removeCycle = 1; // 1 Seconds
+             
+    GpmCacheStorage.Initialize(maxCount, maxSize, reRequestTime, defaultRequestType, unusedPeriodTime, removeCycle);
+}
+```
 
 ### Request
 
 url로 데이터를 요청합니다.
 캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 데이터를 사용합니다.
+
+* url
+    * 요청할 캐시 경로입니다.
+* requestType
+    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 인자를 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
+* reRequestTime
+    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
+    * 기준은 초입니다. 10으로 설정한 다면 10초가 지난 캐시는 재검증합니다.
+    * 인자가 0이거나 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
 
 **API**
 ```cs
@@ -422,18 +457,6 @@ public static CacheInfo Request(string url, double reRequestTime, Action<GpmCach
 public static CacheInfo Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
 
-* url
-    * 요청할 캐시 경로입니다.
-* requestType
-    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
-    * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
-
-* reRequestTime
-    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
-    * 기준은 초입니다. 10으로 설정한 다면 10초가 지난 캐시는 재검증합니다.
-    * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
-    * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
-
 **Example**
 ```cs
 public void Something()
@@ -448,6 +471,7 @@ public void Something()
     });
 }
 ```
+
 ```cs
 public void Something()
 {
@@ -465,7 +489,7 @@ public void Something()
 ### RequestHttpCache
 
 url로 데이터를 요청합니다.
-캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 데이터를 사용합니다.
+캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 데이터를 사용합니다.
 
 **API**
 ```cs
@@ -489,7 +513,7 @@ public void Something()
 
 ### RequestLocalCache
 
-url로 이미 캐시된 데이터를 요청합니다. 
+url로 이미 캐시 된 데이터를 요청합니다. 
 캐시 되어있지 않은 경우 실패합니다.
 
 **API**
@@ -514,7 +538,7 @@ public void Something()
 
 ### GetCachedTexture
 
-url로 이미 캐시된 텍스처를 요청합니다.
+url로 이미 캐시 된 텍스처를 요청합니다.
 앱 실행 후 로드한 텍스처라면 재사용합니다.
 
 **API**
@@ -540,9 +564,22 @@ public void Something()
 
 ### RequestTexture
 
-url로 캐시된 데이터를 요청합니다. 
+url로 캐시 된 데이터를 요청합니다. 
 앱 실행 후 로드한 텍스처라면 재사용합니다.
-캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
+캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
+
+* url
+    * 요청할 캐시 경로입니다.
+* requestType
+    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 인자를 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
+* reRequestTime
+    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
+    * 마지막 검증한 이후 설정한 시간(초 단위)가 지나면 재검증합니다.
+    * 인자가 0이거나 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
+* preLoad
+    * 웹에 검증하기 전에 미리 저장된 캐시를 읽어옵니다.
+    * 검증 이후 콘텐츠가 바뀌었을 경우 콜백이 다시 호출됩니다.
 
 **API**
 ```cs
@@ -556,7 +593,6 @@ public static CacheInfo RequestTexture(string url, bool preLoad, Action<CachedTe
 ```cs
 public static CacheInfo RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
 ```
-
 
 ```cs
 public static CacheInfo RequestTexture(string url, CacheRequestType requestType, bool preLoad, Action<CachedTexture> onResult)
@@ -573,20 +609,6 @@ public static CacheInfo RequestTexture(string url, double reRequestTime,  bool p
 ```cs
 public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, bool preLoad, Action<CachedTexture> onResult)
 ```
-
-* url
-    * 요청할 캐시 경로입니다.
-* requestType
-    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
-    * 기본값은 FIRSTPLAY입니다 SetCacheRequestType 통해 변경할 수 있습니다.
-* reRequestTime
-    * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
-    * 마지막 검증한 이후 설정한 시간(초 단위)가 지나면 재검증합니다.
-    * 0이나 설정하지 않을 시 SetReRequestTime로 설정된 시간이 적용됩니다.
-    * SetReRequestTime의 기본값은 0이며 둘 다 설정하지 않을 시 requestType에 의거하여 재검증합니다.
-* preLoad
-    * 웹에 검증하기 전에 미리 저장된 캐시를 읽어옵니다.
-    * 검증 이후 콘텐츠가 바뀌었을 경우 콜백이 다시 호출됩니다.
 
 **Example**
 ```cs
@@ -637,31 +659,6 @@ public long GetMaxSize()
 }
 ```
 
-### SetMaxSize
-
-관리할 최대 캐시 용량을 설정할 수 있습니다.
-* size
-    * 기본값은 0입니다.
-    * 0일 때 무제한 저장합니다.
-* applayStorage
-    * true 일 때 저장소의 용량 크기를 조절합니다
-    * false 일 때 설정값만 수정되고 파일이 추가될 때 적용됩니다.
-
-**API**
-```cs
-public static void SetMaxSize(long size = 0, bool applyStorage = true)
-```
-
-**Example**
-```cs
-public void Something()
-{
-    long maxSize = 10 * 1024 * 1024; // 10 MB
-    bool applayStorage = true; // 저장소 적용(자동 삭제)
-    GpmCacheStorage.SetMaxSize(maxSize, applayStorage);
-}
-```
-
 ### GetCacheCount
 
 관리 중인 캐시 수를 알 수 있습니다.
@@ -697,66 +694,6 @@ public int GetMaxCount()
 }
 ```
 
-### SetMaxCount
-
-관리할 최대 캐시 개수를 설정할 수 있습니다.
-* count
-    * 기본값은 0입니다.
-    * 0일 때 무제한 저장합니다.
-* applayStorage
-    * true 일 때 저장소의 용량 크기를 조절합니다
-    * false 일 때 설정값만 수정되고 파일이 추가될 때 적용됩니다.
-
-**API**
-```cs
-public static void SetMaxCount(int count = 0, bool applyStorage = true)
-```
-
-**Example**
-```cs
-public void Something()
-{
-    int maxCount = 50000;
-    bool applayStorage = true; // 저장소 적용(자동 삭제)
-    GpmCacheStorage.SetMaxCount(maxCount, applayStorage);
-}
-```
-
-### ClearCache
-
-관리 중인 캐시를 제거합니다.
-
-**API**
-```cs
-public static void ClearCache()
-```
-
-**Example**
-```cs
-public void ClearCache()
-{
-    GpmCacheStorage.ClearCache();
-}
-```
-
-### GetCachePath
-
-관리되는 캐시의 경로를 알 수 있습니다.
-
-**API**
-```cs
-public static string GetCachePath()
-```
-
-**Example**
-```cs
-public string GetCachePath()
-{
-    return GpmCacheStorage.GetCachePath();
-}
-```
-
-
 ### GetReRequestTime
 
 웹캐시 재요청 시간을 알 수 있습니다.
@@ -771,98 +708,6 @@ public static double GetReRequestTime()
 public double GetReRequestTime()
 {
     return GpmCacheStorage.GetReRequestTime();
-}
-```
-
-### SetReRequestTime
-
-웹캐시 재요청 시간을 정할 수 있습니다.
-기본값은 0입니다. 단위는 초입니다.
-
-
-**API**
-```cs
-public static void SetReRequestTime(double value)
-```
-
-**Example**
-```cs
-public void SetReRequestTime()
-{
-    double reRequestTime = 5 * 60;
-    GpmCacheStorage.SetReRequestTime(reRequestTime);
-}
-```
-
-### GetUnusedPeriodTime
-
-불필요한 에셋의 삭제 기간을 알 수 있습니다.
-
-**API**
-```cs
-public static double GetUnusedPeriodTime()
-```
-
-**Example**
-```cs
-public double GetUnusedPeriodTime()
-{
-    return GpmCacheStorage.GetUnusedPeriodTime();
-}
-```
-
-### SetUnusedPeriodTime
-
-불필요한 에셋의 삭제 기간을 설정합니다.
-기본값은 0입니다. 단위는 초입니다.
-
-**API**
-```cs
-public static void SetUnusedPeriodTime(double value)
-```
-
-**Example**
-```cs
-public void SetUnusedPeriodTime()
-{
-    double unUsedPeriodTime = 5 * 60 * 60;
-    GpmCacheStorage.SetUnusedPeriodTime(unUsedPeriodTime);
-}
-```
-
-### GetRemoveCycle
-
-지연 삭제 주기를 알 수 있습니다.
-
-**API**
-```cs
-public static double GetRemoveCycle()
-```
-
-**Example**
-```cs
-public double GetRemoveCycle()
-{
-    return GpmCacheStorage.GetRemoveCycle();
-}
-```
-
-### SetRemoveCycle
-
-지연 삭제 주기를 설정합니다.
-기본값은 0입니다. 단위는 초입니다.
-
-**API**
-```cs
-public static void SetRemoveCycle(double value)
-```
-
-**Example**
-```cs
-public void SetRemoveCycle()
-{
-    double reRequestTime = 5 * 60;
-    GpmCacheStorage.SetRemoveCycle(reRequestTime);
 }
 ```
 
@@ -883,20 +728,53 @@ public CacheRequestType GetCacheRequestType()
 }
 ```
 
-### SetCacheRequestType
+### GetUnusedPeriodTime
 
-GpmCacheStorage.Request를 요청할 때 적용되는 CacheRequestType를 설정합니다.
+불필요한 에셋의 삭제 기간을 알 수 있습니다.
 
 **API**
 ```cs
-public static void SetCacheRequestType(CacheRequestType value)
+public static double GetUnusedPeriodTime()
 ```
 
 **Example**
 ```cs
-public void SetCacheRequestType()
+public double GetUnusedPeriodTime()
 {
-    CacheRequestType reRequestTime = 5 * 60;
-    GpmCacheStorage.SetCacheRequestType(reRequestTime);
+    return GpmCacheStorage.GetUnusedPeriodTime();
+}
+```
+
+### GetRemoveCycle
+
+지연 삭제 주기를 알 수 있습니다.
+
+**API**
+```cs
+public static double GetRemoveCycle()
+```
+
+**Example**
+```cs
+public double GetRemoveCycle()
+{
+    return GpmCacheStorage.GetRemoveCycle();
+}
+```
+
+### ClearCache
+
+관리 중인 캐시를 제거합니다.
+
+**API**
+```cs
+public static void ClearCache()
+```
+
+**Example**
+```cs
+public void ClearCache()
+{
+    GpmCacheStorage.ClearCache();
 }
 ```

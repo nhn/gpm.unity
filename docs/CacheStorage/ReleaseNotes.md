@@ -2,6 +2,27 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.2.0
+
+### Date
+
+* 2023.04.24
+
+### Add
+* 초기화 함수 추가 GpmCacheStorage.Initialize
+    * 명시적으로 초기화를 해야 동작하도록 수정
+
+### Updated
+* Common 2.3.0 업데이트
+* 동기화 성능 개선
+    * 로컬 캐시 파일 관리를 위한 File IO 최소화
+    * 캐시 관리를 위한 내부 파일 포맷 변경
+        * json -> MessagePack
+
+### Fixed
+* Callback에서 Exception 발생했을 때 이전 Callback 지워주지 않는 문제 수정
+* 캐시 되지 않은 파일 불러올 때 Exception 수정
+
 ## 1.1.2
 
 ### Date
