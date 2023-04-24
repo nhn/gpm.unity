@@ -2,17 +2,25 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
-## 1.1.3
+## 1.2.0
 
 ### Date
 
-* 2023.04.06
+* 2023.04.24
+
+### Add
+* Add initialization function GpmCacheStorage.Initialize
+    * Modified to work only when explicitly initialized
 
 ### Updated
-* Updated Common 2.2.4
+* Updated Common 2.3.0
+* Improved synchronization performance for local cache file management
+* Changed internal file format for cache management
+    * json -> MessagePack
 
 ### Fixed
 * Fixed a problem that the previous callback was not cleared when an exception occurred in the callback
+* Fixed exception when loading non-cached files
 
 ## 1.1.2
 
