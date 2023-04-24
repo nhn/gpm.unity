@@ -5,7 +5,11 @@
 
 ### Date
 
-* 2023.04.06
+* 2023.04.24
+
+### Added
+* Added GPMLogger Exception Log
+* Added MessagePack
 
 ### Updated
 * Optimize internal network logic

@@ -2,11 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
-## 2.2.4
+## 2.3.0
 
 ### Date
 
-* 2023.04.06
+* 2023.04.24
+
+### Added
+* GPMLogger Exception Log 추가
+* MessagePack 추가
 
 ### Updated
 * 내부 네트워크 통신 로직 최적화
