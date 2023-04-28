@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serviceList>
+    <service>
+        <name>Common</name>
+        <version>2.3.0</version>
+    </service>
+    <service>
+        <name>Adapter</name>
+        <version>2.0.1</version>
+    </service>
+    <service>
+        <name>DLST</name>
+        <version>2.0.1</version>
+    </service>
+    <service>
+        <name>UI</name>
+        <version>2.7.2</version>
+    </service>
+    <service>
+        <name>Shader</name>
+        <version>0.1.0</version>
+    </service>
+    <service>
+        <name>LogViewer</name>
+        <version>2.0.3</version>
+    </service>
+    <service>
+        <name>Communicator</name>
+        <version>1.1.0</version>
+    </service>
+    <service>
+        <name>WebView</name>
+        <version>1.11.1</version>
+    </service>
+    <service>
+        <name>AssetManagement</name>
+        <version>1.2.2</version>
+    </service>
+    <service>
+        <name>Profiler</name>
+        <version>1.0.2</version>
+    </service>
+    <service>
+        <name>CacheStorage</name>
+        <version>1.2.0</version>
+    </service>
+</serviceList>

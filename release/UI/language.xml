@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<multilanguage>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>$DESCRIPTION</key>
+            <language>
+                <ko>Unity UI를 보다 효율적으로 사용할 수 있는 컴포넌트 제공</ko>
+                <en>Provide components to use Unity UI more efficiently</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_DOCUMENTATION</key>
+            <language>
+                <ko>문서 보기</ko>
+                <en>View documentation</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_DOCUMENTATION</key>
+            <language>
+                <ko>README.md</ko>
+                <en>README.en.md</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_RELEASE_NOTES</key>
+            <language>
+                <ko>릴리스 정보</ko>
+                <en>Release notes</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_RELEASE_NOTES</key>
+            <language>
+                <ko>ReleaseNotes.md</ko>
+                <en>ReleaseNotes.en.md</en>
+            </language>
+        </string>
+    </list>
+</multilanguage>
