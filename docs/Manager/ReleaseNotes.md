@@ -2,6 +2,16 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.2.3
+
+### Date
+
+* 2023.04.28
+
+### Updated
+* Common v2.3.0 업데이트
+* 라이센스 업데이트
+
 ## 2.2.2
 
 ### Date
