@@ -1,7 +1,17 @@
 # Release notes
 
 🌏 [한국어](ReleaseNotes.md)
-## 2.2.4
+
+## 2.3.1
+
+### Date
+
+* 2023.05.08
+
+### Fixed
+* Fixed MessagePack compilation error in .net21 .net4 environment[(#388)](https://github.com/nhn/gpm.unity/issues/388)
+
+## 2.3.0
 
 ### Date
 
