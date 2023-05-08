@@ -9,7 +9,7 @@
 * 2023.05.08
 
 ### Fixed
-* Fixed messagepack compilation error in .net21 .net4 environment[(#388)](https://github.com/nhn/gpm.unity/issues/388)
+* Fixed MessagePack compilation error in .net21 .net4 environment[(#388)](https://github.com/nhn/gpm.unity/issues/388)
 
 ## 2.3.0
 

@@ -9,7 +9,7 @@
 * 2023.05.08
 
 ### Fixed
-* .net21 .net4 환경에서 메시지팩 컴파일 오류 수정 [(#388)](https://github.com/nhn/gpm.unity/issues/388)
+* .net21 .net4 환경에서 MessagePack 컴파일 오류 수정 [(#388)](https://github.com/nhn/gpm.unity/issues/388)
 
 ## 2.3.0
 
