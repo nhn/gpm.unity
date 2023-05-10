@@ -2,6 +2,18 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.4
+
+### Date
+
+* 2023.05.10
+
+### Fixed
+* MessagePack .net 2.1, .net 4.x compilation error fix
+
+### Updated
+* Updated Common v2.3.1
+
 ## 2.2.3
 
 ### Date
