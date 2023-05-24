@@ -2,6 +2,28 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.3.0
+
+### Date
+
+* 2023.05.24
+
+### Added
+* 캐시 삭제 기능 추가
+   * RemoveCache
+* ManagedTexture에서 텍스처 연결 해지, 텍스처 파괴 기능 추가
+   * DestroyTexture, ReleaseCache
+* Request 도중 취소할 수 있고 코루틴에서 대기할 수 있도록 기능 추가
+   * CacheRequestOperation
+* Viewer에서 Local Time으로 보는 기능 추가
+
+### Updated
+* 날짜 계산 최적화
+
+### Fixed
+* 이미 요청 중인 Request를 Local로 요청할 때 대기하던 문제 수정
+* RequestTexture 요청 시 관리되는 텍스처가 외부에서 파괴되어도 읽을 수 있도록 개선
+
 ## 1.2.0
 
 ### Date

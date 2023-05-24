@@ -141,7 +141,7 @@ using Gpm.CacheStorage;
 public void Something()
 {
     string url;
-    GpmCacheStorage.Request(url, (result) =>
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -158,23 +158,23 @@ Result value of cached data. Returns cache information and data.
 * Text or Json can be converted by encoding and the default is utf8.
 
 ```cs
-* boolean IsSuccess() // Returns whether the result was successful or not.
-* CacheInfoInfo; // Returns cache information.
-* byte[] Data; // Returns cache data.
-* string Text; // Returns the utf8 encoded data.
+boolean IsSuccess() // Returns whether the result was successful or not.
+CacheInfoInfo; // Returns cache information.
+byte[] Data; // Returns cache data.
+string Text; // Returns the utf8 encoded data.
 
-* string GetTextData() // Returns the utf8 encoded data.
-* string GetTextData(Encoding encoding) // Returns encoded data.
+string GetTextData() // Returns the utf8 encoded data.
+string GetTextData(Encoding encoding) // Returns encoded data.
 
-* T GetJsonData<T>() // returns json data encoded in utf8.
-* T GetJsonData<T>(Encoding encoding) // Return json data encoded in utf8.
+T GetJsonData<T>() // returns json data encoded in utf8.
+T GetJsonData<T>(Encoding encoding) // Return json data encoded in utf8.
 ```
 
 ```cs
 public void Something()
 {
     string url;
-    GpmCacheStorage.Request(url, (result) =>
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
     {
         // success
         if (result.IsSuccess() == true)
@@ -201,69 +201,56 @@ public void Something()
 }
 ```
 
-### Viewer
-Can view cache information for Cache Storage.
+### CacheRequestOperation
+The return value when requesting the cache. You can get the cache request status.
 
-* How to use
-    * Can be opened through GPM/CacheStorage/Viewer in the menu.
+```cs
+bool keepWaiting() // Returns whether to wait in coroutine.
+void Cancel() // Cancel the request. Callbacks are not dispatched for canceled requests.
+```
 
-![](Images/viewer.png)
+#### Wait for coroutine
+Can wait in a coroutine using CacheRequestOperation.
+```cs
+using Gpm.CacheStorage;
 
-#### 1. Management
-This is the Managed Cache menu.
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    yield return GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
+}
+```
 
-* Size: Current cache capacity / maximum capacity (byte unit)
-    * The current cache capacity and the set maximum capacity.
-    * Keeps the maximum capacity not exceeded.
-* Count: Current cache count / maximum count
-    * The current cache number and the set maximum number.
-    * Keeps the maximum number not exceeded.
+#### Cancel request
+Can opt out of receiving callbacks by canceling the request.
+```cs
+using Gpm.CacheStorage;
 
-#### 2. Request Info
-This information is used when requesting cache.
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    CacheRequestOperation op = GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
 
-* Default RequestType
-    * Re-validates based on the type set at the time of request.
-        * ALWAYS
-            * Revalidate that data has changed on the server at every request.
-        * FIRSTPLAY
-            * It is revalidated every time the app is restarted, and it is also revalidated when the validity period is over.
-        * Once
-            * It is reused and revalidated when the expiration date is over.
-        * LOCAL
-            * Use stored cache.
-* ReRequest
-    * Cache that has passed the set time (seconds) at the time of request is re-validated.
-    * When set to 0, revalidation is not performed based on request time.
+    // Cancel
+    op.Cancel();
 
-#### 3. Auto Remove
-It removes content that has not been used for a long time in real time.
-Both UnusedPeriodTime and RemoveCycle must be set for this to work.
-
-* UnusedPeriodTime
-    * Clear caches that have not been used for the set amount of time (seconds).
-    * Do not remove real-time when unusedPeriodTime or removeCycle is 0.
-* RemoveCycle
-    * Remove caches that are removed one by one every set number of seconds so that performance is not affected.
-    * Do not remove real-time when unusedPeriodTime or removeCycle is 0.
-
-#### 4. Cache data list
-This is a list of managed cache data.
-
-* Name: Cache name
-* Url: cache path
-* Size : Cache size (byte unit)
-* Exfires: Remaining time until expiration date
-* Remain: Remaining time until cache validation
-    * Re-verification after the remaining time has elapsed.
-    * The shorter of the remaining time until the expiration date and the ReRequest time (in seconds)
-* Remove: Remaining time until removal
-    * If not used for the remaining time, it will be removed.
-    * Time Used / Time set as UnusedPeriodTime (in seconds)
-    * Do not remove real-time when unusedPeriodTime or removeCycle is 0.
-
-#### 5. Cache Details Info
-Cache data details selected from the list.
+    yield return op;
+}
+```
 
 ### Texture caching request
 Can request a texture cache using GpmCacheStorage.RequestTexture.
@@ -274,7 +261,7 @@ Can request a texture cache using GpmCacheStorage.RequestTexture.
 public void Something()
 {
     string url;
-    CacheInfo cacheInfo = GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
+    GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
     {
         if (cachedTexture != null)
         {
@@ -284,6 +271,64 @@ public void Something()
 }
 ```
 
+```cs
+public IEnumerator Something()
+{
+    CachedTexture cachedTexture;
+    string url;
+    yield return GpmCacheStorage.RequestTexture(url, (CachedTexture recvCachedTexture) =>
+    {
+        cachedTexture = recvCachedTexture;
+    });
+
+    if (cachedTexture != null)
+    {
+        Texture texture = cachedTexture.texture;
+    }
+}
+```
+
+### CachedTexture
+The result of the cached texture. Return cache information.
+* Can get cached textures.
+* Can know whether the texture has changed through updateData.
+
+```cs
+CacheInfo info // Returns cache information.
+Texture2D texture; // Return the resulting texture.
+bool requested;  // When true, this is a new request from the web.
+bool updateData;  // When true, this is the newly updated texture.
+
+void DestroyTexture() // Destroys the texture and excludes it from managed textures as well.
+void ReleaseCache() // Remove from managed texture. It doesn't destroy textures.
+```
+
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            // texture
+            Texture texture = cachedTexture.texture;
+
+            // requested
+            bool requested = cachedTexture.requested;
+
+            // updateData
+            bool updateData = cachedTexture.updateData;
+
+            // DestroyTexture
+            cachedTexture.DestroyTexture();
+
+            // ReleaseCache
+            cachedTexture.ReleaseCache();
+        }
+    });
+}
+```
 
 ## More effective web cache
 Web cache is about twice as fast as normal requests.
@@ -330,7 +375,7 @@ public void Something()
     // Revalidate every time requested
     string url;
     CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.Request(url, requestType, (result) =>
+    GpmCacheStorage.Request(url, requestType, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -357,7 +402,7 @@ public void Something()
     // Cache that has been requested for 5 minutes is revalidated to the server
     string url;
     double fiveMinutes = 5 * 60;
-    GpmCacheStorage.Request(url, fiveMinutes, (result) =>
+    GpmCacheStorage.Request(url, fiveMinutes, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -367,15 +412,69 @@ public void Something()
 }
 ```
 
-### Cache Expiration
-Calculates expiration based on the header received from the server and verifies it again.
-* If the max-age of CacheControl is present, re-validate it after seconds of that value.
-* If Expires is present in the header, re-request after that time has elapsed.
+### Viewer
+Can view cache information for Cache Storage.
 
-### CacheControl Settings
-* If CacheControl has noStore, disable the cache.
-* Always revalidate if noCache is present in CacheControl.
-    * Same as CacheRequestType.ALWAYS setting or max-age 0
+* How to use
+    * Can be opened through GPM/CacheStorage/Viewer in the menu.
+
+![](Images/viewer.png)
+
+### 1. Management
+This is the Managed Cache menu.
+
+* Size: Current cache capacity / maximum capacity (byte unit)
+    * The current cache capacity and the set maximum capacity.
+    * Keeps the maximum capacity not exceeded.
+* Count: Current cache count / maximum count
+    * The current cache number and the set maximum number.
+    * Keeps the maximum number not exceeded.
+
+### 2. Request Info
+This information is used when requesting cache.
+
+* Default RequestType
+    * Re-validates based on the type set at the time of request.
+        * ALWAYS
+            * Revalidate that data has changed on the server at every request.
+        * FIRSTPLAY
+            * It is revalidated every time the app is restarted, and it is also revalidated when the validity period is over.
+        * Once
+            * It is reused and revalidated when the expiration date is over.
+        * LOCAL
+            * Use stored cache.
+* ReRequest
+    * Cache that has passed the set time (seconds) at the time of request is re-validated.
+    * When set to 0, revalidation is not performed based on request time.
+
+### 3. Auto Remove
+It removes content that has not been used for a long time in real time.
+Both UnusedPeriodTime and RemoveCycle must be set for this to work.
+
+* UnusedPeriodTime
+    * Clear caches that have not been used for the set amount of time (seconds).
+    * Do not remove real-time when unusedPeriodTime or removeCycle is 0.
+* RemoveCycle
+    * Remove caches that are removed one by one every set number of seconds so that performance is not affected.
+    * Do not remove real-time when unusedPeriodTime or removeCycle is 0.
+
+### 4. Cache data list
+This is a list of managed cache data.
+
+* Name: Cache name
+* Url: cache path
+* Size : Cache size (byte unit)
+* Exfires: Remaining time until expiration date
+* Remain: Remaining time until cache validation
+    * Re-verification after the remaining time has elapsed.
+    * The shorter of the remaining time until the expiration date and the ReRequest time (in seconds)
+* Remove: Remaining time until removal
+    * If not used for the remaining time, it will be removed.
+    * Time Used / Time set as UnusedPeriodTime (in seconds)
+    * Do not remove real-time when unusedPeriodTime or removeCycle is 0.
+
+### 5. Cache Details Info
+Cache data details selected from the list.
 
 ## API
 
@@ -445,16 +544,16 @@ If cached data and web data are the same data, use cached data.
 
 **API**
 ```cs
-public static CacheInfo Request(string url, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, Action<GpmCacheResult> onResult)
 ```
 ```cs
-public static CacheInfo Request(string url, CacheRequestType requestType, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, CacheRequestType requestType, Action<GpmCacheResult> onResult)
 ```
 ```cs
-public static CacheInfo Request(string url, double reRequestTime, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
 ```cs
-public static CacheInfo Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -462,7 +561,7 @@ public static CacheInfo Request(string url, CacheRequestType requestType, double
 public void Something()
 {
     string url;
-    GpmCacheStorage.Request(url, (result) =>
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -473,16 +572,123 @@ public void Something()
 ```
 
 ```cs
-public void Something()
+public IEnumerator Something()
 {
     string url;
-    GpmCacheStorage.Request(url, CacheRequestType.ALWAYS, (result) =>
+    bytes[] data;
+    yield return GpmCacheStorage.Request(url, CacheRequestType.ONCE, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
-            bytes[] data = result.Data;
+            data = result.Data;
         }
     });
+}
+```
+
+### GpmCacheResult
+Result value of cached data. Returns cache information and data.
+* IsSuccess allows you to obtain success or not.
+* By default, data is stored as Data.
+* Text or Json can be converted by encoding and the default is utf8.
+
+**API**
+```cs
+boolean IsSuccess() // Returns whether the result was successful or not.
+CacheInfoInfo; // Returns cache information.
+byte[] Data; // Returns cache data.
+string Text; // Returns the utf8 encoded data.
+
+string GetTextData() // Returns the utf8 encoded data.
+string GetTextData(Encoding encoding) // Returns encoded data.
+
+T GetJsonData<T>() // returns json data encoded in utf8.
+T GetJsonData<T>(Encoding encoding) // Return json data encoded in utf8.
+```
+
+**Example**
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        // success
+        if (result.IsSuccess() == true)
+        {
+            // date
+            bytes[] data = result.Data;
+
+            // text - Encoding.UTF8
+            string text = result.Text;
+
+            // text - Encoding.UTF8
+            text = result.GetTextData();
+
+            // text - Encoding.Default
+            text = result.GetTextData(Encoding.Default);    
+
+            // json - Encoding.UTF8
+            JsonClass json = result.GetJsonData<JsonClass>();
+
+            // json - Encoding.Default
+            json = result.GetJsonData<JsonClass>(Encoding.Default);           
+        }
+    });
+}
+```
+
+### CacheRequestOperation
+The return value when requesting the cache. You can get the cache request status.
+* You can await in a coroutine.
+* You can also cancel cache requests.
+
+**API**
+```cs
+bool keepWaiting() // Returns whether to wait in coroutine.
+void Cancel() // Cancel the request. Callbacks are not dispatched for canceled requests.
+```
+
+**Example**
+```cs
+using Gpm.CacheStorage;
+
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    CacheRequestOperation op = GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
+
+    while(op.keepWaiting() == true)
+    {
+        yield return null;
+    }
+}
+```
+
+```cs
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    CacheRequestOperation op = GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
+
+    // Cancel
+    op.Cancel();
+
+    yield return op;
 }
 ```
 
@@ -493,7 +699,7 @@ If the cached data and the web data are the same data, the cached data is used.
 
 **API**
 ```cs
-public static CacheInfo RequestHttpCache(string url, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation RequestHttpCache(string url, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -501,11 +707,26 @@ public static CacheInfo RequestHttpCache(string url, Action<GpmCacheResult> onRe
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestHttpCache(url, (result) =>
+    GpmCacheStorage.RequestHttpCache(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
             bytes[] data = result.Data;
+        }
+    });
+}
+```
+
+```cs
+public IEnumerator Something()
+{
+    string url;
+    bytes[] data;
+    yield return GpmCacheStorage.RequestHttpCache(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
         }
     });
 }
@@ -518,7 +739,7 @@ Fails if not cached.
 
 **API**
 ```cs
-public static CacheInfo RequestLocalCache(string url, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation RequestLocalCache(string url, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -526,7 +747,7 @@ public static CacheInfo RequestLocalCache(string url, Action<GpmCacheResult> onR
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestLocalCache(url, (result) =>
+    GpmCacheStorage.RequestLocalCache(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -543,7 +764,7 @@ If the texture is loaded after running the app, it will be reused.
 
 **API**
 ```cs
-public static CacheInfo GetCachedTexture(string url, Action<CachedTexture> onResult)
+public static CacheRequestOperation GetCachedTexture(string url, Action<CachedTexture> onResult)
 ```
 
 **Example**
@@ -552,7 +773,7 @@ public static CacheInfo GetCachedTexture(string url, Action<CachedTexture> onRes
 public void Something()
 {
     string url;
-    CacheInfo cacheInfo = GpmCacheStorage.GetCachedTexture(url, (cachedTexture) =>
+    GpmCacheStorage.GetCachedTexture(url, (CachedTexture cachedTexture) =>
     {
         if (cachedTexture != null)
         {
@@ -583,31 +804,31 @@ If the cached data and web data are the same data, the cached texture is loaded 
 
 **API**
 ```cs
-public static CacheInfo RequestTexture(string url, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, bool preLoad, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, CacheRequestType requestType, bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, CacheRequestType requestType, bool preLoad, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, double reRequestTime,  bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, double reRequestTime,  bool preLoad, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, CacheRequestType requestType, double reRequestTime, bool preLoad, Action<CachedTexture> onResult)
 ```
 
 **Example**
@@ -615,11 +836,72 @@ public static CacheInfo RequestTexture(string url, CacheRequestType requestType,
 public void Something()
 {
     string url;
-    CacheInfo cacheInfo = GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
+    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
     {
         if (cachedTexture != null)
         {
             Texture texture = cachedTexture.texture;
+        }
+    });
+}
+```
+
+```cs
+public IEnumerator Something()
+{
+    string url;
+    Texture texture;
+    yield return GpmCacheStorage.RequestTexture(url, true, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            texture = cachedTexture.texture;
+        }
+    });
+}
+```
+
+
+### CachedTexture
+
+The result of the cached texture. Return cache information.
+* Can get cached textures.
+* Can know whether the texture has changed through updateData.
+
+**API**
+```cs
+CacheInfo info // Returns cache information.
+Texture2D texture; // Return the resulting texture.
+bool requested;  // When true, this is a new request from the web.
+bool updateData;  // When true, this is the newly updated texture.
+
+void DestroyTexture() // Destroys the texture and excludes it from managed textures as well.
+void ReleaseCache() // Remove from managed texture. It doesn't destroy textures.
+```
+
+**Example**
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            // texture
+            Texture texture = cachedTexture.texture;
+
+            // requested
+            bool requested = cachedTexture.requested;
+
+            // updateData
+            bool updateData = cachedTexture.updateData;
+
+            // DestroyTexture
+            cachedTexture.DestroyTexture();
+
+            // ReleaseCache
+            cachedTexture.ReleaseCache();
         }
     });
 }
@@ -764,7 +1046,7 @@ public double GetRemoveCycle()
 
 ### ClearCache
 
-Remove the managed cache.
+Remove the managed all cache.
 
 **API**
 ```cs
@@ -776,5 +1058,26 @@ public static void ClearCache()
 public void ClearCache()
 {
     GpmCacheStorage.ClearCache();
+}
+```
+
+### RemoveCache
+
+Remove the managed cache.
+
+**API**
+```cs
+public static void RemoveCache()
+```
+
+**Example**
+```cs
+public bool RemoveCache()
+{
+    string url;
+    if( GpmCacheStorage.RemoveCache(url) == true)
+    {
+        // removed
+    }
 }
 ```
