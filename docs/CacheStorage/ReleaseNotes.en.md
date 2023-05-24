@@ -2,6 +2,28 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.3.0
+
+### Date
+
+* 2023.05.24
+
+### Added
+* Added cache clear function
+   * RemoveCache
+* Added texture disconnection and texture destruction functions in ManagedTexture
+   * DestroyTexture, ReleaseCache
+* Added ability to cancel during request and to wait in coroutine
+   * CacheRequestOperation
+* Added the ability to view local time in Viewer
+
+### Updated
+* Optimized date calculation
+
+### Fixed
+* Fixed a waiting problem when requesting a request that is already being requested as Local
+* Improved so that the texture managed when requesting RequestTexture can be read even if it is destroyed externally
+
 ## 1.2.0
 
 ### Date

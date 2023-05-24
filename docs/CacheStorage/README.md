@@ -141,7 +141,7 @@ using Gpm.CacheStorage;
 public void Something()
 {
     string url;
-    GpmCacheStorage.Request(url, (result) =>
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -152,29 +152,29 @@ public void Something()
 ```
 
 ### GpmCacheResult
-캐시된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
+캐시 된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
 * IsSuccess 통해 성공 여부를 받아올 수 있습니다.
 * 기본적으로 데이터는 Data로 저장됩니다.
 * Text나 Json은 인코딩을 통해 변환할 수 있으며 기본값은 utf8입니다.
 
 ```cs
-* bool IsSuccess() // 결과 성공 여부를 반환합니다.
-* CacheInfo Info; // 캐시 정보를 반환합니다.
-* byte[] Data;  // 캐시 데이터를 반환합니다.
-* string Text;  // utf8로 인코딩된 데이터를 반환합니다.
+bool IsSuccess() // 결과 성공 여부를 반환합니다.
+CacheInfo Info; // 캐시 정보를 반환합니다.
+byte[] Data;  // 캐시 데이터를 반환합니다.
+string Text;  // utf8로 인코딩된 데이터를 반환합니다.
 
-* string GetTextData() // utf8로 인코딩된 데이터를 반환합니다.
-* string GetTextData(Encoding encoding) // 인코딩된 데이터를 반환합니다.
+string GetTextData() // utf8로 인코딩된 데이터를 반환합니다.
+string GetTextData(Encoding encoding) // 인코딩된 데이터를 반환합니다.
 
-* T GetJsonData<T>() // utf8로 인코딩된 json 데이터를 반환합니다.
-* T GetJsonData<T>(Encoding encoding) // utf8로 인코딩된 json 데이터를 반환합니다.
+T GetJsonData<T>() // utf8로 인코딩된 json 데이터를 반환합니다.
+T GetJsonData<T>(Encoding encoding) // utf8로 인코딩된 json 데이터를 반환합니다.
 ```
 
 ```cs
 public void Something()
 {
     string url;
-    GpmCacheStorage.Request(url, (result) =>
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
     {
         // success
         if (result.IsSuccess() == true)
@@ -201,72 +201,59 @@ public void Something()
 }
 ```
 
-### Viewer
-CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
+### CacheRequestOperation
+캐시를 요청할 때 반환 값입니다. 캐시 요청 상태를 알 수 있습니다.
 
-* 사용 방법
-    * 메뉴의 GPM/CacheStorage/Viewer 를 통해 오픈 가능합니다.
+```cs
+bool keepWaiting() // 코루틴에서 대기 할 것인지를 반환합니다.
+void Cancel() // 요청을 취소합니다. 취소한 요청은 콜백이 전달되지 않습니다.
+```
 
-![](Images/viewer.png)
+#### 코루틴 대기하기
+CacheRequestOperation를 이용하여 코루틴에서 대기할 수 있습니다.
+```cs
+using Gpm.CacheStorage;
 
-#### 1. Management
-관리되는 캐시 메뉴입니다.
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    yield return GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
+}
+```
 
-* Size : 현재 캐시 용량 / 최대 용량 (byte 단위)
-    * 현재 Cache 용량과 설정된 최대 용량입니다.
-    * 최대 용량이 넘지 않게 유지해줍니다.
-* Count : 현재 캐시 개수 / 최대 개수
-    * 현재 Cache 개수와 설정된 최대 개수입니다.
-    * 최대 개수가 넘지 않게 유지해줍니다.
+#### 요청 취소하기
+요청을 취소하여 콜백을 받지 않을 수 있습니다.
+```cs
+using Gpm.CacheStorage;
 
-#### 2. Request Info
-캐시를 요청할 때 사용되는 정보입니다.
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    CacheRequestOperation op = GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
 
-* Default RequestType
-    * 요청할 때 설정한 타입 기반으로 재검증합니다.
-        * ALWAYS
-            * 요청할 때마다 재검증합니다.
-        * FIRSTPLAY
-            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
-        * Once
-            * 유효기간이 끝났을 때 재검증합니다.
-        * LOCAL
-            * 저장된 캐시를 사용합니다.
-* ReRequest
-    * 요청할 때 설정한 시간(초)이 지난 캐시는 재검증합니다.
-    * 0으로 설정 시 요청 시간 기반으로 재검증하지 않습니다.
+    // Cancel
+    op.Cancel();
 
-#### 3. Auto Remove
-오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
-UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
-
-* UnusedPeriodTime
-    * 설정한 시간(초) 동안 사용하지 않은 캐시를 지워줍니다.
-    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
-* RemoveCycle
-    * 제거되는 캐시들을 성능에 영향이 가지 않도록 설정한 시간(초)마다 하나씩 제거합니다.
-    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
-
-#### 4. 캐시 데이터 리스트
-관리하고 있는 캐시 데이터 리스트입니다.
-
-* Name : 캐시 이름
-* Url : 캐시 경로
-* Size : 캐시 크기 (byte 단위)
-* Exfires : 유효기간까지 남은 시간
-* Remain : 캐시 검증까지 남은 시간
-    * 남은 시간이 지나면 재검증합니다.
-    * 유효기간까지 남은 시간과 ReRequest(초 단위) 시간 중 짧은 시간
-* Remove : 제거될 때까지 남은 시간
-    * 남은 시간 동안 사용하지 않으면 제거됩니다.
-    * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
-    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
-
-#### 5. 캐시 상세 정보
-리스트에서 선택된 캐시 데이터 상세 정보입니다.
+    yield return op;
+}
+```
 
 ### 텍스처 캐싱 요청
-GpmCacheStorage.RequestTexture를 이용하여 텍스처 캐시를 요청할 수 있습니다.
+RequestTexture를 통해 캐시된 텍스처를 요청할 수 있습니다.
 * 앱 실행 후 로드한 텍스처라면 재사용합니다.
 * 캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
 
@@ -274,7 +261,7 @@ GpmCacheStorage.RequestTexture를 이용하여 텍스처 캐시를 요청할 수
 public void Something()
 {
     string url;
-    CacheInfo cacheInfo = GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
+    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
     {
         if (cachedTexture != null)
         {
@@ -284,6 +271,64 @@ public void Something()
 }
 ```
 
+```cs
+public IEnumerator Something()
+{
+    CachedTexture cachedTexture;
+    string url;
+    yield return GpmCacheStorage.RequestTexture(url, (CachedTexture recvCachedTexture) =>
+    {
+        cachedTexture = recvCachedTexture;
+    });
+
+    if (cachedTexture != null)
+    {
+        Texture texture = cachedTexture.texture;
+    }
+}
+```
+
+### CachedTexture
+캐시 된 텍스쳐의 결괏값입니다. 캐시 정보를 반환합니다.
+* 캐시 된 텍스쳐를 받아올 수 있습니다.
+* updateData를 통해 텍스쳐 변경 여부를 알 수 있습니다.
+
+```cs
+CacheInfo info // 캐시 정보를 반환합니다.
+Texture2D texture; // 결과 텍스쳐를 반환합니다.
+bool requested;  // true일 때 웹에서 새로 받은 요청입니다.
+bool updateData;  // true일 때 새롭게 업데이트된 텍스쳐입니다.
+
+void DestroyTexture() // 텍스쳐를 파괴하고 관리되는 텍스쳐에서도 제외합니다.
+void ReleaseCache() // 관리되는 텍스쳐에서 제외합니다. 텍스쳐를 파괴하지는 않습니다.
+```
+
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            // texture
+            Texture texture = cachedTexture.texture;
+
+            // requested
+            bool requested = cachedTexture.requested;
+
+            // updateData
+            bool updateData = cachedTexture.updateData;
+
+            // DestroyTexture
+            cachedTexture.DestroyTexture();
+
+            // ReleaseCache
+            cachedTexture.ReleaseCache();
+        }
+    });
+}
+```
 
 ## 더 효과적인 웹 캐시 사용
 웹 캐시를 사용하면 일반 요청보다 속도가 2배 정도 빠릅니다.
@@ -330,7 +375,7 @@ public void Something()
     // 요청할 때마다 재검증
     string url;
     CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.Request(url, requestType, (result) =>
+    GpmCacheStorage.Request(url, requestType, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -357,7 +402,7 @@ public void Something()
     // 요청한지 5분이 지난 캐시는 서버에 재검증
     string url;
     double fiveMinutes = 5 * 60;
-    GpmCacheStorage.Request(url, fiveMinutes, (result) =>
+    GpmCacheStorage.Request(url, fiveMinutes, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -367,15 +412,69 @@ public void Something()
 }
 ```
 
-### 캐시 만료
-서버에서 받아온 헤더를 기반으로 만료를 계산해 다시 검증합니다.
-* CacheControl의 max-age가 있을 경우 해당 값의 초 후에 재검증합니다.
-* Expires가 헤더에 있을 경우 해당 시간이 지나면 재요청합니다.
+## Viewer
+CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
 
-### CacheControl 설정
-* CacheControl에 noStore가 있을 경우 캐시를 사용하지 않습니다.
-* CacheControl에 noCache가 있을 경우 항상 재검증합니다.
-    * CacheRequestType.ALWAYS 설정 또는 max-age 0과 동일합니다
+* 사용 방법
+    * 메뉴의 GPM/CacheStorage/Viewer 를 통해 오픈 가능합니다.
+
+![](Images/viewer.png)
+
+### 1. Management
+관리되는 캐시 메뉴입니다.
+
+* Size : 현재 캐시 용량 / 최대 용량 (byte 단위)
+    * 현재 Cache 용량과 설정된 최대 용량입니다.
+    * 최대 용량이 넘지 않게 유지해줍니다.
+* Count : 현재 캐시 개수 / 최대 개수
+    * 현재 Cache 개수와 설정된 최대 개수입니다.
+    * 최대 개수가 넘지 않게 유지해줍니다.
+
+### 2. Request Info
+캐시를 요청할 때 사용되는 정보입니다.
+
+* Default RequestType
+    * 요청할 때 설정한 타입 기반으로 재검증합니다.
+        * ALWAYS
+            * 요청할 때마다 재검증합니다.
+        * FIRSTPLAY
+            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
+        * Once
+            * 유효기간이 끝났을 때 재검증합니다.
+        * LOCAL
+            * 저장된 캐시를 사용합니다.
+* ReRequest
+    * 요청할 때 설정한 시간(초)이 지난 캐시는 재검증합니다.
+    * 0으로 설정 시 요청 시간 기반으로 재검증하지 않습니다.
+
+### 3. Auto Remove
+오랫동안 사용되지 않는 콘텐츠를 실시간으로 제거해 줍니다.
+UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
+
+* UnusedPeriodTime
+    * 설정한 시간(초) 동안 사용하지 않은 캐시를 지워줍니다.
+    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
+* RemoveCycle
+    * 제거되는 캐시들을 성능에 영향이 가지 않도록 설정한 시간(초)마다 하나씩 제거합니다.
+    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
+
+### 4. 캐시 데이터 리스트
+관리하고 있는 캐시 데이터 리스트입니다.
+
+* Name : 캐시 이름
+* Url : 캐시 경로
+* Size : 캐시 크기 (byte 단위)
+* Exfires : 유효기간까지 남은 시간
+* Remain : 캐시 검증까지 남은 시간
+    * 남은 시간이 지나면 재검증합니다.
+    * 유효기간까지 남은 시간과 ReRequest(초 단위) 시간 중 짧은 시간
+* Remove : 제거될 때까지 남은 시간
+    * 남은 시간 동안 사용하지 않으면 제거됩니다.
+    * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
+    * unusedPeriodTime 또는 removeCycle가 0일 때 실시간 제거를 하지 않습니다.
+
+### 5. 캐시 상세 정보
+리스트에서 선택된 캐시 데이터 상세 정보입니다.
 
 ## API
 
@@ -445,16 +544,16 @@ url로 데이터를 요청합니다.
 
 **API**
 ```cs
-public static CacheInfo Request(string url, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, Action<GpmCacheResult> onResult)
 ```
 ```cs
-public static CacheInfo Request(string url, CacheRequestType requestType, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, CacheRequestType requestType, Action<GpmCacheResult> onResult)
 ```
 ```cs
-public static CacheInfo Request(string url, double reRequestTime, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
 ```cs
-public static CacheInfo Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation Request(string url, CacheRequestType requestType, double reRequestTime, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -462,7 +561,7 @@ public static CacheInfo Request(string url, CacheRequestType requestType, double
 public void Something()
 {
     string url;
-    GpmCacheStorage.Request(url, (result) =>
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -473,16 +572,123 @@ public void Something()
 ```
 
 ```cs
-public void Something()
+public IEnumerator Something()
 {
     string url;
-    GpmCacheStorage.Request(url, CacheRequestType.ALWAYS, (result) =>
+    bytes[] data;
+    yield return GpmCacheStorage.Request(url, CacheRequestType.ONCE, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
-            bytes[] data = result.Data;
+            data = result.Data;
         }
     });
+}
+```
+
+### GpmCacheResult
+캐시 된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
+* IsSuccess 통해 성공 여부를 받아올 수 있습니다.
+* 기본적으로 데이터는 Data로 저장됩니다.
+* Text나 Json은 인코딩을 통해 변환할 수 있으며 기본값은 utf8입니다.
+
+**API**
+```cs
+bool IsSuccess() // 결과 성공 여부를 반환합니다.
+CacheInfo Info; // 캐시 정보를 반환합니다.
+byte[] Data;  // 캐시 데이터를 반환합니다.
+string Text;  // utf8로 인코딩된 데이터를 반환합니다.
+
+string GetTextData() // utf8로 인코딩된 데이터를 반환합니다.
+string GetTextData(Encoding encoding) // 인코딩된 데이터를 반환합니다.
+
+T GetJsonData<T>() // utf8로 인코딩된 json 데이터를 반환합니다.
+T GetJsonData<T>(Encoding encoding) // utf8로 인코딩된 json 데이터를 반환합니다.
+```
+
+**Example**
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        // success
+        if (result.IsSuccess() == true)
+        {
+            // date
+            bytes[] data = result.Data;
+
+            // text - Encoding.UTF8
+            string text = result.Text;
+
+            // text - Encoding.UTF8
+            text = result.GetTextData();
+
+            // text - Encoding.Default
+            text = result.GetTextData(Encoding.Default);    
+
+            // json - Encoding.UTF8
+            JsonClass json = result.GetJsonData<JsonClass>();
+
+            // json - Encoding.Default
+            json = result.GetJsonData<JsonClass>(Encoding.Default);           
+        }
+    });
+}
+```
+
+### CacheRequestOperation
+캐시를 요청할 때 반환 값입니다. 캐시 요청 상태를 알 수 있습니다.
+* 코루틴에서 대기할 수 있습니다.
+* 캐시 요청을 취소할 수도 있습니다.
+
+**API**
+```cs
+bool keepWaiting() // 코루틴에서 대기 할 것인지를 반환합니다.
+void Cancel() // 요청을 취소합니다. 취소한 요청은 콜백이 전달되지 않습니다.
+```
+
+**Example**
+```cs
+using Gpm.CacheStorage;
+
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    CacheRequestOperation op = GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
+
+    while(op.keepWaiting() == true)
+    {
+        yield return null;
+    }
+}
+```
+
+```cs
+public IEnumerator Something()
+{
+    bytes[] data;
+    string url;
+    CacheRequestOperation op = GpmCacheStorage.Request(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
+        }
+    });
+
+    // Cancel
+    op.Cancel();
+
+    yield return op;
 }
 ```
 
@@ -493,7 +699,7 @@ url로 데이터를 요청합니다.
 
 **API**
 ```cs
-public static CacheInfo RequestHttpCache(string url, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation RequestHttpCache(string url, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -501,11 +707,26 @@ public static CacheInfo RequestHttpCache(string url, Action<GpmCacheResult> onRe
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestHttpCache(url, (result) =>
+    GpmCacheStorage.RequestHttpCache(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
             bytes[] data = result.Data;
+        }
+    });
+}
+```
+
+```cs
+public IEnumerator Something()
+{
+    string url;
+    bytes[] data;
+    yield return GpmCacheStorage.RequestHttpCache(url, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            data = result.Data;
         }
     });
 }
@@ -518,7 +739,7 @@ url로 이미 캐시 된 데이터를 요청합니다.
 
 **API**
 ```cs
-public static CacheInfo RequestLocalCache(string url, Action<GpmCacheResult> onResult)
+public static CacheRequestOperation RequestLocalCache(string url, Action<GpmCacheResult> onResult)
 ```
 
 **Example**
@@ -526,7 +747,7 @@ public static CacheInfo RequestLocalCache(string url, Action<GpmCacheResult> onR
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestLocalCache(url, (result) =>
+    GpmCacheStorage.RequestLocalCache(url, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -543,7 +764,7 @@ url로 이미 캐시 된 텍스처를 요청합니다.
 
 **API**
 ```cs
-public static CacheInfo GetCachedTexture(string url, Action<CachedTexture> onResult)
+public static CacheRequestOperation GetCachedTexture(string url, Action<CachedTexture> onResult)
 ```
 
 **Example**
@@ -552,7 +773,7 @@ public static CacheInfo GetCachedTexture(string url, Action<CachedTexture> onRes
 public void Something()
 {
     string url;
-    CacheInfo cacheInfo = GpmCacheStorage.GetCachedTexture(url, (cachedTexture) =>
+    GpmCacheStorage.GetCachedTexture(url, (CachedTexture cachedTexture) =>
     {
         if (cachedTexture != null)
         {
@@ -583,31 +804,31 @@ url로 캐시 된 데이터를 요청합니다.
 
 **API**
 ```cs
-public static CacheInfo RequestTexture(string url, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, bool preLoad, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, CacheRequestType requestType, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, CacheRequestType requestType, bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, CacheRequestType requestType, bool preLoad, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, double reRequestTime, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, double reRequestTime,  bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, double reRequestTime,  bool preLoad, Action<CachedTexture> onResult)
 ```
 
 ```cs
-public static CacheInfo RequestTexture(string url, CacheRequestType requestType, double reRequestTime, bool preLoad, Action<CachedTexture> onResult)
+public static CacheRequestOperation RequestTexture(string url, CacheRequestType requestType, double reRequestTime, bool preLoad, Action<CachedTexture> onResult)
 ```
 
 **Example**
@@ -615,11 +836,71 @@ public static CacheInfo RequestTexture(string url, CacheRequestType requestType,
 public void Something()
 {
     string url;
-    CacheInfo cacheInfo = GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
+    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
     {
         if (cachedTexture != null)
         {
             Texture texture = cachedTexture.texture;
+        }
+    });
+}
+```
+
+```cs
+public IEnumerator Something()
+{
+    string url;
+    Texture texture;
+    yield return GpmCacheStorage.RequestTexture(url, true, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            texture = cachedTexture.texture;
+        }
+    });
+}
+```
+
+### CachedTexture
+
+캐시 된 텍스쳐의 결괏값입니다. 캐시 정보를 반환합니다.
+* 캐시 된 텍스쳐를 받아올 수 있습니다.
+* updateData를 통해 텍스쳐 변경 여부를 알 수 있습니다.
+
+**API**
+```cs
+CacheInfo info // 캐시 정보를 반환합니다.
+Texture2D texture; // 결과 텍스쳐를 반환합니다.
+bool requested;  // true일 때 웹에서 새로 받은 요청입니다.
+bool updateData;  // true일 때 새롭게 업데이트된 텍스쳐입니다.
+
+void DestroyTexture() // 텍스쳐를 파괴하고 관리되는 텍스쳐에서도 제외합니다.
+void ReleaseCache() // 관리되는 텍스쳐에서 제외합니다. 텍스쳐를 파괴하지는 않습니다.
+```
+
+**Example**
+```cs
+public void Something()
+{
+    string url;
+    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            // texture
+            Texture texture = cachedTexture.texture;
+
+            // requested
+            bool requested = cachedTexture.requested;
+
+            // updateData
+            bool updateData = cachedTexture.updateData;
+
+            // DestroyTexture
+            cachedTexture.DestroyTexture();
+
+            // ReleaseCache
+            cachedTexture.ReleaseCache();
         }
     });
 }
@@ -764,7 +1045,7 @@ public double GetRemoveCycle()
 
 ### ClearCache
 
-관리 중인 캐시를 제거합니다.
+관리 중인 모든 캐시를 제거합니다.
 
 **API**
 ```cs
@@ -776,5 +1057,26 @@ public static void ClearCache()
 public void ClearCache()
 {
     GpmCacheStorage.ClearCache();
+}
+```
+
+### RemoveCache
+
+관리 중인 캐시를 제거합니다.
+
+**API**
+```cs
+public static void RemoveCache()
+```
+
+**Example**
+```cs
+public bool RemoveCache()
+{
+    string url;
+    if( GpmCacheStorage.RemoveCache(url) == true)
+    {
+        // removed
+    }
 }
 ```
