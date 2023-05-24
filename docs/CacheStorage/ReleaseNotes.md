@@ -11,9 +11,9 @@
 ### Added
 * 캐시 삭제 기능 추가
    * RemoveCache
-* ManagedTexture에서 텍스쳐 연결 해지, 텍스쳐 파괴 기능 추가
+* ManagedTexture에서 텍스처 연결 해지, 텍스처 파괴 기능 추가
    * DestroyTexture, ReleaseCache
-* Request 도중 취소할 수 있고 코루틴에서 대기 할 수 있도록 기능 추가
+* Request 도중 취소할 수 있고 코루틴에서 대기할 수 있도록 기능 추가
    * CacheRequestOperation
 * Viewer에서 Local Time으로 보는 기능 추가
 
@@ -22,7 +22,7 @@
 
 ### Fixed
 * 이미 요청 중인 Request를 Local로 요청할 때 대기하던 문제 수정
-* RequestTexture 요청 시 관리되는 텍스쳐가 외부에서 파괴되어도 읽을 수 있도록 개선
+* RequestTexture 요청 시 관리되는 텍스처가 외부에서 파괴되어도 읽을 수 있도록 개선
 
 ## 1.2.0
 
