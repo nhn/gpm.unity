@@ -2,6 +2,25 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.7.3
+
+### Date
+
+* 2023.6.1
+
+### Fixed
+* TabController
+   * 프리팹 스테이지에서 변경사항이 적용되지 않는 버그 수정
+   * 특정 Unity 버전에서 프리팹 저장 시 링크가 제거되는 버그 수정
+
+### Updated
+* Common 2.3.1 업데이트
+* CacheStorage 1.3.0 업데이트
+* WebCacheImage
+   * URL을 변경했을 때 기존 요청을 취소하도록 개선
+* TabController
+   * 비어 있는 항목을 자동으로 제거하지 않도록 개선
+
 ## 2.7.2
 
 ### Date
