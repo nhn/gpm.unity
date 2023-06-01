@@ -2,6 +2,26 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.7.3
+
+### Date
+
+* 2023.6.1
+
+### Fixed
+* TabController
+   * Fixed a bug where changes were not being applied in the prefab stage.
+   * Fixed a bug where links were being removed when saving prefabs in certain Unity versions.
+
+### Updated
+* Updated Common 2.3.1.
+* Updated CacheStorage 1.3.0.
+* WebCacheImage
+   * Improved to cancel previous requests when the URL is changed.
+* TabController
+   * Improved to not automatically remove empty items.
+
+
 ## 2.7.2
 
 ### Date
