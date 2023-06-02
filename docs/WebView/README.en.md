@@ -110,6 +110,12 @@ For smooth WebView experience, PostProcessBuild script enables **hardwareAcceler
     }
     ```
     * If they are already added in another package, you may skip this step.
+4. When using the ShowSafeBrowsing API with Unity 2020.1.0 or higher, activate the **Custom Gradle Properties Template** in **File > Build Settings > Player Settings > Android > Publishing Settings** to create the `Assets/Plugins/Android/gradleTemplate.properties` file.
+    * Add `android.useAndroidX=true` to the last line of the gradleTemplate.properties file.
+    ```gradle
+    **ADDITIONAL_PROPERTIES**
+    android.useAndroidX=true
+    ```
 
 ### iOS
 
