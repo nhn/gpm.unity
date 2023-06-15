@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.12.0
+
+### Date
+* 2023.06.16
+
+### Added
+* GpmWebViewCallback.CallbackType.PageStarted 콜백 추가([Issue 354](https://github.com/nhn/gpm.unity/issues/354))
+* GpmWebViewRequest.Configuration에 WebView 배경 색상 추가([Issue 354](https://github.com/nhn/gpm.unity/issues/354))
+
 ## 1.11.1
 
 ### Date

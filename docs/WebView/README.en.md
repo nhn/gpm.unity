@@ -198,6 +198,7 @@ Displays the WebView.
 | orientation               | GpmOrientation                            | Screen orientation |
 | isClearCookie             | bool                                      | Clear cookies |
 | isClearCache              | bool                                      | Clear cache |
+| backgroundColor           | string                                    | Background Color |
 | isNavigationBarVisible    | bool                                      | Activate/Deactivate Navigation Bar |
 |                           |                                           | Activate/Deactivate Close Button of Popup WebView (iOS only) |
 | navigationBarColor        | string                                    | Navigation Bar Color |
@@ -245,6 +246,7 @@ public void ShowUrlFullScreen()
             orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
+            backgroundColor = "#FFFFFF",
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
@@ -367,6 +369,12 @@ private void OnCallback(
                 Debug.LogFormat("Fail to close WebView. Error:{0}", error);
             }
             break;
+        case GpmWebViewCallback.CallbackType.PageStarted:
+            if (string.IsNullOrEmpty(data) == false)
+            {
+                Debug.LogFormat("PageStarted Url : {0}", data);
+            }
+            break;
         case GpmWebViewCallback.CallbackType.PageLoad:
             if (string.IsNullOrEmpty(data) == false)
             {
@@ -456,6 +464,7 @@ public void ShowHtmlFile()
             orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
+            backgroundColor = "#FFFFFF",
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
@@ -503,6 +512,7 @@ public void ShowHtmlString()
             orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
+            backgroundColor = "#FFFFFF",
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
