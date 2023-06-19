@@ -5,7 +5,7 @@
 ## 1.12.0
 
 ### Date
-* 2023.06.16
+* 2023.06.19
 
 ### Added
 * Add GpmWebViewCallback.CallbackType.PageStarted callback([Issue 354](https://github.com/nhn/gpm.unity/issues/354))
