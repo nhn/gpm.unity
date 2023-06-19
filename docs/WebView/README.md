@@ -197,6 +197,7 @@ WebView를 표시합니다.
 | orientation               | GpmOrientation                            | 화면 회전 |
 | isClearCookie             | bool                                      | 쿠키 제거 |
 | isClearCache              | bool                                      | 캐시 제거 |
+| backgroundColor           | string                                    | 배경 색상 |
 | isNavigationBarVisible    | bool                                      | 네비게이션 바 활성 또는 비활성 |
 |                           |                                           | Popup WebView Close 버튼 활성 또는 비활성 (iOS only) |
 | navigationBarColor        | string                                    | 네비게이션 바 색상 |
@@ -243,6 +244,7 @@ public void ShowUrlFullScreen()
             orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
+            backgroundColor = "#FFFFFF",
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
@@ -365,6 +367,12 @@ private void OnCallback(
                 Debug.LogFormat("Fail to close WebView. Error:{0}", error);
             }
             break;
+        case GpmWebViewCallback.CallbackType.PageStarted:
+            if (string.IsNullOrEmpty(data) == false)
+            {
+                Debug.LogFormat("PageStarted Url : {0}", data);
+            }
+            break;
         case GpmWebViewCallback.CallbackType.PageLoad:
             if (string.IsNullOrEmpty(data) == false)
             {
@@ -454,6 +462,7 @@ public void ShowHtmlFile()
             orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
+            backgroundColor = "#FFFFFF",
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
@@ -502,6 +511,7 @@ public void ShowHtmlString()
             orientation = GpmOrientation.LANDSCAPE,
             isClearCookie = true,
             isClearCache = true,
+            backgroundColor = "#FFFFFF",
             isNavigationBarVisible = true,
             navigationBarColor = "#4B96E6",
             title = "The page title.",
