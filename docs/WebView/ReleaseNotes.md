@@ -2,6 +2,14 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.12.1
+
+### Date
+* 2023.06.20
+
+### Fixed
+* Android WebView에서 정의되지 않은 scheme 오류 수정([Issue407](https://github.com/nhn/gpm.unity/issues/407), [Issue 410](https://github.com/nhn/gpm.unity/issues/410))
+
 ## 1.12.0
 
 ### Date
