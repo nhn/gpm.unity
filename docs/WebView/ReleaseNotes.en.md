@@ -2,6 +2,14 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.12.1
+
+### Date
+* 2023.06.20
+
+### Fixed
+* Fixed the unknown custom scheme error in Android WebView([Issue407](https://github.com/nhn/gpm.unity/issues/407), [Issue 410](https://github.com/nhn/gpm.unity/issues/410))
+
 ## 1.12.0
 
 ### Date
