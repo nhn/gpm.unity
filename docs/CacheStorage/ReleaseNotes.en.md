@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.3.1
+
+### Date
+
+* 2023.07.31
+
+### Fixed
+* Fixed deprecation warning[(414)](https://github.com/nhn/gpm.unity/issues/414)
+
 ## 1.3.0
 
 ### Date
