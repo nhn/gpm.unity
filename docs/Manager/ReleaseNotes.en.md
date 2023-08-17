@@ -9,7 +9,7 @@
 * 2023.07.28
 
 ### Updated
-* Improvemed internal code
+* Improved internal code
 
 ## 2.2.4
 
