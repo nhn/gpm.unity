@@ -2,6 +2,14 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.12.2
+
+### Date
+* 2023.08.23
+
+### Fixed
+* Relocate deprecated APIs in GpmWebView class
+
 ## 1.12.1
 
 ### Date
