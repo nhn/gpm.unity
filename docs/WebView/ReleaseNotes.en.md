@@ -8,7 +8,7 @@
 * 2023.09.22
 
 ### Added
-* Use the back button to pass a callback instead of closing a WebView([Issue 422](https://github.com/nhn/gpm.unity/issues/422))
+* Use the back button to pass a callback instead of closing a WebView(Android only) ([Issue 422](https://github.com/nhn/gpm.unity/issues/422))
   * GpmWebViewRequest.Configuration isBackButtonCloseCallbackUsed
   * GpmWebViewCallback.CallbackType.BackButtonClose
 * Add an option to set the visibility of the Close button([Issue 423](https://github.com/nhn/gpm.unity/issues/423))

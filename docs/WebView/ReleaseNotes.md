@@ -8,7 +8,7 @@
 * 2023.09.22
 
 ### Added
-* Android back button으로 WebView가 닫힐 때 callback으로 대체([Issue 422](https://github.com/nhn/gpm.unity/issues/422))
+* Android back button으로 WebView가 닫힐 때 callback으로 대체(Android only) ([Issue 422](https://github.com/nhn/gpm.unity/issues/422))
   * GpmWebViewRequest.Configuration isBackButtonCloseCallbackUsed
   * GpmWebViewCallback.CallbackType.BackButtonClose
 * Close button 활성/비활성 설정 추가([Issue 423](https://github.com/nhn/gpm.unity/issues/423))
