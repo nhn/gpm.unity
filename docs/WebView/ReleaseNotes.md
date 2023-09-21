@@ -2,6 +2,25 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.0
+
+### Date
+* 2023.09.22
+
+### Added
+* Android back button으로 WebView가 닫힐 때 callback으로 대체([Issue 422](https://github.com/nhn/gpm.unity/issues/422))
+  * GpmWebViewRequest.Configuration isBackButtonCloseCallbackUsed
+  * GpmWebViewCallback.CallbackType.BackButtonClose
+* Close button 활성/비활성 설정 추가([Issue 423](https://github.com/nhn/gpm.unity/issues/423))
+  * GpmWebViewRequest.Configuration isCloseButtonVisible
+
+### Updated
+* Popup WebView의 설정 영역만 차지하도록 변경([Issue 421](https://github.com/nhn/gpm.unity/issues/421), [Issue 416](https://github.com/nhn/gpm.unity/issues/416), [Issue 351](https://github.com/nhn/gpm.unity/issues/351), [Issue 280](https://github.com/nhn/gpm.unity/issues/280))
+
+### Fixed
+* Deprecated API 제거(ShowUrl, ShowHtmlFile, ShowHtmlString)
+* ScreenOrientation.Landscape를 LandscapeLeft로 변경
+
 ## 1.12.2
 
 ### Date

@@ -83,13 +83,6 @@
 
 ###  Android
 
-[Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html)을 사용하여 Android에서 필요한 종속성을 설정합니다.
-Unity 2019.3 이전 버전의 프로젝트에서는 **Internal** 빌드 설정이 아닌 **Gradle**로 전환해야 합니다.
-
-#### hardwareAccelerated 설정
-
-원활한 WebView 사용을 위해 PostProcessBuild 스크립트에서 **hardwareAccelerated**를 활성화하고 있습니다.
-
 #### Gradle 설정
 
 1.  **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Main Gradle Template**을 활성화하면 `Assets/Plugins/Android/mainTemplate.gradle` 파일이 생성됩니다.
@@ -138,24 +131,37 @@ Unity 특정 버전에서 iOS 빌드 시, **내비게이션 바**의 버튼이 �
 **Example**
 
 ```cs
-public void OnPostprocessBuild(BuildReport report) 
+using System.IO;
+using UnityEditor;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+using UnityEditor.iOS.Xcode;
+
+public class BuildProcessor : IPostprocessBuildWithReport
 {
-    if (report.summary.platform == BuildTarget.iOS)
+    public int callbackOrder { get { return 0; } }
+
+    public void OnPostprocessBuild(BuildReport report)
     {
-        // Initialize PBXProject instance
-        var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
-        var pbxProject = new PBXProject();
-        pbxProject.ReadFromFile(pbxprojPath);
+        if (report.summary.platform == BuildTarget.iOS)
+        {
+            // Initialize PBXProject instance
+            var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
+            var pbxProject = new PBXProject();
+            pbxProject.ReadFromFile(pbxprojPath);
 
-        // Get GUID of target
-        var targetGuid = pbxProject.GetUnityMainTargetGuid();
+            // Get GUID of target
+            var targetGuid = pbxProject.GetUnityMainTargetGuid();
 
-        // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
-        pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
+            // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
+            pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
 
-        // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
-        var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
-        pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+            // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
+            var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);
+            pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+
+            pbxProject.WriteToFile(pbxprojPath);
+        }
     }
 }
 ```
@@ -198,12 +204,12 @@ WebView를 표시합니다.
 | isClearCache              | bool                                      | 캐시 제거 |
 | backgroundColor           | string                                    | 배경 색상 |
 | isNavigationBarVisible    | bool                                      | 네비게이션 바 활성 또는 비활성 |
-|                           |                                           | Popup WebView Close 버튼 활성 또는 비활성 (iOS only) |
 | navigationBarColor        | string                                    | 네비게이션 바 색상 |
 | title                     | string                                    | WebView의 제목 |
 | orientation               | UnityEngine.ScreenOrientation             | GPM WebView v1.1.0에서 제거되었습니다. |
 | isBackButtonVisible       | bool                                      | 뒤로 가기 버튼 활성 또는 비활성  |
 | isForwardButtonVisible    | bool                                      | 앞으로 가기 버튼 활성 또는 비활성 |
+| isCloseButtonVisible      | bool                                      | 닫기 버튼 활성 또는 비활성 |
 | supportMultipleWindows    | bool                                      | GPM WebView의 다중 창 지원 여부 |
 | userAgentString           | string                                    | GPM WebView의 userAgentString 설정 |
 | addJavascript             | string                                    | GPM WebView에 JavaScript 추가 |
@@ -211,6 +217,7 @@ WebView를 표시합니다.
 | position                  | GpmWebViewRequest.Position                | Popup WebView 위치 지정 |
 | size                      | GpmWebViewRequest.Size                    | Popup WebView 크기 지정 |
 | margins                   | GpmWebViewRequest.Margins                 | Popup WebView 여백 지정 |
+| isBackButtonCloseCallbackUsed</br>(Android only) | bool               | Back 버튼 사용으로 WebView 종료 대신 Callback 전달 |
 | isMaskViewVisible</br>(iOS only) | bool                               | Popup WebView 배경 활성 또는 비활성 |
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | 현재 플랫폼 추천 브라우저 |
 |                           | GamebaseWebViewContentMode.MOBILE         | 모바일 브라우저 |
@@ -240,7 +247,7 @@ public void ShowUrlFullScreen()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
             backgroundColor = "#FFFFFF",
@@ -249,6 +256,7 @@ public void ShowUrlFullScreen()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
@@ -270,10 +278,11 @@ public void ShowUrlPopupDefault()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
-            isNavigationBarVisible = false,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE,
@@ -296,10 +305,11 @@ public void ShowUrlPopupPositionSize()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
-            isNavigationBarVisible = false,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
             position = new GpmWebViewRequest.Position
             {
                 hasValue = true,
@@ -328,10 +338,11 @@ public void ShowUrlPopupMargins()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
-            isNavigationBarVisible = false,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
             margins = new GpmWebViewRequest.Margins
             {
                 hasValue = true,
@@ -408,6 +419,11 @@ private void OnCallback(
         case GpmWebViewCallback.CallbackType.ExecuteJavascript:
             Debug.LogFormat("ExecuteJavascript data : {0}, error : {1}", data, error);
             break;
+#if UNITY_ANDROID
+        case GpmWebViewCallback.CallbackType.BackButtonClose:
+            Debug.Log("BackButtonClose");
+            break;
+#endif
     }
 }
 ```
@@ -459,7 +475,7 @@ public void ShowHtmlFile()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
             backgroundColor = "#FFFFFF",
@@ -468,6 +484,7 @@ public void ShowHtmlFile()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
@@ -508,7 +525,7 @@ public void ShowHtmlString()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
             backgroundColor = "#FFFFFF",
@@ -517,6 +534,7 @@ public void ShowHtmlString()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
@@ -704,16 +722,8 @@ public static void SetPosition(int x, int y)
 **Example**
 
 ```cs
-public IEnumerator SetPosition()
+public void SetPosition()
 {
-    while (true)
-    {
-        if (GpmWebView.IsActive() == true)
-        {
-            break;
-        }
-        yield return new WaitForEndOfFrame();
-    }
 
     GpmWebView.SetPosition((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
 }
@@ -732,16 +742,8 @@ public static void SetSize(int width, int height)
 **Example**
 
 ```cs
-public IEnumerator SetSize()
+public void SetSize()
 {
-    while (true)
-    {
-        if (GpmWebView.IsActive() == true)
-        {
-            break;
-        }
-        yield return new WaitForEndOfFrame();
-    }
 
     GpmWebView.SetSize((int)(Screen.width * 0.8f), (int)(Screen.height * 0.8f));
 }
@@ -760,17 +762,8 @@ public static void SetMargins(int left, int top, int right, int bottom)
 **Example**
 
 ```cs
-public IEnumerator SetMargins()
+public void SetMargins()
 {
-    while (true)
-    {
-        if (GpmWebView.IsActive() == true)
-        {
-            break;
-        }
-        yield return new WaitForEndOfFrame();
-    }
-
     GpmWebView.SetMargins((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f), (int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
 }
 ```
