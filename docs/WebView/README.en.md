@@ -83,13 +83,6 @@ Provides a WebView used in various ways in the game.
 
 ###  Android
 
-Uses [Gradle](https://docs.unity3d.com/Manual/android-gradle-overview.html) to set the dependencies needed in Android.
-In a project that uses a version before Unity 2019.3, you need to switch to **Gradle** instead of **Internal** settings.
-
-#### hardwareAccelerated settings
-
-For smooth WebView experience, PostProcessBuild script enables **hardwareAccelerated**.
-
 #### Gradle settings
 
 1.  Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Main Gradle Template** to create an `Assets/Plugins/Android/mainTemplate.gradle` file.
@@ -138,24 +131,37 @@ Checked and tested:
 **Example**
 
 ```cs
-public void OnPostprocessBuild(BuildReport report) 
+using System.IO;
+using UnityEditor;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+using UnityEditor.iOS.Xcode;
+
+public class BuildProcessor : IPostprocessBuildWithReport
 {
-    if (report.summary.platform == BuildTarget.iOS)
+    public int callbackOrder { get { return 0; } }
+
+    public void OnPostprocessBuild(BuildReport report)
     {
-        // Initialize PBXProject instance
-        var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
-        var pbxProject = new PBXProject();
-        pbxProject.ReadFromFile(pbxprojPath);
+        if (report.summary.platform == BuildTarget.iOS)
+        {
+            // Initialize PBXProject instance
+            var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
+            var pbxProject = new PBXProject();
+            pbxProject.ReadFromFile(pbxprojPath);
 
-        // Get GUID of target
-        var targetGuid = pbxProject.GetUnityMainTargetGuid();
+            // Get GUID of target
+            var targetGuid = pbxProject.GetUnityMainTargetGuid();
 
-        // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
-        pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
+            // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
+            pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
 
-        // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
-        var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);  
-        pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+            // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
+            var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);
+            pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+
+            pbxProject.WriteToFile(pbxprojPath);
+        }
     }
 }
 ```
@@ -198,12 +204,12 @@ Displays the WebView.
 | isClearCache              | bool                                      | Clear cache |
 | backgroundColor           | string                                    | Background Color |
 | isNavigationBarVisible    | bool                                      | Activate/Deactivate Navigation Bar |
-|                           |                                           | Activate/Deactivate Close Button of Popup WebView (iOS only) |
 | navigationBarColor        | string                                    | Navigation Bar Color |
 | title                     | string                                    | WebView title |
 | orientation               | UnityEngine.ScreenOrientation             | Removed in GPM WebView v1.1.0. |
 | isBackButtonVisible       | bool                                      | Activate/Deactivate Go Back Button |
 | isForwardButtonVisible    | bool                                      | Activate/Deactivate Go Forward Button |
+| isCloseButtonVisible      | bool                                      | Activate/Deactivate Close Button |
 | supportMultipleWindows    | bool                                      | Multiple windows |
 | userAgentString           | string                                    | Sets userAgentString |
 | addJavascript             | string                                    | Add JavaScript to WebView |
@@ -211,6 +217,7 @@ Displays the WebView.
 | position                  | GpmWebViewRequest.Position                | Sets Popup WebView position |
 | size                      | GpmWebViewRequest.Size                    | Sets Popup WebView size |
 | margins                   | GpmWebViewRequest.Margins                 | Sets Popup WebView margins |
+| isBackButtonCloseCallbackUsed</br>(Android only) | bool               | Use the back button to pass a callback instead of closing a WebView |
 | isMaskViewVisible</br>(iOS only) | bool                               | Activate/Deactivate background mask view of Popup WebView |
 | contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | recommended browsers for the current platform |
 |                           | GamebaseWebViewContentMode.MOBILE         | mobile browser |
@@ -241,7 +248,7 @@ public void ShowUrlFullScreen()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
             backgroundColor = "#FFFFFF",
@@ -250,6 +257,7 @@ public void ShowUrlFullScreen()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
@@ -271,10 +279,11 @@ public void ShowUrlPopupDefault()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
-            isNavigationBarVisible = false,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE,
@@ -297,10 +306,11 @@ public void ShowUrlPopupPositionSize()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
-            isNavigationBarVisible = false,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
             position = new GpmWebViewRequest.Position
             {
                 hasValue = true,
@@ -329,10 +339,11 @@ public void ShowUrlPopupMargins()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.POPUP,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
-            isNavigationBarVisible = false,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
             margins = new GpmWebViewRequest.Margins
             {
                 hasValue = true,
@@ -409,6 +420,11 @@ private void OnCallback(
         case GpmWebViewCallback.CallbackType.ExecuteJavascript:
             Debug.LogFormat("ExecuteJavascript data : {0}, error : {1}", data, error);
             break;
+#if UNITY_ANDROID
+        case GpmWebViewCallback.CallbackType.BackButtonClose:
+            Debug.Log("BackButtonClose");
+            break;
+#endif
     }
 }
 ```
@@ -460,7 +476,7 @@ public void ShowHtmlFile()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
             backgroundColor = "#FFFFFF",
@@ -469,6 +485,7 @@ public void ShowHtmlFile()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
@@ -508,7 +525,7 @@ public void ShowHtmlString()
         new GpmWebViewRequest.Configuration()
         {
             style = GpmWebViewStyle.FULLSCREEN,
-            orientation = GpmOrientation.LANDSCAPE,
+            orientation = GpmOrientation.UNSPECIFIED,
             isClearCookie = true,
             isClearCache = true,
             backgroundColor = "#FFFFFF",
@@ -517,6 +534,7 @@ public void ShowHtmlString()
             title = "The page title.",
             isBackButtonVisible = true,
             isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
             supportMultipleWindows = true,
 #if UNITY_IOS
             contentMode = GpmWebViewContentMode.MOBILE
@@ -704,17 +722,8 @@ public static void SetPosition(int x, int y)
 **Example**
 
 ```cs
-public IEnumerator SetPosition()
+public void SetPosition()
 {
-    while (true)
-    {
-        if (GpmWebView.IsActive() == true)
-        {
-            break;
-        }
-        yield return new WaitForEndOfFrame();
-    }
-
     GpmWebView.SetPosition((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
 }
 ```
@@ -732,17 +741,8 @@ public static void SetSize(int width, int height)
 **Example**
 
 ```cs
-public IEnumerator SetSize()
+public void SetSize()
 {
-    while (true)
-    {
-        if (GpmWebView.IsActive() == true)
-        {
-            break;
-        }
-        yield return new WaitForEndOfFrame();
-    }
-
     GpmWebView.SetSize((int)(Screen.width * 0.8f), (int)(Screen.height * 0.8f));
 }
 ```
@@ -760,17 +760,8 @@ public static void SetMargins(int left, int top, int right, int bottom)
 **Example**
 
 ```cs
-public IEnumerator SetMargins()
+public void SetMargins()
 {
-    while (true)
-    {
-        if (GpmWebView.IsActive() == true)
-        {
-            break;
-        }
-        yield return new WaitForEndOfFrame();
-    }
-
     GpmWebView.SetMargins((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f), (int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
 }
 ```
