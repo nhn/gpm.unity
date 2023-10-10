@@ -2,6 +2,14 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.1
+
+### Date
+* 2023.10.10
+
+### Fixed
+* Fixed Android screen position, size layout calculation error([Issue 445](https://github.com/nhn/gpm.unity/issues/445), [Issue 446](https://github.com/nhn/gpm.unity/issues/446))
+
 ## 2.0.0
 
 ### Date
