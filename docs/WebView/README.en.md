@@ -205,7 +205,7 @@ Displays the WebView.
 | backgroundColor           | string                                    | Background Color |
 | isNavigationBarVisible    | bool                                      | Activate/Deactivate Navigation Bar |
 | navigationBarColor        | string                                    | Navigation Bar Color |
-| title                     | string                                    | WebView title |
+| title                     | string                                    | WebView title</br>Using a webpage's title for a null or string.Empty assignment</br>Using a space (" ") for an unlettered title |
 | orientation               | UnityEngine.ScreenOrientation             | Removed in GPM WebView v1.1.0. |
 | isBackButtonVisible       | bool                                      | Activate/Deactivate Go Back Button |
 | isForwardButtonVisible    | bool                                      | Activate/Deactivate Go Forward Button |

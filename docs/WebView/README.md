@@ -203,9 +203,9 @@ WebView를 표시합니다.
 | isClearCookie             | bool                                      | 쿠키 제거 |
 | isClearCache              | bool                                      | 캐시 제거 |
 | backgroundColor           | string                                    | 배경 색상 |
-| isNavigationBarVisible    | bool                                      | 네비게이션 바 활성 또는 비활성 |
-| navigationBarColor        | string                                    | 네비게이션 바 색상 |
-| title                     | string                                    | WebView의 제목 |
+| isNavigationBarVisible    | bool                                      | 내비게이션 바 활성 또는 비활성 |
+| navigationBarColor        | string                                    | 내비게이션 바 색상 |
+| title                     | string                                    | WebView의 제목</br>null 또는 string.Empty 할당에 웹페이지의 타이틀 사용</br>title 글자 미표기에 공백(" ") 사용 |
 | orientation               | UnityEngine.ScreenOrientation             | GPM WebView v1.1.0에서 제거되었습니다. |
 | isBackButtonVisible       | bool                                      | 뒤로 가기 버튼 활성 또는 비활성  |
 | isForwardButtonVisible    | bool                                      | 앞으로 가기 버튼 활성 또는 비활성 |
@@ -566,8 +566,8 @@ App에서 Android Chrome 또는 iOS Safari 브라우저를 표시합니다.</br>
 
 | Parameter | Values | Description |
 | ------------------------- | ----------------------------------------- | -------------------------------- |
-| navigationBarColor        | string                                    | 네비게이션 바 색상 |
-| navigationTextColor</br>(iOS only) | string                           | 네비게이션 텍스트 색상 |
+| navigationBarColor        | string                                    | 내비게이션 바 색상 |
+| navigationTextColor</br>(iOS only) | string                           | 내비게이션 텍스트 색상 |
 
 **API**
 

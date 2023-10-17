@@ -2,6 +2,14 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.2
+
+### Date
+* 2023.10.17
+
+### Fixed
+* iOS close button 활성/비활성 설정 수정([Issue 450](https://github.com/nhn/gpm.unity/issues/450))
+
 ## 2.0.1
 
 ### Date

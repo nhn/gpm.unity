@@ -2,6 +2,14 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.2
+
+### Date
+* 2023.10.17
+
+### Fixed
+* Fix iOS close button visible setting([Issue 450](https://github.com/nhn/gpm.unity/issues/450))
+
 ## 2.0.1
 
 ### Date
