@@ -16,7 +16,7 @@
 
 ### Updated
 * InfiniteScroll
-    * Improved to enable additional data index([438](https://github.com/nhn/gpm.unity/issues/438))
+    * Added InsertData API to add data to a specified location([438](https://github.com/nhn/gpm.unity/issues/438))
     * Position typo correction
 
 ## 2.7.3
