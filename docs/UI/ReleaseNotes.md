@@ -1,6 +1,23 @@
-# Release notes
+﻿# Release notes
 
 🌏 [English](ReleaseNotes.en.md)
+
+## 2.8.0
+
+### Date
+
+* 2023.11.23
+
+### Fixed
+* InfiniteScroll
+    * active 후 컴포넌트 갱신 순서에 따라 업데이트 영향받지 않도록 수정([413](https://github.com/nhn/gpm.unity/issues/413))
+* MultiLayout
+    * pivot 적용 순서에 따른 postion 변경 문제 수정([456](https://github.com/nhn/gpm.unity/issues/456))
+
+### Updated
+* InfiniteScroll
+    * 데이터 추가 Index로 가능하도록 개선([438](https://github.com/nhn/gpm.unity/issues/438))
+    * Position 오타 수정
 
 ## 2.7.3
 
