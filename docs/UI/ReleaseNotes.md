@@ -16,7 +16,7 @@
 
 ### Updated
 * InfiniteScroll
-    * 데이터 추가 Index로 가능하도록 개선([438](https://github.com/nhn/gpm.unity/issues/438))
+    * 데이터 추가를 Index로 가능하도록 개선([438](https://github.com/nhn/gpm.unity/issues/438))
     * Position 오타 수정
 
 ## 2.7.3
