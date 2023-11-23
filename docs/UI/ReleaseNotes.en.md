@@ -8,6 +8,10 @@
 
 * 2023.11.23
 
+### Added
+* InfiniteScroll
+    * Added InsertData API to add data to a specified location([438](https://github.com/nhn/gpm.unity/issues/438))
+
 ### Fixed
 * InfiniteScroll
     * Fixed so that updates are not affected according to the component update order after active([413](https://github.com/nhn/gpm.unity/issues/413))
@@ -16,7 +20,6 @@
 
 ### Updated
 * InfiniteScroll
-    * Added InsertData API to add data to a specified location([438](https://github.com/nhn/gpm.unity/issues/438))
     * Position typo correction
 
 ## 2.7.3
