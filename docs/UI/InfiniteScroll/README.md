@@ -1,4 +1,4 @@
-# Infinite Scroll
+﻿# Infinite Scroll
 
 🌏 [English](README.en.md)
 
@@ -121,6 +121,15 @@ API 사용 방법은 Assets/GPM/UI/Sample/InfiniteScroll/Scripts/InfiniteScrollS
 
 ```cs
 public void InsertData(InfiniteScrollData data)
+```
+```cs
+public void InsertData(InfiniteScrollData data, int insertIndex)
+```
+```cs
+public void InsertData(InfiniteScrollData[] datas)
+```
+```cs
+public void InsertData(InfiniteScrollData[] datas, int insertIndex)
 ```
 
 ### UpdateData

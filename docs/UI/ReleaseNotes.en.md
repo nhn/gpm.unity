@@ -1,6 +1,26 @@
-# Release notes
+﻿# Release notes
 
 🌏 [한국어](ReleaseNotes.md)
+
+## 2.8.0
+
+### Date
+
+* 2023.11.24
+
+### Added
+* InfiniteScroll
+    * Added InsertData API to add data to a specified location([438](https://github.com/nhn/gpm.unity/issues/438))
+
+### Fixed
+* InfiniteScroll
+    * Fixed so that updates are not affected according to the component update order after active([413](https://github.com/nhn/gpm.unity/issues/413))
+* MultiLayout
+    * Fixed position change issue according to pivot([456](https://github.com/nhn/gpm.unity/issues/456))
+
+### Updated
+* InfiniteScroll
+    * Position typo correction
 
 ## 2.7.3
 
