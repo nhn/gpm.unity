@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2023.11.23
+* 2023.11.24
 
 ### Add
 * InfiniteScroll
@@ -16,7 +16,7 @@
 * InfiniteScroll
     * 활성화 후, 컴포넌트 갱신 순서에 따라 업데이트 영향을 받지 않도록 수정([413](https://github.com/nhn/gpm.unity/issues/413))
 * MultiLayout
-    * pivot 적용 순서에 따른 postion 변경 문제 수정([456](https://github.com/nhn/gpm.unity/issues/456))
+    * pivot 적용 순서에 따른 position 변경 문제 수정([456](https://github.com/nhn/gpm.unity/issues/456))
 
 ### Updated
 * InfiniteScroll
