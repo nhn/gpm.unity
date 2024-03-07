@@ -7,15 +7,15 @@
         <string>
             <key>NOTICE_TEXT_1</key>
             <language>
-                <ko>CacheStorage v1.3.0 업데이트</ko>
-                <en>Update CacheStorage v1.3.0</en>
+                <ko>UI v2.9.0 업데이트</ko>
+                <en>Update UI v2.9.0</en>
             </language>
         </string>
         <string>
             <key>NOTICE_LINK_1</key>
             <language>
-                <ko>https://github.com/nhn/gpm.unity/blob/main/docs/CacheStorage/ReleaseNotes.md</ko>
-                <en>https://github.com/nhn/gpm.unity/blob/main/docs/CacheStorage/ReleaseNotes.en.md</en>
+                <ko>https://github.com/nhn/gpm.unity/blob/main/docs/UI/ReleaseNotes.md</ko>
+                <en>https://github.com/nhn/gpm.unity/blob/main/docs/UI/ReleaseNotes.en.md</en>
             </language>
         </string>
         <string>
