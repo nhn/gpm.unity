@@ -25,14 +25,17 @@
 
 ### 스크롤 관리
 * 스크롤 사용 목적에 따라 기준점과 방향을 조절할 수 있습니다.
-![infinitescroll_item](images/infinitescroll_item.gif)
+    * ![infinitescroll_item](images/infinitescroll_item.gif)
 
 ## 사용 방법
 
 ### 설정
+
 ![inspector](images/inspector.png)
+
 * 스크롤 사각 영역(ScrollRect(Scroll View))이 붙어있는 오브젝트에 Infinite Scroll 컴포넌트를 추가합니다.
 * InfiniteScrollItem을 상속받은 클래스가 포함된 프리팹을 Item Prefab에 연결합니다.
+
 ![itemprefab](images/itemprefab.png)
 
 ### 스크롤 데이터 적용
@@ -94,6 +97,7 @@ bool OnFilter(InfiniteScrollData data)
 ```
 
 #### 홀수, 짝수 필터링
+
 ![infinitescroll_filter](images/infinitescroll_filter.gif)
 
 ### ScrollItem 동적 크기 조정
@@ -104,7 +108,7 @@ bool OnFilter(InfiniteScrollData data)
 
 ### ScrollItem 그리드 적용
 * ScrollItem을 그리드로 분할해 적용할 수 있습니다.
-![infinitescroll_grid](images/infinitescroll_grid.gif)
+    * ![infinitescroll_grid](images/infinitescroll_grid.gif)
 
 #### 인스펙터
 * Layout의 Values 그리드를 분할할 크기를 설정합니다.
@@ -118,19 +122,19 @@ bool OnFilter(InfiniteScrollData data)
 * 스크롤의 기준점을 설정할 수 있습니다.
     * 가로(왼쪽, 가운데, 오른쪽)
     * 세로(상단, 중단, 하단)
-![infinitescroll_axis](images/infinitescroll_axis.gif)
+* ![infinitescroll_axis](images/infinitescroll_axis.gif)
 
 #### 인스펙터
 * 각 기준점에 대해 표시하는 버튼을 선택하여 방향을 설정할 수 있습니다.
-![infinitescroll_axis](images/infinitescroll_axis.png)
+    * ![infinitescroll_axis](images/infinitescroll_axis.png)
 
 ### ScrollItem 방향 적용
 * ScrollItem이 정렬되는 방향을 설정할 수 있습니다.
-![infinitescroll_direction](images/infinitescroll_direction.gif)
+    * ![infinitescroll_direction](images/infinitescroll_direction.gif)
 
 #### 인스펙터
 * 각 방향에 대해 표시하는 버튼을 선택하여 방향을 설정할 수 있습니다.
-![infinitescroll_direction](images/infinitescroll_direction.png)
+    * ![infinitescroll_direction](images/infinitescroll_direction.png)
 
 ### 스크롤 이벤트
 ScrollView의 상태 변화에 따라 호출하는 이벤트입니다.
@@ -138,6 +142,7 @@ ScrollView의 상태 변화에 따라 호출하는 이벤트입니다.
 Inspector나 AddListener를 통해 콜백 함수를 등록하여 활용할 수 있습니다.
 
 #### 인스펙터
+
 ![event](images/event.png)
 
 #### onChangeValue

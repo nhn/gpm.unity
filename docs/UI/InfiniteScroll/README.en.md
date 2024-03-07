@@ -25,15 +25,18 @@ ScrollRect(Scroll View) creates scrollItems to fit in content and allows them t
 
 ### Scroll Management
 * Can adjust the reference point and direction according to the purpose of using the scroll.
+
 ![infinitescroll_item](images/infinitescroll_item.gif)
 
 ## How to use
 
 ### Configuration
+
 ![inspector](images/inspector.png)
+
 * Add the Infinite Scroll component to the object with the scroll rectangle area (ScrollRect/Scroll View) attached.
 * Attach a prefab with a class that inherits InfiniteScrollItem to the Item Prefab.
-![itemprefab](images/itemprefab.png)
+    * ![itemprefab](images/itemprefab.png)
 
 ### Apply scroll data
 * To apply scroll data, Need to implement the UpdateData method within a class that inherits from the InfiniteScrollItem class. This allows you to apply data to the content's data.
@@ -95,6 +98,7 @@ bool OnFilter(InfiniteScrollData data)
 ```
 
 #### Filtering Odd and Even
+
 ![infinitescroll_filter](images/infinitescroll_filter.gif)
 
 ### ScrollItem Dynamic Resizing
@@ -105,7 +109,7 @@ bool OnFilter(InfiniteScrollData data)
 
 ### Applying Grid to ScrollItems
 * Can divide the items of the scroll into a grid for application.
-![infinitescroll_grid](images/infinitescroll_grid.gif)
+    * ![infinitescroll_grid](images/infinitescroll_grid.gif)
 
 #### Inspector
 * Set the size to divide the Values ​​grid of Layout.
@@ -120,19 +124,19 @@ bool OnFilter(InfiniteScrollData data)
 * Can set the reference point of the scroll.
     * Horizontal (left, center, right)
     * Vertical (top, middle, bottom)
-![infinitescroll_axis](images/infinitescroll_axis.gif)
+* ![infinitescroll_axis](images/infinitescroll_axis.gif)
 
 #### Inspector
 * Can select buttons to indicate the direction for each reference point.
-![infinitescroll_axis](images/infinitescroll_axis.png)
+    * ![infinitescroll_axis](images/infinitescroll_axis.png)
 
 ### Applying ScrollItem Direction
 * Can set the direction in which scrollitems are aligned.
-![infinitescroll_direction](images/infinitescroll_direction.gif)
+    * ![infinitescroll_direction](images/infinitescroll_direction.gif)
 
 #### Inspector
 * Can select buttons for each direction to set the direction.
-![infinitescroll_direction](images/infinitescroll_direction.png)
+    * ![infinitescroll_direction](images/infinitescroll_direction.png)
 
 ### Scroll Events
 Events called according to changes in the status of ScrollView.
@@ -140,6 +144,7 @@ Events called according to changes in the status of ScrollView.
 You can register and utilize the callback function through the Inspector or AddListener.
 
 #### Inspector
+
 ![event](images/event.png)
 
 #### onChangeValue
