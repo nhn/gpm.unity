@@ -11,14 +11,18 @@
 ### Added
 
 * Introduced functionality to modify the reference point and direction([438](https://github.com/nhn/gpm.unity/issues/455), [455](https://github.com/nhn/gpm.unity/issues/455))
-    ![infinitescroll_item](InfiniteScroll/images/infinitescroll_item.gif)
+
+![infinitescroll_item](InfiniteScroll/images/infinitescroll_item.gif)
+
 * Implemented a data filtering feature([442](https://github.com/nhn/gpm.unity/issues/442))
-    ![infinitescroll_filter](InfiniteScroll/images/infinitescroll_filter.gif)
+
+![infinitescroll_filter](InfiniteScroll/images/infinitescroll_filter.gif)
 
 ### Updated
 
 * Improved functionality to apply space and padding alignment along the axis (x, y)
-    ![infinitescroll_space_padding](InfiniteScroll/images/infinitescroll_space_padding.gif)
+
+![infinitescroll_space_padding](InfiniteScroll/images/infinitescroll_space_padding.gif)
 
 ### Fixed
 * Fixed an issue where object management was not handled properly when data was added in the middle([470](https://github.com/nhn/gpm.unity/issues/470)) 
