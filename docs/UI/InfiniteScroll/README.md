@@ -113,11 +113,11 @@ bool OnFilter(InfiniteScrollData data)
 
 #### 인스펙터
 * Layout의 Values 그리드를 분할할 크기를 설정합니다.
-    ![grid_1](images/grid_1.png)
+    * ![grid_1](images/grid_1.png)
 * Values의 Element의 비율로 그리드를 비율을 설정합니다. 
     * Grid Count가 2 이상일 때 활성화됩니다.
     * ScrollItem 방향에 따라 ui 위치가 바뀔 수 있습니다.
-    ![grid_2](images/grid_2.png)
+    * ![grid_2](images/grid_2.png)
 
 ### 스크롤 기준점 적용
 * 스크롤의 기준점을 설정할 수 있습니다.

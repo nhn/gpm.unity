@@ -114,11 +114,11 @@ bool OnFilter(InfiniteScrollData data)
 
 #### Inspector
 * Set the size to divide the Values ​​grid of Layout.
-    ![grid_1](images/grid_1.png)
+    * ![grid_1](images/grid_1.png)
 * Set the grid ratio with the ratio of the Element of Values.
     * Activated when Grid Count is 2 or more.
     * The UI position may change depending on the direction of the scrollItems.
-    ![grid_2](images/grid_2.png)
+    * ![grid_2](images/grid_2.png)
 
 
 ### Applying Scroll Reference Point
