@@ -14,7 +14,7 @@
 스크롤 사각 영역(ScrollRect/Scroll View)을 사용할 때 뷰포트(Viewport) 크기에 맞게 스크롤 아이템(ScrollItem)을 생성하여 재사용할 수 있는 컴포넌트입니다.
 
 ### ScrollItem 재사용
-* ScrollItem을 재사용함으로써 메모리를 절약하고 성능을 향상시킵니다.
+ScrollItem을 재사용함으로써 메모리를 절약하고 성능을 향상시킵니다.
 
 ![infinitescroll_objectmanaged](images/infinitescroll_objectmanaged.gif)
 
@@ -24,8 +24,9 @@
     * 'InfiniteScrollItem.UpdateData()' 메서드 구현
 
 ### 스크롤 관리
-* 스크롤 사용 목적에 따라 기준점과 방향을 조절할 수 있습니다.
-    * ![infinitescroll_item](images/infinitescroll_item.gif)
+스크롤 사용 목적에 따라 기준점과 방향을 조절할 수 있습니다.
+
+![infinitescroll_item](images/infinitescroll_item.gif)
 
 ## 사용 방법
 
@@ -108,15 +109,15 @@ bool OnFilter(InfiniteScrollData data)
 
 ### ScrollItem 그리드 적용
 * ScrollItem을 그리드로 분할해 적용할 수 있습니다.
-    * ![infinitescroll_grid](images/infinitescroll_grid.gif)
+    ![infinitescroll_grid](images/infinitescroll_grid.gif)
 
 #### 인스펙터
 * Layout의 Values 그리드를 분할할 크기를 설정합니다.
-    * ![grid_1](images/grid_1.png)
+    ![grid_1](images/grid_1.png)
 * Values의 Element의 비율로 그리드를 비율을 설정합니다. 
     * Grid Count가 2 이상일 때 활성화됩니다.
     * ScrollItem 방향에 따라 ui 위치가 바뀔 수 있습니다.
-    * ![grid_2](images/grid_2.png)
+    ![grid_2](images/grid_2.png)
 
 ### 스크롤 기준점 적용
 * 스크롤의 기준점을 설정할 수 있습니다.

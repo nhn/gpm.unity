@@ -14,7 +14,7 @@
 ScrollRect(Scroll View) creates scrollItems to fit in content and allows them to be reusable.
 
 ### Reusing ScrollItem
-* Reusing scrollItems conserves memory and enhances performance.
+Reusing scrollItems conserves memory and enhances performance.
 
 ![infinitescroll_objectmanaged](images/infinitescroll_objectmanaged.gif)
 
@@ -24,7 +24,7 @@ ScrollRect(Scroll View) creates scrollItems to fit in content and allows them t
     * Implement the 'InfiniteScrollItem.UpdateData()' method.
 
 ### Scroll Management
-* Can adjust the reference point and direction according to the purpose of using the scroll.
+Can adjust the reference point and direction according to the purpose of using the scroll.
 
 ![infinitescroll_item](images/infinitescroll_item.gif)
 
@@ -36,7 +36,8 @@ ScrollRect(Scroll View) creates scrollItems to fit in content and allows them t
 
 * Add the Infinite Scroll component to the object with the scroll rectangle area (ScrollRect/Scroll View) attached.
 * Attach a prefab with a class that inherits InfiniteScrollItem to the Item Prefab.
-    * ![itemprefab](images/itemprefab.png)
+
+![itemprefab](images/itemprefab.png)
 
 ### Apply scroll data
 * To apply scroll data, Need to implement the UpdateData method within a class that inherits from the InfiniteScrollItem class. This allows you to apply data to the content's data.
@@ -109,15 +110,15 @@ bool OnFilter(InfiniteScrollData data)
 
 ### Applying Grid to ScrollItems
 * Can divide the items of the scroll into a grid for application.
-    * ![infinitescroll_grid](images/infinitescroll_grid.gif)
+    ![infinitescroll_grid](images/infinitescroll_grid.gif)
 
 #### Inspector
 * Set the size to divide the Values ​​grid of Layout.
-    * ![grid_1](images/grid_1.png)
+    ![grid_1](images/grid_1.png)
 * Set the grid ratio with the ratio of the Element of Values.
     * Activated when Grid Count is 2 or more.
     * The UI position may change depending on the direction of the scrollItems.
-    * ![grid_2](images/grid_2.png)
+    ![grid_2](images/grid_2.png)
 
 
 ### Applying Scroll Reference Point
