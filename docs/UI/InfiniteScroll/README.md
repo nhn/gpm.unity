@@ -11,7 +11,7 @@
 
 ## 개요
 
-스크롤 사각 영역(ScrollRect/Scroll View)을 사용할 때 뷰포트(Viewport) 크기에 맞게 스크롤 아이템(ScrollItem)을 생성하여 재사용할 수 있는 컴포넌트입니다.
+스크롤 사각 영역(Scroll Rect(Scroll View))을 사용할 때 뷰포트(Viewport) 크기에 맞게 스크롤 아이템(ScrollItem)을 생성하여 재사용할 수 있는 컴포넌트입니다.
 
 ### ScrollItem 재사용
 ScrollItem을 재사용함으로써 메모리를 절약하고 성능을 향상시킵니다.
@@ -34,7 +34,7 @@ ScrollItem을 재사용함으로써 메모리를 절약하고 성능을 향상�
 
 ![inspector](images/inspector.png)
 
-* 스크롤 사각 영역(ScrollRect(Scroll View))이 붙어있는 오브젝트에 Infinite Scroll 컴포넌트를 추가합니다.
+* 스크롤 사각 영역(Scroll Rect(Scroll View))이 붙어있는 오브젝트에 Infinite Scroll 컴포넌트를 추가합니다.
 * InfiniteScrollItem을 상속받은 클래스가 포함된 프리팹을 Item Prefab에 연결합니다.
 
 ![itemprefab](images/itemprefab.png)
@@ -114,9 +114,9 @@ bool OnFilter(InfiniteScrollData data)
 #### 인스펙터
 * Layout의 Values 그리드를 분할할 크기를 설정합니다.
     * ![grid_1](images/grid_1.png)
-* Values의 Element의 비율로 그리드를 비율을 설정합니다. 
+* Values의 Element의 비율로 그리드 비율을 설정합니다. 
     * Grid Count가 2 이상일 때 활성화됩니다.
-    * ScrollItem 방향에 따라 ui 위치가 바뀔 수 있습니다.
+    * ScrollItem 방향에 따라 UI 위치가 바뀔 수 있습니다.
     * ![grid_2](images/grid_2.png)
 
 ### 스크롤 기준점 적용
@@ -177,7 +177,7 @@ onChangeActiveItem.AddListener(dataIndex, active =>
 ```
 
 #### onStartLine
-ScrollView의 시작 지점인지가 바뀔 때 호출하는 이벤트입니다.
+ScrollView의 시작 지점인지 여부가 바뀔 때 호출하는 이벤트입니다.
 * (bool)isStartLine
     * 스크롤이 시작 지점인지 여부
 ```cs
@@ -188,7 +188,7 @@ onStartLine.AddListener((bool)isStartLine =>
 ```
 
 #### onEndLine
-ScrollView의 마지막 지점인지가 여부가 바뀔 때 호출하는 이벤트입니다.
+ScrollView의 마지막 지점인지 여부가 바뀔 때 호출하는 이벤트입니다.
 * (bool)isEndLine
     * 스크롤이 마지막 지점인지 여부
 ```cs

@@ -11,7 +11,7 @@
 
 ## Overview
 
-ScrollRect(Scroll View) creates scrollItems to fit in content and allows them to be reusable.
+Scroll Rect(Scroll View) creates scrollItems to fit in content and allows them to be reusable.
 
 ### Reusing ScrollItem
 Reusing scrollItems conserves memory and enhances performance.
@@ -34,7 +34,7 @@ Can adjust the reference point and direction according to the purpose of using t
 
 ![inspector](images/inspector.png)
 
-* Add the Infinite Scroll component to the object with the scroll rectangle area (ScrollRect/Scroll View) attached.
+* Add the Infinite Scroll component to the object with the scroll rectangle area Scroll Rect(Scroll View) attached.
 * Attach a prefab with a class that inherits InfiniteScrollItem to the Item Prefab.
 
 ![itemprefab](images/itemprefab.png)
