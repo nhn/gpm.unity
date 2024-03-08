@@ -233,7 +233,8 @@ public void UpdateData(InfiniteScrollData data)
 ### UpdateAllData
 
 모든 데이터를 업데이트합니다.
-immediately가 true 이면 즉시 데이터를 갱신합니다.
+* immediately가 true 이면 즉시 데이터를 갱신합니다.
+
 ```cs
 public void UpdateAllData(bool immediately = false)
 ```
