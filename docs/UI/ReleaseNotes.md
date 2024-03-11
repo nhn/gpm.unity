@@ -11,7 +11,7 @@
 ### Added
 
 * InfiniteScroll
-    *  기준점과 방향을 변경할 수 있는 기능 추가([438](https://github.com/nhn/gpm.unity/issues/438), [455](https://github.com/nhn/gpm.unity/issues/455)
+    *  기준점과 방향을 변경할 수 있는 기능 추가([438](https://github.com/nhn/gpm.unity/issues/438), [455](https://github.com/nhn/gpm.unity/issues/455))
         * ![infinitescroll_item](InfiniteScroll/images/infinitescroll_item.gif)
     * 데이터 필터링 기능 추가([442](https://github.com/nhn/gpm.unity/issues/442))
         * ![infinitescroll_filter](InfiniteScroll/images/infinitescroll_filter.gif)
