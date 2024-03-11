@@ -10,22 +10,22 @@
 
 ### Added
 
-*  기준점과 방향을 변경할 수 있는 기능 추가([438](https://github.com/nhn/gpm.unity/issues/455), [455](https://github.com/nhn/gpm.unity/issues/455))
-
-![infinitescroll_item](InfiniteScroll/images/infinitescroll_item.gif)
-
-* 데이터 필터링 기능 추가([442](https://github.com/nhn/gpm.unity/issues/442))
-
-![infinitescroll_filter](InfiniteScroll/images/infinitescroll_filter.gif)
+* InfiniteScroll
+    *  기준점과 방향을 변경할 수 있는 기능 추가([438](https://github.com/nhn/gpm.unity/issues/438), [455](https://github.com/nhn/gpm.unity/issues/455))
+        * ![infinitescroll_item](InfiniteScroll/images/infinitescroll_item.gif)
+    * 데이터 필터링 기능 추가([442](https://github.com/nhn/gpm.unity/issues/442))
+        * ![infinitescroll_filter](InfiniteScroll/images/infinitescroll_filter.gif)
 
 ### Updated
 
-* x축과 y축으로 space와 padding 정렬을 적용할 수 있는 기능이 개선
-
-![infinitescroll_space_padding](InfiniteScroll/images/infinitescroll_space_padding.gif)
+* InfiniteScroll
+    * x축과 y축으로 space와 padding 정렬을 적용할 수 있는 기능이 개선
+        * ![infinitescroll_space_padding](InfiniteScroll/images/infinitescroll_space_padding.gif)
 
 ### Fixed
-* 데이터가 중간에 추가될 때 오브젝트 관리가 정상적으로 처리되도록 수정([470](https://github.com/nhn/gpm.unity/issues/470)) 
+
+* InfiniteScroll
+    * 데이터가 중간에 추가될 때 오브젝트 관리가 정상적으로 처리되도록 수정([470](https://github.com/nhn/gpm.unity/issues/470)) 
 
 ## 2.8.0
 
