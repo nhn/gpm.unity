@@ -21,7 +21,7 @@ jobs:
     - uses: actions/stale@v5
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        days-before-pr-state: 3
+        days-before-pr-stale: 3
         days-before-issue-stale: 7
         exempt-issue-labels: 'question'
         stale-issue-message: 'Stale issue. Please check this issue.'
