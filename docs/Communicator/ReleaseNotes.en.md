@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.1.2
+
+### Date
+
+* 2024.03.27
+
+### Fixed
+* 1.1.1 Version Installation Issues Redistributed
+
 ## 1.1.1
 
 ### Date
