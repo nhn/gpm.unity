@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.1.1
+
+### Date
+
+* 2024.03.27
+
+### Updated
+* Response to Apple's Privacy Policy [(Apple Privacy Policy)](https://developer.apple.com/news/?id=3d8a9yyh)
+
 ## 1.1.0
 
 ### Date
