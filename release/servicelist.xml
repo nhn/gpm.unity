@@ -2,7 +2,7 @@
 <serviceList>
     <service>
         <name>Common</name>
-        <version>2.3.2</version>
+        <version>2.3.1</version>
     </service>
     <service>
         <name>Adapter</name>
@@ -26,11 +26,11 @@
     </service>
     <service>
         <name>Communicator</name>
-        <version>1.1.1</version>
+        <version>1.1.0</version>
     </service>
     <service>
         <name>WebView</name>
-        <version>2.0.3</version>
+        <version>2.0.2</version>
     </service>
     <service>
         <name>AssetManagement</name>
