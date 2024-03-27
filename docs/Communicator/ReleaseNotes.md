@@ -2,24 +2,6 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
-## 1.1.2
-
-### Date
-
-* 2024.03.27
-
-### Fixed
-* 1.1.1 버전 설치 문제 재배포
-
-## 1.1.1
-
-### Date
-
-* 2024.03.27
-
-### Updated
-* Apple 개인정보 보호 정책 대응 [(Apple Privacy Policy)](https://developer.apple.com/news/?id=3d8a9yyh)
-
 ## 1.1.0
 
 ### Date
