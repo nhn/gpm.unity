@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="6">
+<info version="7">
   <title>Communicator</title>
   <status>publish</status>
   <description>$DESCRIPTION</description>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <dependencies>
     <unity>
       <version>2018.4.0+</version>
