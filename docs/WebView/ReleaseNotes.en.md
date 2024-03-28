@@ -9,7 +9,7 @@
 * 2024.03.29
 
 ### Updated
-* Response to Apple's Privacy Policy [(Apple Privacy Policy)](https://developer.apple.com/news/?id=3d8a9yyh)
+* Response to Apple Privacy Policy [(Apple Privacy Policy)](https://developer.apple.com/news/?id=3d8a9yyh)
 
 ## 2.0.2
 
