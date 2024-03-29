@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="10">
+<info version="11">
     <title>LogViewer</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
     <dependencies>
         <unity>
             <version>2019.4.0+</version>
@@ -22,6 +22,15 @@
         </CacheStorage>
     </dependencies>
     <packageList>
+        <package>
+            <version>2.0.4</version>
+            <installList>
+                <install>
+                    <name>gpm_logviewer_v2.0.4.unitypackage</name>
+                    <path>GPM/LogViewer</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>2.0.3</version>
             <installList>
