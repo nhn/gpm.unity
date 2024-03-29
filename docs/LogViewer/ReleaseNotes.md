@@ -9,7 +9,7 @@
 * 2024.03.29
 
 ### Updated
-* Deprecated API 업데이트
+* Unity deprecated api(Landscape -> LandscapeLeft) 업데이트
 
 ## 2.0.3
 

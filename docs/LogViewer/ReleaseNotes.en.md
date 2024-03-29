@@ -9,7 +9,7 @@
 * 2024.03.29
 
 ### Updated
-* Updated depreciated API
+* Updated unity depreciated api(Landscape -> LandscapeLeft)
 
 ## 2.0.3
 
