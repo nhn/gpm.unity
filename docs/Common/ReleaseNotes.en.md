@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.3.3
+
+### Date
+
+* 2024.03.29
+
+### Fixed
+* Fixed compilation errors in .Net 2.1 environment
+
+
 ## 2.3.2
 
 ### Date
