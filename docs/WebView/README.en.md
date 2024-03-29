@@ -34,7 +34,7 @@ Provides a WebView used in various ways in the game.
 
 ### Supported iOS version
 
-* 11 or higher
+* 12 or higher
 
 ### Supported platforms
 
