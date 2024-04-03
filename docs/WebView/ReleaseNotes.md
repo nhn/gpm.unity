@@ -9,7 +9,7 @@
 * 2024.04.03
 
 ### Fixed
-* xcode arm64에러 수정 [(501)](https://github.com/nhn/gpm.unity/issues/501)
+* 'Undefined symbols for architecture arm64' 오류 수정 [(501)](https://github.com/nhn/gpm.unity/issues/501)
 
 ## 2.0.3
 
