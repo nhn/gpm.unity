@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.4
+
+### Date
+
+* 2024.04.03
+
+### Fixed
+* xcode arm64에러 수정 [(501)](https://github.com/nhn/gpm.unity/issues/501)
+
 ## 2.0.3
 
 ### Date

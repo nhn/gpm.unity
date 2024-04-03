@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.4
+
+### Date
+
+* 2024.04.03
+
+### Fixed
+* Fixed xcode arm64 error [(501)](https://github.com/nhn/gpm.unity/issues/501)
+
 ## 2.0.3
 
 ### Date
