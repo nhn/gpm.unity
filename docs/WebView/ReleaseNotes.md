@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.5
+
+### Date
+
+* 2024.04.26
+
+### Fixed
+* (Android) HTML 문자열에 #이 포함되면 오류가 발생하는 이슈 개선 [(473)](https://github.com/nhn/gpm.unity/issues/473)
+
 ## 2.0.4
 
 ### Date
