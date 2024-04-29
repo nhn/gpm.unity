@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.5
+
+### Date
+
+* 2024.04.29
+
+### Fixed
+* (Android) Improves an issue where an error occurs when an HTML string contains # [(473)](https://github.com/nhn/gpm.unity/issues/473)
+
 ## 2.0.4
 
 ### Date
