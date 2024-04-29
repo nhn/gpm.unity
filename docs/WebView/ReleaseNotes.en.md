@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2024.04.26
+* 2024.04.29
 
 ### Fixed
 * (Android) Improves an issue where an error occurs when an HTML string contains # [(473)](https://github.com/nhn/gpm.unity/issues/473)

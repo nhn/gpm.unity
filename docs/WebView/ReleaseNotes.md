@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2024.04.26
+* 2024.04.29
 
 ### Fixed
 * (Android) HTML 문자열에 #이 포함되면 오류가 발생하는 이슈 개선 [(473)](https://github.com/nhn/gpm.unity/issues/473)
