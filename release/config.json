@@ -3,7 +3,7 @@
         "url": "https://launching.api.nhncloudservice.com/launching",
         "version": "v3.0",
         "appKey": "77va1DvJCwgqZaLv",
-        "subKey": "gpm/indicator",
+        "subKey": "gpm",
         "isEncoding": false
     }
 }
