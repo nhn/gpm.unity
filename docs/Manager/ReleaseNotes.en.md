@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.6
+
+### Date
+
+* 2024.05.21
+
+### Updated
+* Improved internal code
+
 ## 2.2.5
 
 ### Date
