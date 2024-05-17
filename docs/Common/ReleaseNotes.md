@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.4.0
+
+### Date
+
+* 2024.05.17
+
+### Updated
+* 내부 로직 개선
+
 ## 2.3.3
 
 ### Date
