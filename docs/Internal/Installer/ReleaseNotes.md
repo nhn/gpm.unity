@@ -1,5 +1,14 @@
 # Release notes
 
+## 1.0.5
+
+### Data
+
+* 2024.05.23
+
+### Updated
+* Commmon 2.4.0 업데이트
+
 ## 1.0.4
 
 ### Data
