@@ -2,6 +2,15 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.0.4
+
+### Date
+
+* 2024.03.29
+
+### Updated
+* Unity deprecated api(Landscape -> LandscapeLeft) 업데이트
+
 ## 2.0.3
 
 ### Date

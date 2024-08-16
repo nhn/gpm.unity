@@ -5,8 +5,8 @@
             <text>NOTICE_TEXT_1</text>
             <url>NOTICE_LINK_1</url>
             <timeInfo>
-                <startTime>2022-12-23 00:00</startTime>
-                <endTime>2023-01-31 23:59</endTime>
+                <startTime>2024-03-08 00:00</startTime>
+                <endTime>2024-04-08 23:59</endTime>
                 <day>
                     <start>00</start>
                     <end>24</end>
@@ -17,8 +17,20 @@
             <text>NOTICE_TEXT_2</text>
             <url>NOTICE_LINK_2</url>
             <timeInfo>
+                <startTime>2022-12-23 00:00</startTime>
+                <endTime>2023-06-30 23:59</endTime>
+                <day>
+                    <start>00</start>
+                    <end>24</end>
+                </day>
+            </timeInfo>
+        </notice>
+        <notice>
+            <text>NOTICE_TEXT_3</text>
+            <url>NOTICE_LINK_3</url>
+            <timeInfo>
                 <startTime>2019-07-23 00:00</startTime>
-                <endTime>2029-12-31 23:59</endTime>
+                <endTime>2023-05-31 23:59</endTime>
                 <day>
                     <start>00</start>
                     <end>24</end>

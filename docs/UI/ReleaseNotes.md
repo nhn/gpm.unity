@@ -1,6 +1,95 @@
-# Release notes
+﻿# Release notes
 
 🌏 [English](ReleaseNotes.en.md)
+
+## 2.9.0
+
+### Date
+
+* 2024.3.8
+
+### Added
+
+* InfiniteScroll
+    *  기준점과 방향을 변경할 수 있는 기능 추가([438](https://github.com/nhn/gpm.unity/issues/438), [455](https://github.com/nhn/gpm.unity/issues/455))
+        * ![infinitescroll_item](InfiniteScroll/images/infinitescroll_item.gif)
+    * 데이터 필터링 기능 추가([442](https://github.com/nhn/gpm.unity/issues/442))
+        * ![infinitescroll_filter](InfiniteScroll/images/infinitescroll_filter.gif)
+
+### Updated
+
+* InfiniteScroll
+    * x축과 y축으로 space와 padding 정렬을 적용할 수 있는 기능이 개선
+        * ![infinitescroll_space_padding](InfiniteScroll/images/infinitescroll_space_padding.gif)
+
+### Fixed
+
+* InfiniteScroll
+    * 데이터가 중간에 추가될 때 오브젝트 관리가 정상적으로 처리되도록 수정([470](https://github.com/nhn/gpm.unity/issues/470)) 
+
+## 2.8.0
+
+### Date
+
+* 2023.11.24
+
+### Add
+* InfiniteScroll
+    * 지정한 위치에 데이터를 추가할 수 있는 InsertData API 추가([438](https://github.com/nhn/gpm.unity/issues/438))
+	
+### Fixed
+* InfiniteScroll
+    * 활성화 후, 컴포넌트 갱신 순서에 따라 업데이트 영향을 받지 않도록 수정([413](https://github.com/nhn/gpm.unity/issues/413))
+* MultiLayout
+    * pivot 적용 순서에 따른 position 변경 문제 수정([456](https://github.com/nhn/gpm.unity/issues/456))
+
+### Updated
+* InfiniteScroll
+    * Position 오타 수정
+
+## 2.7.3
+
+### Date
+
+* 2023.6.1
+
+### Fixed
+* TabController
+   * 프리팹 스테이지에서 변경사항이 적용되지 않는 버그 수정
+   * 특정 Unity 버전에서 프리팹 저장 시 링크가 제거되는 버그 수정
+
+### Updated
+* Common 2.3.1 업데이트
+* CacheStorage 1.3.0 업데이트
+* WebCacheImage
+   * URL을 변경했을 때 기존 요청을 취소하도록 개선
+* TabController
+   * 비어 있는 항목을 자동으로 제거하지 않도록 개선
+
+## 2.7.2
+
+### Date
+
+* 2023.4.24
+
+### Updated
+* Common 2.3.0 업데이트
+* CacheStorage 1.2.0 업데이트
+
+## 2.7.1
+
+### Date
+
+* 2023.2.21
+
+### Fixed
+* InfiniteScroll
+    * UpdateData 함수가 불필요하게 많이 호출되는 현상 수정([355](https://github.com/nhn/gpm.unity/issues/355))
+    * InsertData 호출 이후 즉시 Move 호출했을 때 정상 작동되도록 수정([356](https://github.com/nhn/gpm.unity/issues/355))
+
+### Updated
+* InfiniteScroll
+    * UpdateData 함수 호출 시 Item도 업데이트하도록 개선
 
 ## 2.7.0
 

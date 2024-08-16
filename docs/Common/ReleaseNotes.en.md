@@ -2,6 +2,56 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.4.0
+
+### Date
+
+* 2024.05.17
+
+### Fixed
+* Improved internal logic.
+
+## 2.3.3
+
+### Date
+
+* 2024.03.29
+
+### Fixed
+* Fixed compilation errors in .Net 2.1 environment
+
+
+## 2.3.2
+
+### Date
+
+* 2024.03.29
+
+### Updated
+* Response to Apple Privacy Policy [(Apple Privacy Policy)](https://developer.apple.com/news/?id=3d8a9yyh)
+
+## 2.3.1
+
+### Date
+
+* 2023.05.08
+
+### Fixed
+* Fixed MessagePack compilation error in .net21 .net4 environment[(#388)](https://github.com/nhn/gpm.unity/issues/388)
+
+## 2.3.0
+
+### Date
+
+* 2023.04.24
+
+### Added
+* Added GPMLogger Exception Log
+* Added MessagePack
+
+### Updated
+* Optimize internal network logic
+
 ## 2.2.3
 
 ### Date

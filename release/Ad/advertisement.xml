@@ -3,20 +3,6 @@
     <imagePath>/image/</imagePath>
     <advertisements>
         <advertisement>
-            <name>Smart Downloader</name>
-            <imageName>c_smartdownloader.jpg</imageName>
-            <link>https://docs.nhncloud.com/en/Game/Smart%20Downloader/en/Overview/</link>
-            <description>Smart Downloader</description>
-            <timeInfo>
-                <startTime>2019-07-23 00:00</startTime>
-                <endTime>2099-12-31 23:59</endTime>
-                <day>
-                    <start>00</start>
-                    <end>24</end>
-                </day>
-            </timeInfo>
-        </advertisement>
-        <advertisement>
             <name>Leaderboard</name>
             <imageName>c_leaderboard.jpg</imageName>
             <link>https://docs.nhncloud.com/en/Game/Leaderboard/en/Overview/</link>

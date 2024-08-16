@@ -2,6 +2,106 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.3.1
+
+### Date
+
+* 2023.07.31
+
+### Fixed
+* Deprecation warning 수정[(414)](https://github.com/nhn/gpm.unity/issues/414)
+
+## 1.3.0
+
+### Date
+
+* 2023.05.24
+
+### Added
+* 캐시 삭제 기능 추가
+   * RemoveCache
+* ManagedTexture에서 텍스처 연결 해지, 텍스처 파괴 기능 추가
+   * DestroyTexture, ReleaseCache
+* Request 도중 취소할 수 있고 코루틴에서 대기할 수 있도록 기능 추가
+   * CacheRequestOperation
+* Viewer에서 Local Time으로 보는 기능 추가
+
+### Updated
+* 날짜 계산 최적화
+
+### Fixed
+* 이미 요청 중인 Request를 Local로 요청할 때 대기하던 문제 수정
+* RequestTexture 요청 시 관리되는 텍스처가 외부에서 파괴되어도 읽을 수 있도록 개선
+
+## 1.2.0
+
+### Date
+
+* 2023.04.24
+
+### Add
+* 초기화 함수 추가 GpmCacheStorage.Initialize
+    * 명시적으로 초기화를 해야 동작하도록 수정
+
+### Updated
+* Common 2.3.0 업데이트
+* 동기화 성능 개선
+    * 로컬 캐시 파일 관리를 위한 File IO 최소화
+    * 캐시 관리를 위한 내부 파일 포맷 변경
+        * json -> MessagePack
+
+### Fixed
+* Callback에서 Exception 발생했을 때 이전 Callback 지워주지 않는 문제 수정
+* 캐시 되지 않은 파일 불러올 때 Exception 수정
+
+## 1.1.2
+
+### Date
+
+* 2023.03.15
+
+### Updated
+* SetCachePath 기능 제거
+
+### Fixed
+* IOS에서 업데이트 시 폴더 Access Denied 문제 수정
+
+## 1.1.1
+
+### Date
+
+* 2023.03.10
+
+### Fixed
+
+* 요청받을 때 url 상관없이 모든 요청 callback 호출되는 문제 수정
+
+## 1.1.0
+
+### Date
+
+* 2023.03.10
+
+### Added
+* CacheStorage 뷰어 툴 추가
+* RequestTexture RequestType 넣을 수 있도록 함수 추가
+* RequestTexture preload 추가
+
+### Updated
+* NotModified 코드 발생 시에도 유효기간 정보 갱신하도록 개선
+* maxCount 기본값 10000 설정
+* maxSize 기본값 256MB 설정
+* 캐시 다시 받을 때도 내부적으로 같은 데이터이면 데이터 유지하도록 개선
+
+### Fixed
+* LastModified 값이 0일때 읽지 못하던 버그 수정
+* ReRequest 시간 설정 시 계산 잘못하던 문제 수정
+* 캐시 새로 받을 때 용량 계산 잘못하던 문제 수정
+* ios에서 폴더 변경으로 인한 접근 권한 문제 수정
+* 동시에 Request 할 때 callback 받을 수 있도록 수정
+* StringToValue null 값 들어가도 정상 동작하도록 수정
+* Size 제한으로 삭제 시 자동 삭제 중인 캐시도 계산하도록 수정
+
 ## 1.0.1
 
 ### Date

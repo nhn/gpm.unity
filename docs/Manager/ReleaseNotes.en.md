@@ -2,6 +2,56 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.6
+
+### Date
+
+* 2024.05.21
+
+### Updated
+* Improved internal code
+
+## 2.2.5
+
+### Date
+
+* 2023.07.28
+
+### Updated
+* Improved internal code
+
+## 2.2.4
+
+### Date
+
+* 2023.05.10
+
+### Fixed
+* MessagePack .net 2.1, .net 4.x compilation error fix
+
+### Updated
+* Updated Common v2.3.1
+
+## 2.2.3
+
+### Date
+
+* 2023.04.28
+
+### Updated
+* Updated Common v2.3.0
+* Updated License
+
+## 2.2.2
+
+### Date
+
+* 2022.01.05
+
+### Updated
+* Updated Common v2.2.3
+* Change Internal domain
+
 ## 2.2.1
 
 ### Date

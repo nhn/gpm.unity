@@ -1,6 +1,96 @@
-# Release notes
+﻿# Release notes
 
 🌏 [한국어](ReleaseNotes.md)
+
+## 2.9.0
+
+### Date
+
+* 2024.3.8
+
+### Added
+
+* InfiniteScroll
+    * Introduced functionality to modify the reference point and direction([438](https://github.com/nhn/gpm.unity/issues/438), [455](https://github.com/nhn/gpm.unity/issues/455))
+        * ![infinitescroll_item](InfiniteScroll/images/infinitescroll_item.gif)
+    * Implemented a data filtering feature([442](https://github.com/nhn/gpm.unity/issues/442))
+        * ![infinitescroll_filter](InfiniteScroll/images/infinitescroll_filter.gif)
+
+### Updated
+
+* InfiniteScroll
+    * Improved functionality to apply space and padding alignment along the axis (x, y)
+        * ![infinitescroll_space_padding](InfiniteScroll/images/infinitescroll_space_padding.gif)
+
+### Fixed
+* InfiniteScroll
+    * Fixed an issue where object management was not handled properly when data was added in the middle([470](https://github.com/nhn/gpm.unity/issues/470)) 
+
+## 2.8.0
+
+### Date
+
+* 2023.11.24
+
+### Added
+* InfiniteScroll
+    * Added InsertData API to add data to a specified location([438](https://github.com/nhn/gpm.unity/issues/438))
+
+### Fixed
+* InfiniteScroll
+    * Fixed so that updates are not affected according to the component update order after active([413](https://github.com/nhn/gpm.unity/issues/413))
+* MultiLayout
+    * Fixed position change issue according to pivot([456](https://github.com/nhn/gpm.unity/issues/456))
+
+### Updated
+* InfiniteScroll
+    * Position typo correction
+
+## 2.7.3
+
+### Date
+
+* 2023.6.1
+
+### Fixed
+* TabController
+   * Fixed a bug where changes were not being applied in the prefab stage.
+   * Fixed a bug where links were being removed when saving prefabs in certain Unity versions.
+
+### Updated
+* Updated Common 2.3.1.
+* Updated CacheStorage 1.3.0.
+* WebCacheImage
+   * Improved to cancel previous requests when the URL is changed.
+* TabController
+   * Improved to not automatically remove empty items.
+
+
+## 2.7.2
+
+### Date
+
+* 2023.4.24
+
+### Updated
+* Updated Common 2.3.0
+* Updated CacheStorage 1.2.0
+
+## 2.7.1
+
+### Date
+
+* 2023.2.21
+
+### Fixed
+* InfiniteScroll
+    * Fixed a problem where the UpdateData function was called many times unnecessarily([355](https://github.com/nhn/gpm.unity/issues/355))
+    
+    * Fixed so that it works normally when Move is called immediately after calling InsertData([356](https://github.com/nhn/gpm.unity/issues/355))
+    
+### Updated
+* InfiniteScroll
+    * Improved to update Item when calling UpdateData function
 
 ## 2.7.0
 

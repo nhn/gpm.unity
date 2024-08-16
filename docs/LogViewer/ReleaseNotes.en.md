@@ -2,6 +2,15 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.0.4
+
+### Date
+
+* 2024.03.29
+
+### Updated
+* Updated unity depreciated api(Landscape -> LandscapeLeft)
+
 ## 2.0.3
 
 ### Date
