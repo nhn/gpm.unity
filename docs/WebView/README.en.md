@@ -1,0 +1,839 @@
+# WebView
+
+🌏 [한국어](README.md)
+
+## 🚩 Table of Contents
+
+* [Overview](#Overview)
+* [Installation](#Installation)
+* [Specifications](#Specifications)
+* [Platform specific settings](#-Platform-specific-settings)
+* [API](#-API)
+* [Release notes](./ReleaseNotes.en.md)
+
+
+## Overview
+
+Provides a WebView used in various ways in the game.
+
+## Installation
+
+1. [Install Game Package Manger](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711)
+2. Run : [Unity Menu > Tools > GPM > Manager](https://github.com/nhn/gpm.unity/blob/main/README.en.md#execute)
+3. Service installation : WebView
+
+## Specifications
+
+### Supported Unity Version
+
+* 2019.4.0 or higher
+
+### Supported Android version
+
+* 4.4 or higher
+
+### Supported iOS version
+
+* 12 or higher
+
+### Supported platforms
+
+* Android
+* iOS 
+
+### Supported features
+
+| Category | Spec |
+| --- | --- |
+| Style | Popup |
+|   | Fullscreen |
+| Navigation | Visibility |
+|   | Color |
+|   | Title |
+|   | Back |
+|   | Forward |
+|   | Close |
+| Show API | URL, HTML file, HTML string |
+|   | Callback |
+|   | Scheme List |
+| Position, Size API | SetPosition, GetX, GetY |
+|   | SetSize, GetWidth, GetHeight |
+|   | SetMargins |
+| Show SafeBrowsing | |
+|   | Callback |
+| Other | IsActive |
+|   | Screen orientation |
+|   | Add JavaScript |
+|   | Execute JavaScript |
+|   | Clear Cookies |
+|   | Clear Cache |
+|   | Can Go Back |
+|   | Can Go Forward |
+|   | Go Back |
+|   | Go Forward |
+|   | Multiple Windows |
+|   | Scheme command |
+|   | File download</br>(Android only) |
+|   | File upload</br>(Android API 21 or later) |
+|   | User agent string |
+|   | Set auto rotation |
+|   | Show WebBrowser |
+
+## 🔨 Platform specific settings
+
+###  Android
+
+#### Gradle settings
+
+1.  Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Main Gradle Template** to create an `Assets/Plugins/Android/mainTemplate.gradle` file.
+    * ![unity_gradle.png](images/unity_gradle.png)
+    * If you are already using a mainTemplate.gradle file, you may skip this step.
+2.  Add dependencies in mainTemplate.gradle.
+    ```gradle
+    dependencies {
+        ...
+        // Prerequisites
+        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+
+        // Add if you are using the ShowSafeBrowsing API
+        implementation 'androidx.browser:browser:1.3.0'
+    }
+    ```
+    * If they are already added in another package, you may skip this step.
+3. When using the ShowSafeBrowsing API with Unity 2020.1.0 or higher, activate the **Custom Gradle Properties Template** in **File > Build Settings > Player Settings > Android > Publishing Settings** to create the `Assets/Plugins/Android/gradleTemplate.properties` file.
+    * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
+    * Add `android.useAndroidX=true` to the last line of the gradleTemplate.properties file.
+    ```gradle
+    **ADDITIONAL_PROPERTIES**
+    android.useAndroidX=true
+    ```
+
+### iOS
+
+#### Setting Other Linker Flags
+    
+In **Build Settings > Linking > Other Linker Flags** of Xcode Target(Unity-iPhone), you need to add -ObjC.
+
+#### GPMWebView.bundle
+
+When performing an iOS build in certain Unity versions, the buttons on **Navigation Bar** might not display properly. When this issue occurs, go to **Xcode Project > Build Phases > Copy Bundle Resource** Setting of the Xcode Target (Unity-iPhone) and press the + button to find and add `GPMWebView.bundle` file.
+
+![GPMWebViewBundle.png](images/GPMWebViewBundle.png)
+
+#### Optional automation (e.g. CI/CD)
+
+It is completely optional but you can automate above process by using [OnPostprocessBuild](https://docs.unity3d.com/ScriptReference/Build.IPostprocessBuildWithReport.OnPostprocessBuild.html) and [PBXProject](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.html).
+
+Checked and tested:
+
+*  Unity 2020.3.21
+
+**Example**
+
+```cs
+using System.IO;
+using UnityEditor;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+using UnityEditor.iOS.Xcode;
+
+public class BuildProcessor : IPostprocessBuildWithReport
+{
+    public int callbackOrder { get { return 0; } }
+
+    public void OnPostprocessBuild(BuildReport report)
+    {
+        if (report.summary.platform == BuildTarget.iOS)
+        {
+            // Initialize PBXProject instance
+            var pbxprojPath = Path.Combine(report.summary.outputPath, "Unity-iPhone.xcodeproj/project.pbxproj");
+            var pbxProject = new PBXProject();
+            pbxProject.ReadFromFile(pbxprojPath);
+
+            // Get GUID of target
+            var targetGuid = pbxProject.GetUnityMainTargetGuid();
+
+            // Setting Other Linker Flags (adding -ObjC to Other Linker Flags in Build Settings)
+            pbxProject.AddBuildProperty(targetGuid, "OTHER_LDFLAGS", "-ObjC");
+
+            // GPMWebView.bundle (adding GPMWebView.bundle to Copy Bundle Resources in Build Phases)
+            var webViewBundleGuid = pbxProject.AddFile("Frameworks/GPM/WebView/Plugins/IOS/GPMWebView.bundle", "GPMWebView.bundle", PBXSourceTree.Build);
+            pbxProject.AddFileToBuild(targetGuid, webViewBundleGuid);
+
+            pbxProject.WriteToFile(pbxprojPath);
+        }
+    }
+}
+```
+
+**Note**
+
+-ObjC will be added only once because [AddBuildProperty](https://docs.unity3d.com/ScriptReference/iOS.Xcode.PBXProject.AddBuildProperty.html) ignores duplicate values. Same for `GPMWebView.bundle`.
+
+## 🔨 API
+
+### Namespace
+```cs
+using Gpm.WebView;
+```
+
+### ShowUrl
+
+Displays the WebView.
+
+**Required parameter**
+
+* url: the url transmitted to the parameter must be a valid value.
+* configuration: With GpmWebViewRequest.Configuration, WebView options can be changed.
+
+**Optional parameter**
+
+* callback: Events of WebView is notified to users via a callback.
+* schemeList: Specifies the list of custom schemes that users want to receive.
+    * Entering 'https://' allows you receive all URLs that begin with 'https://' as schemeEvent.
+    * A scheme received as schemeEvent is not redirected.
+
+#### Configuration
+
+| Parameter | Values | Description |
+| ------------------------- | ----------------------------------------- | -------------------------------- |
+| style                     | GpmWebViewStyle.POPUP                     | Popup moode |
+|                           | GpmWebViewStyle.FULLSCREEN                | Fullscreen mode |
+| orientation               | GpmOrientation                            | Screen orientation |
+| isClearCookie             | bool                                      | Clear cookies |
+| isClearCache              | bool                                      | Clear cache |
+| backgroundColor           | string                                    | Background Color |
+| isNavigationBarVisible    | bool                                      | Activate/Deactivate Navigation Bar |
+| navigationBarColor        | string                                    | Navigation Bar Color |
+| title                     | string                                    | WebView title</br>Using a webpage's title for a null or string.Empty assignment</br>Using a space (" ") for an unlettered title |
+| orientation               | UnityEngine.ScreenOrientation             | Removed in GPM WebView v1.1.0. |
+| isBackButtonVisible       | bool                                      | Activate/Deactivate Go Back Button |
+| isForwardButtonVisible    | bool                                      | Activate/Deactivate Go Forward Button |
+| isCloseButtonVisible      | bool                                      | Activate/Deactivate Close Button |
+| supportMultipleWindows    | bool                                      | Multiple windows |
+| userAgentString           | string                                    | Sets userAgentString |
+| addJavascript             | string                                    | Add JavaScript to WebView |
+| customSchemePostCommand   | GpmWebViewRequest.CustomSchemePostCommand | Add Custom scheme postprocessing command |
+| position                  | GpmWebViewRequest.Position                | Sets Popup WebView position |
+| size                      | GpmWebViewRequest.Size                    | Sets Popup WebView size |
+| margins                   | GpmWebViewRequest.Margins                 | Sets Popup WebView margins |
+| isBackButtonCloseCallbackUsed</br>(Android only) | bool               | Use the back button to pass a callback instead of closing a WebView |
+| isMaskViewVisible</br>(iOS only) | bool                               | Activate/Deactivate background mask view of Popup WebView |
+| contentMode</br>(iOS only)| GamebaseWebViewContentMode.RECOMMENDED    | recommended browsers for the current platform |
+|                           | GamebaseWebViewContentMode.MOBILE         | mobile browser |
+|                           | GamebaseWebViewContentMode.DESKTOP        | desktop browser |
+| isAutoRotation</br>(iOS only) | bool                                  | Sets auto rotatio of WebView</br>Specify true only when Screen.orientation is not set manually. |
+
+
+**API**
+
+```cs
+public static void ShowUrl(
+    string url,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewDelegate callback,
+    List<string> schemeList)
+```
+
+**Example**
+
+```cs
+using Gpm.WebView;
+
+// FullScreen
+public void ShowUrlFullScreen()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.UNSPECIFIED,
+            isClearCookie = true,
+            isClearCache = true,
+            backgroundColor = "#FFFFFF",
+            isNavigationBarVisible = true,
+            navigationBarColor = "#4B96E6",
+            title = "The page title.",
+            isBackButtonVisible = true,
+            isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
+            supportMultipleWindows = true,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+#endif
+        },
+        // See the end of the code example
+        OnCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        });
+}
+
+// Popup default
+public void ShowUrlPopupDefault()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.UNSPECIFIED,
+            isClearCookie = true,
+            isClearCache = true,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
+            supportMultipleWindows = true,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE,
+            isMaskViewVisible = true,
+#endif
+        },
+        // See the end of the code example
+        OnCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        });
+}
+
+// Popup custom position and size
+public void ShowUrlPopupPositionSize()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.UNSPECIFIED,
+            isClearCookie = true,
+            isClearCache = true,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
+            position = new GpmWebViewRequest.Position
+            {
+                hasValue = true,
+                x = (int)(Screen.width * 0.1f),
+                y = (int)(Screen.height * 0.1f)
+            },
+            size = new GpmWebViewRequest.Size
+            {
+                hasValue = true,
+                width = (int)(Screen.width * 0.8f),
+                height = (int)(Screen.height * 0.8f)
+            },
+            supportMultipleWindows = true,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE,
+            isMaskViewVisible = true,
+#endif
+        }, null, null);
+}
+
+// Popup custom margins
+public void ShowUrlPopupMargins()
+{
+    GpmWebView.ShowUrl(
+        "https://google.com/",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.POPUP,
+            orientation = GpmOrientation.UNSPECIFIED,
+            isClearCookie = true,
+            isClearCache = true,
+            isNavigationBarVisible = true,
+            isCloseButtonVisible = true,
+            margins = new GpmWebViewRequest.Margins
+            {
+                hasValue = true,
+                left = (int)(Screen.width * 0.1f),
+                top = (int)(Screen.height * 0.1f),
+                right = (int)(Screen.width * 0.1f),
+                bottom = (int)(Screen.height * 0.1f)
+            },
+            supportMultipleWindows = true,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE,
+            isMaskViewVisible = true,
+#endif
+        }, null, null);
+}
+
+private void OnCallback(
+    GpmWebViewCallback.CallbackType callbackType,
+    string data,
+    GpmWebViewError error)
+{
+    Debug.Log("OnCallback: " + callbackType);
+    switch (callbackType)
+    {
+        case GpmWebViewCallback.CallbackType.Open:
+            if (error != null)
+            {
+                Debug.LogFormat("Fail to open WebView. Error:{0}", error);
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.Close:
+            if (error != null)
+            {
+                Debug.LogFormat("Fail to close WebView. Error:{0}", error);
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.PageStarted:
+            if (string.IsNullOrEmpty(data) == false)
+            {
+                Debug.LogFormat("PageStarted Url : {0}", data);
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.PageLoad:
+            if (string.IsNullOrEmpty(data) == false)
+            {
+                Debug.LogFormat("Loaded Page:{0}", data);
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.MultiWindowOpen:
+            Debug.Log("MultiWindowOpen");
+            break;
+        case GpmWebViewCallback.CallbackType.MultiWindowClose:
+            Debug.Log("MultiWindowClose");
+            break;
+        case GpmWebViewCallback.CallbackType.Scheme:
+            if (error == null)
+            {
+                if (data.Equals("USER_ CUSTOM_SCHEME") == true || data.Contains("CUSTOM_SCHEME") == true)
+                {
+                    Debug.Log(string.Format("scheme:{0}", data));
+                }
+            }
+            else
+            {
+                Debug.Log(string.Format("Fail to custom scheme. Error:{0}", error));
+            }
+            break;
+        case GpmWebViewCallback.CallbackType.GoBack:
+            Debug.Log("GoBack");
+            break;
+        case GpmWebViewCallback.CallbackType.GoForward:
+            Debug.Log("GoForward");
+            break;
+        case GpmWebViewCallback.CallbackType.ExecuteJavascript:
+            Debug.LogFormat("ExecuteJavascript data : {0}, error : {1}", data, error);
+            break;
+#if UNITY_ANDROID
+        case GpmWebViewCallback.CallbackType.BackButtonClose:
+            Debug.Log("BackButtonClose");
+            break;
+#endif
+    }
+}
+```
+
+### ShowHtmlFile
+
+Loads the HTML file from the **Assets > StreamingAssets** folder into the WebView.
+
+![StreamingAssets.png](images/StreamingAssets.png)
+
+See the code below to enter the filePath value of ShowHtmlFile API.
+
+```cs
+#if UNITY_IOS
+    // "file://" + Application.streamingAssetsPath + "/" + "YOUR_HTML_PATH.html"
+    string.Format("file://{0}/{1}", Application.streamingAssetsPath, "YOUR_HTML_PATH.html");
+#elif UNITY_ANDROID
+    // "file:///android_asset/" + "YOUR_HTML_PATH.html"
+    string.Format("file:///android_asset/{0}", "YOUR_HTML_PATH.html");
+#endif
+```
+
+**API**
+
+```cs
+public static void ShowHtmlFile(
+    string filePath,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewDelegate callback,
+    List<string> schemeList)
+```
+
+**Example**
+
+```cs
+using Gpm.WebView;
+
+public void ShowHtmlFile()
+{
+    var htmlFilePath = string.Empty;
+#if UNITY_IOS
+        htmlFilePath = string.Format("file://{0}/{1}", Application.streamingAssetsPath, "YOUR_HTML_PATH.html");
+#elif UNITY_ANDROID
+        htmlFilePath = string.Format("file:///android_asset/{0}", "YOUR_HTML_PATH.html");
+#endif
+
+    GpmWebView.ShowHtmlFile(
+        htmlFilePath,
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.UNSPECIFIED,
+            isClearCookie = true,
+            isClearCache = true,
+            backgroundColor = "#FFFFFF",
+            isNavigationBarVisible = true,
+            navigationBarColor = "#4B96E6",
+            title = "The page title.",
+            isBackButtonVisible = true,
+            isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
+            supportMultipleWindows = true,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+#endif
+        },
+        OnCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        });
+}
+```
+
+### ShowHtmlString
+
+Loads the HTML string into the WebView.
+
+**API**
+
+```cs
+public static void ShowHtmlString(
+    string htmlString,
+    GpmWebViewRequest.Configuration configuration,
+    GpmWebViewCallback.GpmWebViewDelegate callback,
+    List<string> schemeList)
+```
+
+**Example**
+
+```cs
+using Gpm.WebView;
+
+public void ShowHtmlString()
+{
+    GpmWebView.ShowHtmlString(
+        "${HTML_STRING}",
+        new GpmWebViewRequest.Configuration()
+        {
+            style = GpmWebViewStyle.FULLSCREEN,
+            orientation = GpmOrientation.UNSPECIFIED,
+            isClearCookie = true,
+            isClearCache = true,
+            backgroundColor = "#FFFFFF",
+            isNavigationBarVisible = true,
+            navigationBarColor = "#4B96E6",
+            title = "The page title.",
+            isBackButtonVisible = true,
+            isForwardButtonVisible = true,
+            isCloseButtonVisible = true,
+            supportMultipleWindows = true,
+#if UNITY_IOS
+            contentMode = GpmWebViewContentMode.MOBILE
+#endif
+        },
+        OnCallback,
+        new List<string>()
+        {
+            "USER_ CUSTOM_SCHEME"
+        });
+}
+```
+
+### ShowSafeBrowsing
+
+The App displays the Android Chrome or iOS Safari browser.</br>
+👉 Use the **GpmWebViewSafeBrowsing** class.
+
+**Required parameter**
+
+* url : the url transmitted to the parameter must be a valid value.
+
+**Optional parameter**
+
+* configuration: With GpmWebViewRequest.ConfigurationSafeBrowsing, Navigation bar colors can be changed.
+* callback: Open and Close events of the Browser is notified to users via a callback.
+
+#### Configuration
+
+| Parameter | Values | Description |
+| ------------------------- | ----------------------------------------- | -------------------------------- |
+| navigationBarColor        | string                                    | Navigation bar color |
+| navigationTextColor</br>(iOS only) | string                           | Navigation text color |
+
+**API**
+
+```cs
+public static void ShowSafeBrowsing(
+    string url,
+    GpmWebViewRequest.ConfigurationSafeBrowsing configuration = null,
+    GpmWebViewCallback.GpmWebViewDelegate callback = null)
+```
+
+**Example**
+
+```cs
+public void OpenSafeBrowsing()
+{
+    GpmWebViewSafeBrowsing.ShowSafeBrowsing(sampleUrl,
+        new GpmWebViewRequest.ConfigurationSafeBrowsing()
+        {
+            navigationBarColor = "#4B96E6",
+            navigationTextColor = "#FFFFFF"
+        },
+        OnCallback);
+}
+```
+
+### ExecuteJavaScript
+
+Execute the specified JavaScript string.
+
+**API**
+
+```cs
+public static void ExecuteJavaScript(string script)
+```
+
+**Example**
+
+```cs
+public void ExecuteJavaScriptSample()
+{
+    GpmWebView.ExecuteJavaScript("alert('ExecuteJavaScript');");
+}
+```
+
+### Close
+
+You can close the WebView using the following API.
+
+**API**
+
+```cs
+public static void Close()
+```
+
+**Example**
+
+```cs
+public void Close()
+{
+    GpmWebView.Close();
+}
+```
+
+### IsActive
+
+Gets whether the Popup WebView is enabled.
+
+**API**
+
+```cs
+public static bool IsActive()
+```
+
+**Example**
+
+```cs
+public bool Something()
+{
+    if (GpmWebView.IsActive() == true)
+    {
+        ...
+    }
+}
+```
+
+### CanGoBack
+
+Gets whether the WebView has a back history item.
+
+**API**
+
+```cs
+public static bool CanGoBack()
+```
+
+### CangoForward
+
+Gets whether the WebView has a forward history item.
+
+```cs
+public static bool CanGoForward()
+```
+
+### GoBack
+
+Goes back in the history of the WebView.
+
+**API**
+
+```cs
+public static void GoBack()
+```
+
+**Example**
+
+```cs
+public void GoBack()
+{
+    GpmWebView.GoBack();
+}
+```
+
+### GoForward
+
+Goes forward in the history of the WebView.
+
+**API**
+
+```cs
+public static void GoForward()
+```
+
+**Example**
+
+```cs
+public void GoForward()
+{
+    GpmWebView.GoForward();
+}
+```
+
+### SetPosition
+
+Sets the position of the Popup WebView.
+
+**API**
+
+```cs
+public static void SetPosition(int x, int y)
+```
+
+**Example**
+
+```cs
+public void SetPosition()
+{
+    GpmWebView.SetPosition((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
+}
+```
+
+### SetSize
+
+Sets the size of the Popup WebView.
+
+**API**
+
+```cs
+public static void SetSize(int width, int height)
+```
+
+**Example**
+
+```cs
+public void SetSize()
+{
+    GpmWebView.SetSize((int)(Screen.width * 0.8f), (int)(Screen.height * 0.8f));
+}
+```
+
+### SetMargins
+
+Sets the margins of the Popup WebView.
+
+**API**
+
+```cs
+public static void SetMargins(int left, int top, int right, int bottom)
+```
+
+**Example**
+
+```cs
+public void SetMargins()
+{
+    GpmWebView.SetMargins((int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f), (int)(Screen.width * 0.1f), (int)(Screen.height * 0.1f));
+}
+```
+
+### GetX, GetY
+
+Returns the position of the WebView.
+
+**API**
+
+```cs
+public static int GetX()
+public static int GetY()
+```
+
+**Example**
+
+```cs
+public void Something()
+{
+    if (GpmWebView.IsActive() == true)
+    {
+        int x = GpmWebView.GetX();
+        int y = GpmWebView.GetY();
+        ...
+    }
+}
+```
+
+### GetWidth, GetHeight
+
+Returns the size of the WebView.
+
+**API**
+
+```cs
+public static int GetWidth()
+public static int GetHeight()
+```
+
+**Example**
+
+```cs
+public void Something()
+{
+    if (GpmWebView.IsActive() == true)
+    {
+        int width = GpmWebView.GetWidth();
+        int height = GpmWebView.GetHeight();
+        ...
+    }
+}
+```
+### ShowWebBrowser
+
+Open the default browser for Android/iOS.</br>
+
+**Required parameter**
+
+* url : the url transmitted to the parameter must be a valid value.
+
+**API**
+
+```cs
+public static void ShowWebBrowser(string url)
+```
+
+**Example**
+
+```cs
+public void OpenWebBrowser()
+{
+    GpmWebView.ShowWebBrowser(sampleUrl);
+}
+```

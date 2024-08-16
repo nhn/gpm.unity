@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<multilanguage>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>$DESCRIPTION</key>
+            <language>
+                <ko>DLST는 Unity 중복되는 라이브러리들을 검색해서 지울 수 있는 툴입니다.</ko>
+                <en>DLST(Duplicate Library Search Tool) searches and removes duplicate libraries.</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_DOCUMENTATION</key>
+            <language>
+                <ko>문서 보기</ko>
+                <en>View documentation</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_DOCUMENTATION</key>
+            <language>
+                <ko>README.md</ko>
+                <en>README.en.md</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_RELEASE_NOTES</key>
+            <language>
+                <ko>릴리스 정보</ko>
+                <en>Release notes</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_RELEASE_NOTES</key>
+            <language>
+                <ko>ReleaseNotes.md</ko>
+                <en>ReleaseNotes.en.md</en>
+            </language>
+        </string>
+        <string>
+            <key>$IMAGE_DLST</key>
+            <language>
+                <ko>DLST</ko>
+                <en>DLST</en>
+            </language>
+        </string>
+        <string>
+            <key>$IMAGE_IGNORE_STRING</key>
+            <language>
+                <ko>라이브러리 이름에서 무시할 문자열</ko>
+                <en>Character strings to be ignored for library name</en>
+            </language>
+        </string>
+        <string>
+            <key>$IMAGE_IGNORE_LIBRARY</key>
+            <language>
+                <ko>검색에서 제외할 라이브러리 이름</ko>
+                <en>Library name to be excluded from search</en>
+            </language>
+        </string>
+    </list>
+</multilanguage>

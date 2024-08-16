@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<supportInfo>
+    <version>2.2.5</version>
+    <menuList>
+        <menu>
+            <text>INFO_DOCUMENT</text>
+            <url>DOCUMENT_URL</url>
+        </menu>
+        <menu>
+            <text>INFO_ISSUE_SUGGEST</text>
+            <url>ISSUE_URL</url>
+        </menu>
+        <menu>
+            <text>INFO_ASSETSTORE</text>
+            <url>ASSETSTORE_URL</url>
+        </menu>
+    </menuList>
+    <mail>dl_gpm_help@nhn.com</mail>
+</supportInfo>

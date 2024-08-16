@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<multilanguage>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>$DESCRIPTION</key>
+            <language>
+                <ko>Profiler는 Unity에서 디바이스 성능과 시스템 정보를 실시간으로 확인할 수 있어 최적화에 도움을 주는 툴입니다.</ko>
+                <en>Profiler is a tool that helps optimize device performance and system information in real time in Unity.</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_DOCUMENTATION</key>
+            <language>
+                <ko>문서 보기</ko>
+                <en>View documentation</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_DOCUMENTATION</key>
+            <language>
+                <ko>README.md</ko>
+                <en>README.en.md</en>
+            </language>
+        </string>
+        <string>
+            <key>$VIEW_RELEASE_NOTES</key>
+            <language>
+                <ko>릴리스 정보</ko>
+                <en>Release notes</en>
+            </language>
+        </string>
+        <string>
+            <key>$PATH_RELEASE_NOTES</key>
+            <language>
+                <ko>ReleaseNotes.md</ko>
+                <en>ReleaseNotes.en.md</en>
+            </language>
+        </string>
+        <string>
+            <key>$IMAGE_PERFORMANCE</key>
+            <language>
+                <ko>실시간 CPU와 GPU의 성능을 확인할 수 있습니다.</ko>
+                <en>Check the real-time CPU and GPU performance..</en>
+            </language>
+        </string>
+        <string>
+            <key>$IMAGE_MEMORY</key>
+            <language>
+                <ko>실시간 메모리 할당과 사용량을 확인할 수 있습니다.</ko>
+                <en>Check real-time memory allocation and usage.</en>
+            </language>
+        </string>
+        <string>
+            <key>$IMAGE_RENDERING</key>
+            <language>
+                <ko>렌더링에 사용되는 데이타를 실시간으로 확인 가능합니다.</ko>
+                <en>Check the datas used for rendering in real time.</en>
+            </language>
+        </string>
+        <string>
+            <key>$IMAGE_SYSTEM</key>
+            <language>
+                <ko>시스템 정보를 확인할 수 있습니다.</ko>
+                <en>View the device system information.</en>
+            </language>
+        </string>
+    </list>
+</multilanguage>

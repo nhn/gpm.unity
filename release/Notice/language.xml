@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<multilanguage>
+    <default>
+        <language>en</language>
+    </default>
+    <list>
+        <string>
+            <key>NOTICE_TEXT_1</key>
+            <language>
+                <ko>[업데이트 안내] UI v2.9.0</ko>
+                <en>[Update Notice] UI v2.9.0</en>
+            </language>
+        </string>
+        <string>
+            <key>NOTICE_LINK_1</key>
+            <language>
+                <ko>https://github.com/nhn/gpm.unity/blob/main/docs/UI/ReleaseNotes.md</ko>
+                <en>https://github.com/nhn/gpm.unity/blob/main/docs/UI/ReleaseNotes.en.md</en>
+            </language>
+        </string>
+        <string>
+            <key>NOTICE_TEXT_2</key>
+            <language>
+                <ko>UI v2.7.3 업데이트</ko>
+                <en>Update UI v2.7.3</en>
+            </language>
+        </string>
+        <string>
+            <key>NOTICE_LINK_2</key>
+            <language>
+                <ko>https://github.com/nhn/gpm.unity/blob/main/docs/UI/ReleaseNotes.md</ko>
+                <en>https://github.com/nhn/gpm.unity/blob/main/docs/UI/ReleaseNotes.en.md</en>
+            </language>
+        </string>
+		<string>
+            <key>NOTICE_TEXT_3</key>
+            <language>
+                <ko>Game Package Manager v2.2.4 업데이트</ko>
+                <en>Update Game Package Manager v2.2.4</en>
+            </language>
+        </string>
+        <string>
+            <key>NOTICE_LINK_3</key>
+            <language>
+                <ko>https://github.com/nhn/gpm.unity/blob/main/docs/Manager/ReleaseNotes.md</ko>
+                <en>https://github.com/nhn/gpm.unity/blob/main/docs/Manager/ReleaseNotes.en.md</en>
+            </language>
+        </string>
+    </list>
+</multilanguage>
