@@ -2,7 +2,22 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
-## 2.0.5
+## 2.1.0
+
+### Date
+
+* 2024.08.16
+
+### Added
+
+* (iOS) Add CloseSafeBrowsing API [(396)](https://github.com/nhn/gpm.unity/issues/396) [(522)](https://github.com/nhn/gpm.unity/issues/522)
+* (iOS) Improved the issue where the page could not be closed due to the absence of a close button when the page loading was slow [(434)](https://github.com/nhn/gpm.unity/issues/434)
+
+### Fixed
+
+* (Android) ShowSafeBrowsing API: Improved an issue where it would open with the default browser set on the device [(520)](https://github.com/nhn/gpm.unity/issues/520)
+* (Android) Fixed an issue where error codes were passed as strings, causing JSON parsing errors in Unity [(454)](https://github.com/nhn/gpm.unity/issues/454)
+* Improved internal logic.
 
 ### Date
 
