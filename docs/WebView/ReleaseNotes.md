@@ -16,7 +16,7 @@
 
 * (iOS) 페이지 로딩이 느리면 닫기 버튼이 없어서 페이지를 닫지 못하는 이슈 개선 [(434)](https://github.com/nhn/gpm.unity/issues/434)
 * (Android) ShowSafeBrowsing API: 디바이스에 설정된 기본 브라우저로 열리는 이슈 개선 [(520)](https://github.com/nhn/gpm.unity/issues/520)
-* (Android) 오류 코드가 string으로 전달되어, Unity에서 Json 파싱 오류가 발생하는 이슈 수정 [(454)](https://github.com/nhn/gpm.unity/issues/454)
+* (Android) 오류 코드가 string으로 전달되어, Unity에서 JSON 파싱 오류가 발생하는 이슈 수정 [(454)](https://github.com/nhn/gpm.unity/issues/454)
 * 내부 로직 개선
 
 ## 2.0.5
