@@ -59,8 +59,8 @@
 | Position, Size API | SetPosition, GetX, GetY |
 |   | SetSize, GetWidth, GetHeight |
 |   | SetMargins |
-| Show SafeBrowsing | |
-|   | Callback |
+| SafeBrowsing | Show |
+|   | Close</br>(iOS only) |
 | Other | IsActive |
 |   | Screen orientation |
 |   | Add JavaScript |
@@ -590,6 +590,25 @@ public void OpenSafeBrowsing()
             navigationTextColor = "#FFFFFF"
         },
         OnCallback);
+}
+```
+
+### CloseSafeBrowsing
+
+다음 API를 이용하여 SafeBrowsing을 닫을 수 있습니다.
+
+**API**
+
+```cs
+public static void CloseSafeBrowsing()
+```
+
+**Example**
+
+```cs
+public void CloseSafeBrowsing()
+{
+    GpmWebViewSafeBrowsing.CloseSafeBrowsing();
 }
 ```
 

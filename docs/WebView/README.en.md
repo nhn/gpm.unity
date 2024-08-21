@@ -59,8 +59,8 @@ Provides a WebView used in various ways in the game.
 | Position, Size API | SetPosition, GetX, GetY |
 |   | SetSize, GetWidth, GetHeight |
 |   | SetMargins |
-| Show SafeBrowsing | |
-|   | Callback |
+| SafeBrowsing | Show |
+|   | Close</br>(iOS only) |
 | Other | IsActive |
 |   | Screen orientation |
 |   | Add JavaScript |
@@ -590,6 +590,25 @@ public void OpenSafeBrowsing()
             navigationTextColor = "#FFFFFF"
         },
         OnCallback);
+}
+```
+
+### CloseSafeBrowsing
+
+You can close SafeBrowsing using the following API.
+
+**API**
+
+```cs
+public static void CloseSafeBrowsing()
+```
+
+**Example**
+
+```cs
+public void CloseSafeBrowsing()
+{
+    GpmWebViewSafeBrowsing.CloseSafeBrowsing();
 }
 ```
 
