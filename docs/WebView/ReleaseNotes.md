@@ -2,6 +2,23 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.1.0
+
+### Date
+
+* 2024.08.23
+
+### Added
+
+* (iOS) CloseSafeBrowsing API 추가 [(396)](https://github.com/nhn/gpm.unity/issues/396) [(522)](https://github.com/nhn/gpm.unity/issues/522)
+
+### Fixed
+
+* (iOS) 페이지 로딩이 느리면 닫기 버튼이 없어서 페이지를 닫지 못하는 이슈 개선 [(434)](https://github.com/nhn/gpm.unity/issues/434)
+* (Android) ShowSafeBrowsing API: 디바이스에 설정된 기본 브라우저로 열리는 이슈 개선 [(520)](https://github.com/nhn/gpm.unity/issues/520)
+* (Android) 오류 코드가 string으로 전달되어, Unity에서 JSON 파싱 오류가 발생하는 이슈 수정 [(454)](https://github.com/nhn/gpm.unity/issues/454)
+* 내부 로직 개선
+
 ## 2.0.5
 
 ### Date
