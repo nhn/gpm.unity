@@ -91,7 +91,6 @@ Provides a WebView used in various ways in the game.
 2.  Add dependencies in mainTemplate.gradle.
     ```gradle
     dependencies {
-        ...
         // Prerequisites
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
 
@@ -104,7 +103,7 @@ Provides a WebView used in various ways in the game.
     * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
     
 4. Add AndroidX settings to the last line in gradleTemplate.properties file.
-	```gradle
+    ```gradle
     **ADDITIONAL_PROPERTIES**
     android.useAndroidX=true
     ```

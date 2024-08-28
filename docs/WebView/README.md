@@ -91,7 +91,6 @@
 2.  mainTemplate.gradle에서 dependencies를 추가합니다.
     ```gradle
     dependencies {
-        ...
         // 필수 구성 요소
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
         
