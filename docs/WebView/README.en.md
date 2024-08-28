@@ -100,10 +100,11 @@ Provides a WebView used in various ways in the game.
     }
     ```
     * If they are already added in another package, you may skip this step.
-3. When using the ShowSafeBrowsing API with Unity 2020.1.0 or higher, activate the **Custom Gradle Properties Template** in **File > Build Settings > Player Settings > Android > Publishing Settings** to create the `Assets/Plugins/Android/gradleTemplate.properties` file.
+3. Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Gradle Properties Template** to create an `Assets/Plugins/Android/gradleTemplate.properties` file.
     * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
-    * Add `android.useAndroidX=true` to the last line of the gradleTemplate.properties file.
-    ```gradle
+    
+4. Add AndroidX settings to the last line in gradleTemplate.properties file.
+	```gradle
     **ADDITIONAL_PROPERTIES**
     android.useAndroidX=true
     ```

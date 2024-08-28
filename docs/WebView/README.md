@@ -100,9 +100,10 @@
     }
     ```
     * 다른 패키지에서 이미 추가한 경우 해당 과정을 제외할 수 있습니다.
-3. Unity 2020.1.0 이상에서 ShowSafeBrowsing API를 사용할 경우 **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Properties Template**을 활성화하여 `Assets/Plugins/Android/gradleTemplate.properties` 파일을 생성합니다.
+3. **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Properties Template**을 활성하면 `Assets/Plugins/Android/gradleTemplate.properties` 파일이 생성됩니다.
     * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
-    * gradleTemplate.properties 파일의 마지막 줄에 `android.useAndroidX=true`를 추가합니다.
+    
+4. gradleTemplate.properties 파일의 마지막 줄에 AndroidX 설정을 추가합니다.
     ```gradle
     **ADDITIONAL_PROPERTIES**
     android.useAndroidX=true
