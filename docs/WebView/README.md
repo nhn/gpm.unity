@@ -103,7 +103,7 @@
 
 2. Android X 설정 추가
 
-    1. **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Properties Template**을 활성하면 `Assets/Plugins/Android/gradleTemplate.properties` 파일이 생성됩니다.
+    1. **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Properties Template**을 활성화하면 `Assets/Plugins/Android/gradleTemplate.properties` 파일이 생성됩니다.
         * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
     
     2. gradleTemplate.properties 파일의 마지막 줄에 AndroidX 설정을 추가합니다.
