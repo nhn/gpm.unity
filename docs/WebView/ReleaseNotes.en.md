@@ -19,6 +19,8 @@
 * (Android) Fixed an issue where error codes were passed as strings, causing JSON parsing errors in Unity [(454)](https://github.com/nhn/gpm.unity/issues/454)
 * Improved internal logic.
 
+## 2.0.5
+
 ### Date
 
 * 2024.04.29

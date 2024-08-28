@@ -85,28 +85,32 @@
 
 #### Gradle 설정
 
-1.  **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Main Gradle Template**을 활성화하면 `Assets/Plugins/Android/mainTemplate.gradle` 파일이 생성됩니다.
-    * ![unity_gradle.png](images/unity_gradle.png)
-    * 사용 중인 mainTemplate.gradle 파일이 있을 때는 생략할 수 있습니다.
-2.  mainTemplate.gradle에서 dependencies를 추가합니다.
-    ```gradle
-    dependencies {
-        ...
-        // 필수 구성 요소
-        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
-        
-        // ShowSafeBrowsing API를 사용할 경우 추가
-        implementation 'androidx.browser:browser:1.3.0'
-    }
-    ```
-    * 다른 패키지에서 이미 추가한 경우 해당 과정을 제외할 수 있습니다.
-3. Unity 2020.1.0 이상에서 ShowSafeBrowsing API를 사용할 경우 **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Properties Template**을 활성화하여 `Assets/Plugins/Android/gradleTemplate.properties` 파일을 생성합니다.
-    * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
-    * gradleTemplate.properties 파일의 마지막 줄에 `android.useAndroidX=true`를 추가합니다.
-    ```gradle
-    **ADDITIONAL_PROPERTIES**
-    android.useAndroidX=true
-    ```
+1. 의존성 추가
+    1. **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Main Gradle Template**을 활성화하면 `Assets/Plugins/Android/mainTemplate.gradle` 파일이 생성됩니다.
+        * ![unity_gradle.png](images/unity_gradle.png)
+        * 사용 중인 mainTemplate.gradle 파일이 있을 때는 생략할 수 있습니다.
+    2.  mainTemplate.gradle에서 dependencies를 추가합니다.
+        ```gradle
+        dependencies {
+            // 필수 구성 요소
+            implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+            
+            // ShowSafeBrowsing API를 사용할 경우 추가
+            implementation 'androidx.browser:browser:1.3.0'
+        }
+        ```
+        * 다른 패키지에서 이미 추가한 경우 해당 과정을 제외할 수 있습니다.
+
+2. Android X 설정 추가
+
+    1. **File > Build Settings > Player Settings > Android > Publishing Settings**에서 **Custom Gradle Properties Template**을 활성화하면 `Assets/Plugins/Android/gradleTemplate.properties` 파일이 생성됩니다.
+        * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
+    
+    2. gradleTemplate.properties 파일의 마지막 줄에 AndroidX 설정을 추가합니다.
+        ```gradle
+        **ADDITIONAL_PROPERTIES**
+        android.useAndroidX=true
+        ```
 
 ### iOS
 
