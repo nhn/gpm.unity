@@ -85,28 +85,29 @@ Provides a WebView used in various ways in the game.
 
 #### Gradle settings
 
-1.  Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Main Gradle Template** to create an `Assets/Plugins/Android/mainTemplate.gradle` file.
-    * ![unity_gradle.png](images/unity_gradle.png)
-    * If you are already using a mainTemplate.gradle file, you may skip this step.
-2.  Add dependencies in mainTemplate.gradle.
-    ```gradle
-    dependencies {
-        // Prerequisites
-        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
+1. Dependencies
+    1.  Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Main Gradle Template** to create an `Assets/Plugins/Android/mainTemplate.gradle` file.
+        * ![unity_gradle.png](images/unity_gradle.png)
+        * If you are already using a mainTemplate.gradle file, you may skip this step.
+    2.  Add dependencies in mainTemplate.gradle.
+        ```gradle
+        dependencies {
+            // Prerequisites
+            implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72'
 
-        // Add if you are using the ShowSafeBrowsing API
-        implementation 'androidx.browser:browser:1.3.0'
-    }
-    ```
-    * If they are already added in another package, you may skip this step.
-3. Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Gradle Properties Template** to create an `Assets/Plugins/Android/gradleTemplate.properties` file.
-    * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
-    
-4. Add AndroidX settings to the last line in gradleTemplate.properties file.
-    ```gradle
-    **ADDITIONAL_PROPERTIES**
-    android.useAndroidX=true
-    ```
+            // Add if you are using the ShowSafeBrowsing API
+            implementation 'androidx.browser:browser:1.3.0'
+        }
+        ```
+        * If they are already added in another package, you may skip this step.
+2. Android X
+    1. Go to **File > Build Settings > Player Settings > Android > Publishing Settings** and enable **Custom Gradle Properties Template** to create an `Assets/Plugins/Android/gradleTemplate.properties` file.
+        * ![unity_gradle_properties.png](images/unity_gradle_properties.png)
+    2. Add AndroidX settings to the last line in gradleTemplate.properties file.
+        ```gradle
+        **ADDITIONAL_PROPERTIES**
+        android.useAndroidX=true
+        ```
 
 ### iOS
 
