@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.1.0
+
+### Date
+
+* 2024.09.13
+
+### Added
+* Added LogViewer Open UI Feature
+* Added Log File Saving Feature
+
 ## 2.0.4
 
 ### Date
