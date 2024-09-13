@@ -227,6 +227,7 @@ WebView를 표시합니다.
 |                           | GamebaseWebViewContentMode.MOBILE         | 모바일 브라우저 |
 |                           | GamebaseWebViewContentMode.DESKTOP        | 데스크탑 브라우저 |
 | isAutoRotation</br>(iOS only) | bool                                  | WebView 회전 설정</br>Screen.orientation을 수동 설정하지 않을 때만 true를 지정합니다. |
+| isInlineMedia</br>(iOS only) | bool                                   | HTML5 비디오를 인라인으로 재생<br>iPhone의 기본 값: false<br>iPad의 기본 값: true |
 
 **API**
 

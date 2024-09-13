@@ -224,6 +224,7 @@ Displays the WebView.
 |                           | GamebaseWebViewContentMode.MOBILE         | mobile browser |
 |                           | GamebaseWebViewContentMode.DESKTOP        | desktop browser |
 | isAutoRotation</br>(iOS only) | bool                                  | Sets auto rotatio of WebView</br>Specify true only when Screen.orientation is not set manually. |
+| isInlineMedia</br>(iOS only) | bool                                   | Play HTML5 video inline<br>Default values for iPhone: false<br>Default values for iPad: true |
 
 
 **API**

@@ -2,6 +2,23 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 2.2.0
+
+### Date
+
+* 2024.09.13
+
+### Added
+
+* (iOS) Added isInlineMedia options in Configuration [(435)](https://github.com/nhn/gpm.unity/issues/435)
+
+### Fixed
+
+* (iOS) Improved the issue where sound continues to play after exiting WebView [(453)](https://github.com/nhn/gpm.unity/issues/453)
+* (iOS) Improved autoplay functionality when videos within a page are set to autoplay [(435)](https://github.com/nhn/gpm.unity/issues/435)
+* (Android) Supports for video fullscreen [(462)](https://github.com/nhn/gpm.unity/issues/462)
+* (Android) Added page zoom feature [(529)](https://github.com/nhn/gpm.unity/issues/529)
+
 ## 2.1.0
 
 ### Date
