@@ -10,7 +10,7 @@
 
 ### Added
 
-* (iOS) isInlineMedia 설정 추가 [(435)](https://github.com/nhn/gpm.unity/issues/435)
+* (iOS) Added isInlineMedia options in Configuration [(435)](https://github.com/nhn/gpm.unity/issues/435)
 
 ### Fixed
 
