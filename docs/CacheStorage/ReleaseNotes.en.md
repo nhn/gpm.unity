@@ -2,6 +2,25 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.4.0
+
+### Date
+
+* 2024.09.23
+
+### Added
+* Improved control over cache requests
+  * Request(string url, CacheRequestConfiguration config, Action<GpmCacheResult> onResult)
+  * CacheRequestConfiguration
+    * Added header configuration feature
+    * Added local cache validity period configuration feature (CacheValidTime)
+      * min : Minimum time for cache reuse (seconds)
+        * The cache will be reused without checking for changes until the specified time.
+        * Ignored if set to 0.
+      * max : Maximum time for cache reuse (seconds)
+        * New cache will be fetched after the specified time has elapsed.
+        * Ignored if set to 0.
+
 ## 1.3.1
 
 ### Date

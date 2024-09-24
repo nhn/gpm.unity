@@ -151,6 +151,57 @@ public void Something()
 }
 ```
 
+### CacheRequestConfiguration
+This setting allows for fine control over cache requests.
+* requestType : Determines when cached data should be revalidated with the server.
+    * ALWAYS : Revalidates every time a request is made.
+    * FIRSTPLAY : Revalidates every time the app is restarted and also when the validity period expires.
+    * ONCE : Revalidates when the validity period expires.
+    * LOCAL : Uses the cached data.
+* reRequestTime : The local revalidation interval (in seconds).
+    * This is applied when requestType is FIRSTPLAY or ONCE.
+        * Revalidation occurs after the reRequestTime has elapsed since the last cache check.
+        * If the server’s set validity period is shorter, revalidation occurs based on that time.
+    * If set to 0, reRequestTime is ignored.
+* validCacheTime : Local cache validity period (in seconds)
+    * min : Minimum time for cache reuse (in seconds)
+        * The cache is reused without revalidation until the specified time has passed.
+        * If set to 0, min is ignored.
+    * max : Maximum time for cache reuse (in seconds).
+        * New cache will be fetched once the specified time has elapsed.
+        * If set to 0, max is ignored.
+* header
+    * Sets additional headers to be included with the server request.
+
+```cs
+using Gpm.CacheStorage;
+
+public void Something()
+{
+    string url;
+    
+    CacheRequestType requestType = CacheRequestType.ONCE;
+    
+    double reRequestTime = 60 * 60 * 2;
+    
+    double cacheValidTimeMin = 60 * 5;
+    double cacheValidTimeMax = 60 * 60 * 24 * 30;
+    CacheValidTime validCacheTime = new CacheValidTime(cacheValidTimeMin, cacheValidTimeMax)); 
+
+    Dictionary<string, string> header = new Dictionary<string, string>();
+    header.Add("Content-Type", "application/json");
+    
+    CacheRequestConfiguration config = new CacheRequestConfiguration(requestType, reRequestTime, validCacheTime, header); 
+    GpmCacheStorage.Request(url, config, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            bytes[] data = result.Data;
+        }
+    });
+}
+```
+
 ### GpmCacheResult
 Result value of cached data. Returns cache information and data.
 * IsSuccess allows you to obtain success or not.
@@ -256,12 +307,18 @@ public IEnumerator Something()
 Can request a texture cache using GpmCacheStorage.RequestTexture.
 * If the texture is loaded after running the app, reuse them will be reused.
 * Load and use cached textures when cached data and web data are the same data.
+* preload : Immediately loads cached textures from the local storage
+    * If there is a discrepancy between cached data and web data, the callback will be invoked once more.
+
+#### RequestTexture
 
 ```cs
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestTexture(url, (cachedTexture) =>
+    bool preload = true;
+
+    GpmCacheStorage.RequestTexture(url, preload, (CachedTexture cachedTexture) =>
     {
         if (cachedTexture != null)
         {
@@ -271,12 +328,39 @@ public void Something()
 }
 ```
 
+#### Add Configuration
+
+```cs
+public void Something()
+{
+    string url;
+    
+    Dictionary<string, string> header = new Dictionary<string, string>();
+    header.Add("Authorization ", "value");
+    CacheRequestConfiguration config = new CacheRequestConfiguration(header);
+    
+    bool preload = true;
+
+    GpmCacheStorage.RequestTexture(url, config, preload, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            Texture texture = cachedTexture.texture;
+        }
+    });
+}
+```
+
+#### Use Coroutine
+
 ```cs
 public IEnumerator Something()
 {
-    CachedTexture cachedTexture;
     string url;
-    yield return GpmCacheStorage.RequestTexture(url, (CachedTexture recvCachedTexture) =>
+    bool preload = true;
+    
+    CachedTexture cachedTexture;
+    yield return GpmCacheStorage.RequestTexture(url, preload, (CachedTexture recvCachedTexture) =>
     {
         cachedTexture = recvCachedTexture;
     });
@@ -331,8 +415,9 @@ public void Something()
 ```
 
 ## More effective web cache
-Web cache is about twice as fast as normal requests.
-Importing locally is faster, but cannot determine if it is up to date.
+Using web caching avoids downloading content if it is identical, making the process about twice as fast compared to standard web requests.
+
+Directly fetching from local cache is even faster as it bypasses web requests, but it cannot verify whether the content is up to date.
 
 ![](Images/3_en.png)
 
@@ -340,42 +425,124 @@ Can use the web cache more effectively by validating it only when you need it.
 
 ### Web Cache Validation Strategy
 
-If security is critical or requires continuous renewal, use normal network communications to ensure integrity.
-In addition, different verification strategies depending on whether content is more important for performance or integrity can further improve performance.
+CacheStorage supports the following four validation request types:
+
+* ALWAYS
+    * Revalidates content with each request.
+* FIRSTPLAY
+    * Revalidates content the first time it is requested after the app starts.
+      Revalidates content when it is requested again after restarting the app.
+      Revalidates content based on its validity period after these checks.
+* ONCE
+    * Revalidates content if the validity period has expired when the content is requested.
+* LOCAL
+    * Uses the cached content from local storage.
+
+ALWAYS: Ensures that content is revalidated with each request, so no content is downloaded if it remains the same.
+
+FIRSTPLAY and ONCE: Use cached content from local storage until the specified validity period expires, providing faster access.
+
+### Cache Validation and Performance
+
+More frequent revalidation ensures content integrity, while higher reuse improves performance.
+
+For scenarios where security is crucial or continuous updates are necessary, traditional network communication is used to ensure integrity.
 
 ![](Images/4_en.png)
 
-Cache Storage supports 4 validation strategies
+### Web Cache Validity Period
 
-### CacheRequestType
-Can decide when to re-validate cached data to the server.
-More revalidation ensures integrity, and more reuse improves performance.
+Web cache validation operates based on the validity period set by the server for each piece of content.
+If a CDN sets a validity period for content, you can configure the revalidation frequency.
 
-* ALWAYS
-    * Revalidate that data has changed on the server at every request.
-    * Same as GpmCacheStorage.RequestHttpCache.
-* FIRSTPLAY
-    * Re-validated every time the app is re-launched, and also re-verified when the validity period is over.
-    * Revalidates based on expiration or RequestTime settings.
-* ONCE
-    * Will be re-verified at the end of the validity period.
-    * Revalidates based on expiration or RequestTime settings.
-* LOCAL
-    * Uses cached data.
-    * Same as GpmCacheStorage.RequestLocalCache.
+* Web Cache Validity Period
+    * If the web cache validity period is set to 0, it will always perform revalidation similar to the ALWAYS setting.
+    * If the validity period is set to 3 hours, revalidation will be performed after 3 hours for FIRSTPLAY and ONCE requests.
 
-#### Can request and able to request
-* If no argument is used, the default value set in Initialize is used.
+### Controlling Web Cache Timing
+
+Many contents may be difficult to control from the server side.
+
+CacheStorage allows clients to manage these settings.
+
+* reRequestTime
+    * Allows setting a time for requesting revalidation.
+    * Revalidation will occur after the specified reRequestTime has elapsed.
+        * For example, if reRequestTime is set to 1 day, revalidation will occur after 1 day.
+    * If the server's set validity period is shorter, revalidation will occur based on that time.
+        * For example, if the content's validity period is 1 day and reRequestTime is set to 3 days, revalidation will occur after 1 day.
+    * If reRequestTime is set to 0, only the validity period will be checked.
+* validCacheTime
+    * Allows setting the minimum and maximum validity period for local cache.
+        * min: Minimum time for cache reuse
+            * The cache will be reused without revalidation before the specified time.
+            * If set to 0, min is ignored.
+          * max : Maximum time for cache reuse
+            * New cache will be fetched after the specified time has elapsed.
+            * If set to 0, max is ignored.
+
+### Utilizing Web Cache
+By combining cache validation strategies with cache time control, you can use web cache more effectively.
+
+* If the validation strategy is ALWAYS and validCacheTime has a min of 5 minutes and a max of 30 days:
+    * The ALWAYS strategy provides high integrity but can be optimized for performance using the min setting of validCacheTime.
+        * For instance, you can use the local cache for 5 minutes and perform revalidation after 5 minutes.
+    * Utilize the max setting of validCacheTime to enhance integrity.
+        * Even if the cache has not changed, new content will be downloaded after 30 days.
+
+* If the validation strategy is FIRSTPLAY and validCacheTime has a min of 5 minutes and reRequestTime is 10 minutes:
+    * The min setting of validCacheTime helps improve performance
+        * The FIRSTPLAY strategy performs validation on the first request after the app starts, but local cache will be used for up to 5 minutes.
+    * Use reRequestTime to control the maximum validity period.
+        * Revalidation will occur after 5 minutes on the first request, but if the validity period is longer than 10 minutes, revalidation will occur after 10 minutes.
+        * if the validity period is shorter than reRequestTime, revalidation will occur after the validity period,
+            * but revalidation will be performed after the 5-minute min period set by validCacheTime.
+
+### CacheRequestConfiguration
+
+This configuration allows for fine control over cache requests. 
+If no arguments are provided, the default values set in Initialize will be used.
+
+* requestType : Determines when the cached data should be revalidated with the server.
+    * ALWAYS : Revalidates with the server on every request.
+    * FIRSTPLAY : Revalidates every time the app is restarted, as well as when the validity period expires.
+    * ONCE : Revalidates only when the validity period expires.
+    * LOCAL : Uses the cached data without revalidation.
+* reRequestTime : The local revalidation interval (in seconds).
+    * Applies when requestType is FIRSTPLAY or ONCE.
+        * Revalidation will occur after the reRequestTime has elapsed following cache validation.
+        * If the server's validity period is shorter, revalidation will occur according to the server's validity period.
+    * Ignored if set to 0.
+* validCacheTime : The local cache validity period (in seconds).
+    * min : Minimum time for cache reuse (in seconds).
+        * The cache will be reused without revalidation until the specified time has elapsed.
+        * Ignored if set to 0.
+    * max : Maximum time for cache reuse (in seconds).
+        * A new cache will be fetched after the specified time has elapsed.
+        * Ignored if set to 0.
+* header
+    * Configures additional headers to be sent with the server request.
 
 ```cs
 using Gpm.CacheStorage;
 
 public void Something()
 {
-    // Revalidate every time requested
     string url;
-    CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.Request(url, requestType, (GpmCacheResult result) =>
+    
+    CacheRequestType requestType = CacheRequestType.ONCE;
+    
+    double reRequestTime = 60 * 60 * 2;
+    
+    double cacheValidTimeMin = 60 * 5;
+    double cacheValidTimeMax = 60 * 60 * 24 * 30;
+    CacheValidTime validCacheTime = new CacheValidTime(cacheValidTimeMin, cacheValidTimeMax)); 
+
+    Dictionary<string, string> header = new Dictionary<string, string>();
+    header.Add("Content-Type", "application/json");
+    
+    CacheRequestConfiguration config = new CacheRequestConfiguration(requestType, reRequestTime, validCacheTime, header); 
+    GpmCacheStorage.Request(url, config, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -385,32 +552,30 @@ public void Something()
 }
 ```
 
-### ReRequestTime
-FIRSTPLAY, ONCE will reuse the cache until it expires based on the data received.
-However, you can set the frequency of revalidation requests within the cluster.
-* After a set number of seconds, the server will be re-validated upon callback.
-* Do not re-request when set to 0.
-
-#### Can request and a factor when request
-* If the argument is 0 or not used, the default value set in Initialize is used.
-
-```cs
-using Gpm.CacheStorage;
-
-public void Something()
-{
-    // Cache that has been requested for 5 minutes is revalidated to the server
-    string url;
-    double fiveMinutes = 5 * 60;
-    GpmCacheStorage.Request(url, fiveMinutes, (GpmCacheResult result) =>
-    {
-        if (result.IsSuccess() == true)
-        {
-            bytes[] data = result.Data;
-        }
-    });
-}
-```
+Here is the analysis based on the provided sample configuration:
+* Values
+    * requestType : ONCE
+    * reRequestTime : 2 hours (60 * 60 * 2)
+    * cacheValidTimeMin : 5 minutes (60 * 5)
+    * cacheValidTimeMax : 30 days (60 * 60 * 24 * 30)
+* 해석
+    * requestType가 ONCE
+        * Revalidation will occur only when the validity period has expired.
+    * cacheValidTimeMin: 5 minutes
+        * Revalidation will not be performed before 5 minutes have elapsed.
+    * reRequestTime: 2 hours
+        * Revalidation will be performed if a request is made after 2 hours.
+        * If the validity period is shorter than 2 hours, revalidation will occur after that shorter period.
+    * cacheValidTimeMax: 30 days
+        * If no revalidation has occurred within 30 days, a new cache will be fetched.
+    * Time counting for revalidation starts from the moment of the last revalidation.
+* Performance
+    * Before cacheValidTimeMin, reRequestTime, and expiration:
+        * Data is read from the local cache, which is fast.
+    * After reRequestTime and expiration:
+        * Even if a request is made to the server, if the content has not changed, no new download occurs, improving performance.
+    * After cacheValidTimeMax has elapsed:
+        * A new cache will be fetched, resulting in a download, which is similar to regular server communication.
 
 ### Viewer
 Can view cache information for Cache Storage.
