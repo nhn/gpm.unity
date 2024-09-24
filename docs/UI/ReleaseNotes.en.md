@@ -1,6 +1,19 @@
-﻿# Release notes
+# Release notes
 
 🌏 [한국어](ReleaseNotes.md)
+
+## 2.10.0
+
+### Date
+
+* 2024.09.25
+
+### Added
+* WebCacheImage
+    * Function to add headers
+    * Function to select cache request types
+    * Function to change cache re-request time
+    * Function to set minimum and maximum validity for cache
 
 ## 2.9.0
 

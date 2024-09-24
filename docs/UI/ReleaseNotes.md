@@ -1,6 +1,22 @@
-﻿# Release notes
+# Release notes
 
 🌏 [English](ReleaseNotes.en.md)
+
+## 2.10.0
+
+### Date
+
+* 2024.09.25
+
+### Added
+* WebCacheImage
+    * 헤더 추가할 수 있는 기능
+    * 캐시 요청 타입 선택할 수 있는 기능
+    * 캐시 재요청 시간 변경할 수 있는 기능
+    * 캐시 유효 최소 및 최대 설정할 수 있는 기능
+
+### Updated
+* CacheStorage 1.4.0 업데이트
 
 ## 2.9.0
 
