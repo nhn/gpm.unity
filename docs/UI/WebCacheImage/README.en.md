@@ -17,7 +17,7 @@ Add a **WebCacheImage** component to your UI object.
 * If RawImage does not exist, a RawImage component is also created.
 * If there is a RawImage, it is linked to the RawImage component.
 
-![WebCacheImage.png](https://github.com/nhn/gpm.unity/blob/main/docs/UI/WebCacheImage/images/WebCacheImage.png?raw=true)
+![WebCacheImage.png](./images/WebCacheImage.png)
 
 1. Url: The URL to load the image.
 2. Pre Load: A delay occurs when obtaining an image through a web request. If a cache is available, it will preload the image.

@@ -17,7 +17,7 @@ UI 오브젝트에 **WebCacheImage** 컴포넌트를 추가합니다.
 * RawImage가 없다면 RawImage 컴포넌트도 같이 생성됩니다.
 * RawImage가 있다면 RawImage 컴포넌트에 연동됩니다.
 
-![WebCacheImage.png](https://github.com/nhn/gpm.unity/blob/main/docs/UI/WebCacheImage/images/WebCacheImage.png?raw=true)
+![WebCacheImage.png](./images/WebCacheImage.png)
 
 1. Url: 이미지를 불러올 URL입니다.
 2. Pre Load: 웹 요청을 통해 이미지를 얻을 경우 딜레이가 발생합니다. 캐시가 있을 경우 미리 불러옵니다.
