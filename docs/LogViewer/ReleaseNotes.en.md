@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2024.09.13
+* 2024.09.25
 
 ### Added
 * Added LogViewer Open UI Feature
