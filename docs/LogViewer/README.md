@@ -53,6 +53,8 @@
         * 로그가 발생했을 때 재생 중인 Scene 이름을 보여줄지 설정합니다.
     * Send Mail
         * 전체 로그를 설정한 이메일로 전송합니다.
+    * Save LogFile
+        * 전체 로그를 로컬 파일로 저장합니다.
     * Clear
         * 전체 로그를 삭제합니다.
 
@@ -103,6 +105,8 @@
     ![inspector](./images/inspector.png)
         * Gesture Enable 설정
             * LogView를  활성화하는 제스처를 켜거나 끌 수 있습니다.
+        * Opener Enable 설정
+            * LogView를  활성화하는 UI를 켜거나 끌 수 있습니다.
         * 이메일 설정
             * To: 받는 사람 이메일 주소
             * User Name: 보내는 사람 이메일 주소
@@ -167,10 +171,13 @@
 
 * 플랫폼별 활성화 방법
     * 플랫폼 공통
-        * BackQuote Key로 활성화합니다.</br>
-            ![backquote](./images/backquote.png)
-    * iOS/Android 플랫폼은 제스처로 활성화합니다.
-        * 손가락 다섯개로 1초간 화면을 터치합니다.
+        * BackQuote Key로 활성화합니다. (Gesture Enable)
+            * ![backquote](./images/backquote.png)
+        * Log 버튼을 클릭하여 활성화합니다. (Opener Enable)
+            * ![img.png](./images/logbtn.png)
+    * iOS/Android
+        * 제스처를 사용하여 활성화합니다. (Opener Enable)
+            * 손가락 다섯 개로 1초간 화면을 터치합니다.
 
 *  다음 타입의 로그가 발생하면 자동으로 활성화됩니다.
     *  LogType.Error

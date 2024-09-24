@@ -53,6 +53,8 @@
         * Configure whether to display the name of the scene in playing when there is a log.
     * Send Mail
         * Send all logs to specified email address.
+    * Save Log File
+        * Save the entire log to a local file.
     * Clear
         * Delete all logs. 
 
@@ -103,6 +105,8 @@
     ![inspector](./images/inspector.png)
         * Set Gesture Enable
             * Enable or disable LogView gesture.
+        * Set Opener Enable
+            * Enable or disable the UI that activates Log View.
         * Mail Setting 
             * To: The Recipient's email address
             * User Name: Sender's email address
@@ -169,10 +173,13 @@
 
 * Enabling Each Platform
     * All Platforms
-        * Enable using the Back Quote Key.</br>
-            ![backquote](./images/backquote.png)
-    * Use gesture to enable iOS/Android platforms.
-        * Touch the screen for a second with five fingers.
+        * Use the Back Quote Key to enable. (Gesture Enable)
+            * ![backquote](./images/backquote.png)
+        * Click the Log button to activate it. (Opener Enable)
+            * ![img.png](./images/logbtn.png)
+    * iOS/Android
+        * Use a gesture to enable iOS/Android platforms. (Opener Enable)
+            * Touch the screen with five fingers for one second.
 
 * The following types of logs automatically trigger the LogViewer.
     * LogType.Error
