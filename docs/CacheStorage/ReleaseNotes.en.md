@@ -6,7 +6,7 @@
 
 ### Date
 
-* 2024.09.23
+* 2024.09.25
 
 ### Added
 * Improved control over cache requests
