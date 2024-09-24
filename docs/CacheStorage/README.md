@@ -101,9 +101,9 @@ CacheStorage에 사용될 매개변수를 설정합니다.
         * ALWAYS
             * 요청할 때마다 재검증합니다.
         * FIRSTPLAY
-            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을때도 재검증합니다.
+            * 앱이 재실행될 때마다 재검증합니다, 유효 기간이 끝났을때도 재검증합니다.
         * Once
-            * 재사용 하고 유효기간이 끝났을때 재검증합니다.
+            * 재사용 하고 유효 기간이 끝났을때 재검증합니다.
         * LOCAL
             * 저장된 캐시를 사용합니다.
 * unusedPeriodTime
@@ -131,7 +131,7 @@ public void Something()
 
 ### Request
 Request를 통해 url의 데이터를 요청합니다.
-* 데이터는 cache로 저장되며 같은 url을 호출할 때 재사용 합니다.
+* 데이터는 cache로 저장되며 같은 url을 호출할 때 재사용합니다.
 * CacheRequestType을 통해 언제 서버에 검증할 것인지 정의할 수 있습니다.
 * 서버에 검증할 때 동일한 데이터일 경우 다시 받지 않고 캐시를 재사용합니다.
 
@@ -151,8 +151,59 @@ public void Something()
 }
 ```
 
+### CacheRequestConfiguration
+요청할 때 세밀하게 캐시 요청을 제어할 수 있는 설정입니다.
+* requestType : 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입
+    * ALWAYS : 요청할 때마다 재검증합니다.
+    * FIRSTPLAY : 앱이 재실행될 때마다 재검증합니다, 유효 기간이 끝났을 때도 재검증합니다.
+    * ONCE : 유효 기간이 끝났을 때 재검증합니다.
+    * LOCAL : 캐시된 데이터를 사용합니다.
+* reRequestTime : 로컬에서 지정된 재검증 주기( 초)
+    * requestType이 FIRSTPLAY, ONCE 인 경우 동작합니다.
+        * 캐시 검증 후 reRequestTime이 지나면 재검증합니다.
+        * 만약 서버에 설정된 유효 기간이 더 짧다면 해당 시간으로 재검증합니다.
+    * 0일 경우 reRequestTime은 무시됩니다.
+* validCacheTime : 로컬 캐시 유효 기간 (초)
+    * min : 캐시 재사용의 최소 시간 (초)
+        * 설정한 시간이 지나기 전에는 재검증 없이 재사용합니다.
+        * 0일 경우  min은 무시됩니다.
+    * max : 캐시 재사용의 최대 시간 (초)
+        * 설정한 시간이 지나면 새로운 캐시를 받습니다.
+        * 0일 경우 max는 무시됩니다.
+* header
+    * 서버에 요청할 때 추가할 헤더를 설정합니다.
+
+```cs
+using Gpm.CacheStorage;
+
+public void Something()
+{
+    string url;
+    
+    CacheRequestType requestType = CacheRequestType.ONCE;
+    
+    double reRequestTime = 60 * 60 * 2;
+    
+    double cacheValidTimeMin = 60 * 5;
+    double cacheValidTimeMax = 60 * 60 * 24 * 30;
+    CacheValidTime validCacheTime = new CacheValidTime(cacheValidTimeMin, cacheValidTimeMax)); 
+
+    Dictionary<string, string> header = new Dictionary<string, string>();
+    header.Add("Content-Type", "application/json");
+    
+    CacheRequestConfiguration config = new CacheRequestConfiguration(requestType, reRequestTime, validCacheTime, header); 
+    GpmCacheStorage.Request(url, config, (GpmCacheResult result) =>
+    {
+        if (result.IsSuccess() == true)
+        {
+            bytes[] data = result.Data;
+        }
+    });
+}
+```
+
 ### GpmCacheResult
-캐시 된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
+캐시된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
 * IsSuccess 통해 성공 여부를 받아올 수 있습니다.
 * 기본적으로 데이터는 Data로 저장됩니다.
 * Text나 Json은 인코딩을 통해 변환할 수 있으며 기본값은 utf8입니다.
@@ -256,12 +307,18 @@ public IEnumerator Something()
 RequestTexture를 통해 캐시된 텍스처를 요청할 수 있습니다.
 * 앱 실행 후 로드한 텍스처라면 재사용합니다.
 * 캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
+* preload : 캐시된 텍스처를 로컬에서 즉시 로드합니다.
+    * 캐시된 데이터와 웹 데이터가 다를 경우 콜백이 한번 더 호출됩니다. 
+
+#### 요청
 
 ```cs
 public void Something()
 {
     string url;
-    GpmCacheStorage.RequestTexture(url, (CachedTexture cachedTexture) =>
+    bool preload = true;
+
+    GpmCacheStorage.RequestTexture(url, preload, (CachedTexture cachedTexture) =>
     {
         if (cachedTexture != null)
         {
@@ -271,12 +328,39 @@ public void Something()
 }
 ```
 
+#### 설정값 추가
+
+```cs
+public void Something()
+{
+    string url;
+    
+    Dictionary<string, string> header = new Dictionary<string, string>();
+    header.Add("Authorization ", "value");
+    CacheRequestConfiguration config = new CacheRequestConfiguration(header);
+    
+    bool preload = true;
+
+    GpmCacheStorage.RequestTexture(url, config, preload, (CachedTexture cachedTexture) =>
+    {
+        if (cachedTexture != null)
+        {
+            Texture texture = cachedTexture.texture;
+        }
+    });
+}
+```
+
+#### 코루틴 사용
+
 ```cs
 public IEnumerator Something()
 {
-    CachedTexture cachedTexture;
     string url;
-    yield return GpmCacheStorage.RequestTexture(url, (CachedTexture recvCachedTexture) =>
+    bool preload = true;
+    
+    CachedTexture cachedTexture;
+    yield return GpmCacheStorage.RequestTexture(url, preload, (CachedTexture recvCachedTexture) =>
     {
         cachedTexture = recvCachedTexture;
     });
@@ -289,8 +373,8 @@ public IEnumerator Something()
 ```
 
 ### CachedTexture
-캐시 된 텍스쳐의 결괏값입니다. 캐시 정보를 반환합니다.
-* 캐시 된 텍스쳐를 받아올 수 있습니다.
+캐시된 텍스쳐의 결괏값입니다. 캐시 정보를 반환합니다.
+* 캐시된 텍스쳐를 받아올 수 있습니다.
 * updateData를 통해 텍스쳐 변경 여부를 알 수 있습니다.
 
 ```cs
@@ -331,8 +415,9 @@ public void Something()
 ```
 
 ## 더 효과적인 웹 캐시 사용
-웹 캐시를 사용하면 일반 요청보다 속도가 2배 정도 빠릅니다.
-로컬에서 불러오는 것은 더욱 빠르지만 최신 상태 여부를 확인할 수 없습니다.
+웹 캐시를 사용하면 동일할 경우 콘텐츠를 다운로드 하지 않기 때문에 일반적인 웹 요청보다 속도가 2배 정도 빠릅니다.
+
+로컬 캐시에서 직접 불러오는 것은 웹 요청을 않아 더욱 빠르지만 최신 상태 여부를 확인할 수 없습니다.
 
 ![](Images/3.png)
 
@@ -340,42 +425,124 @@ public void Something()
 
 ### 웹 캐시 검증 전략
 
-보안이 중요하거나 지속적인 갱신이 필요할 경우는 일반적인 네트워크 통신을 이용해 무결성을 보장합니다.
-그리고 콘텐츠가 성능이 더 중요한지 무결성이 더 중요한지에 따라 검증 전략을 달리하면 성능을 더욱 향상시킬 수 있습니다.
+CacheStorage에서는 아래와 같이 4가지 검증 요청 타입을 지원하고 있습니다.
+
+* ALWAYS
+    * 콘텐츠를 요청할 때마다 재검증을 수행합니다.
+* FIRSTPLAY
+    * 앱 실행 후 처음 콘텐츠를 요청할 때 재검증을 수행합니다.
+    * 재 실행 시 다시 콘텐츠를 요청할 때 재검증을 수행 합니다.
+    * 이 후 콘텐츠를 요청할 때 유효 기간이 지나면 재검증을 수행 합니다.
+* ONCE
+    * 콘텐츠를 요청할 때 유효 기간이 지나면 재검증을 수행합니다.
+* LOCAL
+    * 로컬에 캐시된 콘텐츠를 사용합니다.
+
+ALWAYS는 매번 웹 캐시 요청 후 동일하다면 콘텐츠를 다운로드 받지 않습니다.
+
+FIRSTPLAY와 ONCE는 콘텐츠에 지정한 유효기간 까지 로컬에 캐시된 콘텐츠를 사용하여 더욱 빠릅니다.
+
+### 캐시 검증 및 성능
+
+재검증이 빈번할수록 콘텐츠의 무결성을 보장할 수 있으며, 재사용이 많을수록 성능이 향상됩니다.
+
+보안이 중요하거나 지속적인 갱신이 필요할 경우는 일반적인 네트워크 통신을 통해 무결성을 보장합니다.
 
 ![](Images/4.png)
 
-CacheStorage에서는 아래와 같이 4가지 검증 전략을 지원하고 있습니다.
+### 웹 캐시 유효 기간
 
-### CacheRequestType
-캐시 된 데이터를 언제 서버에 다시 검증할지를 결정할 수 있습니다.
-재검증이 많을수록 무결성을 보장해 주며 재사용이 많을수록 성능이 향상됩니다.
+웹 캐시 검증은 콘텐츠 별로 서버에서 설정된 유효 기간 시간으로 동작합니다.
+CDN에서 콘텐츠의 유효기간을 설정한다면 재검증 주기를 설정할 수 있습니다.
 
-* ALWAYS
-    * 요청할 때마다 재검증합니다.
-    * GpmCacheStorage.RequestHttpCache과 동일합니다.
-* FIRSTPLAY
-    * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
-    * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
-* ONCE
-    * 유효기간이 끝났을 때 재검증합니다.
-    * 만료되거나 ReRequestTime 설정에 따라 재검증합니다.
-* LOCAL
-    * 캐시 된 데이터를 사용합니다.
-    * GpmCacheStorage.RequestLocalCache과 동일합니다.
+* 웹 캐시 유효기간
+  * 웹 캐시의 유효기간이 0이라면 항상 ALWAYS같이 재검증을 수행합니다.
+  * 유효기간이 3시간으로 지정 되었다면 3시간이 지난 후 FIRSTPLAY와 ONCE 요청 시 재검증을 수행합니다. 
 
-#### Request 할 때 인자를 넣어서 요청할 수 있습니다.
-* 인자를 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
+### 웹 캐시 시간 제어
+
+서버에서 제어가 힘든 콘텐츠가 많을 수 있습니다.
+
+CacheStorage에서는 클라이언트에서 제어할수 있도록 지원합니다.
+
+* reRequestTime
+    * 재검증을 요청 할 시간을 설정할 수 있습니다.
+    * 캐시 검증 후 reRequestTime이 지나면 재검증합니다.
+        * reRequestTime를 1일로 설정한다면 1일 후 재요청 합니다.
+    * 만약 서버에 설정된 유효 기간이 더 짧다면 해당 시간으로 재검증합니다.
+        * 콘텐츠의 유효기간이 1일이고 reRequestTime를 3일로 설정한다면 1일 후 재요청 합니다.
+    * reRequestTime를 0으로 설정한 경우 유효기만만 체크 합니다.
+* validCacheTime
+    * 로컬 캐시의 최소/최대 유효 기간을 설정할 수 있습니다. 
+        * min : 캐시 재사용의 최소 시간
+            * 설정한 시간이 지나기 전에는 재검증 없이 재사용합니다.
+            * 0일 경우  min은 무시됩니다.
+        * max : 캐시 재사용의 최대 시간
+            * 설정한 시간이 지나면 새로운 캐시를 받습니다.
+            * 0일 경우 max는 무시됩니다.
+
+### 웹 캐시의 활용
+웹 캐시의 검증 전략과 캐시 시간 제어를 같이 사용하여 웹 캐시를 더 효과적으로 사용할 수 있습니다.
+
+* 검증 전략이 ALWAYS이고 validCacheTime의 min 5분인 경우 max 30일인 경우
+    * ALWAYS는 무결성이 좋지만 validCacheTime의 min을 활용하여 성능을 향상 시킬 수 있습니다.
+        * 5분 동안 로컬 캐시를 사용하고 5분 이후 재검증 하게 할 수 있습니다.
+    * validCacheTime의 max을 활용하여 무결성을 더욱 향상 시킬 수 있습니다. 
+        * 30일 이후 요청을 하면 바뀌지 않았어도 새롭게 콘텐츠를 다운 받습니다.
+
+* 검증 전략이 FIRSTPLAY이고 validCacheTime의 min 5분이고 reRequestTime이 10분인 경우
+    * validCacheTime의 min을 활용하여 성능을 향상 시킬 수 있습니다.
+        * FIRSTPLAY는 앱을 실행 시키고 처음 요청 했을 때 검증하지만 5분이 지나기 전에는 로컬 캐시를 사용합니다.
+    * reRequestTime을 활용해 최대 유효 시간을 제어할 수 있습니다.
+        * 5분이 지난 후 처음 요청 할 때 재검증 하지만 유효기간이 10분보다 긴 경우 10분 후 재검증 합니다.
+        * 유효기간이 reRequestTime보다 작다면 유효기간 이후 재검증 합니다.
+            * 다만 validCacheTime의 min에 설정된 5분 이후 재검증 합니다. 
+
+### CacheRequestConfiguration
+
+요청 할 때 세밀하게 캐시 요청을 제어할 수 있는 설정입니다.
+인자를 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
+
+* requestType : 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입
+    * ALWAYS : 요청할 때마다 재검증합니다.
+    * FIRSTPLAY : 앱이 재실행될 때마다 재검증합니다, 유효 기간이 끝났을 때도 재검증합니다.
+    * ONCE : 유효 기간이 끝났을 때 재검증합니다.
+    * LOCAL : 캐시된 데이터를 사용합니다.
+* reRequestTime : 로컬에서 지정된 재검증 주기(초)
+    * requestType이 FIRSTPLAY, ONCE 인 경우 동작합니다.
+        * 캐시 검증 후 reRequestTime이 지나면 재검증합니다.
+        * 만약 서버에 설정된 유효 기간이 더 짧다면 해당 시간으로 재검증합니다.
+    * 0일 경우 reRequestTime은 무시됩니다.
+* validCacheTime : 로컬 캐시 유효 기간 (초)
+    * min : 캐시 재사용의 최소 시간 (초)
+        * 설정한 시간이 지나기 전에는 재검증 없이 재사용합니다.
+        * 0일 경우  min은 무시됩니다.
+    * max : 캐시 재사용의 최대 시간 (초)
+        * 설정한 시간이 지나면 새로운 캐시를 받습니다.
+        * 0일 경우 max는 무시됩니다.
+* header
+    * 서버에 요청할 때 추가할 헤더를 설정합니다.
 
 ```cs
 using Gpm.CacheStorage;
 
 public void Something()
 {
-    // 요청할 때마다 재검증
     string url;
-    CacheRequestType requestType = CacheRequestType.ALWAYS;
-    GpmCacheStorage.Request(url, requestType, (GpmCacheResult result) =>
+    
+    CacheRequestType requestType = CacheRequestType.ONCE;
+    
+    double reRequestTime = 60 * 60 * 2;
+    
+    double cacheValidTimeMin = 60 * 5;
+    double cacheValidTimeMax = 60 * 60 * 24 * 30;
+    CacheValidTime validCacheTime = new CacheValidTime(cacheValidTimeMin, cacheValidTimeMax)); 
+
+    Dictionary<string, string> header = new Dictionary<string, string>();
+    header.Add("Content-Type", "application/json");
+    
+    CacheRequestConfiguration config = new CacheRequestConfiguration(requestType, reRequestTime, validCacheTime, header); 
+    GpmCacheStorage.Request(url, config, (GpmCacheResult result) =>
     {
         if (result.IsSuccess() == true)
         {
@@ -385,32 +552,30 @@ public void Something()
 }
 ```
 
-### ReRequestTime
-FIRSTPLAY, ONCE는 받아온 데이터 기반으로 캐시가 만료되기 전까지 재사용합니다.
-그러나 클라 내에서 재검증 요청 주기를 설정할 수 있습니다.
-* 설정된 초가 지나면 재 호출 시 서버에 다시 검증합니다.
-* 0으로 설정될 때 재요청을 하지 않습니다.
-
-#### Request 할 때 인자를 넣어서 사용할 수 있습니다.
-* 인자가 0이거나 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
-
-```cs
-using Gpm.CacheStorage;
-
-public void Something()
-{
-    // 요청한지 5분이 지난 캐시는 서버에 재검증
-    string url;
-    double fiveMinutes = 5 * 60;
-    GpmCacheStorage.Request(url, fiveMinutes, (GpmCacheResult result) =>
-    {
-        if (result.IsSuccess() == true)
-        {
-            bytes[] data = result.Data;
-        }
-    });
-}
-```
+위 셈플 코드를 분석하면 아래와 같습니다.
+* 값
+    * requestType : ONCE
+    * reRequestTime : 2시간 (60 * 60 * 2)
+    * cacheValidTimeMin : 5분 (60 * 5)
+    * cacheValidTimeMax : 30일 (60 * 60 * 24 * 30)
+* 해석
+    * requestType: ONCE
+        * 유효 기간이 끝났을 때만 재검증이 수행됩니다.
+    * cacheValidTimeMin: 5분
+        * 5분이 지나기 전에는 재검증이 수행되지 않습니다.
+    * reRequestTime: 2시간
+        * 2시간이 지난 요청에는 재검증이 수행됩니다.
+    * 유효 기간이 2시간보다 짧은 경우, 해당 시간이 지나면 재검증이 수행됩니다.
+    * cacheValidTimeMax: 30일
+        * 30일 동안 재검증이 없었으면 새로운 캐시를 받습니다.
+    * 이전에 재검증을 수행한 경우, 그 시점부터 시간을 카운트합니다.
+* 성능
+    * cacheValidTimeMin, reRequestTime, 유효 기간이 지나기 전
+        * 캐시를 로컬에서 읽어오므로 성능이 빠릅니다.
+    * reRequestTime, 유효 기간이 지나 재검증
+        * 서버에 요청하더라도 콘텐츠가 변경되지 않았을 경우, 새로운 다운로드가 발생하지 않아 성능이 향상됩니다.
+    * cacheValidTimeMax가 지났을 경우
+        * 새로운 캐시를 받아야 하므로 다운로드가 발생하며, 이는 일반적인 서버 통신과 동일합니다.
 
 ## Viewer
 CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
@@ -438,9 +603,9 @@ CacheStorage의 캐시 정보를 확인해 볼 수 있습니다.
         * ALWAYS
             * 요청할 때마다 재검증합니다.
         * FIRSTPLAY
-            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
+            * 앱이 재실행될 때마다 재검증합니다, 유효 기간이 끝났을 때도 재검증합니다.
         * Once
-            * 유효기간이 끝났을 때 재검증합니다.
+            * 유효 기간이 끝났을 때 재검증합니다.
         * LOCAL
             * 저장된 캐시를 사용합니다.
 * ReRequest
@@ -464,10 +629,10 @@ UnusedPeriodTime와 RemoveCycle를 둘 다 설정해야 동작합니다.
 * Name : 캐시 이름
 * Url : 캐시 경로
 * Size : 캐시 크기 (byte 단위)
-* Exfires : 유효기간까지 남은 시간
+* Exfires : 유효 기간까지 남은 시간
 * Remain : 캐시 검증까지 남은 시간
     * 남은 시간이 지나면 재검증합니다.
-    * 유효기간까지 남은 시간과 ReRequest(초 단위) 시간 중 짧은 시간
+    * 유효 기간까지 남은 시간과 ReRequest(초 단위) 시간 중 짧은 시간
 * Remove : 제거될 때까지 남은 시간
     * 남은 시간 동안 사용하지 않으면 제거됩니다.
     * 사용한 시간 / UnusedPeriodTime로 설정된 시간 (초 단위)
@@ -495,9 +660,9 @@ CacheStorage를 사용하기 위해서는 반드시 초기화를 해야 합니�
         * ALWAYS
             * 요청할 때마다 재검증합니다.
         * FIRSTPLAY
-            * 앱이 재실행 될 때마다 재검증합니다, 유효기간이 끝났을 때도 재검증합니다.
+            * 앱이 재실행될 때마다 재검증합니다, 유효 기간이 끝났을 때도 재검증합니다.
         * Once
-            * 재사용 하고 유효기간이 끝났을 때 재검증합니다.
+            * 재사용 하고 유효 기간이 끝났을 때 재검증합니다.
         * LOCAL
             * 저장된 캐시를 사용합니다.
 * unusedPeriodTime
@@ -535,7 +700,7 @@ url로 데이터를 요청합니다.
 * url
     * 요청할 캐시 경로입니다.
 * requestType
-    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
     * 인자를 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
 * reRequestTime
     * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
@@ -587,7 +752,7 @@ public IEnumerator Something()
 ```
 
 ### GpmCacheResult
-캐시 된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
+캐시된 데이터의 결괏값입니다. 캐시 정보와 데이터를 반환합니다.
 * IsSuccess 통해 성공 여부를 받아올 수 있습니다.
 * 기본적으로 데이터는 Data로 저장됩니다.
 * Text나 Json은 인코딩을 통해 변환할 수 있으며 기본값은 utf8입니다.
@@ -695,7 +860,7 @@ public IEnumerator Something()
 ### RequestHttpCache
 
 url로 데이터를 요청합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 데이터를 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 데이터를 사용합니다.
 
 **API**
 ```cs
@@ -734,7 +899,7 @@ public IEnumerator Something()
 
 ### RequestLocalCache
 
-url로 이미 캐시 된 데이터를 요청합니다. 
+url로 이미 캐시된 데이터를 요청합니다. 
 캐시 되어있지 않은 경우 실패합니다.
 
 **API**
@@ -759,7 +924,7 @@ public void Something()
 
 ### GetCachedTexture
 
-url로 이미 캐시 된 텍스처를 요청합니다.
+url로 이미 캐시된 텍스처를 요청합니다.
 앱 실행 후 로드한 텍스처라면 재사용합니다.
 
 **API**
@@ -785,14 +950,14 @@ public void Something()
 
 ### RequestTexture
 
-url로 캐시 된 데이터를 요청합니다. 
+url로 캐시된 데이터를 요청합니다. 
 앱 실행 후 로드한 텍스처라면 재사용합니다.
-캐시 된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시 된 텍스처를 로드하여 사용합니다.
+캐시된 데이터와 웹 데이터가 동일한 데이터인 경우 캐시된 텍스처를 로드하여 사용합니다.
 
 * url
     * 요청할 캐시 경로입니다.
 * requestType
-    * 캐시 된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
+    * 캐시된 데이터를 언제 서버에 다시 검증할지를 결정하는 타입입니다.
     * 인자를 사용하지 않으면 Initialize에서 설정한 기본값을 사용합니다.
 * reRequestTime
     * 함수 별로 재검증 요청 주기를 설정할 수 있습니다.
@@ -863,8 +1028,8 @@ public IEnumerator Something()
 
 ### CachedTexture
 
-캐시 된 텍스쳐의 결괏값입니다. 캐시 정보를 반환합니다.
-* 캐시 된 텍스쳐를 받아올 수 있습니다.
+캐시된 텍스쳐의 결괏값입니다. 캐시 정보를 반환합니다.
+* 캐시된 텍스쳐를 받아올 수 있습니다.
 * updateData를 통해 텍스쳐 변경 여부를 알 수 있습니다.
 
 **API**
