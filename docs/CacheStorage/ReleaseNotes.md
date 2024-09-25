@@ -2,6 +2,25 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.4.0
+
+### Date
+
+* 2024.09.25
+
+### Added
+* 더 세밀하게 캐시 요청을 제어할 수 있도록 개선
+    * Request(string url, CacheRequestConfiguration config, Action<GpmCacheResult> onResult)
+    * CacheRequestConfiguration
+        * 헤더 설정 기능 추가
+        * 로컬 캐시 유효 기간 설정 기능 추가(CacheValidTime)
+            * min : 캐시 재사용의 최소 시간 (초)
+                * 설정한 시간 까지 캐시 변경 여부 검증 없이 재사용 합니다.
+                * 0일 경우 무시됩니다.
+            * max : 캐시 재사용의 최대 시간 (초)
+                * 설정한 시간이 지나면 새로운 캐시를 받습니다.
+                * 0일 경우 무시됩니다.
+
 ## 1.3.1
 
 ### Date

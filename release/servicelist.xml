@@ -14,7 +14,7 @@
     </service>
     <service>
         <name>UI</name>
-        <version>2.9.0</version>
+        <version>2.10.0</version>
     </service>
     <service>
         <name>Shader</name>
@@ -22,7 +22,7 @@
     </service>
     <service>
         <name>LogViewer</name>
-        <version>2.0.4</version>
+        <version>2.1.0</version>
     </service>
     <service>
         <name>Communicator</name>
@@ -42,6 +42,6 @@
     </service>
     <service>
         <name>CacheStorage</name>
-        <version>1.3.1</version>
+        <version>1.4.0</version>
     </service>
 </serviceList>
