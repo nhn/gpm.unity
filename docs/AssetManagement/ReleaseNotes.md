@@ -2,6 +2,20 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.2.3
+
+### Date
+
+* 2024.10.15
+
+### Updated
+
+* 유니티 버전별 Deprecated API 대응
+
+### Fixed
+
+* Behavior Package와 함께 사용 시 프리징 문제 수정 [(538)](https://github.com/nhn/gpm.unity/issues/538)
+
 ## 1.2.2
 
 ### Date
