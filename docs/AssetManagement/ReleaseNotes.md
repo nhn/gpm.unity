@@ -14,7 +14,7 @@
 
 ### Fixed
 
-* Behavior Package와 함께 사용 시 프리징 문제 수정 [(538)](https://github.com/nhn/gpm.unity/issues/538)
+* Behavior Package와 함께 사용 시 발생하는 프리징 문제 수정 [(538)](https://github.com/nhn/gpm.unity/issues/538)
 
 ## 1.2.2
 
