@@ -10,11 +10,12 @@
 
 ### Updated
 
-* Support for Deprecated APIs by Unity version
+* Removed Deprecated APIs by Unity version
 
 ### Fixed
 
-* Fixed the freezing issue when used with the Behavior Package [(538)](https://github.com/nhn/gpm.unity/issues/538)
+* Fixed the freezing issue that occurs when using it with the Behavior Package
+  [(538)](https://github.com/nhn/gpm.unity/issues/538)
 
 ## 1.2.2
 
