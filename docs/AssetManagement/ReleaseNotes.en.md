@@ -2,6 +2,21 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.2.3
+
+### Date
+
+* 2024.10.15
+
+### Updated
+
+* Removed Deprecated APIs by Unity version
+
+### Fixed
+
+* Fixed the freezing issue that occurs when using it with the Behavior Package
+  [(538)](https://github.com/nhn/gpm.unity/issues/538)
+
 ## 1.2.2
 
 ### Date
