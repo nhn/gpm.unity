@@ -34,7 +34,7 @@
     </service>
     <service>
         <name>AssetManagement</name>
-        <version>1.2.2</version>
+        <version>1.2.3</version>
     </service>
     <service>
         <name>Profiler</name>
