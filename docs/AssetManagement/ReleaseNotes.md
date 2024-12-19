@@ -2,6 +2,18 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 1.2.4
+
+### Date
+
+* 2024.12.19
+
+### Fixed
+
+* TerrainData 의존성 못 찾는 문제 수정 [(460)](https://github.com/nhn/gpm.unity/issues/460)
+* Scene 일부 데이터 의존성 무시되는 문제 수정 [(540)](https://github.com/nhn/gpm.unity/issues/540)
+* 리소스 끊어진 에셋을 찾을 때 오류가 발생하는 부분 수정 [(541)](https://github.com/nhn/gpm.unity/issues/541)
+
 ## 1.2.3
 
 ### Date
