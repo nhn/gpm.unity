@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="9">
+<info version="10">
     <title>AssetManagement</title>
     <status>publish</status>
     <description>$DESCRIPTION</description>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <dependencies>
         <unity>
             <version>2019.4.0+</version>
@@ -14,6 +14,15 @@
         </Common>
     </dependencies>
     <packageList>
+        <package>
+            <version>1.2.4</version>
+            <installList>
+                <install>
+                    <name>gpm_assetmanagement_v1.2.4.unitypackage</name>
+                    <path>GPM/AssetManagement</path>
+                </install>
+            </installList>
+        </package>
         <package>
             <version>1.2.3</version>
             <installList>
