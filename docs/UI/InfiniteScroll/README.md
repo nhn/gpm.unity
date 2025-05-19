@@ -137,6 +137,55 @@ bool OnFilter(InfiniteScrollData data)
 * 각 방향에 대해 표시하는 버튼을 선택하여 방향을 설정할 수 있습니다.
     * ![infinitescroll_direction](images/infinitescroll_direction.png)
 
+### Scroll 이동
+
+스크롤의 위치를 제어할 수 있습니다.
+* MoveTo(InfiniteScrollData data, MoveToType moveToType)
+    * InfiniteScrollData의 ScrollItem의 위치로 이동할 수 있습니다.
+* MoveTo(int itemIndex, MoveToType moveToType)
+    * ScrollItem[itemIndex] 위치로 이동할 수 있습니다.
+* MoveTo(float scrollRate)
+    * 원하는 스크롤 위치로 이동할 수 있습니다. (0~1)
+* MoveToFromDataIndex(int dataIndex, MoveToType moveToType)
+    * InfiniteScrollData[dataIndex]의 ScrollItem의 위치로 이동할 수 있습니다.
+* MoveToFirstData()
+    * 첫 번째 itemIndex로 즉시 이동합니다.
+* MoveToLastData()
+    * 마지막 itemIndex로 즉시 이동합니다.
+
+#### MoveToType
+이동할 때 ScrollItem의 기준을 설정합니다.
+* MOVE_TO_TOP : ScrollItem의 위쪽을 기준으로 이동합니다.
+* MOVE_TO_CENTER : ScrollItem의 중앙을 기준으로 이동합니다.
+* MOVE_TO_BOTTOM : ScrollItem의 아래쪽을 기준으로 이동합니다.
+
+#### Scroll Curve
+
+* 스크롤 이동할 때 time과 Curve를 설정할 수 있습니다.
+* time이 0이라면 즉시 이동합니다.
+* Curve가 설정되지 않으면 기본적으로 CurveType.EASE_IN_OUT으로 동작합니다.
+* CurveFromType(CurveType curveType, float time)
+    * 설정한 CurveType으로 속도를 제어하여 이동합니다.
+* Curve(AnimationCurve curve, float time)
+    * 직접 설정한 AnimationCurve로 속도를 제어하여 이동합니다.
+
+#### CurveType
+* EASE_IN_OUT : 시작은 점점 빠르게, 끝날 때는 점점 느리게 이동합니다. (기본값)
+* LINEAR : 같은 속도로 이동합니다.
+* EASE_IN : 시작은 느리게 끝날 때는 빠르게 이동합니다.
+* EASE_OUT : 시작은 빠르게 끝날 때는 천천히 이동합니다.
+
+```
+public InfiniteScroll scroll;
+
+void MoveTo()
+{
+    float time = 1;
+    scroll.MoveTo(3, MoveToType.MOVE_TO_TOP, new CurveFromType(CurveType.EASE_IN_OUT, time));
+}
+
+```
+
 ### 스크롤 이벤트
 ScrollView의 상태 변화에 따라 호출하는 이벤트입니다.
 
@@ -276,9 +325,18 @@ public void MoveToFirstData()
 public void MoveToLastData()
 ```
 
+
+### IsMoveToFirstData
+
+현재 위치가 첫 번째 데이터인지 확인합니다.
+
+```cs
+public bool IsMoveToFirstData()
+```
+
 ### IsMoveToLastData
 
-콘텐츠가 마지막 데이터로 이동했는지 확인합니다.
+현재 위치가 마지막 데이터인지 확인합니다.
 
 ```cs
 public bool IsMoveToLastData()
@@ -287,17 +345,35 @@ public bool IsMoveToLastData()
 ### MoveTo
 
 해당 데이터로 콘텐츠를 이동합니다.
-* itemIndex : 필터링 된 scrollItem의 index로 이동합니다.
-* MoveToType : 데이터의 어느 위치로 움직이는지를 정합니다. Top, Center, Bottom
-* time : 이동할 때까지의 시간을 설정합니다. 0일 때 즉시 이동합니다.
+* itemIndex : 필터링된 scrollItem의 index로 이동합니다.
 * InfiniteScrollData : 관리되는 데이터가 있다면 해당 데이터로 이동합니다.
+* MoveToType : 데이터의 어느 위치로 움직이는지를 정합니다. Top, Center, Bottom
+* scrollRate : 이동할 스크롤의 위치를 정합니다. (0~1)
+* time : 이동할 때까지의 시간을 설정합니다. 0일 때 즉시 이동합니다.
+* curve : AnimationCurve(0~1)와 시간을 설정합니다. time이 0일 경우 즉시 이동합니다.
 
 ```cs
 public void MoveTo(int itemIndex, MoveToType moveToType, float time = 0)
 ```
 
 ```cs
+public void MoveTo(int itemIndex, MoveToType moveToType, Curve curve)
+```
+
+```cs
 public void MoveTo(InfiniteScrollData data, MoveToType moveToType, float time = 0)
+```
+
+```cs
+public void MoveTo(InfiniteScrollData data, MoveToType moveToType, Curve curve)
+```
+
+```cs
+public void MoveTo(float scrollRate, float time = 0)
+```
+
+```cs
+public void MoveTo(float scrollRate, Curve curve)
 ```
 
 ### MoveToFromDataIndex
@@ -306,10 +382,16 @@ public void MoveTo(InfiniteScrollData data, MoveToType moveToType, float time = 
 * dataIndex : 관리되는 데이터의 index로 이동합니다.
 * MoveToType : 데이터의 어느 위치로 움직이는지를 정합니다. Top, Center, Bottom
 * time : 이동할 때까지의 시간을 정합니다. 0일 때 즉시 이동합니다.
+* curve : AnimationCurve(0~1)와 시간을 설정합니다. time이 0일 경우 즉시 이동합니다.
 
 ```cs
 public void MoveToFromDataIndex(int dataIndex, MoveToType moveToType, float time = 0)
 ```
+
+```cs
+public void MoveToFromDataIndex(int dataIndex, MoveToType moveToType, Curve curve)
+```
+
 ### SetFilter
 
 스크롤에 보이길 원하는 scrollItem을 선별합니다.

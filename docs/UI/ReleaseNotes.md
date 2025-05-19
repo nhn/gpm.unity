@@ -2,6 +2,17 @@
 
 🌏 [English](ReleaseNotes.en.md)
 
+## 2.11.0
+
+### Date
+
+* 2025.5.20
+
+### Added
+
+* InfiniteScroll
+    * MoveTo Curve 제어할 수 있는 기능 추가 [(549)](https://github.com/nhn/gpm.unity/issues/549)
+
 ## 2.10.0
 
 ### Date
