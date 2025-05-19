@@ -2,6 +2,16 @@
 
 🌏 [한국어](ReleaseNotes.md)
 
+## 1.2.5
+
+### Date
+
+* 2025.5.20
+*
+### Updated
+
+* Improved to ensure assetMap Window is properly initialized [(544)](https://github.com/nhn/gpm.unity/issues/544)
+
 ## 1.2.4
 
 ### Date
