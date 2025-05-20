@@ -139,6 +139,56 @@ bool OnFilter(InfiniteScrollData data)
 * Can select buttons for each direction to set the direction.
     * ![infinitescroll_direction](images/infinitescroll_direction.png)
 
+
+### Scroll Movement
+
+Can control the position of the scroll.
+* MoveTo(InfiniteScrollData data, MoveToType moveToType)
+  * Moves to the position of the ScrollItem in the specified InfiniteScrollData.
+* MoveTo(int itemIndex, MoveToType moveToType)
+  * Moves to the position of ScrollItem[itemIndex].
+* MoveTo(float scrollRate)
+  * Moves to the desired scroll position. (Range: 0 to 1)
+* MoveToFromDataIndex(int dataIndex, MoveToType moveToType)
+  * Moves to the position of the ScrollItem in InfiniteScrollData[dataIndex].
+* MoveToFirstData()
+  * Instantly moves to the first itemIndex.
+* MoveToLastData()
+  * Instantly moves to the last itemIndex.
+
+#### MoveToType
+Defines the reference point of the ScrollItem when scrolling.
+* MOVE_TO_TOP : Aligns the top of the ScrollItem.
+* MOVE_TO_CENTER : Aligns the center of the ScrollItem.
+* MOVE_TO_BOTTOM : Aligns the bottom of the ScrollItem.
+
+#### Scroll Curve
+
+* Can configure the duration and curve for scroll movement.
+* If time is set to 0, the scroll moves instantly.
+* If no curve is specified, it defaults to CurveType.EASE_IN_OUT.
+* CurveFromType(CurveType curveType, float time)
+  * Controls the movement speed using the specified CurveType.
+* Curve(AnimationCurve curve, float time)
+  * Controls the movement speed using a custom AnimationCurve.
+
+#### CurveType
+* EASE_IN_OUT : Starts slowly, accelerates, and then decelerates towards the end. (Default)
+* LINEAR : Moves at a constant speed.
+* EASE_IN : Starts slowly and accelerates towards the end.
+* EASE_OUT : Starts quickly and decelerates towards the end.
+
+```
+public InfiniteScroll scroll;
+
+void MoveTo()
+{
+    float time = 1;
+    scroll.MoveTo(3, MoveToType.MOVE_TO_TOP, new CurveFromType(CurveType.EASE_IN_OUT, time));
+}
+
+```
+
 ### Scroll Events
 Events called according to changes in the status of ScrollView.
 
@@ -277,9 +327,17 @@ Move content to the last data.
 public void MoveToLastData()
 ```
 
+### IsMoveToFirstData
+
+Checks if the current position is the first data.
+
+```cs
+public bool IsMoveToFirstData()
+```
+
 ### IsMoveToLastData
 
-Check if content has been moved to the last data.
+Checks if the current position is the last data.
 
 ```cs
 public bool IsMoveToLastData()
@@ -290,18 +348,35 @@ public bool IsMoveToLastData()
 Move content to the specified data.
 
 * itemIndex : Moves to the index of the filtered scrollItem.
-* MoveToType : Determines where the data moves to. Options are Top, Center, and Bottom.
-* time : Sets the time it takes to move. It moves instantly when set to 0.
 * InfiniteScrollData : If there is managed data, it moves to that data.
+* MoveToType : Determines where the data moves to. Options are Top, Center, and Bottom.
+* scrollRate: Defines the scroll position to move to (0 to 1).
+* time : Sets the time it takes to move. It moves instantly when set to 0.
+* curve: Defines the AnimationCurve (0 to 1) and time. When time is 0, it moves instantly.
 
 ```cs
 public void MoveTo(int itemIndex, MoveToType moveToType, float time = 0)
 ```
 
 ```cs
+public void MoveTo(int itemIndex, MoveToType moveToType, Curve curve)
+```
+
+```cs
 public void MoveTo(InfiniteScrollData data, MoveToType moveToType, float time = 0)
 ```
 
+```cs
+public void MoveTo(InfiniteScrollData data, MoveToType moveToType, Curve curve)
+```
+
+```cs
+public void MoveTo(float scrollRate, float time = 0)
+```
+
+```cs
+public void MoveTo(float scrollRate, Curve curve)
+```
 
 ### MoveToFromDataIndex
 
@@ -309,10 +384,16 @@ Moves the content to the index of the managed data.
 * dataIndex :  Moves to the index of the managed data.
 * MoveToType : Specifies where the data moves to. Options are Top, Center, and Bottom.
 * time : Sets the duration of the movement. It moves instantly when set to 0.
+* curve: Defines the AnimationCurve (0 to 1) and time. When time is 0, it moves instantly.
 
 ```cs
 public void MoveToFromDataIndex(int dataIndex, MoveToType moveToType, float time = 0)
 ```
+
+```cs
+public void MoveToFromDataIndex(int dataIndex, MoveToType moveToType, Curve curve)
+```
+
 ### SetFilter
 
 Selects the scrollItems to be displayed on the scroll.
