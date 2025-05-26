@@ -7,7 +7,7 @@
 ### Date
 
 * 2025.5.20
-*
+
 ### Updated
 
 * Improved to ensure assetMap Window is properly initialized [(544)](https://github.com/nhn/gpm.unity/issues/544)
