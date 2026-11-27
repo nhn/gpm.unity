@@ -2,8 +2,8 @@
     "launching": {
         "url": "https://launching.api.nhncloudservice.com/launching",
         "version": "v3.0",
-        "appKey": "77va1DvJCwgqZaLv",
+        "appKey": "Nzd2YTFEdkpDd2dxWmFMdg==",
         "subKey": "gpm",
-        "isEncoding": false
+        "isEncoding": true
     }
 }
